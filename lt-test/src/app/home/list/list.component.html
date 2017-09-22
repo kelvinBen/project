@@ -1,0 +1,43 @@
+<div class="box" style="margin-top:12px;">
+    <div class="listPic">
+      <img src="../../assets/images/pic1.png">
+      <img src="../../assets/images/pic2.png">
+      <img src="../../assets/images/pic3.png">
+    </div>
+    <div id="wrap">
+      <div id="tit">
+        <div class="stationname">{{bigClass.BigClassName}}</div>
+        <ul>
+          <li *ngFor='let a of smallClasses'>
+            <a routerLink='cate/{{a.Id}}'>{{a.SmallClassName}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="con">
+          <!-- <div class="nav">首页 > <span style="color:red;">{{bigClass.BigClassName}}</span></div> -->
+          <router-outlet></router-outlet>
+          <!-- <ul class="list">
+            <li *ngFor='let l of fileList'>
+              <table style="width: 100%;height: 100%">
+                <tr>
+                  <td>
+                    <a routerLink='/detail/{{l.Id}}'>{{l.Title}}</a>
+                  </td>
+                  <td style="width: 100px;">{{l.Time| date:'yyyy-MM-dd'}}</td>
+                </tr>
+              </table>
+            </li>
+            <div style="margin: 10px;"></div>
+            <div class="pageChange" *ngIf="listCount != 0" style="text-align: right">
+              <span>第</span>
+              <select style="width: 50px;" (change)='changePage($event.target.value)'>
+                  <option *ngFor="let p of page" [value]="p">{{p}}</option>
+                </select>
+              <span>页</span>
+            </div>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+  </div>

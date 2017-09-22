@@ -1,0 +1,41 @@
+@charset "uft-8";
+
+
+/* header部分 */
+ .logo{
+     width: 100%;
+     background: url(../../assets/images/head_bg1.jpg) no-repeat;
+     height: 132px;
+ }
+
+ 
+ nav {
+     background: #255499;
+     width: 100%;
+     height: 46px;
+     font-size: 16px;
+     font-family: "微软雅黑";
+ }
+ 
+ nav ul {
+     width: 1198px;
+     margin: auto;
+ }
+ 
+ nav ul li {
+     float: left;
+     width: 133px;
+     height: 46px;
+     line-height: 46px;
+     text-align: center;
+ }
+ 
+ nav li a {
+     color: #fff;
+     text-decoration: none;
+     cursor: pointer;
+ }
+ 
+ nav li:hover {
+     background: #cd1a1d;
+ }

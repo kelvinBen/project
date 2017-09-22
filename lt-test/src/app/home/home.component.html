@@ -1,0 +1,45 @@
+<header>
+  <div class="logo">
+    <div class="headlogo">
+      <img src="../../assets/images/logo.png" alt="">
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a routerLink='/'>网站首页</a></li>
+      <li><a routerLink='/list/2/cate/5'>单位概况</a></li>
+      <li><a routerLink='/list/1/cate/1'>新闻中心</a></li>
+      <li><a routerLink='/list/3'>实时监测</a></li>
+      <li><a routerLink='/list/4/cate/12'>预报预警</a></li>
+      <li><a routerLink='/list/5/cate/16'>服务产品</a></li>
+      <li><a routerLink='/list/6/cate/23'>农情与气象</a></li>
+      <li><a routerLink='/list/7/cate/26'>气象工作站</a></li>
+      <li><a routerLink='/list/8/cate/31'>政策法规</a></li>
+    </ul>
+  </nav>
+</header>
+<!-- <div>
+  <div>
+    <table>
+      <tbody>
+        <tr>
+            <td width="130" style="background:url(../assets/images/sound.png) no-repeat 20px center;text-indent:50px;font-weight:bolder;color:#191919;font-size:14px">
+              <a href="#" style="text-decoration:none;">通知公告：</a>
+            </td>
+            <td style="color:red;font-size:14px;">
+                <div style="width:1000px;height:40px;padding:0px;">
+                  <marquee direction="left" behavior="scroll" scrollmount="1" scrolldelay="2" width="90%" height="36" onMouseOut="this.start()"
+                    onMouseOver="this.stop()" style="margin-left: 70px;margin-top: -20px; line-height:58px;">
+                    <span *ngFor='let o of ontime' style="padding-right:100px;">
+                    <a routerLink="/detail/{{o.id}}" style="text-decoration:none;">{{o.title}}
+                    </a>
+                </span>
+                  </marquee>
+                </div>
+              </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+<router-outlet></router-outlet>
