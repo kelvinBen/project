@@ -1,0 +1,22 @@
+<div class="box">
+  <div class="header">
+    <header>
+
+    </header>
+  </div>
+  <nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed">
+      <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+        <li nz-submenu>
+          <span title><i class="anticon anticon-file"></i><span class="nav-text">实况监测</span></span>
+          <ul>
+            <li nz-menu-item *ngFor="let i of items">
+                <a routerLink='{{i.routerLink}}'>{{i.name}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <router-outlet></router-outlet>
+  </nz-layout>
+</div>

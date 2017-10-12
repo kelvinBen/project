@@ -1,0 +1,77 @@
+@import url('http://120.26.44.171:5558/esri/css/esri.css');
+#viewDiv{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+.tabswitch{
+    width:40px;height:40px;color:#404040;;position:absolute;z-index:10000;bottom:46px;font-size:20px;
+}
+.tabswitch:hover{
+    color: rgb(16, 108, 200);
+    /* visibility: hidden; */
+}
+.searchbox{
+    width:560px;
+    height:140px;
+    background:rgba(152,192,152,0.6);
+    position:absolute;
+    top:134px;
+}
+.ant-radio-group{
+    margin: 20px 20px;
+}
+.ant-radio-group label .ant-radio-inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 14px;
+    border-color: #d9d9d9;
+    background-color: #fff;
+    transition: all 0.3s;
+}
+.ant-radio-wrapper {
+    font-size: 17px;
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    margin-right: 45px;
+    cursor: pointer;
+  }
+.searchbox .btn{
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 0 16px;
+    margin: 6px 8px;
+    min-width: 88px;
+    line-height: 36px;
+    border-radius: 3px;
+    background: rgb(16, 108, 200);
+}
+
+.infobox{
+    width:560px;
+    height:400px;
+    background:rgba(152,192,152,0.6);
+    position:absolute;
+    bottom:60px;
+    color:#555;
+}
+.infobox md-card{
+    padding:20px 0 20px 20px;
+}

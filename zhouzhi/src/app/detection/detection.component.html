@@ -1,0 +1,99 @@
+<nz-layout style="height:100%">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed">
+    <div class="logo">
+      <img src="../../assets/logo.png" alt=""> <span class="nav-text">周至气象</span>
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+      <li nz-submenu>
+        <span title><i class="anticon anticon-user"></i><span class="nav-text">丝路预报</span></span>
+        <ul>
+          <li nz-menu-item>Tom</li>
+          <li nz-menu-item>Bill</li>
+          <li nz-menu-item>Alex</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">实况监测</span></span>
+        <ul>
+          <li nz-menu-item><a routerLink='/' >分钟监测</a></li>
+          <li nz-menu-item><a routerLink='/detection/h-detection'>小时监测</a></li>
+          <li nz-menu-item><a routerLink='/detection/radar-detection'>雷达</a></li>
+          <li nz-menu-item><a routerLink='/detection/thunder-detection'>雷电</a></li>
+          <li nz-menu-item><a routerLink='/detection/color-map'>要素色斑图</a></li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">物理量诊断</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>Team 3</li>
+          <li nz-menu-item>Team 4</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">乡镇预报</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>Team 3</li>
+          <li nz-menu-item>Team 4</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">XA-NEWS</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>Team 3</li>
+          <li nz-menu-item>Team 4</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">地质灾害</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>Team 3</li>
+          <li nz-menu-item>Team 4</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">城市内涝</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>Team 3</li>
+          <li nz-menu-item>Team 4</li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-team"></i><span class="nav-text">精确扶贫</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+          <li nz-menu-item>Team 3</li>
+          <li nz-menu-item>Team 4</li>
+        </ul>
+      </li>
+      <li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">上级指导</span></span></li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header class="header">
+      周至智慧气象防灾减灾站情信息系统
+    </nz-header>
+    <nz-content style="margin:0 16px;">
+      <nz-breadcrumb style="margin:12px 0;height:10px">
+        <nz-breadcrumb-item>实况监测</nz-breadcrumb-item>
+        <nz-breadcrumb-item></nz-breadcrumb-item>
+      </nz-breadcrumb>
+     
+    </nz-content>
+    <div style="padding:20px; background: #fff;height:100%">
+      <router-outlet style="height:100%"></router-outlet>
+    </div>
+    
+    <nz-footer style="text-align: center;background:rgba(204, 204, 204, 0.6)">Ant Design ©2017 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>
