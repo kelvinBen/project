@@ -13,19 +13,36 @@ import {Info} from '../../model/info';
 })
 
 export class HDetectionComponent implements OnInit {
+  radioValue = 'A';
   infos: Info[] = [];
   infos_1: Info[]= [];
   infos_2: Info[]= [];
   year: Number= 0;
   mindate: Date;
   maxdate: Date;
+  // choice: String;
+  // tDatas = [
+  //   {
+  //     name   : 'Tab 1',
+  //     content: 'Content of Tab Pane 1'
+  //   },
+  //   {
+  //     name   : 'Tab 2',
+  //     content: 'Content of Tab Pane 2'
+  //   },
+  //   {
+  //     name   : 'Tab 3',
+  //     content: 'Content of Tab Pane 3'
+  //   }
+  // ];
   constructor(private _http: HttpClient) { }
   ngOnInit() {
     this.createMap();
-    this.querry();
+    // this.querry(choice);
   }
-querry(){
-  let min =moment(this.mindate).format('YYYYMMDDHH');
+querry(choice){
+  if( choice === 'A') {
+    let min =moment(this.mindate).format('YYYYMMDDHH');
   let max =moment(this.maxdate).format('YYYYMMDDHH');
   this._http.get('http://www.lintongqx.com/wdata/autotimedata_minute?stationnum=eq.57032' +
   '&observtimes=gte.'+ min+'&observtimes=lte.'+ max + '&&order=observtimes.desc'+'&&limit=50' ).
@@ -34,9 +51,12 @@ querry(){
    console.log(this.infos_1);
 });
   console.log( min);
-  // &&limit=50
-  // + '&order=observtimes.desc'
-  // + '&&order=observtimes.desc'
+  }
+  else if(choice === 'B'){}
+  else if(choice === 'C'){}
+  else if(choice === 'D'){}
+  else if(choice === 'E'){}
+  
 }
   createMap() {
     esriLoader.dojoRequire([ 'dojo/dom-construct',

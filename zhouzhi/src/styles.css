@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
 html, body {
     height: 100%;
     width: 100%;
@@ -50,3 +53,71 @@ a {
 	-moz-transition: all 0.5s;
 	-o-transition: all 0.5s;
 }
+
+/* ng-zorro-antd 样式重置*/
+.ant-radio-group{
+    margin: 20px 20px;
+}
+.ant-radio-wrapper {
+    font-size: 17px;
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    margin-right: 30px !important;
+    margin-left: 14px;
+    cursor: pointer;
+  }
+.ant-radio-wrapper .ant-radio-inner {
+    width: 18px;
+    height: 18px;
+}
+.ant-radio-wrapper .ant-radio-inner:after {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    left: 4px;
+    top: 4px;
+    border-radius: 4px;
+}
+/* ngx-table 样式重置*/
+.datatable-row-center{
+        width: 560px;
+        transform: translate3d(0px, 0px, 0px);
+        backface-visibility: hidden;
+        height: 32px;
+        line-height: 40px;
+        font-size: 14px;
+        font-weight: 600;
+        /* background:rgba(240, 248, 255, 0.79); */
+}
+
+.ngx-datatable *  {
+    vertical-align: middle;
+}
+.datatable-header-cell {
+    text-align: center;
+}
+/* .ngx-datatable .datatable-body {
+    position: relative;
+    z-index: 10;
+    display: block;
+    background: rgba(152,192,152,0.8) !important;
+} */
+
+.ngx-datatable .datatable-body .datatable-body-row > div {
+   text-align: center;
+   font-size: 14px;
+   font-weight: 400;
+    background:transparent !important;
+}
+
+.ngx-datatable.material {
+    background:rgba(152,192,152,1.0) !important;
+}
+.ngx-datatable .datatable-body-cell, .ngx-datatable .datatable-header-cell {
+    line-height: 0.625 !important;
+}
+.ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover{
+    background-color: rgb(78, 208, 78);
+}
+

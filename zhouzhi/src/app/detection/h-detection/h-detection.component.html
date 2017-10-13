@@ -9,7 +9,7 @@
             <span>R</span>
           </label>
           <label nz-radio [nzValue]="'B'">
-            <span>▲p3h</span>
+            <span>△p3h</span>
           </label>
           <label nz-radio [nzValue]="'C'">
             <span>Tg</span>
@@ -17,19 +17,21 @@
           <label nz-radio [nzValue]="'D'">
             <span>Td</span>
           </label>
-          <label nz-radio [nzValue]="'D'">
+          <label nz-radio [nzValue]="'E'">
               <span>W</span>
             </label>
         </nz-radio-group>
     </div>
-    <div>
-      <md2-datepicker name="mindate" placeholder="起始时间" [(ngModel)]="mindate"  format="y-MM-dd HH:mm" type="datetime"></md2-datepicker>
-      <md2-datepicker name="maxdate" placeholder="结束时间" [(ngModel)]="maxdate"  format="y-MM-dd HH:mm" type="datetime"></md2-datepicker>
-      <button type="button" button="primary" (click)="querry()" class="btn">查询</button>
-    <!-- <p> Value: {{ mindate }} </p> -->
+    <div class="timechoice">
+      <div *ngIf="radioValue=='A'">
+        <md2-datepicker name="mindate" placeholder="起始时间" [(ngModel)]="mindate"  format="y-MM-dd HH:mm" type="datetime"></md2-datepicker>
+        <md2-datepicker name="maxdate" placeholder="结束时间" [(ngModel)]="maxdate"  format="y-MM-dd HH:mm" type="datetime"></md2-datepicker>
+      </div>
+      <div *ngIf="radioValue!='A'" class="secondtime">
+          <md2-datepicker name="mindate" placeholder="查询时间" [(ngModel)]="mindate"  format="y-MM-dd HH:mm" type="datetime"></md2-datepicker>
+      </div>
+      <button type="button" button="primary" (click)="querry(radioValue)" class="btn">查询</button>
     </div>
-      
-    
   </div>
   <div class="tabswitch" [hidden]="tabout">
       <i class="anticon anticon-shrink"  (click)="tab=true;tabout=true;"></i>
@@ -39,45 +41,116 @@
   </div>
  
   <div class="infobox" [hidden]="tab" >
-    <md-card >
-      <ngx-datatable [rows]="infos" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
+    
+      <ngx-datatable  class='material' *ngIf="radioValue=='A'" [rows]="infos_1"  [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="8">
         <ngx-datatable-column name="站点" [width]="300" prop="id">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.id}}
+            {{row.stationnum}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="时间" [width]="300" prop="id">
+        <ngx-datatable-column name="累计雨量" [width]="300" prop="id">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.id}}
+            {{row.winddirect}}
           </ng-template>
         </ngx-datatable-column>
-         <ngx-datatable-column name="降雨量" [width]="300" prop="name">
+         <ngx-datatable-column name="极大雨量" [width]="300" prop="name">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.name}}
+            {{row.maxwindd}}
           </ng-template>
         </ngx-datatable-column>
-         <ngx-datatable-column name="风向" [width]="300" prop="name">
+         <ngx-datatable-column name="发生时间" [width]="300" prop="name">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.weather}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="风速" [width]="300" prop="weather">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.weather}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="最高温度" [width]="300" prop="weather">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.weather}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="湿度" [width]="300" prop="weather">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.weather}}
+            {{row.observtimes}}
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
-    </md-card>
-  
+      <ngx-datatable  class='material' *ngIf="radioValue=='B'" [rows]="infos_1" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="8">
+          <ngx-datatable-column name="站点" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="三小时气压" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="最大气压" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.name}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="发生时间" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.weather}}
+            </ng-template>
+          </ngx-datatable-column>
+      </ngx-datatable>
+      <ngx-datatable  class='material' *ngIf="radioValue=='C'" [rows]="infos" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="8">
+          <ngx-datatable-column name="站点" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="累计雨量" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="极大雨量" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.name}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="发生时间" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.weather}}
+            </ng-template>
+          </ngx-datatable-column>
+      </ngx-datatable>
+      <ngx-datatable class='material' *ngIf="radioValue=='D'" [rows]="infos" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="8">
+          <ngx-datatable-column name="站点" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="累计雨量" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="极大雨量" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.name}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="发生时间" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.weather}}
+            </ng-template>
+          </ngx-datatable-column>
+      </ngx-datatable>
+      <ngx-datatable class='material' *ngIf="radioValue=='E'" [rows]="infos" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="8">
+          <ngx-datatable-column name="站点" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="风向" [width]="300" prop="id">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.id}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="最大风力" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.name}}
+            </ng-template>
+          </ngx-datatable-column>
+           <ngx-datatable-column name="发生时间" [width]="300" prop="name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.weather}}
+            </ng-template>
+          </ngx-datatable-column>
+      </ngx-datatable>
   </div>
 </nz-layout>
