@@ -1,0 +1,42 @@
+<div class="nav">
+  <span style="padding-left:20px;"><i class="fa fa-home"></i>&nbsp;首页</span>
+  <span>/</span>
+  <span>国家气候</span>
+</div>
+<md-card>
+    <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="国家" [(ngModel)]="selName">
+    </md-input-container>
+    <button md-raised-button color='primary' style="height:35px;" (click)="queryCountry()">查询</button>
+    <button md-raised-button color='primary' style="height:35px;" (click)="resetCountry()">重置</button>
+</md-card>
+<md-card>
+  <div class="row-section">
+      <a routerLink="/admin/admincountry/add" class="row-margin" md-raised-button color='primary'>增加</a>
+  </div>
+  <ngx-datatable class="material" [rows]="countrys" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
+    <ngx-datatable-column name="国家" [width]="300" prop="name">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.name}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="天气" [width]="300" prop="weather">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{row.weather}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="操作" [width]="300">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+            <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/admin/admincountry/1/view/{{row.id}}">
+                <md-icon>search</md-icon>
+            </a>
+            <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/admin/admincountry/edit/{{row.id}}">
+                <md-icon>edit</md-icon>
+            </a>
+            <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+                <md-icon>delete</md-icon>
+            </a>
+        </ng-template>
+      </ngx-datatable-column>
+  </ngx-datatable>
+</md-card>

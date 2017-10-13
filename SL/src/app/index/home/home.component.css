@@ -1,0 +1,60 @@
+@import "http://10.172.99.100:9999/esri/css/esri.css";
+.tile {
+  /*min-height: 200px;*/
+}
+
+.tile h1{
+  text-align: center;
+  line-height: 200px;
+}
+.tile img{
+    width: 195px;
+    height: 150px;
+}
+.countryName{
+    margin-top: -30px;
+    color: #fff;
+    text-align: center;
+}
+
+.arrow_button{
+  align-items: flex-start;
+  text-align: center;
+  cursor: default;
+  color: buttontext;
+  background-color: buttonface;
+  box-sizing: border-box;
+  padding: 2px 6px 3px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+  border-image: initial;
+}
+
+#layerDiv {
+  position: absolute;
+  right: 300px;
+  top: 270px;
+  z-Index: 2;
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.visibility-wrapper {
+  background-color: white;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 55;
+  border-radius: 5px;
+}
+
+.ant-radio-wrapper {
+  font-size: 17px;
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  margin-right: 65px;
+  cursor: pointer;
+}

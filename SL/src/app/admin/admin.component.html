@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="header-wrapper">
+    <span class="header-log">
+      一带一路气象服务网后台管理界面平台
+    </span>
+    <div class="header-title">
+      <a href="#" id="menu-button">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="header-account">
+      <a routerLink="/" style="text-decoration: none;color: #fff;">退出</a>
+    </div>
+  </div>
+  <div class="body-wrapper">
+    <div class="pane-wrapper">
+      <app-admin-menu></app-admin-menu>
+    </div>
+    <div class="canvas-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="foot-wrapper">
+    <div class="foot-wrapper-left">一带一路气象服务网后台管理界面平台</div>
+  </div>
+</div>

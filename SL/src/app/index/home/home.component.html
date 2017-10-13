@@ -1,0 +1,97 @@
+<div class="forecast">
+  <div class="tit">
+    <div class="title">
+      <a routerLink=''>丝路.城市预报</a>
+    </div>
+  </div>
+  <div class="map" id="mapContent">
+    <div id="layerDiv" #layerDiv>
+      <md-radio-group [(ngModel)]="mayType" (change)="changeMap()">
+        <md-radio-button [value]="1">土地覆盖利用</md-radio-button>
+        <md-radio-button [value]="2">植被指数</md-radio-button>
+        <md-radio-button [value]="3">夜间灯光</md-radio-button>
+      </md-radio-group>
+    </div>
+  </div>
+</div>
+<div class="climate">
+  <div class="tit">
+    <div class="title">
+      <a routerLink=''>一带一路气候</a>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="请输入国家名称" />
+    </div>
+  </div>
+  <div class="intro">
+    <div class="pic">
+      <img src="../../assets/images/country.jpg" alt="">
+    </div>
+    <div class="detail">
+      <div class="country">
+        {{countryName}}<br/>
+        <p class="country_con">
+          西安，古称长安、镐京，现为陕西省省会、副省级市、国家区域中心城市（西北），是国务院批复确定的中国西部地区重要的中心城市，国家重要的科研、教育和工业基地[1] 。西安是中国四大古都之一[2] ，联合国科教文组织1981年确定的“世界历史名城”，美媒评选的世界十大古都之一。西安地处关中平原中部，北濒渭河，南依秦岭，八水润长安。全市下辖11区2县，[4]
+          总面积10108平方公里。2015年末常住人口870.56万，其中城镇人口635.68万，城镇化率72.61%。长安自古帝王都，其先后有西周、秦、西汉、新莽、东汉、西晋、前赵、前秦、后秦、西魏、北周、隋、唐13个王朝在此建都。西安是中华文明和中华民族重要发祥地之一，丝绸之路的东方起点。丰镐都城、秦阿房宫、兵马俑，汉未央宫、长乐宫，隋大兴城，唐大明宫、兴庆宫等勾勒出“长安情结”。
+          西安是中国最佳旅游目的地、全国文明城市之一，有两项六处遗产被列入《世界遗产名录》，分别是：秦始皇陵及兵马俑、大雁塔、小雁塔、唐长安城大明宫遗址、汉长安城未央宫遗址、兴教寺塔。西安也是国家重要的科教中心，拥有西安交通大学、西北工业大学、西安电子科技大学等7所985或211工程大学。
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="banner" *ngIf="carouselTileItems">
+    <ngx-carousel [inputs]="carouselTile" [inputsLength]="carouselTileItems.length">
+      <div class="item" *ngFor="let t of carouselTileItems">
+        <div class="tile">
+          <img src="../../../assets/upload/{{t.name}}.jpg" alt="">
+          <div class="countryName">
+            {{t.name}}
+          </div>
+        </div>
+      </div>
+    </ngx-carousel>
+  </div>
+</div>
+<div class="list">
+  <div class="video">
+    <div class="tit">
+      <div class="title">
+        <a routerLink=''>一带一路天气预报视频</a>
+      </div>
+    </div>
+    <div class="videolist_con">
+      <ul>
+        <li *ngFor="let v of videos">
+          <a routerLink='/video'>
+          {{v.title}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="wordlist">
+    <div class="tit">
+      <div class="title">
+        <a routerLink=''>欧亚论坛</a>
+      </div>
+    </div>
+    <div class="wordlist_con">
+      <ul>
+        <li *ngFor="let i of files">
+          {{i.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="visibility-wrapper" [@visibilityChanged]='visibilityState'>
+  <table style="width:100%">
+    <tr>
+      <td>七日天气预报</td>
+      <td align="right">
+        <button md-icon-button mdTooltip="关闭" mdTooltipPosition='left' (click)="visibilityState='hidden'">
+                <md-icon class="md-24" aria-label="Example icon-button with a heart icon">close</md-icon>
+              </button>
+      </td>
+    </tr>
+  </table>
+  <div [innerHTML]="forcast"></div>
+</div>

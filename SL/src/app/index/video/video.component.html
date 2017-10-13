@@ -1,0 +1,22 @@
+<div class="climate">
+  <div class="tit">
+    <div class="title">
+      <a routerLink=''>一带一路天气预报视频</a>
+    </div>
+  </div>
+  <div class="intro">
+    <div style="text-align:center">
+      <md-form-field>
+        <input [(ngModel)]="selDate" mdInput [mdDatepicker]="picker" placeholder="日期">
+        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+        <md-datepicker #picker></md-datepicker>
+      </md-form-field>
+    </div>
+    <video #videoEle id="videoElement"></video>
+  </div>
+</div>
+<div class='gotoHome'>
+  <a md-fab color="primary" routerLink='/'>
+    <md-icon class="md-24" mdTooltip="返回首页" mdTooltipPosition='left'>home</md-icon>
+  </a>
+</div>

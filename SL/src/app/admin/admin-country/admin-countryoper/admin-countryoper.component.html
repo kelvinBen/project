@@ -1,0 +1,55 @@
+<div class="nav">
+  <span style="padding-left:20px;"><i class="fa fa-home"></i>&nbsp;国家气候</span>
+  <span>/</span>
+  <span>{{type?'查看':(countryId?"编辑":"新增")}}</span>
+</div>
+<md-card>
+  <md-card-title>
+    {{type?'查看':(countryId?"编辑":"新增")}}
+  </md-card-title>
+  <form #countryForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="国家" required [(ngModel)]="vm.name" name="name">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="天气"  [(ngModel)]="vm.weather" name="weather">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+       <quill-editor [(ngModel)]="vm.note" name="note" [options]="editorOptions"></quill-editor>
+    </div>
+    <div class="row-section">
+      <md-card>
+        <md-card-subtitle>上传图片（注：申请请上传图片）</md-card-subtitle>
+        <ngx-datatable class="material" [rows]="files" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+          [limit]="5">
+          <ngx-datatable-column name="图片名称" prop="Name">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="上传时间" prop="Time">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="操作">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="下载"  target="_blank" href="/fs/{{value.ExName}}">
+                <md-icon>note</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile(value.ExName)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        <br>
+         <p-fileUpload name="uploadfiles" url="/upload" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+        (onUpload)="onBasicUpload($event)" *ngIf="!type"></p-fileUpload> 
+      </md-card>
+      <md-card-actions>
+        <div class="centerText" style="text-align: center;">
+          <button md-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+          <a routerLink="/admin/admincountry" md-raised-button color="warn">取消</a>
+          <button md-raised-button color="primary" type="submit" [disabled]="!countryForm.valid" *ngIf="!type">提交</button>
+        </div>
+      </md-card-actions>
+    </div> 
+  </form>
+</md-card>

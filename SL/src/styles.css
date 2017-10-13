@@ -1,0 +1,192 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html,body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: '新宋';
+}
+
+/*header*/
+.wrap{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    width: 100%;
+    height: 432px;
+    background: url('./assets/images/banner.png');
+}
+.header img{
+    width: 100%;
+    height: 132px;
+}
+/*content*/
+.content{
+    width: 1000px;
+    margin: -218px auto 10px auto;
+}
+.climate{
+    width: 100%;
+   
+}
+.climate a,.video  a , .wordlist a, .forecast .tit .title a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    text-align: center;
+}
+.forecast .tit{
+    height: 46px;
+    background: rgba(253, 128, 28, 0.72)
+}
+.forecast .tit .title{
+    line-height: 46px;
+    padding-left:35px; 
+}
+.forecast .map{
+    width: 100%;
+    height: 500px;
+    border: 1px solid #fabc8a;
+    margin:0 auto 8px auto;
+}
+.climate .tit{
+    overflow: hidden;
+}
+.climate .tit .title, .video .tit .title, .wordlist .tit .title{
+    height: 46px;
+    width: 247px;
+    float: left;
+}
+.climate .tit .title, .list .video .tit .title, .list .wordlist .tit .title{
+    line-height: 46px;
+    background: -moz-linear-gradient(right,#5383bd,#cf673b);
+    background: -webkit-gradient(linear,right,from(#cf673b),to(#5383bd));
+    background:-webkit-linear-gradient(right,#5383bd,#cf673b);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    text-align: center;
+}
+.tit .search{
+    float: right;
+}
+.tit .search input{
+    margin-top: 12px;
+    height: 25px;
+}
+.intro{
+    margin:0 auto 8px auto;
+    overflow:hidden;
+    border: 1px solid #6fa0ce;
+    padding: 8px;
+}
+.intro .pic{
+    float: left;
+    width: 31%;
+}
+.intro .pic img{
+    width: 304px;
+    height: 174px;
+}
+.intro .detail{
+    float: right;
+    padding: 5px 5px;
+    text-align: justify;
+    width:67%;
+}
+.intro .detail .country .country_con{
+    font-family: '微软雅黑';
+    font-size: 14px;
+    width: 99%;
+    max-height: 250px;
+    text-indent: 28px;
+    line-height: 25px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+}
+.banner{
+    margin: 8px auto 0 auto;
+}
+.list{
+    overflow: hidden;
+}
+.list .video{
+    float: left;
+    width: 49%;  
+}
+.list .wordlist{
+    float: right;
+    width: 50%;
+}
+.list .video .tit, .list .wordlist .tit{
+    height:46px;
+    width: 99%;
+}
+.video .tit .title{
+    width:285px;
+}
+.wordlist .tit .title{
+    width: 150px;
+}
+.wordlist .wordlist_con, .video .videolist_con{
+    width: 99%;
+    border: 1px solid #6fa0ce;
+}
+.wordlist .wordlist_con ul, .video .videolist_con ul  {
+    font-family: '微软雅黑';
+    font-size: 13px;
+    list-style: disc;
+    width: 87%;
+}
+.wordlist .wordlist_con ul li, .video .videolist_con ul li{
+    border-bottom: 1px dashed #ccc;
+    height: 30px;
+    line-height: 30px;
+}
+
+.wordlist .wordlist_con ul li a, .video .videolist_con ul li a{
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+}
+/*footer */
+
+.footer {
+	width: 100%;
+	margin: 15px auto;
+}
+
+.footnav {
+	height: 55px;
+	background: #4e84c2;
+}
+.footlogo {
+	list-style: none;
+	font-size: 14px;
+	color: #fff;
+	line-height: 55px;
+	font-family: "微软雅黑";
+	padding-right: 15px;
+    text-align: center;
+}
+.footlogo img{
+	margin:6px;
+}
+.copyright {
+	margin-top: 8px;
+	font-size: 13px;
+	line-height: 24px;
+	height:60px;
+	color: #666;
+    margin-left: 40%;
+}
+div.nav{
+    height: 45px;
+    width: 100%;
+    background: #ccc;
+    line-height: 45px;
+    font-size: 14px;
+}
