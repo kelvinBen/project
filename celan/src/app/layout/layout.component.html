@@ -1,0 +1,38 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle  pull-left" appSidebarToggler>
+              <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+      <a class="navbar-brand"> 户县“三化一到位”应急工作平台</a>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid all">
+  <div class="sidebar">
+    <ul class="nav">
+      <div *ngFor="let item of navigation">
+        <li *ngIf="!isDropdown(item); else dropdown" [class.active]="isActive(item)"><a><i class="{{ item.icon }}"></i><span>{{item.name}}</span></a></li>
+        <ng-template #dropdown>
+          <li appNavDropdown [class.active]="isActive(item)"><a appNavDropdownToggle><i class="{{item.icon}}"></i><span>{{item.name}} <i class="fa fa-angle-down fa-fw pull-right drop "></i></span></a>
+            <ul class="sub-menu">
+              <li *ngFor="let sub of item.children"><a href="">&nbsp;{{sub.name}}</a></li>
+            </ul>
+          </li>
+        </ng-template>
+      </div>
+    </ul>
+  </div>
+  <div class="maincontent" style="">
+    <ul class="breadcrumb">
+      <li class="header">Home/ Dashboard
+      </li>
+    </ul>
+    Bootstrap 下拉菜单 这一章讲解了下拉菜单，但是没有涉及到交互部分，本章将具体讲解下拉菜单的交互。使用下拉菜单（Dropdown）插件，您可以向任何组件（比如导航栏、标签页、胶囊式导航菜单、按钮等）添加下拉菜单。 如果您想要单独引用该插件的功能，那么您需要引用
+    dropdown.js。或者，正如 Bootstrap 插件概览 一章中所提到，您可以引用 bootstrap.js 或压缩版的 bootstrap.min.js。 Bootstrap 下拉菜单 这一章讲解了下拉菜单，但是没有涉及到交互部分，本章将具体讲解下拉菜单的交互。使用下拉菜单（Dropdown）插件，您可以向任何组件（比如导航栏、标签页、胶囊式导航菜单、按钮等）添加下拉菜单。
+    如果您想要单独引用该插件的功能，那么您需要引用 dropdown.js。或者，正如 Bootstrap 插件概览 一章中所提到，您可以引用 bootstrap.js 或压缩版的 bootstrap.min.js。 Bootstrap
+    下拉菜单 这一章讲解了下拉菜单，但是没有涉及到交互部分，本章将具体讲解下拉菜单的交互。使用下拉菜单（Dropdown）插件，您可以向任何组件（比如导航栏、标签页、胶囊式导航菜单、按钮等）添加下拉菜单。 如果您想要单独引用该插件的功能，那么您需要引用
+    dropdown.js。或者，正如 Bootstrap 插件概览 一章中所提到，您可以引用 bootstrap.js 或压缩版的 bootstrap.min.js。
+    <router-outlet></router-outlet>
+  </div>
+</div>

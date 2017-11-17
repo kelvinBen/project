@@ -1,0 +1,23 @@
+[
+    {
+        "title": "实况监测",
+        "open": true,
+        "menus": [
+            {
+                "title": "分钟监测",
+                "link": "/minute",
+                "selected": true
+            },
+            {
+                "title": "小时监测",
+                "link": "/hour",
+                "selected": false
+            },
+            {
+                "title": "雷达图",
+                "link": "/radar",
+                "selected": false
+            }
+        ]
+    }
+]
