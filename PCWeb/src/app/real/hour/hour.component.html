@@ -1,0 +1,75 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;">
+  <div style="width:500px;height:100%;" fxLayout="column">
+    <dx-toolbar class="plane-head">
+      <dxi-item location="before">
+        <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+          <i class="fa fa-star"></i>
+          <span>小时监测</span>
+        </div>
+      </dxi-item>
+      <dxi-item location="after">
+        <dx-select-box [items]="typeList" [(ngModel)]="selType" style="width:100px;" (onValueChanged)="loadData()">
+        </dx-select-box>
+      </dxi-item>
+    </dx-toolbar>
+    <div class="plane-body plane-border">
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+        <label *ngIf="selType === '降水'">起始</label>
+        <dx-date-box *ngIf="selType === '降水'" [(ngModel)]="sDate" type="date" displayFormat="y-MM-dd HH" style="width:165px;">
+        </dx-date-box>
+        <label>{{selType !== '降水'?'时间':'终止'}}</label>
+        <dx-date-box [(ngModel)]="eDate" type="date" displayFormat="y-MM-dd HH" style="width:165px;">
+        </dx-date-box>
+        <dx-button icon="search" type="default" (click)="loadData()">
+        </dx-button>
+      </div>
+      <dx-data-grid #rainGrid *ngIf="selType === '降水'" [hoverStateEnabled]="true" [dataSource]="rainsGrid" class="grid_body">
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-paging [enabled]="false"></dxo-paging>
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+        <dxi-column dataField="station.Station_Id_C" caption="站号" [width]="80"></dxi-column>
+        <dxi-column dataField="station.Station_Name" caption="站名" [width]="110"></dxi-column>
+        <dxi-column dataField="Rain" caption="累计" sortOrder="desc" [width]="100"></dxi-column>
+        <dxi-column dataField="MaxRain" caption="极大雨量" [width]="100"></dxi-column>
+        <dxi-column dataField="MaxTime" caption="发生时间" [width]="100"></dxi-column>
+      </dx-data-grid>
+      <!-- <dx-data-grid #pGrid *ngIf="selType === '变压'" [hoverStateEnabled]="true" [dataSource]="pressGrid" class="grid_body">
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-paging [enabled]="false"></dxo-paging>
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+        <dxi-column dataField="station.Station_Id_C" caption="站号" [width]="80"></dxi-column>
+        <dxi-column dataField="station.Station_Name" caption="站名" [width]="120"></dxi-column>
+        <dxi-column dataField="PRS" caption="气压" [width]="100"></dxi-column>
+        <dxi-column dataField="PRS_Change_3h" sortOrder="desc" caption="3h变压" [width]="100"></dxi-column>
+        <dxi-column dataField="PRS_Change_24h" caption="24h变压" [width]="100"></dxi-column>
+      </dx-data-grid> -->
+      <dx-data-grid #tGrid *ngIf="selType === '气温'" [hoverStateEnabled]="true" [dataSource]="tempsGrid" class="grid_body">
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-paging [enabled]="false"></dxo-paging>
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+        <dxi-column dataField="station.Station_Id_C" caption="站号" [width]="75"></dxi-column>
+        <dxi-column dataField="station.Station_Name" caption="站名" [width]="120"></dxi-column>
+        <dxi-column dataField="TEM" caption="气温" sortOrder="desc" [width]="70"></dxi-column>
+        <dxi-column dataField="TEM_Max" caption="最高温" [width]="80"></dxi-column>
+        <dxi-column dataField="TEM_Max_OTime" caption="出现时间" [width]="90"></dxi-column>
+        <dxi-column dataField="TEM_Min" caption="最低温" [width]="80"></dxi-column>
+        <dxi-column dataField="TEM_Min_OTime" caption="出现时间" [width]="90"></dxi-column>
+      </dx-data-grid>
+      <dx-data-grid #wGrid *ngIf="selType === '极大风'" [hoverStateEnabled]="true" [dataSource]="windsGrid" class="grid_body">
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-paging [enabled]="false"></dxo-paging>
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-scrolling showScrollbar="always" [scrollByContent]="false"></dxo-scrolling>
+        <dxi-column dataField="station.Station_Id_C" caption="站号" [width]="75"></dxi-column>
+        <dxi-column dataField="station.Station_Name" caption="站名" [width]="120"></dxi-column>
+        <dxi-column dataField="WIN_S_Inst_Max" caption="极大风速" sortOrder="desc" [width]="90"></dxi-column>
+        <dxi-column dataField="WIN_D_INST_Max" caption="极大风向" [width]="90"></dxi-column>
+        <dxi-column dataField="WIN_S_INST_Max_OTime" caption="出现时间" [width]="90"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="mapView plane-border" id="esriMap" #map></div>
+</div>

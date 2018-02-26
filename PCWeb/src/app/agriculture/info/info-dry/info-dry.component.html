@@ -1,0 +1,27 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" style="padding:10px 10px 0 10px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>查询时间</label>
+    <dx-date-box type="datetime" displayFormat="y-MM-dd HH" style="width:165px;">
+    </dx-date-box>
+    <label>参数a:</label>
+    <dx-number-box style="width:50px;"></dx-number-box>
+    <label>b:</label>
+    <dx-number-box style="width:50px;"></dx-number-box>
+    <label>c:</label>
+    <dx-number-box style="width:50px;"></dx-number-box>
+    <dx-button icon="search" type="default" >
+    </dx-button>
+  </div>
+  <div style="height:50px;"></div>
+  <div fxLayout="column" fxLayoutAlign="center center" style="height:400px;width:1300px;font-size:16px;background:#eee;border:1px solid #ccc;padding:10px;">
+    <p style="font-size:20px;line-height:24px;padding:0 0 60px 0;">站名:户县&nbsp;&nbsp;</p>
+    <p>综合指数:{{0}}</p>
+    <p>综合干旱指数:{{0}}</p>
+    <p>相对湿润度指数:{{0}} ℃</p>
+    <p>30天滑动标准降水指数:{{0}}</p>
+    <p>30天滑动标准降水z指数:{{0}}</p>
+    <p>60天滑动标准降水指数:{{0}} mm</p>
+    <p>90天滑动标准降水指数:{{0}} 天</p>
+    <p>标准化降水变量和标准化温度变量之差:{{0}} ℃</p>
+  </div>
+</div>

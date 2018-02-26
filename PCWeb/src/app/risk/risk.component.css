@@ -1,0 +1,15 @@
+nz-card p {
+    font-size: 16px;
+    text-indent: 40px;
+    line-height: 30px;
+}
+
+div.ant-col-6 {
+    text-align: center;
+}
+
+div img {
+    width: 340px;
+    height: 329px;
+    vertical-align: middle;
+}

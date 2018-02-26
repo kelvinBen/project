@@ -1,0 +1,118 @@
+<div class="e_monitor">
+    <div class="e_monitorTop">
+        <div style="width:33%;height:100%;">
+            <dx-toolbar class="plane-head">
+                <dxi-item location="before">
+                    <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+                        <i class="fa fa-star"></i>
+                        <span>干旱</span>
+                    </div>
+                </dxi-item>
+            </dx-toolbar>
+            <div class="plane-body plane-border">
+                <dx-data-grid #mGrid [hoverStateEnabled]="true" [dataSource]="" style="height:calc(100% - 4px);">
+                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                    <dxo-paging [enabled]="false"></dxo-paging>
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+                    <dxi-column dataField="" caption="站名" [width]="75"></dxi-column>
+                    <dxi-column dataField="" caption="站号" [width]="90"></dxi-column>
+                    <dxi-column dataField="" caption="表层土壤湿度" [width]="80"></dxi-column>
+                    <dxi-column dataField="" caption="干旱等级" [width]="65"></dxi-column>
+                </dx-data-grid>
+            </div>
+        </div>
+        <div style="width:33%;height:100%;">
+            <dx-toolbar class="plane-head">
+                <dxi-item location="before">
+                    <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+                        <i class="fa fa-star"></i>
+                        <span>连阴雨</span>
+                    </div>
+                </dxi-item>
+            </dx-toolbar>
+            <div class="plane-body plane-border">
+                <dx-data-grid #mGrid [hoverStateEnabled]="true" [dataSource]="" style="height:calc(100% - 4px);">
+                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                    <dxo-paging [enabled]="false"></dxo-paging>
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+                    <dxi-column dataField="" caption="站名" [width]="75"></dxi-column>
+                    <dxi-column dataField="" caption="站号" [width]="90"></dxi-column>
+                    <dxi-column dataField="" caption="最近5天降水日数" [width]="80"></dxi-column>
+                    <dxi-column dataField="" caption="最近5天总降水量" [width]="65"></dxi-column>
+                    <dxi-column dataField="" caption="今日降水量" [width]="65"></dxi-column>
+                    <dxi-column dataField="" caption="连阴雨灾害" [width]="65"></dxi-column>
+                </dx-data-grid>
+            </div>
+        </div>
+        <div style="width:33%;height:100%;">
+            <dx-toolbar class="plane-head">
+                <dxi-item location="before">
+                    <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+                        <i class="fa fa-star"></i>
+                        <span>大风</span>
+                    </div>
+                </dxi-item>
+            </dx-toolbar>
+            <div class="plane-body plane-border">
+                <dx-data-grid #mGrid [hoverStateEnabled]="true" [dataSource]="" style="height:calc(100% - 4px);">
+                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                    <dxo-paging [enabled]="false"></dxo-paging>
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+                    <dxi-column dataField="" caption="站名" [width]="75"></dxi-column>
+                    <dxi-column dataField="" caption="站号" [width]="90"></dxi-column>
+                    <dxi-column dataField="" caption="最大风速" [width]="80"></dxi-column>
+                    <dxi-column dataField="" caption="灾害等级" [width]="65"></dxi-column>
+                </dx-data-grid>
+            </div>
+        </div>
+    </div>
+    <div class="e_monitorBottom">
+        <div style="width:50%;height:100%;">
+            <dx-toolbar class="plane-head">
+                <dxi-item location="before">
+                    <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+                        <i class="fa fa-star"></i>
+                        <span>越冬冻害</span>
+                    </div>
+                </dxi-item>
+            </dx-toolbar>
+            <div class="plane-body plane-border">
+                <dx-data-grid #mGrid [hoverStateEnabled]="true" [dataSource]="" style="height:calc(100% - 4px);">
+                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                    <dxo-paging [enabled]="false"></dxo-paging>
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+                    <dxi-column dataField="" caption="站名" [width]="75"></dxi-column>
+                    <dxi-column dataField="" caption="站号" [width]="90"></dxi-column>
+                    <dxi-column dataField="" caption="最低气温" [width]="80"></dxi-column>
+                    <dxi-column dataField="" caption="灾害等级" [width]="65"></dxi-column>
+                </dx-data-grid>
+            </div>
+        </div>
+        <div class="e_frost">
+            <dx-toolbar class="plane-head">
+                <dxi-item location="before">
+                    <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+                        <i class="fa fa-star"></i>
+                        <span>霜冻</span>
+                    </div>
+                </dxi-item>
+            </dx-toolbar>
+            <div class="plane-body plane-border">
+                <dx-data-grid #mGrid [hoverStateEnabled]="true" [dataSource]="" style="height:calc(100% - 4px);">
+                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                    <dxo-paging [enabled]="false"></dxo-paging>
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+                    <dxi-column dataField="" caption="站名" [width]="75"></dxi-column>
+                    <dxi-column dataField="" caption="站号" [width]="90"></dxi-column>
+                    <dxi-column dataField="" caption="最低气温" [width]="80"></dxi-column>
+                    <dxi-column dataField="" caption="灾害等级" [width]="65"></dxi-column>
+                </dx-data-grid>
+            </div>
+        </div>
+    </div>
+</div>

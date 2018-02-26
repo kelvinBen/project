@@ -1,0 +1,33 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" style="padding:10px 10px 0 10px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>日选择：</label>
+    <dx-date-box [(ngModel)]="sDate" type="date" displayFormat="y-MM-dd" style="width:165px;">
+    </dx-date-box>
+    <dx-button icon="search" type="default" (click)="queryHday() ">
+    </dx-button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" style="width:1300px;background:#eee;border:1px solid #ccc;padding:10px;">
+    <div style="width:100px">
+      <span>查询要素：</span>
+    </div>
+    <div class="factors">
+      <li *ngFor="let element of elements">
+        <dx-check-box [(ngModel)]="element.checked" [width]="250" text="{{element.label}}"></dx-check-box>
+      </li>
+    </div>
+  </div>
+    <div fxLayout="column" *ngIf=dayData fxLayoutAlign="center center" style="height:400px;width:1300px;font-size:16px;" >
+      <p  style="font-size:20px;line-height:24px;padding:10px 0" >站名:{{dayData.Station_Name}}&nbsp;&nbsp;累年:{{dayData.Years_MMUT}}&nbsp;&nbsp;日序:{{dayData.Day_Seq}}</p>
+      <p *ngIf=dayData.TEM_Avg>平均气温:{{dayData.TEM_Avg}} ℃</p>
+      <p *ngIf=dayData.SSH>日照时数:{{dayData.SSH}} h</p>
+      <p *ngIf=dayData.WIN_S_Avg>平均风速:{{dayData.WIN_S_Avg}} m/s</p>
+      <p *ngIf=dayData.VAP_Avg>平均水气压:{{dayData.VAP_Avg}} </p>
+      <p *ngIf=dayData.GST_Avg>平均地面温度:{{dayData.GST_Avg}} ℃</p>
+      <p *ngIf=dayData.TEM_Max_Avg_MMUT>累年平均日最高气温:{{dayData.TEM_Max_Avg_MMUT}} ℃</p>
+      <p *ngIf=dayData.TEM_Min_Avg_MMUT>累年平均日最低气温:{{dayData.TEM_Min_Avg_MMUT}} ℃</p>
+      <p *ngIf=dayData.PRE_Time_2020_MMUT>累年20-20时平均降水量:{{dayData.PRE_Time_2020_MMUT}} mm</p>
+      <p *ngIf=dayData.PRE_Time_0808_MMUT>累年08-08时平均降水量:{{dayData.PRE_Time_0808_MMUT}} mm</p>
+      <p *ngIf=dayData.GST_Max_Avg_MMUT>累年日平均最高地面温度:{{dayData.GST_Max_Avg_MMUT}} ℃</p>
+      <p *ngIf=dayData.GST_Min_Avg_MMUT>累年日平均最低地面温度:{{dayData.GST_Min_Avg_MMUT}} ℃</p>
+    </div>
+</div>

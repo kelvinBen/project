@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" style="padding:10px 10px 0 10px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>统计年份</label>
+    <dx-number-box [(ngModel)]="selYear" style="width:50px;"></dx-number-box>
+    <!-- <label>界限温度</label>
+    <dx-select-box [items]="tempList" [(ngModel)]="selTemp" style="width:80px;">
+    </dx-select-box> -->
+    <dx-button icon="search" type="default" (click)="query()">
+    </dx-button>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" style="height:200px;width:1300px;font-size:16px;background:#eee;border:1px solid #ccc;padding:10px;">
+    <p *ngIf="yearData">30年日平均气温稳定通过0.0℃之积温:{{yearData.ACTEM_TEM_Avg_StPas_0}} ℃</p>
+    <p *ngIf="yearData">30年日平均气温稳定通过5.0℃之积温:{{yearData.ACTEM_TEM_Avg_StPas_5}} ℃</p>
+    <p *ngIf="yearData">30年日平均气温稳定通过10.0℃之积温:{{yearData.ACTEM_TEM_Avg_StPas_10}} ℃</p>
+    <p *ngIf="yearData">30年日平均气温稳定通过15.0℃之积温:{{yearData.ACTEM_TEM_Avg_StPas_15}} ℃</p>
+    <p *ngIf="yearData">30年日平均气温稳定通过20.0℃之积温:{{yearData.ACTEM_TEM_Avg_StPas_20}} ℃</p>
+    <p *ngIf="yearData">30年日平均气温稳定通过22.0℃之积温:{{yearData.ACTEM_TEM_Avg_StPas_22}} ℃</p>
+  </div>
+</div>

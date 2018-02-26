@@ -1,0 +1,16 @@
+<div class="queryDiv" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+  <dx-select-box [items]="stations" [(ngModel)]="selStation" displayExpr="Station_Name" valueExpr="Station_Id_C" style="width:150px;">
+  </dx-select-box>
+  <label>起始</label>
+  <dx-date-box [(ngModel)]="sDate" type="datetime" displayFormat="y-MM-dd HH" style="width:165px;">
+  </dx-date-box>
+  <label>终止</label>
+  <dx-date-box [(ngModel)]="eDate" type="datetime" displayFormat="y-MM-dd HH" style="width:165px;">
+  </dx-date-box>
+  <dx-button icon="search" type="default" (click)="queryFactor()">
+  </dx-button>
+<!-- <i class="fa fa-cube" style="width:20px;height:20px;display:block;color:rgb(60, 203, 205);position:absolute;right:30px;" (click)= "changeSelect()"></i>  -->
+</div>
+
+<div theme="macarons" style="height:calc(100% - 56px);" (chartInit)="onChartInit($event)"></div>
+

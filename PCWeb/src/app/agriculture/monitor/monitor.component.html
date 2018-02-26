@@ -1,0 +1,136 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;">
+  <div style="width:50%;" fxLayout="column" fxLayoutGap="10px">
+    <div style="height:50%;">
+      <dx-toolbar class="plane-head">
+        <dxi-item location="before">
+          <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+            <i class="fa fa-star"></i>
+            <span>地面温度监测(最近24小时)</span>
+          </div>
+        </dxi-item>
+        <dxi-item location="after">
+          <dx-button icon="search" type="default" (click)="queryGroudTemp()">
+          </dx-button>
+        </dxi-item>
+      </dx-toolbar>
+      <div class="plane-body plane-border">
+        <dx-data-grid #gGrid [hoverStateEnabled]="true" [dataSource]="gounds" style="height:calc(100% - 4px);">
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-paging [enabled]="false"></dxo-paging>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxo-scrolling [scrollByContent]="true"></dxo-scrolling>
+          <dxi-column dataField="Datetime" caption="日期" sortOrder="desc" cellTemplate="cellDateTimeTemplate" [width]="110"></dxi-column>
+          <dxi-column dataField="GST" caption="地面温度" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_Max" caption="地面最高温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_Min" caption="地面最低温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_5cm" caption="5cm地温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_10cm" caption="10cm地温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_15cm" caption="15cm地温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_20cm" caption="20cm地温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_40cm" caption="40cm地温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_80cm" caption="80cm地温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_160cm" caption="160cm地温" dataType="number" [width]="100"></dxi-column>
+          <dxi-column dataField="GST_320cm" caption="320cm地温" dataType="number"></dxi-column>
+          <div *dxTemplate="let d of 'cellDateTimeTemplate'">
+            {{formatDateTimeString(d.value)}}
+          </div>
+        </dx-data-grid>
+      </div>
+    </div>
+    <div style="height:50%;">
+      <dx-toolbar class="plane-head">
+        <dxi-item location="before">
+          <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+            <i class="fa fa-star"></i>
+            <span>日照监测</span>
+          </div>
+        </dxi-item>
+        <dxi-item location="after">
+          <dx-button icon="search" type="default" (click)="querySSH()">
+          </dx-button>
+        </dxi-item>
+      </dx-toolbar>
+      <div class="plane-body plane-border">
+        <dx-data-grid #sGrid [hoverStateEnabled]="true" [dataSource]="sshs" style="height:calc(100% - 4px)">
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-paging [enabled]="false"></dxo-paging>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxo-scrolling mode="onHover"></dxo-scrolling>
+          <dxi-column dataField="Datetime" caption="日期" sortOrder="desc" dataType="date" [width]="90"></dxi-column>
+          <dxi-column dataField="SSH" caption="日照时数" dataType="number" [width]="80"></dxi-column>
+          <dxi-column dataField="SSH_Time_0708" caption="07-08" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_0809" caption="08-09" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_0910" caption="09-10" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1011" caption="10-11" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1112" caption="11-12" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1213" caption="12-13" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1314" caption="13-14" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1415" caption="14-15" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1516" caption="15-16" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1617" caption="16-17" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1718" caption="17-18" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1819" caption="18-19" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SSH_Time_1920" caption="19-20" dataType="number" [width]="70"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+  <div style="width:50%;" fxLayout="column" fxLayoutGap="10px">
+    <div style="height:50%;">
+      <dx-toolbar class="plane-head">
+        <dxi-item location="before">
+          <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+            <i class="fa fa-star"></i>
+            <span>土壤湿度监测</span>
+          </div>
+        </dxi-item>
+        <dxi-item location="after">
+          <dx-button icon="search" type="default" (click)="querySoil()">
+          </dx-button>
+        </dxi-item>
+      </dx-toolbar>
+      <div class="plane-body plane-border">
+        <dx-data-grid #soilGrid [hoverStateEnabled]="true" [dataSource]="soils" style="height:calc(100% - 8px)">
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxo-scrolling></dxo-scrolling>
+          <dxi-column dataField="Datetime" caption="日期" dataType="date" sortOrder="desc" [width]="120"></dxi-column>
+          <dxi-column dataField="SRHU10" caption="10cm" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SRHU20" caption="20cm" [width]="70"></dxi-column>
+          <dxi-column dataField="SRHU30" caption="30cm" [width]="70"></dxi-column>
+          <dxi-column dataField="SRHU40" caption="40cm" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SRHU50" caption="50cm" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SRHU60" caption="60cm" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SRHU80" caption="80cm" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="SRHU100" caption="100cm" dataType="number" [width]="80"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+    <div style="height:50%;">
+      <dx-toolbar class="plane-head">
+        <dxi-item location="before">
+          <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+            <i class="fa fa-star"></i>
+            <span>日值监测</span>
+          </div>
+        </dxi-item>
+      </dx-toolbar>
+      <div class="plane-body plane-border">
+        <dx-data-grid #dayGrid [hoverStateEnabled]="true" [dataSource]="days" style="height:calc(100% - 5px)">
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxo-scrolling></dxo-scrolling>
+          <dxi-column dataField="Datetime" caption="日期" dataType="date" sortOrder="desc" [width]="120"></dxi-column>
+          <dxi-column dataField="EVP" caption="蒸发量" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="TEM_Avg" caption="平均气温" [width]="70"></dxi-column>
+          <dxi-column dataField="TEM_Max" caption="最高气温" [width]="70"></dxi-column>
+          <dxi-column dataField="TEM_Min" caption="最低气温" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="PRE_Time_2020" caption="20-20时降水量" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="PRE_Max_1h" caption="1小时最大降水量" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="RHU_Avg" caption="平均相对湿度" dataType="number" [width]="70"></dxi-column>
+          <dxi-column dataField="RHU_Min" caption="最小相对湿度" dataType="number" [width]="80"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>

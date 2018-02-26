@@ -1,0 +1,4 @@
+<dx-tabs [dataSource]="menus" [selectedIndex]="0" (onItemClick)="selectTab($event)" [height]="45"></dx-tabs>
+<div class="tab-content">
+  <router-outlet></router-outlet>
+</div>

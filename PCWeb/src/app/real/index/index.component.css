@@ -1,0 +1,33 @@
+:host ::ng-deep .dx-toolbar {
+    height: 40px;
+    background: #45bcd0 !important;
+    background-size: cover;
+    color: #0b4a6d;
+    font-size: 16px;
+    overflow: hidden;
+  }
+  
+  :host ::ng-deep .dx-toolbar .dx-toolbar-items-container {
+    height: 40px;
+  }
+  
+  :host ::ng-deep .plane-head i {
+    padding: 0 10px;
+    color: yellow;
+  }
+  
+  :host ::ng-deep .plane-head span {
+    color: white;
+  }
+  
+  :host ::ng-deep .plane-body {
+    height: calc(100% - 40px);
+  }
+  
+  :host ::ng-deep .plane-border {
+    box-sizing: border-box;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 2px;
+  }

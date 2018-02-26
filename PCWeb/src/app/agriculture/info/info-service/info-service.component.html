@@ -1,0 +1,35 @@
+<div style="height:56px;width:1300px;padding: 10px;">
+  <dx-toolbar class="plane-head">
+    <dxi-item location="before">
+      <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+        <i class="fa fa-star"></i>
+        <span>气象周年服务方案</span>
+      </div>
+    </dxi-item>
+    <dxi-item location="after">
+      <dx-button text="上传" type="default" (click)="oper(null)">
+      </dx-button>
+    </dxi-item>
+  </dx-toolbar>
+  <div class="plane-body plane-border">
+    <dx-data-grid #tGrid [hoverStateEnabled]="true" [dataSource]="files">
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-paging [enabled]="true"></dxo-paging>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxi-column dataField="CreateTime" caption="方案日期" sortOrder="desc" [width]="150"></dxi-column>
+      <dxi-column dataField="Title" caption="标题" [width]="200"></dxi-column>
+      <dxi-column dataField="Depart" caption="部门" [width]="200"></dxi-column>
+      <dxi-column dataField="Reason" caption="内容简述"></dxi-column>
+      <dxi-column dataField="Author" caption="发布者" [width]="100"></dxi-column>
+      <dxi-column dataField="Id" caption="操作" [width]="90" cellTemplate="cellTemplate" [width]="100"></dxi-column>
+      <div *dxTemplate="let data of 'cellTemplate'">
+        <dx-button type="default" text="下载">
+        </dx-button>
+        <!-- <dx-button type="default" text="上传">
+        </dx-button> -->
+        <dx-button type="default" text="删除">
+        </dx-button>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" style="padding:10px 10px 0 10px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>起始</label>
+    <dx-date-box [(ngModel)]="sDate" type="date" displayFormat="y-MM" style="width:165px;">
+    </dx-date-box>
+    <label>终止</label>
+    <dx-date-box [(ngModel)]="eDate" type="date" displayFormat="y-MM" style="width:165px;">
+    </dx-date-box>
+    <dx-button icon="search" type="default" (click)="queryMon()">
+    </dx-button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" style="width:1300px;background:#eee;border:1px solid #ccc;padding:10px;">
+    <div style="width:100px">
+      <span>查询要素：</span>
+    </div>
+    <div class="factors">
+      <li *ngFor="let element of elements">
+        <dx-check-box [(ngModel)]="element.checked" [width]="250" text="{{element.label}}"></dx-check-box>
+      </li>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" class="borderP">
+    <dx-data-grid #tGrid [hoverStateEnabled]="true" [dataSource]="monDatas" style="height:450px;width:1300px;">
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+      <dxi-column dataField="Station_Name" caption="站名" [width]="100"></dxi-column>
+      <dxi-column dataField="Datetime" caption="日期" sortOrder="desc" [width]="100" cellTemplate="cellTemplate"></dxi-column>
+      <dxi-column *ngFor="let cl of elements" [visible]="cl.checked" [dataField]="cl.value" [caption]="cl.label" dataType="number" [width]="100"></dxi-column>
+      <div *dxTemplate="let data of 'cellTemplate'">
+          {{formatTime(data.value)}}
+      </div>
+    </dx-data-grid>
+  </div>
+</div>

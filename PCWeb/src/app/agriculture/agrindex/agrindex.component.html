@@ -1,0 +1,8 @@
+<div fxLayout="column" style="padding:10px;" fxLayoutAlign="start center">
+  <dx-radio-group [items]="listMenus" layout="horizontal" [(ngModel)]="selMenu">
+  </dx-radio-group>
+</div>
+<iframe *ngIf="selMenu === '葡萄'" src="../../../assets/Files/Grape.pdf" frameborder="0" class="iframeDiv"></iframe>
+<iframe *ngIf="selMenu === '作物生育气象适宜性指标'" src="../../../assets/Files/作物生育气象适宜性指标.pdf" frameborder="0" class="iframeDiv"></iframe>
+<iframe *ngIf="selMenu === '农事活动气象适宜性指标'" src="../../../assets/Files/农事活动气象适宜性指标.pdf" frameborder="0" class="iframeDiv"></iframe>
+<iframe *ngIf="selMenu === '农业气象灾害指标'" src="../../../assets/Files/农业气象灾害指标.pdf" frameborder="0" class="iframeDiv"></iframe>

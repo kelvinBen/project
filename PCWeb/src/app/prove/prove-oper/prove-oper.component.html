@@ -1,0 +1,27 @@
+<div style="padding:10px;" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <dx-form style="width:1000px;" id="form" [formData]="vm" [labelLocation]="'top'" [showColonAfterLabel]="true" [showValidationSummary]="true" validationGroup="customerData">
+    <dxi-item itemType="group" caption="{{title}}" [colCount]="2">
+      <dxi-item dataField="Title" [label]="{text:'标题'}">
+        <dxi-validation-rule type="required" message="标题为必填项"></dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="CreateTime" [label]="{text:'日期'}" editorType="dxDateBox" [editorOptions]="{ width: '100%' }">
+        <dxi-validation-rule type="required" message="日期为必填项"></dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="Depart" [label]="{text:'单位'}">
+        <dxi-validation-rule type="required" message="单位为必填项"></dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="Author" [label]="{text:'开证明者'}">
+        <dxi-validation-rule type="required" message="开证明者为必填项"></dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="Reason" [label]="{text:'原因'}" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2">
+        <dxi-validation-rule type="required" message="原因为必填项"></dxi-validation-rule>
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" >
+    <dx-button text="提交" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
+    </dx-button>
+    <dx-button text="取消" type="danger">
+    </dx-button>
+  </div>
+</div>

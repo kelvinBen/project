@@ -1,0 +1,43 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>起始</label>
+    <dx-date-box [(ngModel)]="sDate" type="datetime" displayFormat="y-MM-dd HH" style="width:165px;">
+    </dx-date-box>
+    <label>终止</label>
+    <dx-date-box [(ngModel)]="eDate" type="datetime" displayFormat="y-MM-dd HH" style="width:165px;">
+    </dx-date-box>
+    <dx-button icon="search" type="default" (click)="query()">
+    </dx-button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" class="borderP">
+    <dx-data-grid #tGrid [hoverStateEnabled]="true" [dataSource]="dayDatas" style="height:300px;width:800px;">
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+      <dxi-column dataField="Station_Name" caption="站名" [width]="60"></dxi-column>
+      <dxi-column dataField="Datetime" caption="日期" dataType="date" sortOrder="desc" [width]="120"></dxi-column>
+      <dxi-column dataField="SRHU10" caption="10cm" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="SRHU20" caption="20cm" [width]="70"></dxi-column>
+      <dxi-column dataField="SRHU30" caption="30cm" [width]="70"></dxi-column>
+      <dxi-column dataField="SRHU40" caption="40cm" dataType="number"[width]="70"></dxi-column>
+      <dxi-column dataField="SRHU50" caption="50cm" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="SRHU60" caption="60cm" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="SRHU80" caption="80cm" dataType="number" [width]="70"></dxi-column>
+      <dxi-column dataField="SRHU100" caption="100cm" dataType="number" [width]="80"></dxi-column>
+    </dx-data-grid>
+  </div>
+  <dx-chart [dataSource]="dayDatas" style="width:900px;">
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-legend verticalAlignment="top" horizontalAlignment="center" itemTextPosition="right">
+    </dxo-legend>
+    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+    </dxo-tooltip>
+    <dxi-series argumentField="Datetime" valueField="SRHU10" dataType="number" name="深度土壤10cm" type="line">
+    </dxi-series>
+    <dxi-series argumentField="Datetime" valueField="SRHU20" dataType="number" name="深度土壤20cm" type="line">
+    </dxi-series>
+    <dxi-series argumentField="Datetime" valueField="SRHU30" dataType="number" name="深度土壤30cm" type="line">
+    </dxi-series>
+  </dx-chart>
+</div>
+

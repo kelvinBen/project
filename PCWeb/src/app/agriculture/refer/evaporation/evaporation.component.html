@@ -1,0 +1,36 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+      <label>起始</label>
+      <dx-date-box [(ngModel)]="sDate" type="date" displayFormat="y-MM-dd" style="width:165px;">
+      </dx-date-box>
+      <label>终止</label>
+      <dx-date-box [(ngModel)]="eDate" type="date" displayFormat="y-MM-dd" style="width:165px;">
+      </dx-date-box>
+      <dx-button icon="search" type="default" (click)="query()">
+      </dx-button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" class="borderP">
+      <dx-data-grid #tGrid [hoverStateEnabled]="true" [dataSource]="dayDatas" style="height:300px;width:800px;">
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+        <dxi-column dataField="Station_Name" caption="站名" [width]="100"></dxi-column>
+        <dxi-column dataField="Datetime" caption="日期" dataType="date" sortOrder="desc" [width]="100"></dxi-column>
+        <dxi-column dataField="EVP" caption="日蒸发量" dataType="number" [width]="100"></dxi-column>
+        <!-- <dxi-column dataField="Sunrist_Time" caption="日出时间" [width]="100"></dxi-column>
+        <dxi-column dataField="Sunset_Time" caption="日落时间" [width]="100"></dxi-column>
+        <dxi-column dataField="dayEx" caption="日照时数距平" dataType="number"></dxi-column>
+        <dxi-column dataField="SSH" caption="30总日照时数" dataType="number" [width]="130"></dxi-column> -->
+      </dx-data-grid>
+    </div>
+    <dx-chart [dataSource]="chartDatas" style="width:900px;">
+      <dxo-export [enabled]="true"></dxo-export>
+      <dxo-legend verticalAlignment="top" horizontalAlignment="center" itemTextPosition="right">
+      </dxo-legend>
+      <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+      </dxo-tooltip>
+      <dxi-series argumentField="Datetime" valueField="EVP" name="日蒸发量" type="line">
+      </dxi-series>
+    </dx-chart>
+  </div>
+  

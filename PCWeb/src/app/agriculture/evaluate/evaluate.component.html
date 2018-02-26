@@ -1,0 +1,8 @@
+<div fxLayout="column" style="padding-top:10px;" fxLayoutAlign="start center" style="height:100%;">
+  <dx-radio-group [items]="listMenus" layout="horizontal" [(ngModel)]="selMenu">
+  </dx-radio-group>
+  <div class="evaluateCon">
+    <app-e-monitor *ngIf="selMenu === '农气灾害监测'" style="width:100%;height:100%;"></app-e-monitor>
+    <app-e-assess *ngIf="selMenu === '农气灾害评估'" style="width:100%;height:100%;"></app-e-assess>
+  </div>
+</div>

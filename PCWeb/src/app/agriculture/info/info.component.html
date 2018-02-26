@@ -1,0 +1,8 @@
+<div fxLayout="column" style="padding-top:10px;" fxLayoutAlign="start center">
+  <dx-radio-group [items]="listMenus" layout="horizontal" [(ngModel)]="selMenu">
+  </dx-radio-group>
+  <app-info-temp *ngIf="selMenu === '积温查询'"></app-info-temp>
+  <app-info-pass *ngIf="selMenu === '稳定通过'"></app-info-pass>
+  <app-info-dry *ngIf="selMenu === '干旱指数'"></app-info-dry>
+  <app-info-service *ngIf="selMenu === '气象周年服务方案'"></app-info-service>
+</div>

@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px 10px 0 10px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>起始</label>
+    <dx-date-box [(ngModel)]="sDate" type="date" displayFormat="y-MM-dd" style="width:165px;">
+    </dx-date-box>
+    <label>终止</label>
+    <dx-date-box [(ngModel)]="eDate" type="date" displayFormat="y-MM-dd" style="width:165px;">
+    </dx-date-box>
+    <label>界限温度</label>
+    <dx-select-box [items]="tempList" [(ngModel)]="selTemp" style="width:80px;">
+    </dx-select-box>
+    <dx-button icon="search" type="default" (click)="query()">
+    </dx-button>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" style="height:100px;width:900px;font-size:16px;background:#eee;border:1px solid #ccc;padding:10px;">
+    <p>活动积温:{{tempData.toFixed(2)}} ℃</p>
+    <p>有效积温:{{tempDataEx.toFixed(2)}} ℃</p>
+    <p *ngIf="history && selTemp === '0'">30年日平均气温稳定通过0.0℃之积温:{{history.ACTEM_TEM_Avg_StPas_0}} ℃</p>
+    <p *ngIf="history && selTemp === '5'">30年日平均气温稳定通过5.0℃之积温:{{history.ACTEM_TEM_Avg_StPas_5}} ℃</p>
+    <p *ngIf="history && selTemp === '10'">30年日平均气温稳定通过10.0℃之积温:{{history.ACTEM_TEM_Avg_StPas_10}} ℃</p>
+    <p *ngIf="history && selTemp === '12'">30年日平均气温稳定通过12.0℃之积温:{{history.ACTEM_TEM_Avg_StPas_12}} ℃</p>
+    <p *ngIf="history && selTemp === '15'">30年日平均气温稳定通过15.0℃之积温:{{history.ACTEM_TEM_Avg_StPas_15}} ℃</p>
+    <p *ngIf="history && selTemp === '20'">30年日平均气温稳定通过20.0℃之积温:{{history.ACTEM_TEM_Avg_StPas_20}} ℃</p>
+    <p *ngIf="history && selTemp === '22'">30年日平均气温稳定通过22.0℃之积温:{{history.ACTEM_TEM_Avg_StPas_22}} ℃</p>
+  </div>
+</div>

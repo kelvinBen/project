@@ -1,0 +1,49 @@
+:host ::ng-deep .container {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+:host ::ng-deep .container .body-container {
+  height: calc(100% - 90px);
+}
+
+:host ::ng-deep .top-toolbar {
+  height: 90px;
+  background: url('../assets/Images/index.jpg') no-repeat;
+  background-size: cover;
+  color: #0b4a6d;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .top-toolbar .dx-toolbar-items-container {
+  height: 90px;
+}
+
+:host ::ng-deep .log-span {
+  font-size: 26px;
+  font-family: '微软雅黑';
+  font-weight: bold;
+}
+
+:host ::ng-deep nav a {
+  color: #0b4a6d;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  height: 40px;
+}
+
+:host ::ng-deep nav a {
+  padding-left: 5px;
+}
+
+:host ::ng-deep nav span {
+  padding: 0 5px;
+}
+
+:host ::ng-deep nav a.active {
+  color: #0066FF;
+  border-bottom: 2px solid #0066FF;
+}

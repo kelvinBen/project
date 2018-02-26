@@ -1,0 +1,51 @@
+<div class="container">
+  <dx-toolbar class="top-toolbar">
+    <dxi-item location="before">
+      <div *dxTemplate fxLayout="row" fxLayoutAlign="center center">
+        <img src="../assets/Images/logo.png" height="60" style="padding:0 10px 0 20px;">
+        <span class="log-span">鄠邑三化一到位智慧气象应急工作平台</span>
+      </div>
+    </dxi-item>
+    <dxi-item location="after">
+      <div *dxTemplate fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding: 50px 20px 0 0;">
+        <nav fxLayoutAlign="end center" fxLayoutGap="10px">
+          <a [ngClass]="{'active': urlActive('real')}" routerLink='/real/index'>
+            <i class="fa fa-database"></i>
+            <span>实况监测</span>
+          </a>
+          <a [ngClass]="{'active': urlActive('forcast')}" routerLink='/forcast/normal'>
+            <i class="fa fa-cloud"></i>
+            <span>指导预报</span>
+          </a>
+          <a [ngClass]="{'active': urlActive('analysis')}" routerLink='/analysis/month'>
+            <i class="fa fa-line-chart"></i>
+            <span>资料统计</span>
+          </a>
+          <a [ngClass]="{'active': urlActive('agriculture')}" routerLink='/agriculture/monitor'>
+            <i class="fa fa-envelope"></i>
+            <span>为农服务</span>
+          </a>
+          <a [ngClass]="{'active': urlActive('climate')}" routerLink='/climate'>
+            <i class="fa fa-map"></i>
+            <span>气候区划</span>
+          </a>
+          <a [ngClass]="{'active': urlActive('risk')}" routerLink='/risk'>
+            <i class="fa fa-map"></i>
+            <span>风险区划</span>
+          </a>
+          <!-- <a [ngClass]="{'active': urlActive('product')}" routerLink='/product/rain'>
+            <i class="fa fa-clipboard"></i>
+            <span>产品制作</span>
+          </a> -->
+          <a [ngClass]="{'active': urlActive('prove')}" routerLink='/prove'>
+            <i class="fa fa-download"></i>
+            <span>气象证明</span>
+          </a>
+        </nav>
+      </div>
+    </dxi-item>
+  </dx-toolbar>
+  <div class="body-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

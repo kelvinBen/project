@@ -1,0 +1,7 @@
+<div fxLayout="column" style="padding-top:10px;" fxLayoutAlign="start center">
+  <dx-radio-group [items]="listMenus" layout="horizontal" [(ngModel)]="selMenu" >
+  </dx-radio-group>
+  <app-mon *ngIf="selMenu === '历史月值查询'"></app-mon>
+  <app-ten *ngIf="selMenu === '历史旬值查询'"></app-ten>
+</div>
+

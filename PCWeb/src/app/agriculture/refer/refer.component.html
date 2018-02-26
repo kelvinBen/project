@@ -1,0 +1,9 @@
+<div fxLayout="column" style="padding-top:10px;" fxLayoutAlign="start center">
+  <dx-radio-group [items]="listMenus" layout="horizontal" [(ngModel)]="selMenu" (onValueChanged)="menuChanged()">
+  </dx-radio-group>
+  <app-temp *ngIf="selMenu === '气温实况'"></app-temp>
+  <app-sunshine *ngIf="selMenu === '日照时数'"></app-sunshine>
+  <app-evaporation *ngIf="selMenu === '蒸发量'"></app-evaporation>
+  <app-dayrain *ngIf="selMenu === '降水'"></app-dayrain>
+  <app-soil *ngIf="selMenu === '土壤商情'"></app-soil>
+</div>

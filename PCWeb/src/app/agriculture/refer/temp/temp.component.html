@@ -1,0 +1,40 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>起始</label>
+    <dx-date-box [(ngModel)]="sDate" type="date" displayFormat="y-MM-dd" style="width:165px;">
+    </dx-date-box>
+    <label>终止</label>
+    <dx-date-box [(ngModel)]="eDate" type="date" displayFormat="y-MM-dd" style="width:165px;">
+    </dx-date-box>
+    <dx-button icon="search" type="default" (click)="queryTemp()">
+    </dx-button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" class="borderP">
+    <dx-data-grid #tGrid [hoverStateEnabled]="true" [dataSource]="dayGridDatas" style="height:300px;width:900px;">
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-scrolling showScrollbar="always" [scrollByContent]="true"></dxo-scrolling>
+      <dxi-column dataField="day.Station_Name" caption="站名" [width]="100"></dxi-column>
+      <dxi-column dataField="day.Datetime" caption="日期" dataType="date" sortOrder="desc" [width]="100"></dxi-column>
+      <dxi-column dataField="day.TEM_Avg" caption="平均气温" dataType="number" [width]="100"></dxi-column>
+      <dxi-column dataField="day.TEM_Max" caption="最高气温" dataType="number" [width]="100"></dxi-column>
+      <dxi-column dataField="day.TEM_Min" caption="最低气温" dataType="number" [width]="100"></dxi-column>
+      <dxi-column dataField="dayEx" caption="平均气温距平" dataType="number"></dxi-column>
+      <dxi-column dataField="dayMMUT.TEM_Max_Avg_MMUT" caption="30总最高气温" dataType="number" [width]="130"></dxi-column>
+      <dxi-column dataField="dayMMUT.TEM_Min_Avg_MMUT" caption="30总高低气温" dataType="number" [width]="130"></dxi-column>
+    </dx-data-grid>
+  </div>
+  <dx-chart [dataSource]="chartDatas" style="width:900px;">
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-legend verticalAlignment="top" horizontalAlignment="center" itemTextPosition="right">
+    </dxo-legend>
+    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+    </dxo-tooltip>
+    <dxi-series argumentField="Datetime" valueField="TEM_Avg" name="平均气温" type="line">
+    </dxi-series>
+    <dxi-series argumentField="Datetime" valueField="TEM_Max" name="最高气温" type="line">
+    </dxi-series>
+    <dxi-series argumentField="Datetime" valueField="TEM_Min" name="最低气温" type="line" color="#0033FF">
+    </dxi-series>
+  </dx-chart>
+</div>
