@@ -1,0 +1,200 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li>
+    <a routerLink="/resource/out">外部应急资源</a>
+  </li>
+  <li class="active">{{type1?'查询':(pId?"编辑":"新增")}}</li>
+</ul>
+<md-card style="margin:0px;" class="pad">
+  <md-card-title>{{type1?'查询':(pId?"编辑":"新增")}}外部应急资源</md-card-title>
+  <md2-accordion [multiple]="true">
+    <md2-accordion-tab header="应急医疗资源" active="true" *ngIf="pType==1">
+      <form #hForm="ngForm" (ngSubmit)="onHSubmit()">
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="名称" required [(ngModel)]="vm.name" name="name" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="病床数" type="number" required [(ngModel)]="vm.bedNum" name="bnum" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="医生数" type="number" required [(ngModel)]="vm.doctorNum" name="dnum" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="护士数" type="number" required [(ngModel)]="vm.nurseNum" name="nnum" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="急求车辆数" type="number" required [(ngModel)]="vm.carNum" name="cnum" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="库存血浆" required [(ngModel)]="vm.blood" name="blood" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="负责人" required [(ngModel)]="vm.charge" name="charge" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="联系方式" required [(ngModel)]="vm.phone" name="phone" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="值班电话" required [(ngModel)]="vm.telephone" name="tel" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="经度" required [(ngModel)]="vm.longitude" name="longitude" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="纬度" required [(ngModel)]="vm.latitude" name="latitude" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <md-card-actions>
+          <div class="centerText">
+            <button md-raised-button color="accent" type="reset" *ngIf="!type1">重置</button>
+            <a routerLink="/resource/out" md-raised-button color="warn">取消</a>
+            <button md-raised-button color="primary" type="submit" [disabled]="!hForm.valid" *ngIf="!type1">提交</button>
+          </div>
+        </md-card-actions>
+      </form>
+    </md2-accordion-tab>
+    <md2-accordion-tab header="应急通信资源" active="true" *ngIf="pType==2">
+      <form #cForm="ngForm" (ngSubmit)="onCSubmit()">
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="名称" required [(ngModel)]="commu.name" name="name" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="行政区划代码" required [(ngModel)]="commu.code" name="code" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="运营单位" required [(ngModel)]="commu.depart" name="depart" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="覆盖位置" required [(ngModel)]="commu.range" name="range" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="负责人" required [(ngModel)]="commu.charge" name="charge" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="联系方式" required [(ngModel)]="commu.phone" name="phone" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="值班电话" required [(ngModel)]="commu.telephone" name="tel" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="经度" required [(ngModel)]="commu.longitude" name="longitude" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="纬度" required [(ngModel)]="commu.latitude" name="latitude" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <md-card-actions>
+          <div class="centerText">
+            <button md-raised-button color="accent" type="reset" *ngIf="!type1">重置</button>
+            <a routerLink="/resource/out/1" md-raised-button color="warn">取消</a>
+            <button md-raised-button color="primary" type="submit" [disabled]="!cForm.valid" *ngIf="!type1">提交</button>
+          </div>
+        </md-card-actions>
+      </form>
+    </md2-accordion-tab>
+    <md2-accordion-tab header="应急运输资源" active="true" *ngIf="pType==3">
+      <form #tForm="ngForm" (ngSubmit)="onTSubmit()">
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="名称" required [(ngModel)]="trans.name" name="name" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="主管部门" required [(ngModel)]="trans.depart" name="depart" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="站场类型" required [(ngModel)]="trans.type" name="type" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="站场面积 &nbsp;/平方公里" required [(ngModel)]="trans.area" name="area" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="运输方式" required [(ngModel)]="trans.ways" name="ways" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="负责人" required [(ngModel)]="trans.charge" name="charge" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="联系方式" required [(ngModel)]="trans.phone" name="phone" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="值班电话" required [(ngModel)]="trans.telephone" name="tel" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="经度" required [(ngModel)]="trans.longitude" name="longitude" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="纬度" required [(ngModel)]="trans.latitude" name="latitude" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <md-card-actions>
+          <div class="centerText">
+            <button md-raised-button color="accent" type="reset" *ngIf="!type1">重置</button>
+            <a routerLink="/resource/out/2" md-raised-button color="warn">取消</a>
+            <button md-raised-button color="primary" type="submit" [disabled]="!tForm.valid" *ngIf="!type1">提交</button>
+          </div>
+        </md-card-actions>
+      </form>
+    </md2-accordion-tab>
+    <md2-accordion-tab header="应急避难场所" active="true" *ngIf="pType==4">
+      <form #sForm="ngForm" (ngSubmit)="onSSubmit()">
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="名称" required [(ngModel)]="s.name" name="name" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="类型" required [(ngModel)]="s.type" name="type" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="面积 &nbsp;/平方米" required [(ngModel)]="s.area" name="area" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="可容纳人数" required [(ngModel)]="s.peopleNum" name="pnum" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="地址" required [(ngModel)]="s.address" name="address" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="联系方式" required [(ngModel)]="s.phone" name="phone" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="经度" required [(ngModel)]="s.longitude" name="longitude" [readonly]="type1">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="纬度" required [(ngModel)]="s.latitude" name="latitude" [readonly]="type1">
+          </md-input-container>
+        </div>
+        <md-card-actions>
+          <div class="centerText">
+            <button md-raised-button color="accent" type="reset" *ngIf="!type1">重置</button>
+            <a routerLink="/resource/out/3" md-raised-button color="warn">取消</a>
+            <button md-raised-button color="primary" type="submit" [disabled]="!sForm.valid" *ngIf="!type1">提交</button>
+          </div>
+        </md-card-actions>
+      </form>
+    </md2-accordion-tab>
+  </md2-accordion>
+</md-card>

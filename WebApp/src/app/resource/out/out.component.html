@@ -1,0 +1,166 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li class="active">外部应急资源</li>
+</ul>
+<md-tab-group [selectedIndex]="selIndex">
+  <md-tab label="应急医疗资源">
+    <div layout="column" class="pad">
+      <div flex layout="row">
+        <a routerLink='/resource/out/1/add' md-raised-button color='primary' style="height:35px;">增加</a>
+      </div>
+      <md-card flex style="margin:0px;margin-top:20px;">
+        <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+          <span *ngIf="!searchBox1.searchVisible" class="push-left-sm">
+                                    <span class="md-title">应急医疗资源列表</span>
+          </span>
+          <td-search-box #searchBox1 backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search1($event)"
+            flex>
+          </td-search-box>
+        </div>
+        <md-divider></md-divider>
+        <td-data-table #dataTable1 [data]="tempHospitals" [columns]="columns1" [selectable]="false" [multiple]="false" [sortable]="true"
+          [sortBy]="sortBy1" [sortOrder]="sortOrder" (sortChange)="sort1($event)">
+          <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+            <div style="width:130px;">
+              <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/out/1/view/1/out/{{row.id}}">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/out/1/edit/{{row.id}}">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id, 'hospital')">
+                <md-icon>delete</md-icon>
+              </a>
+            </div>
+          </ng-template>
+        </td-data-table>
+        <div class="md-padding" *ngIf="!dataTable1.hasData" layout="row" layout-align="center center">
+          <h3>无数据显示.</h3>
+        </div>
+        <td-paging-bar #pagingBar1 [pageSizes]="[1,10, 20, 50]" [total]="filteredTotal1" (change)="page1($event)">
+          <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar1.range}} <span hide-xs>of {{pagingBar1.total}}</span>
+        </td-paging-bar>
+      </md-card>
+    </div>
+  </md-tab>
+  <md-tab label="应急通信资源">
+    <div layout="column" class="pad">
+      <div flex layout="row">
+        <a routerLink='/resource/out/2/add' md-raised-button color='primary' style="height:35px;">增加</a>
+      </div>
+      <md-card flex style="margin:0px;margin-top:20px;">
+        <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+          <span *ngIf="!searchBox2.searchVisible" class="push-left-sm">
+                                        <span class="md-title">应急通信资源列表</span>
+          </span>
+          <td-search-box #searchBox2 backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search2($event)"
+            flex>
+          </td-search-box>
+        </div>
+        <md-divider></md-divider>
+        <td-data-table #dataTable2 [data]="tempCommunications" [columns]="columns2" [selectable]="false" [multiple]="false"
+          [sortable]="true" [sortBy]="sortBy2" [sortOrder]="sortOrder" (sortChange)="sort2($event)">
+          <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+            <div style="width:130px;">
+              <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/out/2/view/2/out/{{row.id}}">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/out/2/edit/{{row.id}}">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id, 'communication')">
+                <md-icon>delete</md-icon>
+              </a>
+            </div>
+          </ng-template>
+        </td-data-table>
+        <div class="md-padding" *ngIf="!dataTable2.hasData" layout="row" layout-align="center center">
+          <h3>无数据显示.</h3>
+        </div>
+        <td-paging-bar #pagingBar2 [pageSizes]="[10, 20, 50]" [total]="filteredTotal2" (change)="page2($event)">
+          <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar2.range}} <span hide-xs>of {{pagingBar2.total}}</span>
+        </td-paging-bar>
+      </md-card>
+    </div>
+  </md-tab>
+  <md-tab label="应急运输资源">
+    <div layout="column" class="pad">
+      <div flex layout="row">
+        <a routerLink='/resource/out/3/add' md-raised-button color='primary' style="height:35px;">增加</a>
+      </div>
+      <md-card flex style="margin:0px;margin-top:20px;">
+        <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+          <span *ngIf="!searchBox3.searchVisible" class="push-left-sm">
+                                            <span class="md-title">应急运输资源列表</span>
+          </span>
+          <td-search-box #searchBox3 backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search3($event)"
+            flex>
+          </td-search-box>
+        </div>
+        <md-divider></md-divider>
+        <td-data-table #dataTable3 [data]="tempTransports" [columns]="columns3" [selectable]="false" [multiple]="false" [sortable]="true"
+          [sortBy]="sortBy3" [sortOrder]="sortOrder" (sortChange)="sort3($event)">
+          <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+            <div style="width:130px;">
+              <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/out/3/view/3/out/{{row.id}}">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/out/3/edit/{{row.id}}">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id, 'transport')">
+                <md-icon>delete</md-icon>
+              </a>
+            </div>
+          </ng-template>
+        </td-data-table>
+        <div class="md-padding" *ngIf="!dataTable3.hasData" layout="row" layout-align="center center">
+          <h3>无数据显示.</h3>
+        </div>
+        <td-paging-bar #pagingBar3 [pageSizes]="[10, 20, 50]" [total]="filteredTotal3" (change)="page3($event)">
+          <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar3.range}} <span hide-xs>of {{pagingBar3.total}}</span>
+        </td-paging-bar>
+      </md-card>
+    </div>
+  </md-tab>
+  <md-tab label="应急避难场所">
+    <div layout="column" class="pad">
+      <div flex layout="row">
+        <a routerLink='/resource/out/4/add' md-raised-button color='primary' style="height:35px;">增加</a>
+      </div>
+      <md-card flex style="margin:0px;margin-top:20px;">
+        <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+          <span *ngIf="!searchBox4.searchVisible" class="push-left-sm">
+                                                <span class="md-title">应急避难场所列表</span>
+          </span>
+          <td-search-box #searchBox4 backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search4($event)"
+            flex>
+          </td-search-box>
+        </div>
+        <md-divider></md-divider>
+        <td-data-table #dataTable4 [data]="tempShelters" [columns]="columns4" [selectable]="false" [multiple]="false" [sortable]="true"
+          [sortBy]="sortBy4" [sortOrder]="sortOrder" (sortChange)="sort4($event)">
+          <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+            <div style="width:130px;">
+              <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/out/4/view/4/out/{{row.id}}">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/out/4/edit/{{row.id}}">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id, 'shelter')">
+                <md-icon>delete</md-icon>
+              </a>
+            </div>
+          </ng-template>
+        </td-data-table>
+        <div class="md-padding" *ngIf="!dataTable4.hasData" layout="row" layout-align="center center">
+          <h3>无数据显示.</h3>
+        </div>
+        <td-paging-bar #pagingBar4 [pageSizes]="[10, 20, 50]" [total]="filteredTotal4" (change)="page4($event)">
+          <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar4.range}} <span hide-xs>of {{pagingBar4.total}}</span>
+        </td-paging-bar>
+      </md-card>
+    </div>
+  </md-tab>
+</md-tab-group>

@@ -1,0 +1,31 @@
+<h2 md-dialog-title>应急机构</h2>
+<md-dialog-content>
+  <div class="body-wrapper">
+    <div class="pane-wrapper pad-10">
+      <md-card class="push-none pad">
+        <h3>点击选择应急机构:</h3>
+        <p-tree [value]="emerNodes" selectionMode="single" (onNodeSelect)="nodeSelect($event)"></p-tree>
+      </md-card>
+    </div>
+    <div class="canves-wrapper pad-10">
+      <md-card class="push-none pad">
+        <h3>应急机构信息:</h3>
+        <div class="row-section">
+          <md-checkbox class="row-margin" [(ngModel)]="bNode">无上级组织机构</md-checkbox>
+          <md-input-container style="width:200px;" class="row-margin">
+            <input mdInput placeholder="上级组织机构" [(ngModel)]="parentNode.name" readonly>
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:400px;" class="row-margin">
+            <input mdInput placeholder="名称" [(ngModel)]="vm.name" required>
+          </md-input-container>
+        </div>
+      </md-card>
+    </div>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>取消</button>
+  <button md-button md-dialog-close (click)="submit()" [disabled]="!vm.name">确定</button>
+</md-dialog-actions>

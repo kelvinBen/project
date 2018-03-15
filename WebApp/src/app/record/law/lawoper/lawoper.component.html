@@ -1,0 +1,62 @@
+<ul class="breadcrumb">
+  <li>应急记录</li>
+  <li>
+    <a routerLink="/record/law">法律法规</a>
+  </li>
+  <li class="active">{{type?'查看':(lawId?"编辑":"新增")}}</li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title>{{type?'查看':(lawId?"编辑":"新增")}}法律法规</md-card-title>
+  <form #lawForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-select placeholder="法律法规效力等级" style="width:300px;" class="row-margin" [(ngModel)]="vm.type" name="type" required>
+        <md-option *ngFor="let e of types" [value]="e.id">
+          {{e.name}}
+        </md-option>
+      </md-select>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="法律法规名称" name="name" required [(ngModel)]="vm.name" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="来源" name="source" required [(ngModel)]="vm.source" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="生效时间" name="validTime" required type="date" [(ngModel)]="vm.validTime" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="发布时间" name="reportTime" required type="date" [(ngModel)]="vm.reportTime" [readonly]="type">
+      </md-input-container>
+    </div>
+    <md-card>
+      <ngx-datatable class="material" [rows]="files" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+        [limit]="5">
+        <ngx-datatable-column name="文件名称" prop="Name">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="上传时间" prop="Time">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="操作">
+          <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+            <a md-mini-fab color="primary" mdTooltip="下载" href="/fs/{{value.ExName}}" target="_blank">
+              <md-icon>search</md-icon>
+            </a>
+            <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile(value.ExName)">
+              <md-icon>delete</md-icon>
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+      <br>
+      <p-fileUpload name="uploadfiles" url="/upload/file" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+        (onUpload)="onBasicUpload($event)" *ngIf="!type"></p-fileUpload>
+    </md-card>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" *ngIf="!type">重置</button>
+        <button md-raised-button color="warn" (click)="cancel()">取消</button>
+        <button md-raised-button color="primary" type="submit" [disabled]="!lawForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

@@ -1,0 +1,31 @@
+<h2 md-dialog-title>{{data?"编辑":"新增"}}通讯录</h2>
+<md-dialog-content style="height:190px;">
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="名称" required [(ngModel)]="vm.name" name="name">
+    </md-input-container>
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="职务" required [(ngModel)]="vm.duty" name="duty">
+    </md-input-container>
+  </div>
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="联系电话" required [(ngModel)]="vm.phone" name="phone">
+    </md-input-container>
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="办公电话" [(ngModel)]="vm.telephone" name="telephone">
+    </md-input-container>
+  </div>
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="邮箱" [(ngModel)]="vm.email" name="email">
+    </md-input-container>
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="地址" [(ngModel)]="vm.address" name="address">
+    </md-input-container>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>取消</button>
+  <button md-button md-dialog-close (click)="submit()">确定</button>
+</md-dialog-actions>

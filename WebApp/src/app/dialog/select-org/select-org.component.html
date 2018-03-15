@@ -1,0 +1,11 @@
+<h2 md-dialog-title>组织机构</h2>
+<md-dialog-content>
+  <md-card class="push-none pad">
+    <h3>点击选择上级组织机构:</h3>
+    <p-tree [value]="orgNodes" selectionMode="single" [(selection)]="selectOrg"></p-tree>
+  </md-card>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button [md-dialog-close]="-1">取消</button>
+  <button md-button [md-dialog-close]="selectOrg">确定</button>
+</md-dialog-actions>

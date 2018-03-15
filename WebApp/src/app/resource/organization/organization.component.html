@@ -1,0 +1,40 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li class="active">应急机构</li>
+</ul>
+<div layout="row" layout-margin>
+  <div>
+    <md-card class="push-none pad">
+      <h3>应急机构:</h3>
+      <div class="button-row">
+        <a md-mini-fab color="primary" mdTooltip="添加应急机构" (click)="emerOperator(true)">
+          <md-icon>add</md-icon>
+        </a>
+        <a md-mini-fab color="primary" mdTooltip="编辑应急机构" (click)="emerOperator(false)">
+          <md-icon>edit</md-icon>
+        </a>
+        <a md-mini-fab color="warn" mdTooltip="删除应急机构" (click)="deleteEmer()">
+          <md-icon>delete</md-icon>
+        </a>
+        <a md-mini-fab color="primary" mdTooltip="应急机构上移" (click)="sortFun(true)">
+          <md-icon class="up_rotate">arrow_back</md-icon>
+        </a>
+        <a md-mini-fab color="primary" mdTooltip="应急机构下移" (click)="sortFun(false)">
+          <md-icon class="down_rotate">arrow_back</md-icon>
+        </a>
+      </div>
+      <p-tree [value]="emerNodes" selectionMode="single" [(selection)]="selectEmer" (onNodeSelect)="nodeSelect()"></p-tree>
+    </md-card>
+  </div>
+  <div style="margin-left:10px;">
+    <md-card flex class="push-none pad">
+      <h3>{{selectEmer ? selectEmer.label:''}}各岗位职责:</h3>
+      <div style="padding:10px 0px;">
+        <button md-raised-button color='primary' (click)="saveContent()">保存</button>
+      </div>
+      <div>
+        <quill-editor [(ngModel)]="editorContent" [options]="editorOptions"></quill-editor>
+      </div>
+    </md-card>
+  </div>
+</div>

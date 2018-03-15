@@ -1,0 +1,44 @@
+<h2 md-dialog-title>搜救船舶</h2>
+<md-dialog-content style="height:320px;padding-top:10px;">
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="船舶名称" required [(ngModel)]="data.name" name="name">
+    </md-input-container>
+  </div>
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="日费用（元/小时）" type="number" min="0" required [(ngModel)]="data.cost" name="cost">
+    </md-input-container>
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="搜救海区（海事局）" required [(ngModel)]="data.area" name="duty">
+    </md-input-container>
+  </div>
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="搜救开始时间" type="datetime-local" required [(ngModel)]="data.stime" name="stime">
+    </md-input-container>
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="搜救结束时间" type="datetime-local" required [(ngModel)]="data.etime" name="etime">
+    </md-input-container>
+  </div>
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="燃油价格（元/吨）" type="number" min="0" [(ngModel)]="data.fuelPrice" name="fuelPrice" required>
+    </md-input-container>
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="搜救耗油（吨）" type="number" min="0" [(ngModel)]="data.oil" name="oil" required>
+    </md-input-container>
+  </div>
+  <div class="row-section">
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="搜救人数（人）" type="number" min="0" [(ngModel)]="data.person" name="person" required>
+    </md-input-container>
+    <md-input-container style="width:260px;" class="row-margin">
+      <input mdInput placeholder="搜救架次（次）" type="number" min="0" [(ngModel)]="data.num" name="num" required>
+    </md-input-container>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>取消</button>
+  <button md-button [md-dialog-close]="data" [disabled]="invalid()">确定</button>
+</md-dialog-actions>

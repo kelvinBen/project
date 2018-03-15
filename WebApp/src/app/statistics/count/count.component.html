@@ -1,0 +1,321 @@
+<ul class="breadcrumb">
+  <li>统计查询</li>
+  <li class="active">应急资源统计</li>
+</ul>
+<md-tab-group>
+  <md-tab label="溢油回收应急设备统计">
+    <div layout="row" class="pad">
+      <div flex>
+        <md-select placeholder="所属单位" [(ngModel)]="selOrg" (change)="orgChange()">
+          <md-option value="74">辽东作业公司</md-option>
+          <md-option value="75">渤南作业公司</md-option>
+          <md-option value="76">渤西作业公司</md-option>
+          <md-option value="77">蓬勃作业公司</md-option>
+          <md-option value="78">秦皇岛32-6/渤中作业公司</md-option>
+          <md-option value="79">曹妃甸作业公司</md-option>
+        </md-select>
+      </div>
+    </div>
+    <table class="materialTbl" style="width:100%;border-spacing:0px;" border="0">
+      <thead>
+        <tr>
+          <th colspan="2" width='100px'>单位</th>
+          <th *ngFor='let o of orgs'>{{o.name}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="14">围油栏</td>
+          <td>型号</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].model:''}}</td>
+        </tr>
+        <tr>
+          <td>厂家</td>
+          <td *ngFor='let o of orgs'>{{weiyouMap[o.id]?weiyouMap[o.id].manufacturer:''}}</td>
+        </tr>
+        <tr>
+          <td>总长</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].alllength:''}}</td>
+        </tr>
+        <tr>
+          <td>围板深度</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].Deep:''}}</td>
+        </tr>
+        <tr>
+          <td>抗浪</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].wave:''}}</td>
+        </tr>
+        <tr>
+          <td>抗风</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].wind:''}}</td>
+        </tr>
+        <tr>
+          <td>抗流</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].flow:''}}</td>
+        </tr>
+        <tr>
+          <td>布放时间</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].buTime:''}}</td>
+        </tr>
+        <tr>
+          <td>回收时间</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].recyclingTime:''}}</td>
+        </tr>
+        <tr>
+          <td>储存方式</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].saveway:''}}</td>
+        </tr>
+        <tr>
+          <td>储存温度</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].saveTemp:''}}</td>
+        </tr>
+        <tr>
+          <td>工作温度</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].workTemp:''}}</td>
+        </tr>
+        <tr>
+          <td>总重量</td>
+          <td *ngFor='let o of orgs'>{{weiyous[o.id]?weiyous[o.id].totalWeight:''}}</td>
+        </tr>
+        <tr>
+          <td>生产日期</td>
+          <td *ngFor='let o of orgs'>{{weiyouMap[o.id]?weiyouMap[o.id].startTime:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="3">动力装置</td>
+          <td>型号</td>
+          <td *ngFor='let o of orgs'>{{donglis[o.id]?donglis[o.id].model:''}}</td>
+        </tr>
+        <tr>
+          <td>厂家</td>
+          <td *ngFor='let o of orgs'>{{dongliMap[o.id]?dongliMap[o.id].manufacturer:''}}</td>
+        </tr>
+        <tr>
+          <td>功率</td>
+          <td *ngFor='let o of orgs'>{{donglis[o.id]?donglis[o.id].power:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="9">撇油器</td>
+          <td>型号</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].model:''}}</td>
+        </tr>
+        <tr>
+          <td>厂家</td>
+          <td *ngFor='let o of orgs'>{{pieiolsMap[o.id]?pieiolsMap[o.id].manufacturer:''}}</td>
+        </tr>
+        <tr>
+          <td>重量</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].weight:''}}</td>
+        </tr>
+        <tr>
+          <td>适用油品</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].applyOil:''}}</td>
+        </tr>
+        <tr>
+          <td>撇送距离</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].sendDistance:''}}</td>
+        </tr>
+        <tr>
+          <td>回收效率</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].recyclingRatio:''}}</td>
+        </tr>
+        <tr>
+          <td>工作方式</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].workWay:''}}</td>
+        </tr>
+        <tr>
+          <td>布放方式</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].buWay:''}}</td>
+        </tr>
+        <tr>
+          <td>回收能力</td>
+          <td *ngFor='let o of orgs'>{{pieiols[o.id]?pieiols[o.id].recyclingAbility:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="5">工作艇</td>
+          <td>型号</td>
+          <td *ngFor='let o of orgs'>{{workboat[o.id]?workboat[o.id].model:''}}</td>
+        </tr>
+        <tr>
+          <td>功率</td>
+          <td *ngFor='let o of orgs'>{{workboat[o.id]?workboat[o.id].power:''}}</td>
+        </tr>
+        <tr>
+          <td>最大航速</td>
+          <td *ngFor='let o of orgs'>{{workboat[o.id]?workboat[o.id].speed:''}}</td>
+        </tr>
+        <tr>
+          <td>拖力</td>
+          <td *ngFor='let o of orgs'>{{workboat[o.id]?workboat[o.id].drag:''}}</td>
+        </tr>
+        <tr>
+          <td>存放点</td>
+          <td *ngFor='let o of orgs'>{{workboat[o.id]?workboat[o.id].saveaddress:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="4">存储油器具</td>
+          <td>型号</td>
+          <td *ngFor='let o of orgs'>{{saveoil[o.id]?saveoil[o.id].model:''}}</td>
+        </tr>
+        <tr>
+          <td>容积</td>
+          <td *ngFor='let o of orgs'>{{saveoil[o.id]?saveoil[o.id].volume:''}}</td>
+        </tr>
+        <tr>
+          <td>数量</td>
+          <td *ngFor='let o of orgs'>{{saveoil[o.id]?saveoil[o.id].num:''}}</td>
+        </tr>
+        <tr>
+          <td>满载重量</td>
+          <td *ngFor='let o of orgs'>{{saveoil[o.id]?saveoil[o.id].totalWeight:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="4">喷洒设备</td>
+          <td>数量</td>
+          <td *ngFor='let o of orgs'>{{equiq[o.id]?equiq[o.id].num:''}}</td>
+        </tr>
+        <tr>
+          <td>厂家</td>
+          <td *ngFor='let o of orgs'>{{equiqMap[o.id]?equiqMap[o.id].manufacturer:''}}</td>
+        </tr>
+        <tr>
+          <td>臂长</td>
+          <td *ngFor='let o of orgs'>{{equiq[o.id]?equiq[o.id].armLength:''}}</td>
+        </tr>
+        <tr>
+          <td>喷洒速度</td>
+          <td *ngFor='let o of orgs'>{{equiq[o.id]?equiq[o.id].pensaSpeed:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="4">手持喷枪</td>
+          <td>数量</td>
+          <td *ngFor='let o of orgs'>{{guns[o.id]?guns[o.id].gunnum:''}}</td>
+        </tr>
+        <tr>
+          <td>厂家</td>
+          <td *ngFor='let o of orgs'>{{gunsMap[o.id]?weiyouMap[o.id].manufacturer:''}}</td>
+        </tr>
+        <tr>
+          <td>最大射距</td>
+          <td *ngFor='let o of orgs'>{{guns[o.id]?guns[o.id].targetDistance:''}}</td>
+        </tr>
+        <tr>
+          <td>喷洒速度</td>
+          <td *ngFor='let o of orgs'>{{guns[o.id]?guns[o.id].pensaSpeed:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="4">油拖网</td>
+          <td>数量</td>
+          <td *ngFor='let o of orgs'>{{nets[o.id]?nets[o.id].num:''}}</td>
+        </tr>
+        <tr>
+          <td>厂家</td>
+          <td *ngFor='let o of orgs'>{{netMap[o.id]?netMap[o.id].manufacturer:''}}</td>
+        </tr>
+        <tr>
+          <td>长度</td>
+          <td *ngFor='let o of orgs'>{{nets[o.id]?nets[o.id].length:''}}</td>
+        </tr>
+        <tr>
+          <td>存放方式</td>
+          <td *ngFor='let o of orgs'>{{nets[o.id]?nets[o.id].saveway:''}}</td>
+        </tr>
+        <tr>
+          <td rowspan="5">消油剂</td>
+          <td>型号</td>
+          <td *ngFor='let o of orgs'>{{xiaooils[o.id]?xiaooils[o.id].model:''}}</td>
+        </tr>
+        <tr>
+          <td>厂家</td>
+          <td *ngFor='let o of orgs'>{{xiaooilMap[o.id]?xiaooilMap[o.id].manufacturer:''}}</td>
+        </tr>
+        <tr>
+          <td>数量</td>
+          <td *ngFor='let o of orgs'>{{xiaooils[o.id]?xiaooils[o.id].num:''}}</td>
+        </tr>
+        <tr>
+          <td>生产日期</td>
+          <td *ngFor='let o of orgs'>{{xiaooilMap[o.id]?xiaooilMap[o.id].repairTime:''}}</td>
+        </tr>
+        <tr>
+          <td>有效期限</td>
+          <td *ngFor='let o of orgs'>{{xiaooilMap[o.id]?xiaooilMap[o.id].updateTime:''}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">吸油毡</td>
+          <td *ngFor='let o of orgs'>{{others[o.id]?others[o.id].oilmat:''}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-tab>
+  <md-tab label="船舶统计">
+    <div class="pad">
+      <button md-raised-button color='primary' style="height:35px;" (click)="downloadFile('../../../assets/TempFiles/shiptable.xlsx')">导出</button>
+    </div>
+    <ngx-datatable class="material" [rows]="ships" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+      [scrollbarH]="true">
+      <ngx-datatable-column name="序号" [width]="50">
+        <ng-template let-rowIndex="rowIndex" ngx-datatable-cell-template>
+          {{rowIndex+1}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="船名" prop="name" [width]="70"> </ngx-datatable-column>
+      <ngx-datatable-column name="类型" prop="type" [width]="100"> </ngx-datatable-column>
+      <ngx-datatable-column name="建造完成时间" prop="buildtime"></ngx-datatable-column>
+      <ngx-datatable-column name="所在海区" prop="area"></ngx-datatable-column>
+      <ngx-datatable-column name="船舶功率(KW)" prop="kilowatt"> </ngx-datatable-column>
+      <ngx-datatable-column name="船舶长(M)" prop="length"> </ngx-datatable-column>
+      <ngx-datatable-column name="船舶型宽(M)" prop="width"> </ngx-datatable-column>
+      <ngx-datatable-column name="螺距" prop="pitch"> </ngx-datatable-column>
+      <ngx-datatable-column name="最大航速（节）" prop="pitch"> </ngx-datatable-column>
+      <ngx-datatable-column name="主拖缆系拄拉力（吨）" prop="maintowinglinepower"> </ngx-datatable-column>
+      <ngx-datatable-column name="散料罐舱容总和（方）" prop="maintowinglinepower"> </ngx-datatable-column>
+      <ngx-datatable-column name="能否布防围油栏" prop="maintowinglinepower">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.maintowinglinepower?'能':'否'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="冰区级别" prop="icelevel"> </ngx-datatable-column>
+      <ngx-datatable-column name="消防排量（立方/小时）" prop="firevolume"> </ngx-datatable-column>
+      <ngx-datatable-column name="所属公司" prop="depart"> </ngx-datatable-column>
+    </ngx-datatable>
+  </md-tab>
+  <md-tab label="直升飞机统计">
+    <div class="pad">
+      <button md-raised-button color='primary' style="height:35px;" (click)="downloadFile('../../../assets/TempFiles/h.xlsx')">导出</button>
+    </div>
+    <ngx-datatable class="material" [rows]="helicopters" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="50" [scrollbarV]="true"
+      [scrollbarH]="true">
+      <ngx-datatable-column name="序号" [width]="50">
+        <ng-template let-rowIndex="rowIndex" ngx-datatable-cell-template>
+          {{rowIndex+1}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="型号" prop="num" [width]="100"></ngx-datatable-column>
+      <ngx-datatable-column name="飞行基地" prop="base"></ngx-datatable-column>
+      <ngx-datatable-column name="生产厂家" prop="vender"></ngx-datatable-column>
+      <ngx-datatable-column name="制造/购置年份" prop="year"></ngx-datatable-column>
+      <ngx-datatable-column name="注册号" prop="regnum"></ngx-datatable-column>
+      <ngx-datatable-column name="最大D值" prop="maxd"></ngx-datatable-column>
+      <ngx-datatable-column name="机高m" prop="height"></ngx-datatable-column>
+      <ngx-datatable-column name="最大起飞重量kg" prop="maxweight"></ngx-datatable-column>
+      <ngx-datatable-column name="空机重量kg" prop="weight"></ngx-datatable-column>
+      <ngx-datatable-column name="最大速度km/h" prop="maxspeed"></ngx-datatable-column>
+      <ngx-datatable-column name="巡航速度km/h" prop="speed"></ngx-datatable-column>
+      <ngx-datatable-column name="最大航程km" prop="voyage"></ngx-datatable-column>
+      <ngx-datatable-column name="续航时间h" prop="hours"></ngx-datatable-column>
+      <ngx-datatable-column name="实用升限m" prop="ceiling"></ngx-datatable-column>
+      <ngx-datatable-column name="绞车能力" prop="winch">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.winch?'具备':'无'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="乘客座位" prop="seats"></ngx-datatable-column>
+      <ngx-datatable-column name="安全救生设备" prop="equipment">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.equipment?'有':'无'}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </md-tab>
+</md-tab-group>

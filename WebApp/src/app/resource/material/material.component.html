@@ -1,0 +1,132 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li class="active">应急物资</li>
+</ul>
+<md-tab-group>
+  <md-tab label="应急物资">
+    <div layout="column" class="pad">
+      <div flex style="margin-top:10px;">
+        <!-- <md-select placeholder="应急保障类别(大类)" [(ngModel)]="type" (change)="cate1Change()">
+          <md-option *ngFor="let c of cates" [value]="c.id">
+            {{c.name}}
+          </md-option>
+        </md-select>
+        <md-select placeholder="现场任务类型(中类)" [(ngModel)]="type1" (change)="cate2Change()">
+          <md-option *ngFor="let c of cates1" [value]="c.id">
+            {{c.name}}
+          </md-option>
+        </md-select>
+        <md-select placeholder="主要作业方式或物资功能(小类)" [(ngModel)]="type2">
+          <md-option *ngFor="let c of cates2" [value]="c.id">
+            {{c.name}}
+          </md-option>
+        </md-select> -->
+        <md-select placeholder="现场任务类型" [(ngModel)]="selCateEx">
+          <md-option *ngFor="let e of catesEx" [value]="e.id">
+            {{e.name}}
+          </md-option>
+        </md-select>
+        <md-input-container style="width:260px;" class="row-margin">
+          <input mdInput placeholder="作业公司" required readonly [value]="operOrg?operOrg.name:'无'" [readonly]="true">
+        </md-input-container>
+        <button type="button" (click)="searchOrg()" md-mini-fab class="row-margin" color="primary"><md-icon>search</md-icon></button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button md-raised-button color='primary' (click)="querygoods()">查询</button>
+        <button md-raised-button color='primary'>重置</button>
+      </div>
+      <div flex layout="row" style="margin-top:10px;">
+        <a routerLink='/resource/material/goodsadd' md-raised-button color='primary'>增加</a>
+        <!-- <td-file-upload class="row-margin" #singleFileUpload (upload)="uploadEvent($event)">
+          <md-icon>file_upload</md-icon><span>{{ singleFileUpload.files?.name }}</span>
+          <ng-template td-file-input-label>
+            <span>导入</span>
+          </ng-template>
+        </td-file-upload>
+        <button md-raised-button color='primary' class="row-margin">导出</button>
+        <button md-raised-button color='primary' style="margin-left:10px;" (click)="downloadFile('../../../assets/TempFiles/plan.xlsx')">模版</button> -->
+      </div>
+      <md-card flex style="margin:0px;margin-top:20px;">
+        <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+          <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                          <span class="md-title">应急物资列表</span>
+          </span>
+          <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+            flex>
+          </td-search-box>
+        </div>
+        <md-divider></md-divider>
+        <td-data-table #dataTable [data]="tempMaterials" [columns]="columns" [selectable]="false" [multiple]="false" [sortable]="true"
+          [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+          <ng-template tdDataTableTemplate="type" let-value="value" let-row="row" let-column="column">
+              {{queryType(row.type)}}
+            </ng-template>
+          <ng-template tdDataTableTemplate="depart" let-value="value" let-row="row" let-column="column">
+            {{queryOrg(row.depart)}}
+          </ng-template>
+          <ng-template tdDataTableTemplate="emerGroup" let-value="value" let-row="row" let-column="column">
+            {{queryGroup(row.emerGroup)}}
+          </ng-template>
+          <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+            <div style="width:130px;">
+              <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/material/1/goodsview/{{row.id}}">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/material/goodsedit/{{row.id}}">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+                <md-icon>delete</md-icon>
+              </a>
+            </div>
+          </ng-template>
+        </td-data-table>
+        <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+          <h3>无数据显示.</h3>
+        </div>
+        <td-paging-bar #pagingBar [pageSizes]="[10, 20, 50]" [total]="filteredTotal" (change)="page($event)">
+          <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+        </td-paging-bar>
+      </md-card>
+    </div>
+  </md-tab>
+  <md-tab label="存储库">
+    <div layout="column" class="pad">
+      <div flex style="margin-top:10px;">
+        <a routerLink='/resource/material/storageadd' md-raised-button color='primary'>增加</a>
+      </div>
+      <md-card flex style="margin:0px;margin-top:20px;">
+        <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+          <span *ngIf="!searchBox1.searchVisible" class="push-left-sm">
+                            <span class="md-title">存储库列表</span>
+          </span>
+          <td-search-box #searchBox1 backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search1($event)"
+            flex>
+          </td-search-box>
+        </div>
+        <md-divider></md-divider>
+        <td-data-table #dataTable1 [data]="tempStorages" [columns]="columns1" [selectable]="false" [multiple]="false" [sortable]="true"
+          [sortBy]="sortBy1" [sortOrder]="sortOrder" (sortChange)="sort1($event)">
+          <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+            <div style="width:130px;">
+              <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/material/1/storageview/{{row.id}}">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/material/storageedit/{{row.id}}">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="deleteStorage(row.id)">
+                <md-icon>delete</md-icon>
+              </a>
+            </div>
+          </ng-template>
+        </td-data-table>
+        <div class="md-padding" *ngIf="!dataTable1.hasData" layout="row" layout-align="center center">
+          <h3>无数据显示.</h3>
+        </div>
+        <td-paging-bar #pagingBar1 [pageSizes]="[10, 20, 50]" [total]="filteredTotal1" (change)="page1($event)">
+          <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar1.range}} <span hide-xs>of {{pagingBar1.total}}</span>
+        </td-paging-bar>
+      </md-card>
+    </div>
+  </md-tab>
+</md-tab-group>

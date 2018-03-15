@@ -1,0 +1,191 @@
+{
+    "data": [
+        {
+            "data": {
+                "name": "围油栏",
+                "type": "充气式",
+                "model": "1500型",
+                "parameter": "干舷500吃水700",
+                "longkou": "200",
+                "dongying": "200",
+                "one": "350",
+                "two": "120",
+                "sea": "260",
+                "three": "150",
+                "four": "100",
+                "five": "150",
+                "six": "200",
+                "seven": "350",
+                "sum": "3600"
+            },
+            "children": [
+                {
+                    "data": {
+                        "type": "固体式",
+                        "model": "1000型",
+                        "parameter": "干舷500吃水700",
+                        "longkou": "230",
+                        "dongying": "500",
+                        "one": "220",
+                        "two": "160",
+                        "sea": "200",
+                        "three": "200",
+                        "four": "120",
+                        "five": "400",
+                        "six": "360",
+                        "seven": "230",
+                        "sum": "3000"
+                    }
+                },
+                {
+                    "data": {
+                        "type": "沙滩式",
+                        "model": "900型",
+                        "parameter": "干舷500吃水700",
+                        "longkou": "230",
+                        "dongying": "500",
+                        "one": "220",
+                        "two": "160",
+                        "sea": "200",
+                        "three": "200",
+                        "four": "120",
+                        "five": "400",
+                        "six": "360",
+                        "seven": "230",
+                        "sum": "3000"
+                    }
+                },
+                {
+                    "data": {
+                        "type": "防火性",
+                        "model": "WGJ900H",
+                        "parameter": "干舷500吃水700",
+                        "longkou": "230",
+                        "dongying": "500",
+                        "one": "220",
+                        "two": "160",
+                        "sea": "200",
+                        "three": "200",
+                        "four": "120",
+                        "five": "400",
+                        "six": "360",
+                        "seven": "230",
+                        "sum": "3000"
+                    }
+                }
+            ]
+        },
+        {
+            "data": {
+                "name": "撇油器",
+                "type": "大型",
+                "model": "LFM450",
+                "parameter": "250m³/h、中/重质油",
+                "longkou": "1",
+                "dongying": "1",
+                "one": "1",
+                "two": "1",
+                "sea": "1",
+                "three": "1",
+                "four": "1",
+                "five": "1",
+                "six": "1",
+                "seven": "1",
+                "sum": "10"
+            },
+            "children": [
+                {
+                    "data": {
+                        "type": "中型",
+                        "model": "LSC-4C",
+                        "parameter": "80m³/h、中/重质油",
+                        "longkou": "1",
+                        "dongying": "",
+                        "one": "1",
+                        "two": "1",
+                        "sea": "1",
+                        "three": "1",
+                        "four": "1",
+                        "five": "1",
+                        "six": "1",
+                        "seven": "1",
+                        "sum": "6"
+                    },
+                    "children": [
+                        {
+                            "data": {
+                                "model": "MINIMAX100",
+                                "parameter": "100m³/h、中/重质油",
+                                "longkou": "1",
+                                "dongying": "",
+                                "one": "",
+                                "two": "1",
+                                "sea": "1",
+                                "three": "1",
+                                "four": "1",
+                                "five": "",
+                                "six": "1",
+                                "seven": "1",
+                                "sum": "7"
+                            }
+                        },
+                        {
+                            "data": {
+                                "model": "槽式轮毂50",
+                                "parameter": "50m³/h、中/重质油",
+                                "longkou": "1",
+                                "dongying": "",
+                                "one": "",
+                                "two": "1",
+                                "sea": "1",
+                                "three": "",
+                                "four": "1",
+                                "five": "",
+                                "six": "1",
+                                "seven": "1",
+                                "sum": "7"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "data": {
+                        "type": "小型",
+                        "model": "MINIMAX12",
+                        "parameter": "12m³/h、中/重质油",
+                        "longkou": "1",
+                        "dongying": "",
+                        "one": "1",
+                        "two": "1",
+                        "sea": "",
+                        "three": "",
+                        "four": "1",
+                        "five": "1",
+                        "six": "1",
+                        "seven": "1",
+                        "sum": "6"
+                    },
+                    "children": [
+                        {
+                            "data": {
+                                "model": "HAF12",
+                                "parameter": "12m³/h、中/重质油",
+                                "longkou": "2",
+                                "dongying": "",
+                                "one": "",
+                                "two": "1",
+                                "sea": "1",
+                                "three": "",
+                                "four": "",
+                                "five": "",
+                                "six": "1",
+                                "seven": "1",
+                                "sum": "6"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,177 @@
+<ul class="breadcrumb">
+  <li>对外救助</li>
+  <li>
+    <a routerLink="/rescue">对外救助管理</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pID?"编辑":"新增")}}
+  </li>
+</ul>
+<md-card style="margin:0px;" class="pad">
+  <md-card-title>{{type?'查看':(pID?"编辑":"新增")}}对外救助</md-card-title>
+  <form #resForm="ngForm" (ngSubmit)="onSubmit()">
+    <md2-accordion [multiple]="true">
+      <md2-accordion-tab header="基本信息" active="true">
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="搜救海区" required [(ngModel)]="vm.area" name="area">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="发生时间" required type="date" [(ngModel)]="vm.rescueTime" name="rescueTime">
+          </md-input-container>
+        </div>
+        <div class="row-section" style="height:100px;">
+          <md-input-container style="margin-top:20px;width:100%;" class="row-margin">
+            <textarea mdInput placeholder="情况说明" required [(ngModel)]="vm.note" rows="5" name="note"></textarea>
+          </md-input-container>
+        </div>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="搜救船次">
+        <div style="padding-bottom:10px;" align="right">
+          <button md-raised-button color="primary" type="button" mdTooltip="添加搜救船次" (click)="addShip()">添加搜救船舶</button>
+        </div>
+        <ngx-datatable [rowHeight]="'auto'" [rows]="ships" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="50">
+          <ngx-datatable-column name="船舶名称" prop="name" [width]="50"></ngx-datatable-column>
+          <ngx-datatable-column name="日费(元/天)" prop="cost" [width]="50"></ngx-datatable-column>
+          <ngx-datatable-column name="燃油价格(元/吨)" prop="fuelPrice" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="搜救海区(海事局)" prop="area" [width]="50"></ngx-datatable-column>
+          <ngx-datatable-column name="搜救开始时间" prop="stime" [width]="100">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{value | date:'yyyy-MM-dd HH:mm:ss'}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="搜救结束时间" prop="etime" [width]="100">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{value | date:'yyyy-MM-dd HH:mm:ss'}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="搜救耗油(吨)" prop="oil" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="搜救人数(人)" prop="person" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="搜救船次(次)" prop="num" [width]="100"></ngx-datatable-column>
+          <!-- <ngx-datatable-column name="搜救天数(天)" prop="num" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="船舶费用(元)" prop="num" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="燃油费用(元)" prop="num" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="费用合计(元)" prop="num" [width]="100"></ngx-datatable-column> -->
+          <ngx-datatable-column name="操作" [width]="100">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="编辑" (click)="editShip(row)">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="deleteShip(row)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="搜救架次">
+        <div style="padding-bottom:10px;" align="right">
+          <button md-raised-button type="button" color="primary" mdTooltip="添加搜救架次" (click)="addHelicopters()">添加直升机</button>
+        </div>
+        <ngx-datatable [rowHeight]="'auto'" [rows]="helicopters" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="50">
+          <ngx-datatable-column name="直升机名称" prop="name"></ngx-datatable-column>
+          <ngx-datatable-column name="日费(元/小时)" prop="cost"></ngx-datatable-column>
+          <ngx-datatable-column name="搜救海区(海事局)" prop="area"></ngx-datatable-column>
+          <ngx-datatable-column name="搜救开始时间" prop="stime">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{value | date:'yyyy-MM-dd HH:mm:ss'}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="搜救结束时间" prop="etime">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{value | date:'yyyy-MM-dd HH:mm:ss'}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="搜救人数(人)" prop="person"></ngx-datatable-column>
+          <!-- <ngx-datatable-column name="搜救架次(次)" prop="num" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="搜救天数(天)">
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                {{getHelicoptersDays(row)}}
+              </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="搜救时间(小时)" prop="num" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="费用(元)" prop="num" [width]="100"></ngx-datatable-column> -->
+          <ngx-datatable-column name="操作">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="编辑" (click)="editHelicopters(row)">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="deleteHelicopters(row)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="救助申请">
+        <ngx-datatable class="material" [rows]="applys" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+          [limit]="5">
+          <ngx-datatable-column name="文件名称" prop="Name"></ngx-datatable-column>
+          <ngx-datatable-column name="上传时间" prop="Time"></ngx-datatable-column>
+          <ngx-datatable-column name="操作">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="下载" href="/fs/{{value.ExName}}" target="_blank">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile(value.ExName)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        <br>
+        <p-fileUpload name="uploadfiles" url="/upload/file" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+          (onUpload)="onBasicUpload($event)" *ngIf="!type"></p-fileUpload>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="救助情况">
+        <ngx-datatable class="material" [rows]="images" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+          [limit]="5">
+          <ngx-datatable-column name="文件名称" prop="Name"></ngx-datatable-column>
+          <ngx-datatable-column name="上传时间" prop="Time"></ngx-datatable-column>
+          <ngx-datatable-column name="操作">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="下载" href="/fs/{{value.ExName}}" target="_blank">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile1(value.ExName)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        <br>
+        <p-fileUpload name="uploadfiles" url="/upload/file" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+          (onUpload)="onBasicUpload1($event)" *ngIf="!type"></p-fileUpload>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="救助奖励">
+        <ngx-datatable class="material" [rows]="rewards" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+          [limit]="5">
+          <ngx-datatable-column name="文件名称" prop="Name"></ngx-datatable-column>
+          <ngx-datatable-column name="上传时间" prop="Time"></ngx-datatable-column>
+          <ngx-datatable-column name="操作">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="下载" href="/fs/{{value.ExName}}" target="_blank">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile2(value.ExName)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        <br>
+        <p-fileUpload name="uploadfiles" url="/upload/file" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+          (onUpload)="onBasicUpload2($event)" *ngIf="!type"></p-fileUpload>
+      </md2-accordion-tab>
+    </md2-accordion>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" *ngIf="!type">重置</button>
+        <button md-raised-button color="warn" (click)="cancel()">取消</button>
+        <button md-raised-button color="primary" type="submit" [disabled]="!resForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

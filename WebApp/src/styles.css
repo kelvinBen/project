@@ -1,0 +1,237 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@covalent/core/theming/prebuilt/indigo-pink.css';
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.breadcrumb {
+  padding: 8px 15px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin: 0px;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+}
+
+.breadcrumb > li + li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+
+.breadcrumb > li > a {
+  color: #777;
+}
+
+.breadcrumb > .active {
+  color: #777;
+}
+
+a {
+  text-decoration: none
+}
+
+.centerText {
+  text-align: center;
+}
+
+.padd10 {
+  padding: 10px;
+}
+
+.row-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.row-margin {
+  margin: 0 10px;
+}
+
+
+.page-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+@-webkit-keyframes arc-spinner-rotator-arc {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes arc-spinner-rotator-arc {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+.ngx-preloader {
+  margin: 50px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  -webkit-animation: arc-spinner-rotator-arc 5.4s linear infinite;
+  animation: arc-spinner-rotator-arc 5.4s linear infinite;
+}
+
+.ngx-preloader .arc {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  border-right: 10px solid #02AAFF;
+  -webkit-transform: rotateZ(0deg);
+  transform: rotateZ(0deg);
+  -webkit-animation: arc-spinner-rotator-arc 1.8s cubic-bezier(0.8, 0, 0.4, 0.8) 0s infinite, arc-spinner-colors 3.6s ease-in-out infinite;
+  animation: arc-spinner-rotator-arc 1.8s cubic-bezier(0.8, 0, 0.4, 0.8) 0s infinite, arc-spinner-colors 3.6s ease-in-out infinite;
+}
+
+.ngx-preloader .arc-0 {
+  -webkit-animation-delay: 0s, 0s;
+  animation-delay: 0s, 0s;
+}
+
+.ngx-preloader .arc-1 {
+  -webkit-animation-delay: 0.015s, 0s;
+  animation-delay: 0.015s, 0s;
+}
+
+.ngx-preloader .arc-2 {
+  -webkit-animation-delay: 0.03s, 0s;
+  animation-delay: 0.03s, 0s;
+}
+
+.ngx-preloader .arc-3 {
+  -webkit-animation-delay: 0.045s, 0s;
+  animation-delay: 0.045s, 0s;
+}
+
+.ngx-preloader .arc-4 {
+  -webkit-animation-delay: 0.06s, 0s;
+  animation-delay: 0.06s, 0s;
+}
+
+.ngx-preloader .arc-5 {
+  -webkit-animation-delay: 0.075s, 0s;
+  animation-delay: 0.075s, 0s;
+}
+
+.ngx-preloader .arc-6 {
+  -webkit-animation-delay: 0.09s, 0s;
+  animation-delay: 0.09s, 0s;
+}
+
+.ngx-preloader .arc-7 {
+  -webkit-animation-delay: 0.105s, 0s;
+  animation-delay: 0.105s, 0s;
+}
+
+.ngx-preloader .arc-8 {
+  -webkit-animation-delay: 0.12s, 0s;
+  animation-delay: 0.12s, 0s;
+}
+
+.ngx-preloader .arc-9 {
+  -webkit-animation-delay: 0.135s, 0s;
+  animation-delay: 0.135s, 0s;
+}
+
+.ngx-preloader .arc-10 {
+  -webkit-animation-delay: 0.15s, 0s;
+  animation-delay: 0.15s, 0s;
+}
+
+.ngx-preloader .arc-11 {
+  -webkit-animation-delay: 0.165s, 0s;
+  animation-delay: 0.165s, 0s;
+}
+
+.ngx-preloader .arc-12 {
+  -webkit-animation-delay: 0.18s, 0s;
+  animation-delay: 0.18s, 0s;
+}
+
+.ngx-preloader .arc-13 {
+  -webkit-animation-delay: 0.195s, 0s;
+  animation-delay: 0.195s, 0s;
+}
+
+.ngx-preloader .arc-14 {
+  -webkit-animation-delay: 0.21s, 0s;
+  animation-delay: 0.21s, 0s;
+}
+
+.ngx-preloader .arc-15 {
+  -webkit-animation-delay: 0.225s, 0s;
+  animation-delay: 0.225s, 0s;
+}
+
+.ngx-preloader .arc-16 {
+  -webkit-animation-delay: 0.24s, 0s;
+  animation-delay: 0.24s, 0s;
+}
+
+.ngx-preloader .arc-17 {
+  -webkit-animation-delay: 0.255s, 0s;
+  animation-delay: 0.255s, 0s;
+}
+
+.ngx-preloader .arc-18 {
+  -webkit-animation-delay: 0.27s, 0s;
+  animation-delay: 0.27s, 0s;
+}
+
+.ngx-preloader .arc-19 {
+  -webkit-animation-delay: 0.285s, 0s;
+  animation-delay: 0.285s, 0s;
+}
+
+.ngx-preloader .arc-20 {
+  -webkit-animation-delay: 0.3s, 0s;
+  animation-delay: 0.3s, 0s;
+}
+
+.ngx-preloader .arc-21 {
+  -webkit-animation-delay: 0.315s, 0s;
+  animation-delay: 0.315s, 0s;
+}
+
+.ngx-preloader .arc-22 {
+  -webkit-animation-delay: 0.33s, 0s;
+  animation-delay: 0.33s, 0s;
+}
+
+.ngx-preloader .arc-23 {
+  -webkit-animation-delay: 0.345s, 0s;
+  animation-delay: 0.345s, 0s;
+}
+
+.ngx-preloader .arc-24 {
+  -webkit-animation-delay: 0.36s, 0s;
+  animation-delay: 0.36s, 0s;
+}

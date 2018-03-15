@@ -1,0 +1,42 @@
+<ul class="breadcrumb">
+  <li>系统管理</li>
+  <li>
+    <a routerLink="/admin/role">权限管理</a>
+  </li>
+  <li class="active">{{type?'查看':(roleId?"编辑":"新增")}}</li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title>{{type?'查看':(roleId?"编辑":"新增")}}权限</md-card-title>
+  <form #roleForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:260px;" class="row-margin">
+        <input mdInput placeholder="用户" required readonly [value]="selUser?selUser.name:'无'" name="user" [readonly]="type">
+      </md-input-container>
+      <button type="button" (click)="searchUser()" md-mini-fab class="row-margin" color="primary">
+        <md-icon>search</md-icon>
+      </button>
+    </div>
+    <div class="row-section">
+      <md-select placeholder="角色" style="width:300px;" class="row-margin" [(ngModel)]="vm.type" name="type" required>
+        <md-option [value]="-1">普通管理员</md-option>
+        <md-option [value]="1">超级管理员</md-option>
+      </md-select>
+    </div>
+    <div class="row-section" *ngIf="vm.type === -1">
+      <md-input-container style="width:260px;" class="row-margin">
+        <input mdInput placeholder="所属单位" required readonly [value]="selOrg?selOrg.name:'无'" name="depart" [readonly]="type">
+      </md-input-container>
+      <button type="button" (click)="searchOrg()" md-mini-fab class="row-margin" color="primary">
+        <md-icon>search</md-icon>
+      </button>
+    </div>
+
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" *ngIf="!type">重置</button>
+        <button md-raised-button color="warn" (click)="cancel()">取消</button>
+        <button md-raised-button color="primary" type="submit" [disabled]="!roleForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

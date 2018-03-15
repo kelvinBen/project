@@ -1,0 +1,49 @@
+<h2 md-dialog-title>组织机构</h2>
+<md-dialog-content>
+  <div class="body-wrapper">
+    <div class="pane-wrapper pad-10">
+      <md-card class="push-none pad">
+        <h3>点击选择上级组织机构:</h3>
+        <p-tree [value]="orgNodes" selectionMode="single" [(selection)]="selectOrg" (onNodeSelect)="nodeSelect($event)"></p-tree>
+      </md-card>
+    </div>
+    <div class="canves-wrapper pad-10">
+      <md-card class="push-none pad">
+        <h3>组织机构信息:</h3>
+        <div class="row-section">
+          <md-checkbox class="row-margin" [(ngModel)]="bNode">无上级组织机构</md-checkbox>
+          <md-input-container style="width:200px;" class="row-margin">
+            <input mdInput placeholder="上级组织机构" [(ngModel)]="parentNode.name" readonly>
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:400px;" class="row-margin">
+            <input mdInput placeholder="名称" [(ngModel)]="vm.name" required>
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:400px;" class="row-margin">
+            <input mdInput placeholder="地址" [(ngModel)]="vm.address" required>
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:200px;" class="row-margin">
+            <input mdInput placeholder="经度" [(ngModel)]="vm.longtitude" required>
+          </md-input-container>
+          <md-input-container style="width:200px;" class="row-margin">
+            <input mdInput placeholder="纬度" [(ngModel)]="vm.latitude" required>
+          </md-input-container>
+        </div>
+        <div class="row-section" style="padding-top:20px;">
+          <md-input-container style="width:400px;" class="row-margin">
+            <textarea mdInput placeholder="简介" rows="3" [(ngModel)]="vm.introduce" name="desc"></textarea>
+          </md-input-container>
+        </div>
+      </md-card>
+    </div>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button [md-dialog-close]="-1">取消</button>
+  <button md-button md-dialog-close (click)="submit()" [disabled]="!vm.name">确定</button>
+</md-dialog-actions>

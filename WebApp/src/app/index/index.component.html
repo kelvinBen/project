@@ -1,0 +1,104 @@
+<div class="header-wrapper">
+  <md-toolbar color="primary">
+    <a [routerLink]="['/gis/index']">
+      <!-- <span>
+          渤海石油管理局应急管理信息系统
+        </span> -->
+      <img src="../../assets/Images/logo1.png" width="400px;" style="padding-top:7px;">
+    </a>
+    <div class="fill-remaining-space">
+      <button md-button (click)="clickRouter('/resource/organization')">应急机构</button>
+      <button md-button (click)="clickRouter('/resource/plan')">应急预案</button>
+      <button md-button [mdMenuTriggerFor]="menu">应急资源</button>
+      <md-menu #menu yPosition="below" [overlapTrigger]="false">
+        <!-- <button md-menu-item (click)="clickRouter('/resource/plan')">
+          <span>应急预案</span>
+        </button> -->
+        <button md-menu-item (click)="clickRouter('/resource/professor')">
+          <span>应急专家</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/resource/group')">
+          <span>应急队伍</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/resource/material')">
+          <span>应急物资</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/resource/ship')">
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;船舶</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/resource/helicopter')">
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;直升飞机</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/resource/out')">
+          <span>外部应急资源</span>
+        </button>
+        <!-- <button md-menu-item (click)="clickRouter('/resource/organization')">
+          <span>应急机构</span>
+        </button> -->
+      </md-menu>
+      <button md-button [mdMenuTriggerFor]="menu1">应急记录</button>
+      <md-menu #menu1="mdMenu" yPosition="below" [overlapTrigger]="false">
+        <button md-menu-item (click)="clickRouter('/record/action')">
+          <span>应急演习</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/record/train')">
+          <span>应急培训</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/record/response')">
+          <span>应急响应</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/record/disaster')">
+          <span>灾害灾情</span>
+        </button>
+      </md-menu>
+      <button md-button [mdMenuTriggerFor]="menu2">统计查询</button>
+      <md-menu #menu2="mdMenu" yPosition="below" [overlapTrigger]="false">
+        <button md-menu-item (click)="clickRouter('/statistics/count')">
+          <span>应急资源统计</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/statistics/ability')">
+          <span>应急记录统计</span>
+        </button>
+      </md-menu>
+      <button md-button [mdMenuTriggerFor]="menu3">地图平台</button>
+      <md-menu #menu3="mdMenu" yPosition="below" [overlapTrigger]="false">
+        <button md-menu-item (click)="clickRouter('/gis/index')">
+          <span>综合查询</span>
+        </button>
+      </md-menu>
+      <button md-button [mdMenuTriggerFor]="menu5">对外救助</button>
+      <md-menu #menu5="mdMenu" yPosition="below" [overlapTrigger]="false">
+        <button md-menu-item (click)="clickRouter('/rescue')">
+          <span>对外救助管理</span>
+        </button>
+        <!-- <button md-menu-item (click)="clickRouter('rescue/statistics')"><span>对外救助统计</span></button> -->
+      </md-menu>
+
+      <button md-button (click)="clickRouter('/record/law')">法律法规</button>
+      <button md-button [mdMenuTriggerFor]="menu4">系统管理</button>
+      <md-menu #menu4="mdMenu" yPosition="below" [overlapTrigger]="false">
+        <button md-menu-item (click)="clickRouter('/admin/user')">
+          <span>用户管理</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/admin/role')">
+          <span>权限管理</span>
+        </button>
+        <button md-menu-item (click)="clickRouter('/resource/addresslist')">
+          <span>组织机构</span>
+        </button>
+      </md-menu>
+    </div>
+
+    <button md-mini-fab [mdMenuTriggerFor]="userMenu" color="primary">
+      <md-icon>face</md-icon>
+    </button>
+    <md-menu #userMenu>
+      <button md-menu-item routerLink="/login">
+        <span>登出</span>
+      </button>
+    </md-menu>
+  </md-toolbar>
+</div>
+<div #bodyWrapper>
+  <router-outlet></router-outlet>
+</div>

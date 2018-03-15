@@ -1,0 +1,59 @@
+<ul class="breadcrumb">
+  <li>应急记录</li>
+  <li class="active">灾害灾情</li>
+</ul>
+<div layout="column" class="pad">
+  <div flex>
+    <md-select placeholder="灾害分类" (change)="typeChange()" [(ngModel)]="type">
+      <md-option *ngFor="let n of dType" [value]="n.id">
+        {{n.type}}
+      </md-option>
+    </md-select>
+    <md-select placeholder="子分类" [(ngModel)]="type1">
+      <md-option *ngFor="let n of smallType" [value]="n.id">
+        {{n.name}}
+      </md-option>
+    </md-select>
+    <button md-raised-button color='primary' (click)="querydisaster()">查询</button>
+    <button md-raised-button color='primary' (click)="resetdisaster()">重置</button>
+  </div>
+  <div flex class="pad-top">
+    <a routerLink='/record/disaster/add' md-raised-button color='primary'>增加</a>
+  </div>
+  <md-card flex style="margin:0px;margin-top:20px;">
+    <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+      <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                            <span class="md-title">灾害灾情列表</span>
+      </span>
+      <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+        flex>
+      </td-search-box>
+    </div>
+    <md-divider></md-divider>
+    <td-data-table #dataTable [data]="tempDisaster" [columns]="columns" [selectable]="false" [multiple]="false" [sortable]="true"
+      [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+      <ng-template tdDataTableTemplate="smallType" let-value="value" let-row="row" let-column="column">
+          {{getSmallType(value)}}
+      </ng-template>
+      <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+        <div style="width:130px;">
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/record/1/disaster/{{row.id}}">
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/record/disaster/edit/{{row.id}}">
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+            <md-icon>delete</md-icon>
+          </a>
+        </div>
+      </ng-template>
+    </td-data-table>
+    <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+      <h3>无数据显示.</h3>
+    </div>
+    <td-paging-bar #pagingBar [pageSizes]="[10, 20, 50]" [total]="filteredTotal" (change)="page($event)">
+      <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar>
+  </md-card>
+</div>

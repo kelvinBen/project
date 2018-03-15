@@ -1,0 +1,89 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li>
+    <a routerLink="/resource/helicopter">直升飞机</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title>{{type?'查看':(pId?"编辑":"新增")}}直升飞机</md-card-title>
+  <form #hForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="型号" required [(ngModel)]="vm.num" name="num" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="飞行基地" required [(ngModel)]="vm.base" name="base" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="生产厂家" required [(ngModel)]="vm.vender" name="vender" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="制造/购置年份" required [(ngModel)]="vm.year" name="year" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="所属公司" required [(ngModel)]="vm.depart" name="depart" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="注册号" required name="regnum" [(ngModel)]="vm.regnum" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="最大D值" type="number" step="0.01" required name="maxd" [(ngModel)]="vm.maxd" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="机高m" required type="number" step="0.001" [(ngModel)]="vm.height" name="height" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="最大起飞重量kg" type="number" step="0.01" required [(ngModel)]="vm.maxweight" name="maxweight" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="空机重量kg" type="number" step="0.01" required [(ngModel)]="vm.weight" name="weight" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="最大速度km/h" type="number" step="0.01" required [(ngModel)]="vm.maxspeed" name="maxspeed" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="巡航速度km/h" type="number" step="0.01" required [(ngModel)]="vm.speed" name="speed" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="最大航程km" type="number" step="0.01" required [(ngModel)]="vm.voyage" name="voyage" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="续航时间h" type="number" step="0.01" required [(ngModel)]="vm.hours" name="hours" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="实用升限m" type="number" step="0.01" required [(ngModel)]="vm.ceiling" name="ceiling" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="乘客座位" required type="number" [(ngModel)]="vm.seats" name="seats" [readonly]="type">
+      </md-input-container>
+      <md-select class="row-margin" name="winch" placeholder="绞车能力" required style="width:300px;" [(ngModel)]="vm.winch">
+        <md-option [value]="true">具备</md-option>
+        <md-option [value]="false">无</md-option>
+      </md-select>
+      <md-select class="row-margin" name="equipment" placeholder="安全救生设备" required style="width:300px;" [(ngModel)]="vm.equipment">
+        <md-option [value]="true">有</md-option>
+        <md-option [value]="false">无</md-option>
+      </md-select>
+    </div>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/resource/helicopter" md-raised-button color="warn">取消</a>
+        <button md-raised-button color="primary" type="submit" [disabled]="!hForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

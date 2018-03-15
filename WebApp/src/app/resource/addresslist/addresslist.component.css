@@ -1,0 +1,43 @@
+.body-wrapper {
+    display: -webkit-flex;
+    /* Safari */
+    display: flex;
+    flex-direction: row;
+}
+
+.body-wrapper .pane-wrapper {
+    /*width: 300px;*/
+    order: 1;
+}
+
+.body-wrapper .canves-wrapper {
+    order: 2;
+    flex: 1;
+    display: flex;
+}
+
+.pad-10 {
+    padding: 10px;
+}
+
+.button-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.up_rotate {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+}
+.down_rotate {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+}

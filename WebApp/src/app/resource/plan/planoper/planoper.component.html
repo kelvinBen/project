@@ -1,0 +1,100 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li>
+    <a routerLink="/resource/plan">应急预案</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(planId?"编辑":"新增")}}
+  </li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title>{{type?'查看':(planId?"编辑":"新增")}}应急预案</md-card-title>
+  <form #planForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-select class="row-margin" name="level" placeholder="预案层级" required style="width:300px;" [(ngModel)]="vm.level">
+        <md-option *ngFor="let t of planLevels" [value]="t.id">
+          {{t.name}}
+        </md-option>
+      </md-select>
+      <md-select class="row-margin" name="type" placeholder="预案类型" required style="width:300px;" [(ngModel)]="vm.type">
+        <md-option *ngFor="let t of planTypes" [value]="t.id">
+          {{t.typename}}
+        </md-option>
+      </md-select>
+      <md-select class="row-margin" name="reportIf" placeholder="是否向上级单位上报" required style="width:300px;" [(ngModel)]="vm.reportIf">
+        <md-option value="1">是</md-option>
+        <md-option value="0">否</md-option>
+      </md-select>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="预案名称" required [(ngModel)]="vm.name" name="name" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:260px;" class="row-margin">
+        <input mdInput placeholder="所属单位" required [value]="selOrg?selOrg.name:'无'" name="department" [readonly]="type">
+      </md-input-container>
+      <button type="button" (click)="searchOrg()" md-mini-fab class="row-margin" color="primary"><md-icon>search</md-icon></button>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="签发人" required [(ngModel)]="vm.sign" name="sign" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="联系人" required [(ngModel)]="vm.contact" name="contact" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="联系电话" required [(ngModel)]="vm.phone" name="phone" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="发布时间" required type="date" name="reportTime" [(ngModel)]="vm.reportTime" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="更新时间" required type="date" name="updateTime" [(ngModel)]="vm.updateTime" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="是否向当地政府备案" [(ngModel)]="vm.governRecord" name="governRecord" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="当地政府名称" [(ngModel)]="vm.governName" name="governName" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="备案号" [(ngModel)]="vm.recordAttribute" name="recordAttribute" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="备案时间" type="date" [(ngModel)]="vm.recordTime" name="recordTime" [readonly]="type">
+      </md-input-container>
+    </div>
+    <md-card class="pad-sm push-none">
+      <md-card-subtitle>预案文件、备案申请上传（注：备案申请请上传PDF扫描件）</md-card-subtitle>
+      <ngx-datatable class="material" [rows]="files" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+        [limit]="5">
+        <ngx-datatable-column name="文件名称" prop="Name">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="上传时间" prop="Time">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="操作">
+          <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+            <a md-mini-fab color="primary" mdTooltip="下载" href="/fs/{{value.ExName}}" target="_blank">
+              <md-icon>note</md-icon>
+            </a>
+            <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile(value.ExName)">
+              <md-icon>delete</md-icon>
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+      <br>
+      <p-fileUpload name="uploadfiles" url="/upload/file" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+        (onUpload)="onBasicUpload($event)" *ngIf="!type"></p-fileUpload>
+    </md-card>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/resource/plan" md-raised-button color="warn">取消</a>
+        <button md-raised-button color="primary" type="submit" [disabled]="!planForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

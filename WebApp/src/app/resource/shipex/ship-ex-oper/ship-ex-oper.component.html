@@ -1,0 +1,324 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li>
+    <a routerLink="/resource/ship">船舶</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title>{{type?'查看':(pId?"编辑":"新增")}}船舶</md-card-title>
+  <form #hForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="船舶名称" required name="name" [(ngModel)]="vm.name" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="船旗国" required name="country" [(ngModel)]="vm.country" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="船籍港" required name="registry" [(ngModel)]="vm.registry" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="船级社" required name="classification" [(ngModel)]="vm.classification" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="船舶类型" required name="type" [(ngModel)]="vm.type" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="建造完成时间" required name="buildtime" [(ngModel)]="vm.buildtime" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="所在海区" required name="area" [(ngModel)]="vm.area" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主机数量（台）" required name="hostnum" [(ngModel)]="vm.hostnum" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="单主机（HP）" required name="power" [(ngModel)]="vm.power" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="总马力（HP）" required name="totalpower" [(ngModel)]="vm.totalpower" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="千瓦（KW）" required name="kilowatt" [(ngModel)]="vm.kilowatt" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="船长（米）" required name="length" [(ngModel)]="vm.length" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="型宽（米）" required name="width" [(ngModel)]="vm.width" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="型深（米）" required name="height" [(ngModel)]="vm.height" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="满载吃水（米）" required name="loaddraught" [(ngModel)]="vm.loaddraught" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="总吨" required name="deadweight" [(ngModel)]="vm.deadweight" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="净吨" required name="grosston" [(ngModel)]="vm.grosston" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="载重量" required name="ton" [(ngModel)]="vm.ton" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主甲板长" required name="decklength" [(ngModel)]="vm.decklength" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主甲板宽" required name="deckwidth" [(ngModel)]="vm.deckwidth" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主甲板面积" required name="deckarea" [(ngModel)]="vm.deckarea" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="艏侧推数量" required name="bowthruster" [(ngModel)]="vm.bowthruster" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="艏侧推总功率（HP）" required name="bowthrusterpower" [(ngModel)]="vm.bowthrusterpower" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="艉侧推数量" required name="sternthruster" [(ngModel)]="vm.sternthruster" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="艉侧推总功率（HP）" required name="sternthrusterpower" [(ngModel)]="vm.sternthrusterpower" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-select class="row-margin" name="equipment" placeholder="起抛锚（有/无）" required style="width:300px;" [(ngModel)]="vm.anchor">
+        <md-option [value]="true">有</md-option>
+        <md-option [value]="false">无</md-option>
+      </md-select>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="螺距" required name="pitch" [(ngModel)]="vm.pitch" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="最大航速（节）" required name="maxspeed" [(ngModel)]="vm.maxspeed" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="经济航速（节）" required name="speed" [(ngModel)]="vm.speed" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主拖缆数量（根）" required name="maintowinglinenum" [(ngModel)]="vm.maintowinglinenum" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主拖缆长度（米）" required name="maintowinglinelength" [(ngModel)]="vm.maintowinglinelength" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主拖缆直径（毫米）" required name="maintowinglineradius" [(ngModel)]="vm.maintowinglineradius" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主拖缆系拄拉力（吨）" required name="maintowinglinepower" [(ngModel)]="vm.maintowinglinepower" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="淡水-饮用水" required name="water" [(ngModel)]="vm.water" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="钻井/压载水" required name="ballastwater" [(ngModel)]="vm.ballastwater" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="燃油仓（方）" required name="fuelbunker" [(ngModel)]="vm.fuelbunker" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="散料罐（方）-1#罐舱容" required name="bulkcan1" [(ngModel)]="vm.bulkcan1" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="散料罐（方）-2#罐舱容" required name="bulkcan2" [(ngModel)]="vm.bulkcan2" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="散料罐（方）-3#罐舱容" required name="bulkcan3" [(ngModel)]="vm.bulkcan3" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="散料罐（方）-4#罐舱容" required name="bulkcan4" [(ngModel)]="vm.bulkcan4" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="散料罐-（方）5#罐舱容" required name="bulkcan5" [(ngModel)]="vm.bulkcan5" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="散料罐（方）-6#罐舱容" required name="bulkcan6" [(ngModel)]="vm.bulkcan6" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="散料罐（方）-舱容总和" required name="bulkcans" [(ngModel)]="vm.bulkcans" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="泥浆舱（方）-1#舱舱容" required name="mudtank1" [(ngModel)]="vm.mudtank1" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="泥浆舱（方）-2#舱舱容" required name="mudtank2" [(ngModel)]="vm.mudtank2" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="泥浆舱（方）-3#舱舱容" required name="mudtank3" [(ngModel)]="vm.mudtank3" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="泥浆舱（方）-4#舱舱容" required name="mudtank4" [(ngModel)]="vm.mudtank4" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="泥浆舱（方）-5#舱舱容" required name="mudtank5" [(ngModel)]="vm.mudtank5" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="泥浆舱（方）-6#舱舱容" required name="mudtank6" [(ngModel)]="vm.mudtank6" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="泥浆舱（方）-舱容总和" required name="mudtanks" [(ngModel)]="vm.mudtanks" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="盐水舱-1#舱舱容" required name="brine1" [(ngModel)]="vm.brine1" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="盐水舱-2#舱舱容" required name="brine2" [(ngModel)]="vm.brine2" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="盐水舱-3#舱舱容" required name="brine3" [(ngModel)]="vm.brine3" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="盐水舱-4#舱舱容" required name="brine4" [(ngModel)]="vm.brine4" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="盐水舱-舱容总和" required name="brines" [(ngModel)]="vm.brines" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="甲板-载货量（吨）" required name="burden" [(ngModel)]="vm.burden" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="甲板-强度（吨/平方米）（t/sq.m）" required name="strength" [(ngModel)]="vm.strength" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="载客" required name="carrypassengers" [(ngModel)]="vm.carrypassengers" [readonly]="type">
+      </md-input-container>
+      <md-select class="row-margin" name="equipment" placeholder="能否布防围油栏（能/否）" required style="width:300px;" [(ngModel)]="vm.oilboom">
+        <md-option [value]="true">能</md-option>
+        <md-option [value]="false">否</md-option>
+      </md-select>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="主要航区" required name="navigatingzone" [(ngModel)]="vm.navigatingzone" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="冰区级别" required name="icelevel" [(ngModel)]="vm.icelevel" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="海上移动业务识别码（MMSI）" required name="mmsi" [(ngModel)]="vm.mmsi" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="对外消防系统-数量（台）" required name="firenum" [(ngModel)]="vm.firenum" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="对外消防系统-排量（立方/小时）" required name="firevolume" [(ngModel)]="vm.firevolume" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="对外消防系统-射程（米）" required name="firerange" [(ngModel)]="vm.firerange" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="对外消防系统-排出高度（米）" required name="fireheight" [(ngModel)]="vm.fireheight" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="对外消防系统-泡沫舱舱容（方）" required name="firefoam" [(ngModel)]="vm.firefoam" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救生艇-数量（艘）" required name="lifeboatnum" [(ngModel)]="vm.lifeboatnum" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救生艇-航速（节）" required name="lifeboatspeed" [(ngModel)]="vm.lifeboatspeed" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救生艇-单艇载员（人）" required name="lifeboatperson" [(ngModel)]="vm.lifeboatperson" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救助艇-数量（艘）" required name="rescueboatnum" [(ngModel)]="vm.rescueboatnum" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救助艇-载员（人）" required name="rescueboatperson" [(ngModel)]="vm.rescueboatperson" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救生/救助两用艇-数量（艘）" required name="muliboatnum" [(ngModel)]="vm.muliboatnum" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救生/救助两用艇-载员（人）" required name="muliboatperson" [(ngModel)]="vm.muliboatperson" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救生筏-数量（只）" required name="liferaftnum" [(ngModel)]="vm.liferaftnum" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="救生筏-单筏载员（人）" required name="liferaftperson" [(ngModel)]="vm.liferaftperson" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="处理剂仓（方）" required name="finishingagent" [(ngModel)]="vm.finishingagent" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="溢油回收仓（方）" required name="oilspill" [(ngModel)]="vm.oilspill" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="消油剂喷洒臂-数量（根）" required name="spraynum" [(ngModel)]="vm.spraynum" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="消油剂喷洒臂-长度（米）" required name="spraylength" [(ngModel)]="vm.spraylength" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="呼号" required name="callsign" [(ngModel)]="vm.callsign" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="IMO编号" required name="imo" [(ngModel)]="vm.imo" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="建造厂" required name="constructionyard" [(ngModel)]="vm.constructionyard" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="船东" required name="shipowner" [(ngModel)]="vm.shipowner" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="所属公司" required name="depart" [(ngModel)]="vm.depart" [readonly]="type">
+      </md-input-container>
+    </div>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/resource/ship" md-raised-button color="warn">取消</a>
+        <button md-raised-button color="primary" type="submit" [disabled]="!hForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

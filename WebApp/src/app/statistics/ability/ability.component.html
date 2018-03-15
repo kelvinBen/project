@@ -1,0 +1,102 @@
+<ul class="breadcrumb">
+  <li>统计查询</li>
+  <li class="active">应急记录统计</li>
+</ul>
+<md-card style="margin:0px;">
+  <md2-accordion multiple="true">
+    <md2-accordion-tab header="演习统计" active="true">
+      <div layout="row" layout-align="center center">
+        <md-input-container>
+          <input mdInput placeholder="开始时间" required type="date" [(ngModel)]="actionStart">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="终止时间" required type="date" [(ngModel)]="actionEnd" class="pull-left">
+        </md-input-container>
+        <button md-raised-button color='primary' class="pull-left" (click)="queryAction()">查询</button>
+        <!-- <button md-raised-button color='primary' style="height:35px;">导出图表</button> -->
+      </div>
+      <p-chart type="doughnut" [data]="actionChartData" width="800" height="200"></p-chart>
+    </md2-accordion-tab>
+    <!-- <md2-accordion-tab header="应急培训统计">
+      <div class="textCenter">
+        <md-select placeholder="查询公司">
+          <md-option selected>
+            天津分公司
+          </md-option>
+        </md-select>
+        <md-input-container>
+          <input mdInput placeholder="开始时间" required type="date">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="终止时间" required type="date">
+        </md-input-container>
+        <button md-raised-button color='primary' style="height:35px;">查询</button>
+        <button md-raised-button color='primary' style="height:35px;">导出图表</button>
+      </div>
+      <p-chart type="doughnut" [data]="data" width="800" height="200"></p-chart>
+    </md2-accordion-tab> -->
+    <md2-accordion-tab header="灾害统计">
+      <div layout="row" layout-align="center center">
+        <md-input-container>
+          <input mdInput placeholder="开始时间" required type="date" [(ngModel)]="disStart">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="终止时间" required type="date" [(ngModel)]="disEnd" class="pull-left">
+        </md-input-container>
+        <button md-raised-button color='primary' class="pull-left" (click)="querydisaster()">查询</button>
+        <!-- <button md-raised-button color='primary' style="height:35px;">导出图表</button> -->
+      </div>
+      <p-chart type="doughnut" [data]="disChartData" width="800" height="200"></p-chart>
+    </md2-accordion-tab>
+  </md2-accordion>
+</md-card>
+<p-dialog header="演习统计列表" [(visible)]="display">
+  <ngx-datatable class="material" [rows]="rows" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
+    <ngx-datatable-column name="演习名称">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <strong>{{column.name}}</strong>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.name}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="演习单位">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <strong>{{column.name}}</strong>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.depart}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="演习时间">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <strong>{{column.name}}</strong>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.date}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="演习地点">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <strong>{{column.name}}</strong>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.address}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="参加者">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <strong>{{column.name}}</strong>
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.join}}
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button md-raised-button color='primary' (click)="display = false;">导出</button>
+      <button md-raised-button color='warn' (click)="display = false;">关闭</button>
+    </div>
+  </p-footer>
+</p-dialog>

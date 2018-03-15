@@ -1,0 +1,44 @@
+<ul class="breadcrumb">
+  <li>系统管理</li>
+  <li>
+    <a routerLink="/admin/user">用户管理</a>
+  </li>
+  <li class="active">{{type?'查看':(userId?"编辑":"新增")}}</li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title>{{type?'查看':(userId?"编辑":"新增")}}用户</md-card-title>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="姓名" name="name" required [(ngModel)]="vm.name" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput type="password" placeholder="密码" name="password" required [(ngModel)]="vm.password" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="职位" name="position" required [(ngModel)]="vm.position" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="邮箱" name="email" required [(ngModel)]="vm.email" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="手机" name="phone" required [(ngModel)]="vm.phone" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="座机" name="telphone" required [(ngModel)]="vm.telphone" [readonly]="type">
+      </md-input-container>
+    </div>
+
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" *ngIf="!type">重置</button>
+        <button md-raised-button color="warn" (click)="cancel()">取消</button>
+        <button md-raised-button color="primary" type="submit" [disabled]="!userForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

@@ -1,0 +1,74 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li class="active">船舶</li>
+</ul>
+<div layout="column" class="pad">
+  <div flex layout="row">
+    <a routerLink="/resource/ship/add" md-raised-button color='primary' style="height:35px;">增加</a>
+    <td-file-upload class="row-margin" #singleFileUpload (upload)="uploadEvent($event)">
+      <md-icon>file_upload</md-icon><span>{{ singleFileUpload.files?.name }}</span>
+      <ng-template td-file-input-label>
+        <span>导入</span>
+      </ng-template>
+    </td-file-upload>
+    <button md-raised-button color='primary' style="height:35px;" (click)="downloadFile('../../../assets/TempFiles/shiptable.xlsx')">导出</button>
+    <button md-raised-button color='primary' style="margin-left:10px;" (click)="downloadFile('../../../assets/TempFiles/shipex.xlsx')">模版</button>
+  </div>
+  <md-card flex style="margin:0px;margin-top:20px;">
+    <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+      <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                          <span class="md-title">船舶列表</span>
+      </span>
+      <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+        flex>
+      </td-search-box>
+    </div>
+    <md-divider></md-divider>
+    <td-data-table #dataTable [data]="tempShips" [columns]="columns" [selectable]="false" [multiple]="false" [sortable]="true"
+      [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+      <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+        <div style="width:130px;">
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/1/ship/{{row.id}}">
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/ship/edit/{{row.id}}">
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+            <md-icon>delete</md-icon>
+          </a>
+        </div>
+      </ng-template>
+    </td-data-table>
+    <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+      <h3>无数据显示.</h3>
+    </div>
+    <td-paging-bar #pagingBar [pageSizes]="[10, 20, 50]" [total]="filteredTotal" (change)="page($event)">
+      <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar>
+  </md-card>
+</div>
+<!-- <md-card>
+  <ngx-datatable #table class="material" [rows]="ships" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+    [limit]="5">
+    <ngx-datatable-column name="船舶名称" prop="name"></ngx-datatable-column>
+    <ngx-datatable-column name="船旗国" prop="country"> </ngx-datatable-column>
+    <ngx-datatable-column name="船籍港" prop="registry"> </ngx-datatable-column>
+    <ngx-datatable-column name="船级社" prop="classification"></ngx-datatable-column>
+    <ngx-datatable-column name="船舶类型" prop="type"> </ngx-datatable-column>
+    <ngx-datatable-column name="建造完成时间" prop="buildtime"></ngx-datatable-column>
+    <ngx-datatable-column name="操作">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/1/ship/{{value.id}}">
+          <md-icon>search</md-icon>
+        </a>
+        <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/ship/edit/{{value.id}}">
+          <md-icon>edit</md-icon>
+        </a>
+        <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(value.id)">
+          <md-icon>delete</md-icon>
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</md-card> -->

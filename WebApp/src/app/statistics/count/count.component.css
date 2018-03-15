@@ -1,0 +1,29 @@
+.materialTbl th{
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom-color: #CCC;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-right-color: #CCC;
+    border-right-width: 1px;
+    border-right-style: solid;
+    background-color: #efefef;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.materialTbl td{
+    border-top: 0;
+    color: rgba(0, 0, 0, 0.87);
+    transition: width 0.3s ease;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom-color: #CCC;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-right-color: #CCC;
+    border-right-width: 1px;
+    border-right-style: solid;
+}

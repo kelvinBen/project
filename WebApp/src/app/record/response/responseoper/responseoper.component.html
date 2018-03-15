@@ -1,0 +1,166 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li>
+    <a routerLink="/record/response">应急响应</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(responseId?"编辑":"新增")}}
+  </li>
+</ul>
+<md-card style="margin:0px;" class="pad">
+  <md-card-title>{{type?'查看':(responseId?"编辑":"新增")}}应急响应</md-card-title>
+  <form #resForm="ngForm" (ngSubmit)="onSubmit()">
+    <md2-accordion [multiple]="true">
+      <md2-accordion-tab header="应急响应" active="true">
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="响应级别" required type="number" min="1" max="3" [(ngModel)]="vm.level" name="level">
+          </md-input-container>
+          <md-select class="row-margin" placeholder="应急状态" [(ngModel)]="vm.status" name="status">
+            <md-option [value]="false">应急响应</md-option>
+            <md-option [value]="true">应急结束</md-option>
+          </md-select>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="事件名称" required [(ngModel)]="vm.eventName" name="eventName">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="发生地点" required [(ngModel)]="vm.address" name="address">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="发生时间" required type="date" [(ngModel)]="vm.time" name="time">
+          </md-input-container>
+        </div>
+        <div class="row-section">
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="事发原因" required [(ngModel)]="vm.reason" name="reason">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="影响范围" required [(ngModel)]="vm.range" name="range">
+          </md-input-container>
+          <md-input-container style="width:300px;" class="row-margin">
+            <input mdInput placeholder="伤亡情况" required [(ngModel)]="vm.injury" name="injury">
+          </md-input-container>
+        </div>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="响应调用物资">
+        <div style="padding-bottom:10px;" align="right">
+          <button md-raised-button color="primary" type="button" (click)="addMaterial()">添加应急物资</button>
+        </div>
+        <ngx-datatable [rowHeight]="'auto'" [rows]="materials" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="50">
+          <ngx-datatable-column name="物资名称" prop="materialname" [width]="50">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a *ngIf="row.materialtype=='shipex'" href="/#/resource/1/ship/{{row.materialid}}" target="_blank">{{value}}</a>
+              <a *ngIf="row.materialtype=='helicopter'" href="/#/resource/1/helicopter/{{row.materialid}}" target="_blank">{{value}}</a>
+              <a *ngIf="row.materialtype!='helicopter' && row.materialtype!='shipex'" href="/#/resource/material/1/goodsview/{{row.materialid}}"
+                target="_blank">{{value}}</a>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="物资类型" prop="typename" [width]="50"></ngx-datatable-column>
+          <ngx-datatable-column name="物资调用数量" prop="num" [width]="100">
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <span *ngIf="!editing[row.materialtype+row.materialid]">{{value}}</span>
+              <md-input-container class="row-margin" *ngIf="editing[row.materialtype+row.materialid]">
+                <input mdInput [(ngModel)]="row.num" type="number" min="0" name="num">
+              </md-input-container>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="资源实际消耗数量" prop="numex" [width]="100">
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <span *ngIf="!editing[row.materialtype+row.materialid]">{{value}}</span>
+              <md-input-container style="width:210px;" class="row-margin" *ngIf="editing[row.materialtype+row.materialid]">
+                <input mdInput [(ngModel)]="row.numex" type="number" min="0" max="{{row.num}}" name="numex">
+              </md-input-container>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="备注" prop="function">
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <span *ngIf="!editing[row.materialtype+row.materialid]">{{value}}</span>
+              <md-input-container class="row-margin" *ngIf="editing[row.materialtype+row.materialid]">
+                <input mdInput [(ngModel)]="row.function" type="text" name="function">
+              </md-input-container>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="操作" [width]="100">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="编辑" (click)="editMaterial(row)" *ngIf="!editing[row.materialtype+row.materialid]">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="primary" mdTooltip="保存" (click)="updateValue(row)" *ngIf="editing[row.materialtype+row.materialid]">
+                <md-icon>check</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="deleteMaterial(row)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="应急专家">
+        <div style="padding-bottom:10px;" align="right">
+          <button md-raised-button color="primary" type="button" (click)="addPerson()">添加应急专家</button>
+        </div>
+        <ngx-datatable [rowHeight]="'auto'" [rows]="persons" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="50">
+          <ngx-datatable-column name="专家姓名" prop="name" [width]="50">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="专家性别" prop="gender" [width]="50"></ngx-datatable-column>
+          <ngx-datatable-column name="工作单位" prop="depart" [width]="100">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="行政职位" prop="position" [width]="100">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="专业特长" prop="desc">
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="响应救援队">
+        <div style="padding-bottom:10px;" align="right">
+          <button md-raised-button type="button" color="primary" mdTooltip="添加应急救援队" (click)="addGroup()">添加应急救援队</button>
+        </div>
+        <ngx-datatable [rowHeight]="'auto'" [rows]="groups" class='material' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="50">
+          <ngx-datatable-column name="救援队名称" prop="groupname"></ngx-datatable-column>
+          <ngx-datatable-column name="救援方式" prop="mode"></ngx-datatable-column>
+          <ngx-datatable-column name="指挥者" prop="conductor"></ngx-datatable-column>
+          <ngx-datatable-column name="联系方式" prop="contact"></ngx-datatable-column>
+          <ngx-datatable-column name="操作">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="deleteGroup(row.groupid)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md2-accordion-tab>
+      <md2-accordion-tab header="附件">
+        <ngx-datatable class="material" [rows]="files" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+          [limit]="5">
+          <ngx-datatable-column name="文件名称" prop="Name"></ngx-datatable-column>
+          <ngx-datatable-column name="上传时间" prop="Time"></ngx-datatable-column>
+          <ngx-datatable-column name="操作">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="下载" href="/fs/{{value.ExName}}" target="_blank">
+                <md-icon>search</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile(value.ExName)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        <br>
+        <p-fileUpload name="uploadfiles" url="/upload/file" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+          (onUpload)="onBasicUpload($event)" *ngIf="!type"></p-fileUpload>
+      </md2-accordion-tab>
+    </md2-accordion>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" *ngIf="!type">重置</button>
+        <button md-raised-button color="warn" (click)="cancel()">取消</button>
+        <button md-raised-button color="primary" type="submit" [disabled]="!resForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

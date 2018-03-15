@@ -1,0 +1,74 @@
+<ul class="breadcrumb">
+  <li>应急记录</li>
+  <li>
+    <a routerLink="/record/disaster">灾害灾情</a>
+  </li>
+  <li class="active"> {{type?'查看':(disasterId?"编辑":"新增")}}</li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title> {{type?'查看':(disasterId?"编辑":"新增")}}灾害灾情</md-card-title>
+  <form #disasterForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="灾害灾情名称" name="name" required [(ngModel)]="vm.name" [readonly]="type">
+      </md-input-container>
+      <md-select placeholder="灾害分类" [(ngModel)]="vm.dType" name="dType" style="width:300px;" class="row-margin">
+        <md-option *ngFor="let n of dType" [value]="n.id">
+          {{n.type}}
+        </md-option>
+      </md-select>
+      <md-select placeholder="子分类" [(ngModel)]="vm.smallType" name="smallType" style="width:300px;" class="row-margin">
+        <md-option *ngFor="let n of smallType" [value]="n.id">
+          {{n.name}}
+        </md-option>
+      </md-select>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="发生地点" name="address" required [(ngModel)]="vm.address" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="发布时间" name="time" required type="date" [(ngModel)]="vm.time" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="人员伤亡" name="injury" required [(ngModel)]="vm.injury" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="财产损失" name="property" required [(ngModel)]="vm.property" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:600px;" class="row-margin">
+        <input mdInput placeholder="备注" name="note" required [(ngModel)]="vm.note" [readonly]="type">
+      </md-input-container>
+    </div>
+    <md-card>
+      <!-- <md-card-subtitle>文件上传(演习总结文件必须是手签pdf格式)</md-card-subtitle> -->
+      <ngx-datatable class="material" [rows]="files" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+        [limit]="5">
+        <ngx-datatable-column name="文件名称" prop="Name"></ngx-datatable-column>
+        <ngx-datatable-column name="上传时间" prop="Time"></ngx-datatable-column>
+        <ngx-datatable-column name="操作">
+          <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+            <a md-mini-fab color="primary" mdTooltip="下载" href="/fs/{{value.ExName}}" target="_blank">
+              <md-icon>search</md-icon>
+            </a>
+            <a md-mini-fab color="warn" mdTooltip="删除" *ngIf="!type" (click)="deleteUpFile(value.ExName)">
+              <md-icon>delete</md-icon>
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+      <br>
+      <p-fileUpload name="uploadfiles" url="/upload/file" multiple="multiple" chooseLabel="选择文件" uploadLabel='全部上传' cancelLabel='全部取消'
+        (onUpload)="onBasicUpload($event)" *ngIf="!type"></p-fileUpload>
+    </md-card>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <button md-raised-button color="warn" (click)="cancel()">取消</button>
+        <button md-raised-button color="primary" type="submit" [disabled]="!disasterForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

@@ -1,0 +1,66 @@
+<ul class="breadcrumb">
+  <li>应急记录</li>
+  <li class="active">应急培训</li>
+</ul>
+<div layout="column" class="pad">
+  <div flex>
+    <md-input-container>
+      <input mdInput placeholder="培训计划年份" #action type="date" [(ngModel)]="selYear">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="所属单位" #action type="text" [(ngModel)]="selDepart">
+    </md-input-container>
+    <button md-raised-button color='primary' style="height:35px;" (click)="querytrain()">查询</button>
+  </div>
+  <div flex layout="row">
+    <a [routerLink]="['/record/train/add']" class="row-margin" md-raised-button color='primary'>增加</a>
+    <td-file-upload class="row-margin" #singleFileUpload (upload)="uploadEvent($event)">
+      <md-icon>file_upload</md-icon><span>{{ singleFileUpload.files?.name }}</span>
+      <ng-template td-file-input-label>
+        <span>导入</span>
+      </ng-template>
+    </td-file-upload>
+    <button md-raised-button color='primary' style="height:35px;">导出</button>
+    <button md-raised-button color='primary' style="margin-left:10px;" (click)="downloadFile('../../../assets/TempFiles/train.xlsx')">模版</button>
+  </div>
+
+  <md-card flex style="margin:0px;margin-top:20px;">
+    <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+      <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                        <span class="md-title">应急培训列表</span>
+      </span>
+      <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+        flex>
+      </td-search-box>
+    </div>
+    <md-divider></md-divider>
+    <td-data-table #dataTable [data]="tempTrain" [columns]="columns" [selectable]="false" [multiple]="false" [sortable]="true"
+      [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+      <ng-template tdDataTableTemplate="status" let-value="value" let-row="row" let-column="column">
+        {{row.status?'完成':'未完成'}}
+      </ng-template>
+      <ng-template tdDataTableTemplate="time" let-value="value" let-row="row" let-column="column">
+        {{value}}
+      </ng-template>
+      <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+        <div style="width:130px;">
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/record/1/train/{{row.id}}">
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/record/train/edit/{{row.id}}">
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+            <md-icon>delete</md-icon>
+          </a>
+        </div>
+      </ng-template>
+    </td-data-table>
+    <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+      <h3>无数据显示.</h3>
+    </div>
+    <td-paging-bar #pagingBar [pageSizes]="[10, 20, 50]" [total]="filteredTotal" (change)="page($event)">
+      <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar>
+  </md-card>
+</div>

@@ -1,0 +1,21 @@
+.body-wrapper {
+    display: -webkit-flex;
+    /* Safari */
+    display: flex;
+    flex-direction: row;
+}
+
+.body-wrapper .pane-wrapper {
+    /*width: 300px;*/
+    order: 1;
+}
+
+.body-wrapper .canves-wrapper {
+    order: 2;
+    flex: 1;
+    display: flex;
+}
+
+.pad-10 {
+    padding: 10px;
+}

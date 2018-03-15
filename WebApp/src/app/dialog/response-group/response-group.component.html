@@ -1,0 +1,32 @@
+<h2 md-dialog-title>添加应急队伍</h2>
+<md-dialog-content style="height:190px">
+  <div class="row-section">
+    <md-select class="row-margin" [(ngModel)]="selType" (change)="changeType()" placeholder="队伍类型" required style="width:300px;">
+      <md-option *ngFor="let t of types" [value]="t.id">
+        {{t.name}}
+      </md-option>
+    </md-select>
+    <md-select class="row-margin" name="level" placeholder="队伍名称" required style="width:300px;" (change)="changeGroup()" [(ngModel)]="selGroup">
+      <md-option *ngFor="let t of groups" [value]="t">
+        {{t.name}}
+      </md-option>
+    </md-select>
+  </div>
+  <div class="row-section">
+    <md-input-container class="row-margin">
+      <input mdInput placeholder="救援方式" style="width:300px;" required [(ngModel)]="vm.mode">
+    </md-input-container>
+    <md-input-container class="row-margin">
+      <input mdInput placeholder="指挥者" style="width:300px;" required [(ngModel)]="vm.conductor">
+    </md-input-container>
+  </div>
+  <div class="row-section">
+    <md-input-container class="row-margin">
+      <input mdInput placeholder="联系方式" style="width:300px;" required [(ngModel)]="vm.contact">
+    </md-input-container>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button [md-dialog-close]="-1">取消</button>
+  <button md-button [md-dialog-close]="vm">确定</button>
+</md-dialog-actions>

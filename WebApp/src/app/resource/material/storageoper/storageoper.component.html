@@ -1,0 +1,71 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li>
+    <a routerLink="/resource/material">应急物资</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<md-card>
+  <md-card-title> {{type?'查看':(pId?"编辑":"新增")}}存储库</md-card-title>
+  <form #storageForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="存储库名称" required [(ngModel)]="vm.name" name="name" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="存储库类型" required [(ngModel)]="vm.type" name="type" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:260px;" class="row-margin">
+        <input mdInput placeholder="所属单位" required [value]="selOrg?selOrg.name:'无'" name="depart" [readonly]="type">
+      </md-input-container>
+      <button type="button" (click)="searchOrg()" md-mini-fab class="row-margin" color="primary"><md-icon>search</md-icon></button>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="地址" required [(ngModel)]="vm.address" name="address" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="经度" required [(ngModel)]="vm.longitude" name="lon" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="纬度" required [(ngModel)]="vm.latitude" name="lat" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="负责人"  [(ngModel)]="vm.charge" name="charge" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="手机"  [(ngModel)]="vm.phone" name="phone" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="办公电话"  [(ngModel)]="vm.telephone" name="tel" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="传真"  [(ngModel)]="vm.fax" name="fax" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="库容"  [(ngModel)]="vm.capacity" name="capacity" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="库容单位"  [(ngModel)]="vm.capacityUnit" name="capacityUnit" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-input-container style="width:600px;" class="row-margin">
+        <textarea mdInput placeholder="备注"  [(ngModel)]="vm.note" name="note" [readonly]="type"></textarea>
+      </md-input-container>
+    </div>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/resource/material" md-raised-button color="warn">取消</a>
+        <button md-raised-button color="primary" [disabled]="!storageForm.valid" type="submit" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>

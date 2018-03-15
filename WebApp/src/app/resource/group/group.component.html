@@ -1,0 +1,85 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li class="active">应急队伍</li>
+</ul>
+
+<div layout="column" class="pad">
+  <div flex>
+    <md-select placeholder="应急队伍" [(ngModel)]="selType" style="width: 300px;">
+      <md-option *ngFor="let t of types" [value]="t.id">
+        {{t.name}}
+      </md-option>
+    </md-select>
+    <button md-raised-button color='primary' (click)="queryGroup()">查询</button>
+    <button md-raised-button color='primary'>重置</button>
+  </div>
+  <div flex layout="row"  class="pad-top">
+    <a routerLink="/resource/group/add" md-raised-button color='primary' style="height:35px;">增加</a>
+  </div>
+  <md-card flex style="margin:0px;margin-top:20px;">
+    <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+      <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                        <span class="md-title">应急队伍列表</span>
+      </span>
+      <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+        flex>
+      </td-search-box>
+    </div>
+    <md-divider></md-divider>
+    <td-data-table #dataTable [data]="tempGroups" [columns]="columns" [selectable]="false" [multiple]="false" [sortable]="true"
+      [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+      <ng-template tdDataTableTemplate="type" let-value="value" let-row="row" let-column="column">
+        {{getTypeName(row.type)}}
+      </ng-template>
+      <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+        <div style="width:130px;">
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/1/group/{{row.id}}">
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/group/edit/{{row.id}}">
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+            <md-icon>delete</md-icon>
+          </a>
+        </div>
+      </ng-template>
+    </td-data-table>
+    <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+      <h3>无数据显示.</h3>
+    </div>
+    <td-paging-bar #pagingBar [pageSizes]="[10, 20, 50]" [total]="filteredTotal" (change)="page($event)">
+      <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar>
+  </md-card>
+</div>
+<!-- <md-card>
+  <ngx-datatable #table class="material" [rows]="tempGroups" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+    [rowHeight]="'auto'" [limit]="5">
+    <ngx-datatable-column name="名称" prop="name"></ngx-datatable-column>
+    <ngx-datatable-column name="应急队伍" prop="type">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{getTypeName(row.type)}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="描述" prop="desc"></ngx-datatable-column>
+    <ngx-datatable-column name="人数" prop="peopleNum">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="主管部门" prop="depart"></ngx-datatable-column>
+    <ngx-datatable-column name="负责人" prop="charge"></ngx-datatable-column>
+    <ngx-datatable-column name="联系方式" prop="phone"></ngx-datatable-column>
+    <ngx-datatable-column name="操作">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/resource/1/group/{{value.id}}">
+          <md-icon>search</md-icon>
+        </a>
+        <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/resource/group/edit/{{value.id}}">
+          <md-icon>edit</md-icon>
+        </a>
+        <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(value.id)">
+          <md-icon>delete</md-icon>
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</md-card> -->

@@ -1,0 +1,113 @@
+<div #mapDiv id="mapContainer">
+
+</div>
+<div class="subMenu">
+  <button md-mini-fab color='primary' (click)="org.toggle($event)" mdTooltip="应急机构" mdTooltipPosition='left'>
+    <md-icon svgIcon="org-icon"></md-icon>
+  </button>
+  <button md-mini-fab color='primary' (click)="res.toggle($event)" mdTooltip="救援力量" mdTooltipPosition='left'>
+    <md-icon svgIcon="rescue-icon"></md-icon>
+  </button>
+  <!-- <button md-mini-fab color='primary' (click)="expert.toggle($event)" mdTooltip="应急专家" mdTooltipPosition='left'>
+          <md-icon svgIcon="expert-icon"></md-icon>
+        </button> -->
+  <button md-mini-fab color='primary' (click)="materials.toggle($event)" mdTooltip="应急物资" mdTooltipPosition='left'>
+    <md-icon svgIcon="materials-icon"></md-icon>
+  </button>
+  <!-- <button md-mini-fab color='primary' mdTooltip="外部应急资源" mdTooltipPosition='left'>
+          <md-icon svgIcon="external-icon"></md-icon>
+        </button> -->
+  <!-- <button md-mini-fab color='primary' mdTooltip="预警信息" mdTooltipPosition='left'>
+          <md-icon svgIcon="disaster-icon"></md-icon>
+        </button> -->
+  <button md-mini-fab color='primary' (click)="maplayers.toggle($event)" mdTooltip="地图控制" mdTooltipPosition='left'>
+    <md-icon svgIcon="layer-icon"></md-icon>
+  </button>
+</div>
+<div class="visibility-wrapper" [@visibilityChanged]='visibilityState'>
+  <div class="title-wrapper">
+    <h3>{{tblName}}</h3>
+    <div class="right">
+      <button md-mini-fab color='warn' mdTooltip="关闭" mdTooltipPosition='left' (click)="visibilityState='hidden'">
+        <md-icon>close</md-icon>
+      </button>
+    </div>
+  </div>
+  <ngx-datatable class="material" [rows]="rows" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="3">
+    <ngx-datatable-column name="物资名称" prop="name" [width]='140'>
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a routerLink='/resource/material/1/goodsview/{{row.id}}'>{{value}}</a>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="所属单位" prop="depart" [width]='240'>
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{queryOrg(value)}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="出厂日期" prop="startTime" [width]='120'></ngx-datatable-column>
+    <ngx-datatable-column name="更新时间" prop="updateTime" [width]='120'></ngx-datatable-column>
+    <ngx-datatable-column name="维护周期(天)" prop="repairTime" [width]='100'></ngx-datatable-column>
+    <ngx-datatable-column name="地理信息" prop="longitude" [width]='100'>
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <!-- {{queryOrg(value)}} -->
+        <button type="button" (click)="rowClick(row)" md-mini-fab class="row-margin" color="primary"><md-icon>pin_drop</md-icon></button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+<div class="message-wrapper" *ngIf="first && sec">
+  <button type="button" *ngIf="first" mdTooltip="待维护物资列表" mdTooltipPosition='left' (click)="showInfos(first, '待维护')" md-mini-fab
+    class="row-margin" color="accent">
+    <md-icon>info</md-icon>
+  </button>
+  <!-- <button type="button" *ngIf="sec" mdTooltip="已过维护期物资列表" mdTooltipPosition='above' (click)="showInfos(sec, '已过维护期')" md-mini-fab class="row-margin"
+    color="warn">
+    <md-icon>info</md-icon>
+  </button> -->
+</div>
+<div class="query-wrapper">
+  <md-select placeholder="现场任务类型" [(ngModel)]="selCateEx">
+    <md-option *ngFor="let e of catesEx" [value]="e.id">
+      {{e.name}}
+    </md-option>
+  </md-select>
+  <md-input-container style="width:260px;" class="row-margin">
+    <input mdInput placeholder="物资名称" [(ngModel)]="selName">
+  </md-input-container>
+  <!-- <md-select placeholder="应急保障类别(大类)" [(ngModel)]="type" (change)="cate1Change()">
+      <md-option *ngFor="let c of cates" [value]="c.id">
+        {{c.name}}
+      </md-option>
+    </md-select>
+    <md-select placeholder="现场任务类型(中类)" [(ngModel)]="type1" (change)="cate2Change()">
+      <md-option *ngFor="let c of cates1" [value]="c.id">
+        {{c.name}}
+      </md-option>
+    </md-select>
+    <md-select placeholder="主要作业方式或物资功能(小类)" [(ngModel)]="type2">
+      <md-option *ngFor="let c of cates2" [value]="c.id">
+        {{c.name}}
+      </md-option>
+    </md-select> -->
+  <button md-raised-button color='primary' (click)="query()">查询</button>
+</div>
+<p-overlayPanel #org>
+  <md-checkbox [(ngModel)]='orgCheck' (change)="layerFun('org', orgCheck)">生产设施</md-checkbox>
+</p-overlayPanel>
+<p-overlayPanel #res>
+  <md-checkbox [(ngModel)]='rescueCheck' (change)="layerFun('rescue', rescueCheck)">应急救援队</md-checkbox>
+  <!-- <md-checkbox [(ngModel)]='policeCheck' (change)="layerFun('police', policeCheck)">公安队伍</md-checkbox> -->
+</p-overlayPanel>
+<p-overlayPanel #expert>
+  <md-checkbox [(ngModel)]='expertCheck' (change)="layerFun('expert', expertCheck)">应急专家</md-checkbox>
+</p-overlayPanel>
+<p-overlayPanel #materials>
+  <md-checkbox [(ngModel)]='warehouseCheck' (change)="layerFun('warehouse', warehouseCheck)">存储库</md-checkbox>
+  <md-checkbox [(ngModel)]='materialCheck' (change)="layerFun('material', materialCheck)">应急物资</md-checkbox>
+</p-overlayPanel>
+<p-overlayPanel #maplayers>
+  <md-radio-group [(ngModel)]="maplayerCheck">
+    <md-radio-button value="1" (change)="changeMap(1)">地图</md-radio-button>
+    <md-radio-button value="2" (change)="changeMap(2)">卫星图</md-radio-button>
+  </md-radio-group>
+</p-overlayPanel>

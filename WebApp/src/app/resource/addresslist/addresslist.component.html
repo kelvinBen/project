@@ -1,0 +1,62 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li class="active">组织机构及通讯录</li>
+</ul>
+<md-card>
+  <div class="body-wrapper">
+    <div class="pane-wrapper pad-10">
+      <md-card  class="push-none pad">
+        <h3>组织机构:</h3>
+        <div class="button-row">
+          <a md-mini-fab color="primary" mdTooltip="添加应急机构" (click)="orgOperator(true)">
+            <md-icon>add</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑应急机构" (click)="orgOperator(false)">
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除应急机构" (click)="deleteOrg()">
+            <md-icon>delete</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="应急机构上移">
+            <md-icon class="up_rotate">arrow_back</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="应急机构下移">
+            <md-icon class="down_rotate">arrow_back</md-icon>
+          </a>
+        </div>
+        <p-tree [value]="orgNodes" selectionMode="single" [(selection)]="selectOrg" (onNodeSelect)="nodeSelect()"></p-tree>
+      </md-card>
+    </div>
+    <div class="canves-wrapper pad-10">
+      <md-card  class="push-none pad">
+        <h3>{{selectOrg ? selectOrg.label:''}}通讯录:</h3>
+        <div style="padding:10px 0px;">
+          <button md-raised-button color='primary' (click)="listOperator()">添加</button>
+        </div>
+        <ngx-datatable class="material" [rows]="rows" [columnMode]="'standard'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+          [limit]="10">
+          <ngx-datatable-column name="姓名" prop="name" [width]="100">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="职务" prop="duty" [width]="100">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="手机" prop="phone" [width]="150">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="办公电话" prop="telephone" [width]="200">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="邮箱" prop="email" [width]="200">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="操作" [width]="200">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <a md-mini-fab color="primary" mdTooltip="编辑" (click)="listEdit(row)">
+                <md-icon>edit</md-icon>
+              </a>
+              <a md-mini-fab color="warn" mdTooltip="删除" (click)="deleteUser(row.id)">
+                <md-icon>delete</md-icon>
+              </a>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md-card>
+    </div>
+  </div>
+</md-card>

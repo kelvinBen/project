@@ -1,0 +1,87 @@
+<ul class="breadcrumb">
+  <li>应急记录</li>
+  <li class="active">法律法规</li>
+</ul>
+<div layout="column" class="pad">
+  <div flex>
+    <md-select placeholder="效力等级" [(ngModel)]="selType" style="width:150px;">
+      <md-option *ngFor="let e of types" [value]="e.id">
+        {{e.name}}
+      </md-option>
+    </md-select>
+    <md-input-container>
+      <input mdInput placeholder="法律法规名称" style="width:200px;" type="text" [(ngModel)]="selName">
+    </md-input-container>
+    <!-- <md-input-container>
+      <input mdInput placeholder="发布时间" type="date" [(ngModel)]="selstart">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="终止日期" type="date" [(ngModel)]="selfinal">
+    </md-input-container> -->
+    <button md-raised-button color='primary' (click)="querylaws()">查询</button>
+    <button md-raised-button color='primary' (click)="reset()">重置</button>
+  </div>
+  <div flex class="pad-top">
+    <a routerLink='/record/law/add' md-raised-button color='primary'>增加</a>
+  </div>
+
+  <md-card flex style="margin:0px;margin-top:20px;">
+    <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+      <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                          <span class="md-title">法律法规列表</span>
+      </span>
+      <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+        flex>
+      </td-search-box>
+    </div>
+    <md-divider></md-divider>
+    <td-data-table #dataTable [data]="tempLaws" [columns]="columns" [selectable]="false" [multiple]="false" [sortable]="true"
+      [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)">
+      <ng-template tdDataTableTemplate="type" let-value="value" let-row="row" let-column="column">
+        {{getTypeName(row.type)}}
+      </ng-template>
+      <ng-template tdDataTableTemplate="id" let-value="value" let-row="row" let-column="column">
+        <div style="width:130px;">
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/record/1/law/{{row.id}}">
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/record/law/edit/{{row.id}}">
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+            <md-icon>delete</md-icon>
+          </a>
+        </div>
+      </ng-template>
+    </td-data-table>
+    <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+      <h3>无数据显示.</h3>
+    </div>
+    <td-paging-bar #pagingBar [pageSizes]="[10, 20, 50]" [total]="filteredTotal" (change)="page($event)">
+      <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+    </td-paging-bar>
+  </md-card>
+</div>
+<!-- <md-card>
+  <ngx-datatable #table class="material" [rows]="tempLaws" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+    [limit]="5">
+    <ngx-datatable-column name="名称" prop="name"></ngx-datatable-column>
+    <ngx-datatable-column name="来源" prop="source"></ngx-datatable-column>
+    <ngx-datatable-column name="发布时间" prop="reportTime"></ngx-datatable-column>
+    <ngx-datatable-column name="生效时间" prop="validTime"></ngx-datatable-column>
+    <ngx-datatable-column name="内容" prop="content"></ngx-datatable-column>
+    <ngx-datatable-column name="操作">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink="/record/1/law/{{value.id}}">
+          <md-icon>search</md-icon>
+        </a>
+        <a md-mini-fab color="primary" mdTooltip="编辑" routerLink="/record/law/edit/{{value.id}}">
+          <md-icon>edit</md-icon>
+        </a>
+        <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(value.id)">
+          <md-icon>delete</md-icon>
+        </a>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</md-card> -->

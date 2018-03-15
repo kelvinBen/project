@@ -1,0 +1,19 @@
+.header-wrapper {
+    height: 64px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    align-items: center;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+    padding-right: 20px;
+    text-align: right;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}

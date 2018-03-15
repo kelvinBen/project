@@ -1,0 +1,91 @@
+<h2 md-dialog-title>添加应急物资</h2>
+<md-dialog-content>
+  <div layout="column">
+    <div flex>
+      <md-select [(ngModel)]="selType" placeholder="物资类型" (change)="loadDatas()" >
+        <md-option value="shipex">船舶</md-option>
+        <md-option value="helicopter">直升飞机</md-option>
+        <md-option value="goods">其他物资</md-option>
+      </md-select>
+      <md-select [(ngModel)]="selSubType" (change)="loadDatas()" placeholder="物资类型" style="width:150px;" [disabled]="selType!=='goods'">
+        <md-option *ngFor="let t of goodsType" [value]="t">{{t.typename}}</md-option>
+      </md-select>
+    </div>
+    <md-card flex style="margin:0px;margin-top:20px;">
+      <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+        <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
+                          <span class="md-title">应急物资列表</span>
+        </span>
+        <td-search-box #searchBox backIcon="arrow_back" class="push-right-sm" placeholder="Search here" (searchDebounce)="search($event)"
+          flex>
+        </td-search-box>
+      </div>
+      <md-divider></md-divider>
+      <td-data-table #dataTable [data]="rowsTemp" [columns]="columns" [selectable]="true" [multiple]="true" [sortable]="true"
+        [sortBy]="sortBy" [sortOrder]="sortOrder" (sortChange)="sort($event)" [(ngModel)]="selectedRows">
+      </td-data-table>
+      <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+        <h3>无数据显示.</h3>
+      </div>
+      <td-paging-bar #pagingBar [pageSizes]="[10, 20, 50]" [total]="filteredTotal" (change)="page($event)">
+        <span td-paging-bar-label hide-xs>每页显示:</span> {{pagingBar.range}} <span hide-xs>of {{pagingBar.total}}</span>
+      </td-paging-bar>
+    </md-card>
+  </div>
+  <!-- <div class="row-section" *ngIf="selType=='shipex'">
+    <md-input-container>
+      <input mdInput placeholder="船舶名称／IMO／MMSI 模糊查询..." style="width:500px;" (keyup)='updateFilter($event)'>
+    </md-input-container>
+  </div> -->
+  <!-- <ngx-datatable #table1 class='material striped' style="width:800px;height:300px;" [rows]="shipsTemp" [columnMode]="'force'"
+    [headerHeight]="50" [selected]="selectedShip" [rowHeight]="50" [offset]="shipOffset" [scrollbarV]="true" *ngIf="selType=='shipex'"
+    [selectionType]="'checkbox'">
+    <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true"
+      [checkboxable]="true">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="船舶名称" [width]="100" prop="name"></ngx-datatable-column>
+    <ngx-datatable-column name="所属公司" prop="depart"></ngx-datatable-column>
+    <ngx-datatable-column name="船舶类型" prop="type"></ngx-datatable-column>
+    <ngx-datatable-column name="MMSI" prop="mmsi"></ngx-datatable-column>
+    <ngx-datatable-column name="IMO" prop="imo"></ngx-datatable-column>
+  </ngx-datatable>
+
+  <div class="row-section" *ngIf="selType=='helicopter'">
+    <md-input-container>
+      <input mdInput placeholder="直升飞机型号／注册号 模糊查询..." style="width:500px;" (keyup)='updateFilter1($event)'>
+    </md-input-container>
+  </div>
+  <ngx-datatable #table1 class='material striped' style="width:800px;height:300px;" [rows]="helicopterTemp" [columnMode]="'force'"
+    [headerHeight]="50" [selected]="selectedHelicopter" [rowHeight]="50" [offset]="shipOffset" [scrollbarV]="true" *ngIf="selType=='helicopter'"
+    [selectionType]="'checkbox'">
+    <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true"
+      [checkboxable]="true">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="型号" [width]="100" prop="num"></ngx-datatable-column>
+    <ngx-datatable-column name="飞行基地" prop="base"></ngx-datatable-column>
+    <ngx-datatable-column name="生产厂家" prop="vender"></ngx-datatable-column>
+    <ngx-datatable-column name="所属公司" prop="depart"></ngx-datatable-column>
+    <ngx-datatable-column name="注册号" prop="regnum"></ngx-datatable-column>
+  </ngx-datatable>
+
+  <div class="row-section" *ngIf="(selType!='shipex' && selType!='helicopter')">
+    <md-input-container>
+      <input mdInput placeholder="物资名称／资产编号 模糊查询..." style="width:500px;" (keyup)='updateFilter2($event)'>
+    </md-input-container>
+  </div>
+  <ngx-datatable #table2 class='material striped' style="width:800px;height:300px;" [rows]="goodsTemp" [columnMode]="'force'"
+    [headerHeight]="50" [selected]="selectedGoods" [rowHeight]="50" [offset]="shipOffset" [scrollbarV]="true" *ngIf="(selType!='shipex' && selType!='helicopter')"
+    [selectionType]="'checkbox'">
+    <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true"
+      [checkboxable]="true">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="物资名称" [width]="100" prop="name"></ngx-datatable-column>
+    <ngx-datatable-column name="生产厂家" prop="manufacturer"></ngx-datatable-column>
+    <ngx-datatable-column name="所属公司" prop="depart"></ngx-datatable-column>
+    <ngx-datatable-column name="资产编号" prop="assetNum"></ngx-datatable-column>
+  </ngx-datatable> -->
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>取消</button>
+  <button md-button (click)="submit()" [disabled]="selectedRows.length == 0">确定</button>
+</md-dialog-actions>

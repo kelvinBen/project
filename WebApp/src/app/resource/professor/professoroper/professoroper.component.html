@@ -1,0 +1,62 @@
+<ul class="breadcrumb">
+  <li>应急资源</li>
+  <li>
+    <a routerLink="/resource/professor">应急专家</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<md-card style="margin:0px;">
+  <md-card-title>{{type?'查看':(pId?"编辑":"新增")}}应急专家</md-card-title>
+  <form #proForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row-section">
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="专家姓名" required [(ngModel)]="vm.name" name="name" [readonly]="type">
+      </md-input-container>
+      <md-select class="row-margin" placeholder="专家性别" name="gender" required style="width:300px;" [(ngModel)]="vm.gender">
+        <md-option value="男">男</md-option>
+        <md-option value="女">女</md-option>
+      </md-select>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="出生日期" required type="date" [(ngModel)]="vm.birthday" name="birth" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div class="row-section">
+      <md-select placeholder="专家类别" name="type" required style="width:300px;" class="row-margin" [(ngModel)]="vm.professionType">
+        <md-option *ngFor="let t of types" [value]="t.id">
+          {{t.name}}
+        </md-option>
+      </md-select>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="工作单位" required [(ngModel)]="vm.depart" name="depart" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="行政职位" required [(ngModel)]="vm.position" name="position" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="手机" required [(ngModel)]="vm.phone" name="phone" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="固定电话" required [(ngModel)]="vm.telephone" name="telephone" [readonly]="type">
+      </md-input-container>
+      <md-input-container style="width:300px;" class="row-margin">
+        <input mdInput placeholder="Email" required [(ngModel)]="vm.email" name="email" [readonly]="type">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container style="width:600px;" class="row-margin">
+        <textarea mdInput placeholder="专业特长描述" rows="3" [(ngModel)]="vm.desc" required name="desc" [readonly]="type"></textarea>
+      </md-input-container>
+    </div>
+    <md-card-actions>
+      <div class="centerText">
+        <button md-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/resource/professor" md-raised-button color="warn">取消</a>
+        <button md-raised-button color="primary" type="submit" [disabled]="!proForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </md-card-actions>
+  </form>
+</md-card>
