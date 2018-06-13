@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      鄠邑未来五天预报
+    </ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="openMenu()">
+        <ion-icon name="md-add-circle"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="listFlag = !listFlag;">
+        <ion-icon name="md-list-box"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager *ngIf="!listFlag">
+    <ion-slide *ngFor="let m of stationMenus">
+      <page-forcast [station]="m" style="height:100%;"></page-forcast>
+    </ion-slide>
+  </ion-slides>
+  <ion-list *ngIf="listFlag">
+    <ion-item *ngFor="let m of stationMenus">
+      <ion-icon color="danger" name="md-close-circle" item-start (click)="delMenu(m)"></ion-icon>
+      <h2>{{m.StationName}}</h2>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom *ngIf="listFlag">
+    <button ion-fab (click)="listFlag=false;">
+      <ion-icon name="ios-undo"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

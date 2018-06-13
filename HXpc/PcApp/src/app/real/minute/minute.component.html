@@ -1,0 +1,54 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;">
+  <mat-card style="height:100%;width:760px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>分钟监测</span>
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <mat-form-field style="width:100px;">
+            <mat-select [(ngModel)]="selType" (change)="initGrid()">
+              <mat-option [value]="1">十分钟雨量</mat-option>
+              <mat-option [value]="2">压温湿风</mat-option>
+              <mat-option [value]="3">其他要素</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="width:120px;">
+            <input matInput [(ngModel)]="selDate" mode="daytime" [dpDayPicker]="minuteConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="loadData()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column">
+      <ag-grid-angular #minuteGrid enableSorting (gridReady)="initGrid()" style="width: 100%; height: 100%;" class="ag-theme-blue">
+      </ag-grid-angular>
+    </div>
+  </mat-card>
+  <div fxFlex="1 1 auto" style="height:100%;">
+    <mat-card style="height:100%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>实况监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+            <mat-form-field style="width:120px;">
+              <input matInput [(ngModel)]="autoDate" mode="daytime" [dpDayPicker]="minuteConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+            </mat-form-field>
+            <button mat-icon-button color="primary">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+        </mat-toolbar>
+        <mat-divider style="z-index:999;"></mat-divider>
+      </mat-card-title>
+      <mat-card-content class="card-content">
+        <div class="mapView" id="esriHourMap" #map></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

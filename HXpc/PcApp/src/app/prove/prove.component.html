@@ -1,0 +1,55 @@
+<div fxLayout="column" style="padding:10px;" fxLayoutAlign="start center">
+  <mat-card style="height:100%;width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>气象证明列表</span>
+        <span fxFlex="1 1 auto"></span>
+        <a mat-button color="primary" routerLink="/prove/add">
+          新增气象证明
+        </a>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="CreateTime">
+          <mat-header-cell *matHeaderCellDef> 日期 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{timeFormat(element.CreateTime)}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Depart">
+          <mat-header-cell *matHeaderCellDef> 部门 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Depart}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Author">
+          <mat-header-cell *matHeaderCellDef> 开证明人 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Author}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Reason">
+          <mat-header-cell *matHeaderCellDef> 原因 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Reason}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Id">
+          <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a mat-icon-button color="primary" routerLink="/prove/edit/{{element.Id}}" matTooltip="编辑">
+              <mat-icon>mode_edit</mat-icon>
+            </a>
+            <button mat-icon-button color="warn" (click)="delete(element.Id)" matTooltip="删除">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="下载" (click)="down(element.Id)">
+              <mat-icon>get_app</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+
+      </mat-table>
+      <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,7 @@
+.tab-content {
+  width: 100%;
+  height: calc(100% - 49px);
+  padding: 0;
+  margin: 0;
+}
+

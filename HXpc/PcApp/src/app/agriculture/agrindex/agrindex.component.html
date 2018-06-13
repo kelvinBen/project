@@ -1,0 +1,12 @@
+<div fxLayout="column" style="padding:10px;" fxLayoutAlign="start center">
+  <mat-radio-group [(ngModel)]="selMenu">
+    <mat-radio-button value="1">葡萄</mat-radio-button>
+    <mat-radio-button value="2">作物生育气象适宜性指标</mat-radio-button>
+    <mat-radio-button value="3">农事活动气象适宜性指标</mat-radio-button>
+    <mat-radio-button value="4">农业气象灾害指标</mat-radio-button>
+  </mat-radio-group>
+</div>
+<iframe *ngIf="selMenu === '1'" src="../../../assets/Files/Grape.pdf" frameborder="0" class="iframeDiv"></iframe>
+<iframe *ngIf="selMenu === '2'" src="../../../assets/Files/作物生育气象适宜性指标.pdf" frameborder="0" class="iframeDiv"></iframe>
+<iframe *ngIf="selMenu === '3'" src="../../../assets/Files/农事活动气象适宜性指标.pdf" frameborder="0" class="iframeDiv"></iframe>
+<iframe *ngIf="selMenu === '4'" src="../../../assets/Files/农业气象灾害指标.pdf" frameborder="0" class="iframeDiv"></iframe>

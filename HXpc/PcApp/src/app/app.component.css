@@ -1,0 +1,45 @@
+.app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 90px;
+  background: url('../assets/Images/index.jpg') no-repeat;
+  background-size: cover;
+}
+
+.app-container {
+  position: absolute;
+  top: 90px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.log-span {
+  font-size: 26px;
+  font-weight: bold;
+  color: #0b4a6d;
+}
+
+nav a {
+  color: #0b4a6d;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  height: 40px;
+  padding-left: 5px;
+}
+
+
+nav span {
+  padding: 0 5px;
+}
+
+nav a.active {
+  color: #0066FF;
+  border-bottom: 2px solid #0066FF;
+}
+
+

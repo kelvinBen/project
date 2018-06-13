@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>单站要素演变</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="padding:0px;">
+  <ion-item style="padding-left:0px;">
+    <ion-label>区站号</ion-label>
+    <ion-select [(ngModel)]="selStation" (ngModelChange)="selStation=$event;queryFactor()">
+      <ion-option *ngFor="let s of stations" [value]="s.Station_Id_C">{{s.Station_Name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <div style="padding-top:10px;height:75%;margin-left:0px;" id="mainChart"></div>
+</ion-content>

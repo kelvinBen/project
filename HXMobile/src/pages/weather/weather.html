@@ -1,0 +1,66 @@
+<ion-content *ngIf="bShowWarn === false">
+  <div class="box">
+    <div class="m_title">
+      {{data.Station_Name}}
+      <p>实时天气</p>
+    </div>
+    <div class="m_other">
+      <div class="m_row">
+        <div style="padding-right:10px;width:50%;text-align: right;">
+          <label>实时气温</label>
+        </div>
+        <div style="padding-left:10px;width:50%;">
+          <label>{{data.TEM}} ℃</label>
+        </div>
+      </div>
+      <div class="m_row ">
+        <div style="padding-right:10px;width:50%;text-align: right;">
+          <label>相对湿度</label>
+        </div>
+        <div style="padding-left:10px;width:50%;">
+          <label>{{data.RHU}} %</label>
+        </div>
+      </div>
+      <div class="m_row ">
+        <div style="padding-right:10px;width:50%;text-align: right;">
+          <label>风速 &nbsp;&nbsp;{{data.WIN_S_Avg_1mi}}m/s</label>
+        </div>
+        <div style="padding-left:10px;width:50%;">
+          <label>风向 &nbsp;&nbsp;{{data.WIN_D_Avg_1mi}}°</label>
+        </div>
+      </div>
+    </div>
+    <div class="m_updatetime">
+      <ul>
+        <li>更新时间：&nbsp;{{FormatDateTime(data.Datetime)}}</li>
+      </ul>
+    </div>
+  </div>
+</ion-content>
+<ion-content *ngIf="bShowWarn === true">
+  <div class="warnbox">
+    <div class="title">
+      <span>
+        <a (click)="queryWarn()">
+          <img src="./assets/imgs/return.png" style="width:20px;height:20px;">
+        </a>
+      </span> 道路结冰预警信息
+      <p style="height: 15px;line-height: 15px;margin-top: -10px;font-size: 13px; color:#b5b4b4;">发布日期：2018-01-23 05:28:00</p>
+    </div>
+    <div class="weatherIcon">
+      <img src="./assets/imgs/wranIcon/roadicing(3).JPG">
+    </div>
+    <div class="warn_info">
+      鄠邑区气象台2018年1月9日17时35分继续发布道路结冰黄色预警信号：预计未来12小时内临潼区将出现对交通有影响的道路结冰，请注意防范。
+    </div>
+    <div style="height:8px;width:100%;background:#e6e6e6;"></div>
+    <div class="warn_guide">
+      <p>防御指南:</p>
+      <div class="guide_con">
+        1.交通、公安等部门做好道路结冰应急和抢险工作；
+        <br> 2.交通、公安等部门注意指挥和疏导行驶车辆，必要时关闭结冰道路交通；
+        <br> 3.人员尽量减少外出。
+      </div>
+    </div>
+  </div>
+</ion-content>

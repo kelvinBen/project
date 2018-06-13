@@ -1,0 +1,110 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;">
+  <div style="width:28%;" fxLayout="column" fxLayoutGap="10px">
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>同期历史对比</span>
+          <span fxFlex="1 1 auto"></span>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <div fxLayout="column" fxLayoutGap="10px" *ngIf="lastHour" fxLayoutAlign="center center">
+          <label>{{lastHour.Station_Name}}(更新时间:{{formatterTime(lastHour.Datetime)}}),能见度:{{lastHour.VIS_Min}}m</label>
+          <label>气温:{{lastHour.TEM}}℃,最高温:{{lastHour.TEM_Max}}℃,最低温:{{lastHour.TEM_Min}}℃</label>
+          <label>极大风速:{{lastHour.WIN_S_Inst_Max}}m/s,极大风向:{{lastHour.WIN_D_INST_Max}}°</label>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" style="height:10%;" *ngIf="historyDay">
+          历史同日最高温:{{historyDay.Datetime}}&nbsp;&nbsp;{{historyDay.TEM_Max}}℃
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center end" style="height:10%;" *ngIf="historyMinTemp">
+          历史同日最低温:{{historyMinTemp.Datetime}}&nbsp;&nbsp;{{historyMinTemp.TEM_Min}}℃
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center end" style="height:10%;" *ngIf="historyRain2020">
+          历史同日最大20-20时降水量:{{historyRain2020.Datetime}}&nbsp;&nbsp;{{historyRain2020.PRE_Time_2020}}mm
+        </div>
+      </div>
+    </mat-card>
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>单站演变</span>
+          <span fxFlex="1 1 auto"></span>
+          <mat-form-field style="width:150px;">
+            <mat-select [(value)]="selStation" (selectionChange)="queryFactor()">
+              <mat-option *ngFor="let stn of stations" [value]="stn.Station_Id_C">{{stn.Station_Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div echarts class="card-content" [options]="option" theme="macarons" (chartInit)="onChartInit($event)"></div>
+    </mat-card>
+  </div>
+  <div style="width:28%;" fxLayout="column" fxLayoutGap="10px">
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>小时监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <mat-form-field style="width:100px;">
+            <input matInput [(ngModel)]="selHour" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+          </mat-form-field>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content">
+        <ag-grid-angular #hourGrid enableSorting style="width: 100%; height: 100%;" class="ag-theme-blue">
+        </ag-grid-angular>
+      </div>
+    </mat-card>
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>分钟监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <div fxLayout="row" fxLayoutGap="10px">
+            <!-- <mat-form-field style="width:100px;">
+              <mat-select [(ngModel)]="minuteRainType">
+                <mat-option [value]="true">累计雨量</mat-option>
+                <mat-option [value]="false">10分钟雨量</mat-option>
+              </mat-select>
+            </mat-form-field> -->
+            <mat-form-field style="width:120px;">
+              <input matInput [(ngModel)]="selMinute" (change)="queryMRainDatas()" mode="daytime" [dpDayPicker]="minuteConfig" theme="dp-material"
+                attachTo=".mat-input-wrapper">
+            </mat-form-field>
+          </div>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content">
+        <ag-grid-angular #minuteGrid enableSorting style="width: 100%; height: 100%;" class="ag-theme-blue">
+        </ag-grid-angular>
+      </div>
+    </mat-card>
+  </div>
+  <div style="width:44%;" fxLayout="column" fxLayoutGap="10px">
+    <mat-card style="height:100%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>实况监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <mat-form-field style="width:120px;">
+            <input matInput [(ngModel)]="autoMinute" (change)="queryRealWeather()" mode="daytime" [dpDayPicker]="minuteConfig" theme="dp-material"
+              attachTo=".mat-input-wrapper">
+          </mat-form-field>
+        </mat-toolbar>
+        <mat-divider style="z-index:999;"></mat-divider>
+      </mat-card-title>
+      <mat-card-content class="card-content">
+        <div class="mapView" id="esriMap" #map></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

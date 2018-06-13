@@ -1,0 +1,75 @@
+<div fxLayout="column" style="padding:10px;" fxLayoutAlign="start center">
+  <mat-card style="height:100%;width:800px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>雨情通报</span>
+        <span fxFlex="1 1 auto"></span>
+        <a mat-button color="warn" routerLink="/product/rain">
+          返回列表
+        </a>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column" style="padding:20px;" fxLayoutGap="20px">
+      <form #operForm="ngForm" (ngSubmit)="onSubmit()">
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field style="width:33%">
+            <input matInput placeholder="统计人员" name="author" required [(ngModel)]="vm.Author" #author="ngModel">
+            <mat-error *ngIf="author.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width:33%">
+            <input matInput placeholder="期数" type="number" min="1" required name="num" [(ngModel)]="vm.Num" #num="ngModel">
+            <mat-error *ngIf="num.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width:33%">
+            <input matInput placeholder="日期" name="createtime" #createtime="ngModel" required [(ngModel)]="vm.CreateTime" mode="daytime"
+              [dpDayPicker]="timeConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+            <mat-error *ngIf="createtime.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field style="width:100%">
+          <textarea matInput rows="5" placeholder="内容" name="content" required [(ngModel)]="vm.Content" #content="ngModel"></textarea>
+          <mat-error *ngIf="content.hasError('required')">
+            必填项
+          </mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field style="width:33%">
+            <input matInput placeholder="雨量统计查询起始时间" name="starttime" #starttime="ngModel" required [(ngModel)]="vm.StartTime" mode="daytime"
+              [dpDayPicker]="timeConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+            <mat-error *ngIf="starttime.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width:33%">
+            <input matInput placeholder="终止时间" name="endtime" #endtime="ngModel" required [(ngModel)]="vm.EndTime" mode="daytime" [dpDayPicker]="timeConfig"
+              theme="dp-material" attachTo=".mat-input-wrapper">
+            <mat-error *ngIf="endtime.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button type="button" mat-raised-button color="primary" (click)="queryRain()">查询</button>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutWrap>
+          <mat-form-field style="width:20%" *ngFor="let stn of rainList">
+            <input matInput type="number" min="0" placeholder="{{stn.StationName}}" name="{{stn.StationId}}" [(ngModel)]="stn.Rain">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!operForm.form.valid">提交</button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

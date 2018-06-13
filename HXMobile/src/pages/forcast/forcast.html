@@ -1,0 +1,63 @@
+<ion-content>
+  <div class="forecastbox">
+    <div class="forecast_detail">
+      <div class="f_days">
+        <ul>
+          <li *ngFor="let f of items">{{f.day}}</li>
+        </ul>
+      </div>
+      <div class="f_micon">
+        <ul>
+          <li *ngFor="let f of items">
+            <img src="./assets/imgs/weathericon/sunny.png">
+          </li>
+        </ul>
+      </div>
+      <div class="f_lcharts">
+        <div class="demo-chart" style="width:100%; height:100%;text-align:center;" id="lc"></div>
+      </div>
+      <div class="f_hcharts">
+        <div class="demo-chart" style="width:100%; height:100%;" id="hc"></div>
+      </div>
+      <div class="f_eicon">
+        <ul>
+          <li *ngFor="let f of items">
+              <img src="./assets/imgs/weathericon/{{f.eicon}}">
+          </li>
+        </ul>
+      </div>
+      <div class="f_windd">
+        <ul>
+          <ul>
+            <li *ngFor="let f of items">{{f.windd}}°
+              <p style="margin-top:-20px;">{{f.windv}}m/s</p>
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <div style="height:8px;width:100%;background:#e6e6e6;margin-top:35px;"></div>
+      <div class="future">
+        <div class="future_title">
+          逐三小时精细化预报
+        </div>
+        <div class="f_now">
+          <ul>
+            <li *ngFor="let n of listDatas">{{formatForcastTime(n.Validtime)}}</li>
+          </ul>
+        </div>
+        <div class="f_nowicon">
+          <ul>
+            <li *ngFor="let n of listDatas">
+                <img src="./assets/imgs/weathericon/{{weatherImage(n.WEP)}}">
+            </li>
+          </ul>
+        </div>
+        <div class="f_nowtemp">
+          <ul>
+            <li *ngFor="let n of listDatas">{{n.TEM}}℃</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

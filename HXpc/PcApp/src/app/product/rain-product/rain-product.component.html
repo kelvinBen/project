@@ -1,0 +1,51 @@
+<div fxLayout="column" style="padding:10px;" fxLayoutAlign="start center">
+  <mat-card style="height:100%;width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>雨情通报列表</span>
+        <span fxFlex="1 1 auto"></span>
+        <a mat-button color="primary" routerLink="/product/rain/add">
+          新增雨情通报
+        </a>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="Num">
+          <mat-header-cell *matHeaderCellDef> 期数 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Num}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="CreateTime">
+          <mat-header-cell *matHeaderCellDef> 日期 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{timeFormat(element.CreateTime)}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Author">
+          <mat-header-cell *matHeaderCellDef> 统计人员 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Author}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Id">
+          <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a mat-icon-button color="primary" routerLink="/product/rain/edit/{{element.Id}}" matTooltip="编辑">
+              <mat-icon>mode_edit</mat-icon>
+            </a>
+            <button mat-icon-button color="warn" (click)="delete(element.Id)" matTooltip="删除">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="下载" (click)="down(element.Id)">
+              <mat-icon>get_app</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+
+      </mat-table>
+      <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" [showFirstLastButtons]="true">
+      </mat-paginator>
+    </div>
+  </mat-card>
+</div>

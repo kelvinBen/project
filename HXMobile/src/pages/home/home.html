@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>天气实况</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="OpenMenu()">
+        <ion-icon name="md-add-circle"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="listFlag = !listFlag;">
+        <ion-icon name="md-list-box"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="DoRefresh($event)">
+    <ion-refresher-content>下拉刷新</ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="listFlag">
+    <ion-item *ngFor="let m of stationMenus">
+      <ion-icon color="danger" name="md-close-circle" item-start (click)="DelMenu(m)"></ion-icon>
+      <h2>{{m.StationName}}</h2>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom *ngIf="listFlag">
+    <button ion-fab (click)="listFlag=false;">
+      <ion-icon name="ios-refresh-outline"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-slides pager *ngIf="!listFlag">
+    <ion-slide *ngFor="let m of GetWeatherData(stationMenus)">
+      <page-weather [data]="m" style="height:100%;"></page-weather>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

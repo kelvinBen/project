@@ -1,0 +1,91 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>城市</label>
+    <mat-form-field style="width:100px;">
+      <mat-select [(ngModel)]="selCity" (change)="changeCity()">
+        <mat-option *ngFor="let city of cityList" [value]="city">{{city}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>站名</label>
+    <mat-form-field style="width:100px;">
+      <mat-select [(ngModel)]="selStation">
+        <mat-option *ngFor="let stn of stationList" [value]="stn.Station_Id_C">{{stn.Station_Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="queryHyear()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <mat-card style="width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>查询要素</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content factors" style="padding:10px;">
+      <li *ngFor="let element of elements" style="width:260px;">
+        <mat-checkbox [(ngModel)]="element.checked" (change)="queryHyear()">{{element.label}}</mat-checkbox>
+      </li>
+    </div>
+  </mat-card>
+  <mat-card style="width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>查询结果</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div fxLayout="column" *ngIf="yearData" fxLayoutAlign="center center" style="font-size:16px;">
+      <p style="font-size:20px;line-height:24px;padding:10px 0">站名:{{yearData.Station_Name}}&nbsp;&nbsp;累年:{{yearData.Years_MMUT}}</p>
+      <p *ngIf="yearData.TEM_Avg">平均气温:{{yearData.TEM_Avg}} ℃</p>
+      <p *ngIf="yearData.TEM_Max_Avg">平均最高气温:{{yearData.TEM_Max_Avg}} ℃</p>
+      <p *ngIf="yearData.TEM_Min_Avg">平均最低气温:{{yearData.TEM_Min_Avg}} ℃</p>
+      <p *ngIf="yearData.TEM_Max">最高气温:{{yearData.TEM_Max}} ℃</p>
+      <p *ngIf="yearData.TEM_Max_ODay">极端最高气温出现日:{{yearData.TEM_Max_ODay}}</p>
+      <p *ngIf="yearData.TEM_Max_OMon">极端最高气温出现月:{{yearData.TEM_Max_OMon}}</p>
+      <p *ngIf="yearData.TEM_Min">最低气温:{{yearData.TEM_Min}} ℃</p>
+      <p *ngIf="yearData.TEM_Min_ODay">最低气温出现日:{{yearData.TEM_Min_ODay}}</p>
+      <p *ngIf="yearData.TEM_Min_OMon">最低气温出现月:{{yearData.TEM_Min_OMon}}</p>
+      <p *ngIf="yearData.TEM_Min_OYear">最低气温出现年:{{yearData.TEM_Min_OYear}}</p>
+      <p *ngIf="yearData.TEM_Avg_Dev">平均气温日较差:{{yearData.TEM_Avg_Dev}}</p>
+      <p *ngIf="yearData.TEM_Max_Dev">最大气温日较差:{{yearData.TEM_Max_Dev}}</p>
+      <p *ngIf="yearData.TEM_Dev_Max_ODay">最大气温日较差出现日:{{yearData.TEM_Dev_Max_ODay}}</p>
+      <p *ngIf="yearData.TEM_Dev_Max_OMon">最大气温日较差出现月:{{yearData.TEM_Dev_Max_OMon}}</p>
+      <p *ngIf="yearData.TEM_Min_B2C_Days_MMUT">累年日最低气温＜2℃日数:{{yearData.TEM_Min_B2C_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_Time_2020_MMUT">累年20-20时平均降水量:{{yearData.PRE_Time_2020_MMUT}}</p>
+      <p *ngIf="yearData.PRE_Time_0808_MMUT">累年08-08时平均降水量:{{yearData.PRE_Time_0808_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A0p1mm_Days_MMUT">累年日降水量≥0.1mm日数:{{yearData.PRE_A0p1mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A1mm_Days_MMUT">累年日降水量≥1mm日数:{{yearData.PRE_A1mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A5mm_Days_MMUT">累年日降水量≥5mm日数:{{yearData.PRE_A5mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A10mm_Days_MMUT">累年日降水量≥10mm日数:{{yearData.PRE_A10mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A25mm_Days_MMUT">累年日降水量≥25mm日数:{{yearData.PRE_A25mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A50mm_Days_MMUT">累年日降水量≥50mm日数:{{yearData.PRE_A50mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A100mm_Days_MMUT">累年日降水量≥100mm日数:{{yearData.PRE_A100mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.PRE_A150mm_Days_MMUT">累年日降水量≥150mm日数:{{yearData.PRE_A150mm_Days_MMUT}}</p>
+      <p *ngIf="yearData.RAD_PRE">降水量相对平均差:{{yearData.RAD_PRE}}</p>
+      <p *ngIf="yearData.PRE_AD">降水量平均差:{{yearData.PRE_AD}}</p>
+      <p *ngIf="yearData.PRE_RSD">降水量相对标准差:{{yearData.PRE_RSD}}</p>
+      <p *ngIf="yearData.PRE_SD">降水量标准差:{{yearData.PRE_SD}}</p>
+      <p *ngIf="yearData.WIN_S_Inst_Max">极大风速:{{yearData.WIN_S_Inst_Max}}</p>
+      <p *ngIf="yearData.WIN_D_INST_Max">极大风速的风向:{{yearData.WIN_D_INST_Max}}</p>
+      <p *ngIf="yearData.WIN_S_INST_Max_OYear">极大风速出现年份:{{yearData.WIN_S_INST_Max_OYear}}</p>
+      <p *ngIf="yearData.EGST_Max_OMon">极大风速出现月:{{yearData.EGST_Max_OMon}}</p>
+      <p *ngIf="yearData.WIN_S_INST_Max_ODay">极大风速出现日:{{yearData.WIN_S_INST_Max_ODay}}</p>
+      <p *ngIf="yearData.WIN_S_Max_A5ms_Days_MMUT">累年最大风速≥5.0m/s日数:{{yearData.WIN_S_Max_A5ms_Days_MMUT}}</p>
+      <p *ngIf="yearData.WIN_S_Max_A10ms_Days_MMUT">累年最大风速≥10.0m/s日数:{{yearData.WIN_S_Max_A10ms_Days_MMUT}}</p>
+      <p *ngIf="yearData.WIN_S_Max_A12ms_Days_MMUT">累年最大风速≥12.0m/s日数:{{yearData.WIN_S_Max_A12ms_Days_MMUT}}</p>
+      <p *ngIf="yearData.WIN_S_Max_A15ms_Days_MMUT">累年最大风速≥15.0m/s日数:{{yearData.WIN_S_Max_A15ms_Days_MMUT}}</p>
+      <p *ngIf="yearData.WIN_S_Max_A17ms_Days_MMUT">累年最大风速≥17.0m/s日数:{{yearData.WIN_S_Max_A17ms_Days_MMUT}}</p>
+      <p *ngIf="yearData.GST_Avg">平均地面温度:{{yearData.GST_Avg}}</p>
+      <p *ngIf="yearData.SSH">日照时数:{{yearData.SSH}}</p>
+      <p *ngIf="yearData.SSP_Mon">月日照百分率:{{yearData.SSP_Mon}}</p>
+      <p *ngIf="yearData.TEM_Avg_Dev_MMUT">累年气温平均差:{{yearData.TEM_Avg_Dev_MMUT}}</p>
+      <p *ngIf="yearData.TEM_SD_MMUT">累年温度标准差:{{yearData.TEM_SD_MMUT}}</p>
+      <p *ngIf="yearData.TEM_Panom_Max">累年月气温最大正距平:{{yearData.TEM_Panom_Max}}</p>
+      <p *ngIf="yearData.TEM_Nanom_Max">累年月气温最大负距平:{{yearData.TEM_Nanom_Max}}</p>
+    </div>
+  </mat-card>
+</div>

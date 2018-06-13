@@ -1,0 +1,46 @@
+<div class="mapView" #map id="esriMap"></div>
+<div id="queryDiv">
+  <mat-card style="height:100%;width:550px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span *ngIf="geocoder">{{geocoder.regeocode.formatted_address}}</span>
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <mat-form-field style="width:90px;">
+            <input matInput [(ngModel)]="selDate" mode="day" [dpDayPicker]="dayConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+          </mat-form-field>
+          <mat-form-field style="width:60px;">
+            <mat-select [(ngModel)]="selHour">
+              <mat-option [value]="8">08</mat-option>
+              <mat-option [value]="20">20</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>气温</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div id="tChart" style="width:100%;height:200px;"></div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>降水</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div id="rChart" style="width:100%;height:200px;"></div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>能见度</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div id="vChart" style="width:100%;height:200px;"></div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-card>
+</div>

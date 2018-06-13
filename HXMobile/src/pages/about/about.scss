@@ -1,0 +1,25 @@
+@import url('http://120.26.44.171:5557/esri/css/main.css');
+.esri-basemap-toggle__container,
+.esri-basemap-toggle__image {
+  width: 32px;
+  height: 32px;
+}
+
+.esri-basemap-toggle {
+  width: 40px;
+  height: 40px;
+}
+
+.esri-basemap-toggle__title {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.result {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  z-index: 999;
+  padding: 10px;
+}

@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;padding:10px;" fxLayoutAlign="center center">
+  <mat-card style="height:100%;width:900px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>精细化预报</span>
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <mat-form-field style="width:90px;">
+            <input matInput [(ngModel)]="selDate" mode="day" [dpDayPicker]="dayConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="queryForcast()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column">
+      <ag-grid-angular #forcastGrid (gridReady)="initGrid()" style="width: 100%; height: 100%;" class="ag-theme-blue">
+      </ag-grid-angular>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,63 @@
+<div fxLayout="column" style="padding:10px;" fxLayoutAlign="start center">
+  <mat-card style="height:100%;width:800px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>气象证明</span>
+        <span fxFlex="1 1 auto"></span>
+        <a mat-button color="warn" routerLink="/prove">
+          返回列表
+        </a>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column" style="padding:20px;" fxLayoutGap="20px">
+      <form #operForm="ngForm" (ngSubmit)="onSubmit()">
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field style="width:80%">
+            <input matInput placeholder="标题" required name="title" [(ngModel)]="vm.Title" #title="ngModel">
+            <mat-error *ngIf="title.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width:20%">
+            <input matInput placeholder="日期" name="createtime" #createtime="ngModel" required [(ngModel)]="vm.CreateTime" mode="daytime"
+              [dpDayPicker]="timeConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+            <mat-error *ngIf="createtime.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field style="width:80%">
+            <input matInput placeholder="单位" name="depart" required [(ngModel)]="vm.Depart" #depart="ngModel">
+            <mat-error *ngIf="depart.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="width:20%">
+            <input matInput placeholder="开证明者" name="author" required [(ngModel)]="vm.Author" #author="ngModel">
+            <mat-error *ngIf="author.hasError('required')">
+              必填项
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field style="width:100%">
+          <textarea matInput rows="2" placeholder="原因" name="reason" required [(ngModel)]="vm.Reason" #reason="ngModel"></textarea>
+          <mat-error *ngIf="reason.hasError('required')">
+            必填项
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field style="width:100%">
+          <textarea matInput rows="5" placeholder="内容" name="content" required [(ngModel)]="vm.Content" #content="ngModel"></textarea>
+          <mat-error *ngIf="content.hasError('required')">
+            必填项
+          </mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!operForm.form.valid">提交</button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

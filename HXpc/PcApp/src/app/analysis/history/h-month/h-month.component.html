@@ -1,0 +1,59 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>城市</label>
+    <mat-form-field style="width:100px;">
+      <mat-select [(ngModel)]="selCity" (change)="changeCity()">
+        <mat-option *ngFor="let city of cityList" [value]="city">{{city}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>站名</label>
+    <mat-form-field style="width:100px;">
+      <mat-select [(ngModel)]="selStation">
+        <mat-option *ngFor="let stn of stationList" [value]="stn.Station_Id_C">{{stn.Station_Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>日期</label>
+    <mat-form-field style="width:100px;">
+      <input matInput [(ngModel)]="sDate" mode="day" [dpDayPicker]="dayConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="queryMon()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <mat-card style="width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>查询要素</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content factors" style="padding:10px;">
+      <li *ngFor="let element of elements" style="width:260px;">
+        <mat-checkbox [(ngModel)]="element.checked" (change)="queryMon()">{{element.label}}</mat-checkbox>
+      </li>
+    </div>
+  </mat-card>
+  <mat-card style="width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>查询结果</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div fxLayout="column" *ngIf="monhDatas" fxLayoutAlign="center center" style="font-size:16px;">
+      <p style="font-size:20px;line-height:24px;padding:10px 0">站名:{{monhDatas.Station_Name}}&nbsp;&nbsp;累年:{{monhDatas.Years_MMUT}}&nbsp;&nbsp;月序:{{monhDatas.Mon_Seq}}</p>
+      <p *ngIf="monhDatas.PRS_Max_OYear">极端最高气压出现年:{{monhDatas.PRS_Max_OYear}}</p>
+      <p *ngIf="monhDatas.GST_Min_OYear">最低地面气温出现年:{{monhDatas.GST_Min_OYear}}</p>
+      <p *ngIf="monhDatas.TEM_Min_OYear">最低气温出现年:{{monhDatas.TEM_Min_OYear}}</p>
+      <p *ngIf="monhDatas.TEM_Dev_Min_OYear">月最小气温日较差出现年:{{monhDatas.TEM_Dev_Min_OYear}}</p>
+      <p *ngIf="monhDatas.PRE_Max_OYear">最大日降水量出现年:{{monhDatas.PRE_Max_OYear}}</p>
+      <p *ngIf="monhDatas.NPRE_LCDays_EDay">最长连续无降水止日:{{monhDatas.NPRE_LCDays_EDay}}</p>
+      <p *ngIf="monhDatas.V13334_057">最大积雪深度出现年:{{monhDatas.V13334_057}}</p>
+      <p *ngIf="monhDatas.WIN_S_INST_Max_OYear">极大风速出现年份:{{monhDatas.WIN_S_INST_Max_OYear}}</p>
+      <p *ngIf="monhDatas.EGST_Max_OYear">极端最高地面温度出现年:{{monhDatas.EGST_Max_OYear}}</p>
+      <p *ngIf="monhDatas.GST_Min_OYear_err">最低地面温度出现时间:{{monhDatas.GST_Min_OYear_err}}</p>
+    </div>
+  </mat-card>
+</div>

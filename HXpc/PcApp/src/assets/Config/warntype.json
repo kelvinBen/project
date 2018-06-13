@@ -1,0 +1,53 @@
+[{
+        "value": 1,
+        "label": "台风"
+    },
+    {
+        "value": 1,
+        "label": "暴雨"
+    },
+    {
+        "value": 3,
+        "label": "寒潮"
+    },
+    {
+        "value": 4,
+        "label": "大风"
+    },
+    {
+        "value": 5,
+        "label": "沙尘暴"
+    },
+    {
+        "value": 6,
+        "label": "冰雹"
+    },
+    {
+        "value": 7,
+        "label": "大雾"
+    },
+    {
+        "value": 8,
+        "label": "霾"
+    },
+    {
+        "value": 9,
+        "label": "道路结冰"
+    },
+    {
+        "value": 10,
+        "label": "高温"
+    },
+    {
+        "value": 11,
+        "label": "干旱"
+    },
+    {
+        "value": 12,
+        "label": "雷电"
+    },
+    {
+        "value": 13,
+        "label": "霜冻"
+    }
+]

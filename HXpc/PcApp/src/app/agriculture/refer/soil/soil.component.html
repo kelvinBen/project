@@ -1,0 +1,48 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>城市</label>
+    <mat-form-field style="width:100px;">
+        <mat-select [(ngModel)]="selCity" (change)="changeCity()">
+        <mat-option *ngFor="let city of cityList" [value]="city">{{city}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>站名</label>
+    <mat-form-field style="width:100px;">
+      <mat-select [(ngModel)]="selStation">
+        <mat-option *ngFor="let stn of stationList" [value]="stn.Station_Id_C">{{stn.Station_Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>起始</label>
+    <mat-form-field style="width:120px;">
+      <input matInput [(ngModel)]="sDate" mode="daytime" [dpDayPicker]="timeConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <label>终止</label>
+    <mat-form-field style="width:120px;">
+      <input matInput [(ngModel)]="eDate" mode="daytime" [dpDayPicker]="timeConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="query()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <mat-card style="width:1100px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>列表</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <ag-grid-angular #agGrid enableSorting (gridReady)="initGrid()" style="width: 100%; height: 300px;" class="ag-theme-blue">
+    </ag-grid-angular>
+  </mat-card>
+  <mat-card style="width:1100px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>图表</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div [options]="option" echarts theme="macarons" style="width:100%;height:300px;" (chartInit)="onChartInit($event)"></div>
+  </mat-card>
+</div>

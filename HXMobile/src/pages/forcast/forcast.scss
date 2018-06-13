@@ -1,0 +1,88 @@
+page-forcast {}
+
+.forecast_detail {
+  margin: 20px auto;
+  font-size: 13px;
+}
+
+.f_days,
+.f_micon,
+.f_eicon,
+.f_windd {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+
+.f_now,
+.f_nowtemp {
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+}
+
+.f_nowicon {
+  width: 100%;
+  height: 35px;
+  line-height: 30px;
+}
+
+.f_days ul,
+.f_micon ul,
+.f_eicon ul,
+.f_windd ul,
+.f_now ul,
+.f_nowicon ul,
+.f_nowtemp ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.f_days ul li,
+.f_micon ul li,
+.f_eicon ul li,
+.f_windd ul li,
+.f_now ul li,
+.f_nowicon ul li,
+.f_nowtemp ul li {
+  width: 20%;
+  float: left;
+  text-align: center;
+}
+
+.f_micon ul li img,
+.f_eicon ul li img,
+.f_nowicon ul li img {
+  margin: 0 auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.f_hcharts,
+.f_lcharts {
+  width: 100%;
+  height: 80px;
+  /* margin-left: -45px; */
+}
+
+.future {
+  width: 100%;
+}
+
+.future_title {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  margin: 15px 20px 0 20px;
+  font-size: 15px;
+}
+
+:host ::ng-deep .f_hcharts .demo-chart div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+:host ::ng-deep canvas {
+  width: 100% !important;
+}

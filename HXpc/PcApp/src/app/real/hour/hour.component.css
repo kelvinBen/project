@@ -1,0 +1,28 @@
+@import url('http://120.26.44.171:5557/esri/css/main.css');
+.mat-card {
+  padding: 0px;
+}
+
+.mat-card-actions,
+.mat-card-content,
+.mat-card-subtitle,
+.mat-card-title {
+  margin-bottom: 0;
+}
+
+.card-toolbar {
+  font-size: 14px;
+  height: 40px;
+  color: #3f51b5;
+}
+
+.card-content {
+  height: calc(100% - 40px);
+}
+
+.mapView {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}

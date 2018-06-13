@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center" style="width:100%;height:100%;">
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" style="padding:10px;">
+    <mat-form-field style="width:150px;">
+      <mat-select placeholder="起始时间" [(ngModel)]="selStation">
+        <mat-option *ngFor="let stn of stations" [value]="stn.Station_Id_C">{{stn.Station_Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width:110px;">
+      <input matInput [(ngModel)]="sDate" placeholder="起始时间" mode="daytime" [dpDayPicker]="config" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <mat-form-field style="width:110px;">
+      <input matInput [(ngModel)]="eDate" placeholder="终止时间" mode="daytime" [dpDayPicker]="config" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="queryFactor()">
+      <mat-icon>search</mat-icon>查询
+    </button>
+  </div>
+  <div [options]="option" echarts theme="macarons" style="width:100%;height:calc(100% - 85.5px);" (chartInit)="onChartInit($event)"></div>
+</div>

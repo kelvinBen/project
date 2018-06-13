@@ -1,0 +1,58 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;">
+  <mat-card style="height:100%;width:800px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>小时监测</span>
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <mat-form-field style="width:60px;">
+            <mat-select [(ngModel)]="selType" (change)="loadData()">
+              <mat-option value="降水">降水</mat-option>
+              <mat-option value="气温">气温</mat-option>
+              <mat-option value="极大风">极大风</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="width:100px;" *ngIf="selType === '降水'">
+            <input matInput [(ngModel)]="sDate" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+          </mat-form-field>
+          <label *ngIf="selType === '降水'">至</label>
+          <mat-form-field style="width:100px;">
+            <input matInput [(ngModel)]="eDate" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="loadData()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="column">
+      <ag-grid-angular #hourGrid enableSorting (gridReady)="initGrid()" style="width: 100%; height: 100%;" class="ag-theme-blue">
+      </ag-grid-angular>
+    </div>
+  </mat-card>
+  <div fxFlex="1 1 auto" style="height:100%;">
+    <mat-card style="height:100%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>实况监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+            <mat-form-field style="width:100px;">
+              <input matInput [(ngModel)]="autoDate" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+            </mat-form-field>
+            <button mat-icon-button color="primary" (click)="loadData()">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+        </mat-toolbar>
+        <mat-divider style="z-index:999;"></mat-divider>
+      </mat-card-title>
+      <mat-card-content class="card-content">
+        <div class="mapView" id="esriHourMap" #map></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

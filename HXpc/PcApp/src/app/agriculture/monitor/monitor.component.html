@@ -1,0 +1,74 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;">
+  <div style="width:50%;" fxLayout="column" fxLayoutGap="10px">
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>地面温度监测(最近24小时)</span>
+          <span fxFlex="1 1 auto"></span>
+          <button mat-icon-button color="primary" (click)="queryGroudTemp()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content">
+        <ag-grid-angular #groudTempGrid enableSorting (gridReady)="initGroundTempGrid()" style="width: 100%; height: 100%;" class="ag-theme-blue">
+        </ag-grid-angular>
+      </div>
+    </mat-card>
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>日照监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <button mat-icon-button color="primary" (click)="querySSH()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content">
+        <ag-grid-angular #sshGrid enableSorting (gridReady)="initSSHGridGrid()" style="width: 100%; height: 100%;" class="ag-theme-blue">
+        </ag-grid-angular>
+      </div>
+    </mat-card>
+  </div>
+  <div style="width:50%;" fxLayout="column" fxLayoutGap="10px">
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>土壤湿度监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <button mat-icon-button color="primary" (click)="querySoil()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content">
+        <ag-grid-angular #soilGrid enableSorting (gridReady)="initSoilGrid()" style="width: 100%; height: 100%;" class="ag-theme-blue">
+        </ag-grid-angular>
+      </div>
+    </mat-card>
+    <mat-card style="height:50%;">
+      <mat-card-title>
+        <mat-toolbar class="card-toolbar">
+          <mat-icon color="primary">star</mat-icon>
+          <span>日值监测</span>
+          <span fxFlex="1 1 auto"></span>
+          <button mat-icon-button color="primary" (click)="queryDay()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content">
+        <ag-grid-angular #dayGrid enableSorting (gridReady)="initDayGrid()" style="width: 100%; height: 100%;" class="ag-theme-blue">
+        </ag-grid-angular>
+      </div>
+    </mat-card>
+  </div>
+</div>

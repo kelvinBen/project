@@ -1,0 +1,60 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <label>城市</label>
+    <mat-form-field style="width:100px;">
+      <mat-select [(ngModel)]="selCity"  (change)="changeCity()">
+        <mat-option *ngFor="let city of cityList" [value]="city">{{city}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>站名</label>
+    <mat-form-field style="width:100px;">
+      <mat-select [(ngModel)]="selStation">
+        <mat-option *ngFor="let stn of stationList" [value]="stn.Station_Id_C">{{stn.Station_Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>日期</label>
+    <mat-form-field style="width:100px;">
+      <input matInput [(ngModel)]="sDate" mode="day" [dpDayPicker]="dayConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="queryHday()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <mat-card style="width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>查询要素</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content factors" style="padding:10px;">
+      <li *ngFor="let element of elements" style="width:260px;">
+        <mat-checkbox [(ngModel)]="element.checked" (change)="queryHday()">{{element.label}}</mat-checkbox>
+      </li>
+    </div>
+  </mat-card>
+  <mat-card style="width:1300px;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>查询结果</span>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div fxLayout="column" *ngIf=dayData fxLayoutAlign="center center" style="font-size:16px;">
+      <p style="font-size:20px;line-height:24px;padding:10px 0">站名:{{dayData.Station_Name}}&nbsp;&nbsp;累年:{{dayData.Years_MMUT}}&nbsp;&nbsp;日序:{{dayData.Day_Seq}}</p>
+      <p *ngIf=dayData.TEM_Avg>平均气温:{{dayData.TEM_Avg}} ℃</p>
+      <p *ngIf=dayData.SSH>日照时数:{{dayData.SSH}} h</p>
+      <p *ngIf=dayData.WIN_S_Avg>平均风速:{{dayData.WIN_S_Avg}} m/s</p>
+      <p *ngIf=dayData.VAP_Avg>平均水气压:{{dayData.VAP_Avg}} </p>
+      <p *ngIf=dayData.GST_Avg>平均地面温度:{{dayData.GST_Avg}} ℃</p>
+      <p *ngIf=dayData.TEM_Max_Avg_MMUT>累年平均日最高气温:{{dayData.TEM_Max_Avg_MMUT}} ℃</p>
+      <p *ngIf=dayData.TEM_Min_Avg_MMUT>累年平均日最低气温:{{dayData.TEM_Min_Avg_MMUT}} ℃</p>
+      <p *ngIf=dayData.PRE_Time_2020_MMUT>累年20-20时平均降水量:{{dayData.PRE_Time_2020_MMUT}} mm</p>
+      <p *ngIf=dayData.PRE_Time_0808_MMUT>累年08-08时平均降水量:{{dayData.PRE_Time_0808_MMUT}} mm</p>
+      <p *ngIf=dayData.GST_Max_Avg_MMUT>累年日平均最高地面温度:{{dayData.GST_Max_Avg_MMUT}} ℃</p>
+      <p *ngIf=dayData.GST_Min_Avg_MMUT>累年日平均最低地面温度:{{dayData.GST_Min_Avg_MMUT}} ℃</p>
+    </div>
+  </mat-card>
+</div>

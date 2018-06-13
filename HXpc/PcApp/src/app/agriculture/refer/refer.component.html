@@ -1,0 +1,14 @@
+<div fxLayout="column" style="padding-top:10px;" fxLayoutAlign="start center">
+  <mat-radio-group [(ngModel)]="selMenu">
+    <mat-radio-button value="1">气温实况</mat-radio-button>
+    <mat-radio-button value="2">日照时数</mat-radio-button>
+    <mat-radio-button value="3">蒸发量</mat-radio-button>
+    <mat-radio-button value="4">降水</mat-radio-button>
+    <mat-radio-button value="5">土壤商情</mat-radio-button>
+  </mat-radio-group>
+  <app-temp *ngIf="selMenu === '1'"></app-temp>
+  <app-sunshine *ngIf="selMenu === '2'"></app-sunshine>
+  <app-evaporation *ngIf="selMenu === '3'"></app-evaporation>
+  <app-dayrain *ngIf="selMenu === '4'"></app-dayrain>
+  <app-soil *ngIf="selMenu === '5'"></app-soil>
+</div>

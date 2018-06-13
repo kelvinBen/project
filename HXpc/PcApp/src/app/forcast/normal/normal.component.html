@@ -1,0 +1,79 @@
+<div fxLayout="row" fxLayoutGap="10px" style="height:100%;padding:10px;" fxLayoutAlign="center center">
+  <mat-card style="height:100%;width:100%;">
+    <mat-card-title>
+      <mat-toolbar class="card-toolbar">
+        <mat-icon color="primary">star</mat-icon>
+        <span>常规预报</span>
+        <span fxFlex="1 1 auto"></span>
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+          <!-- <mat-form-field style="width:90px;">
+            <input matInput [(ngModel)]="selDate" (ngModelChange)="query()" mode="day" [dpDayPicker]="dayConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+          </mat-form-field> -->
+        </div>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <div class="card-content" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;">
+      <mat-card style="height:100%;width:33%;">
+        <mat-card-title>
+          <mat-toolbar class="card-toolbar">
+            <mat-icon color="primary">star</mat-icon>
+            <span>西安地区短期天气预报-05时</span>
+            <span fxFlex="1 1 auto"></span>
+            <button mat-button *ngIf="!XZFlag" (click)="XZFlag = !XZFlag">返回列表</button>
+          </mat-toolbar>
+          <mat-divider></mat-divider>
+        </mat-card-title>
+        <div class="card-content">
+          <mat-list role="list" *ngIf="XZFlag">
+            <mat-list-item role="listitem" *ngFor="let xz of XZList">
+              <a (click)="showContent('XZ', xz.Name);" href="javascript:void(0)">{{xz.Name}}</a>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+          <iframe *ngIf="!XZFlag" [src]="urlXZ" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </mat-card>
+      <mat-card style="height:100%;width:33%;">
+        <mat-card-title>
+          <mat-toolbar class="card-toolbar">
+            <mat-icon color="primary">star</mat-icon>
+            <span>西安地区短期天气预报-10时</span>
+            <span fxFlex="1 1 auto"></span>
+            <button mat-button *ngIf="!XNFlag" (click)="XNFlag = !XNFlag">返回列表</button>
+          </mat-toolbar>
+          <mat-divider></mat-divider>
+        </mat-card-title>
+        <div class="card-content">
+          <mat-list role="list" *ngIf="XNFlag">
+            <mat-list-item role="listitem" *ngFor="let xn of XNList">
+              <a (click)="showContent('XN', xn.Name);" href="javascript:void(0)">{{xn.Name}}</a>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+          <iframe *ngIf="!XNFlag" [src]="urlXN" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </mat-card>
+      <mat-card style="height:100%;width:33%;">
+        <mat-card-title>
+          <mat-toolbar class="card-toolbar">
+            <mat-icon color="primary">star</mat-icon>
+            <span>西安地区短期天气预报-16时</span>
+            <span fxFlex="1 1 auto"></span>
+            <button mat-button *ngIf="!XYFlag" (click)="XYFlag = !XYFlag">返回列表</button>
+          </mat-toolbar>
+          <mat-divider></mat-divider>
+        </mat-card-title>
+        <div class="card-content">
+            <mat-list role="list" *ngIf="XYFlag">
+              <mat-list-item role="listitem" *ngFor="let xy of XYList">
+                <a (click)="showContent('XY', xy.Name);" href="javascript:void(0)">{{xy.Name}}</a>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+            <iframe *ngIf="!XYFlag" [src]="urlXY" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+      </mat-card>
+    </div>
+  </mat-card>
+</div>
