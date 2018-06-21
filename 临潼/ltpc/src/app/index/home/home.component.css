@@ -1,0 +1,134 @@
+.newsCenter{
+  width: 100%;
+  float:left;
+  height: 310px;
+  margin-bottom: 8px;
+}
+.newsCenter h2{
+  width: 100%;
+  font-size: 14px;
+	color: #fff;
+  background:#5793e0;
+	height: 40px;
+	line-height: 40px;
+  margin-top: 0px;
+}
+
+.newsCenter section {
+    background: url('../../../assets/images/newtop_bg.jpg') no-repeat 10px 20px;
+    height: 80px;
+    overflow: hidden;
+    border-bottom: #CCC 1px dashed;
+}
+
+.newsCenter section p {
+    padding-left: 80px;
+    padding-top: 10px;
+    line-height: 22px;
+    color: #666;
+}
+
+.newsCenter section p a {
+    color: #F00;
+}
+
+.c_n_top h3 {
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+}
+
+.pic_news{
+  width: 42%;
+  float: left;
+}
+/*.bannerContainer {
+  width: 100%;
+  padding: 0px;
+}
+
+.bannerPicList {
+  padding: 0px;
+  width: 340px;
+}
+
+.bannerPicList li {
+  display: none;
+  margin-left: 0px;
+}
+.bannerPicList li img{
+  width: 335px;
+}
+.bannerPicList li.active {
+  display: block;
+}
+.bannerBtnList {
+  position: absolute;
+  top: 491px;
+  z-index: 10001;
+  width: 335px;
+  height: 35px;
+  background: rgba(204,204,204, 0.8);
+}
+.bannerBtnList li {
+  float: left;
+  margin: 0 5px;
+  list-style-type: none;
+}
+
+.bannerBtnList span.picBtn {
+  margin-left: 15px;
+  line-height: 30px;
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  font-family:"微软雅黑";
+}*/
+
+#alert_now_title_content{
+    margin-left:8px;
+    text-indent:20px;
+    font-family: "微软雅黑";
+    font-size:14px;
+    width: 94%;
+    text-align: justify;
+}
+#waringInfo{
+    font-size: 14px;
+    margin: 2px 6px;
+    padding: 0px 6px;
+    /*text-indent: 20px;*/
+    text-align: justify;
+    line-height: 23px;
+    font-family: "微软雅黑";
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /*-webkit-line-clamp: 3;*/
+    -webkit-box-orient: vertical;   
+}
+
+/*七日预报*/
+.weatherpre{
+    margin-top: 20px;
+}
+
+#fz,#kp,#fg{
+  font-size: 11px;
+}
+#fz li a{
+  text-decoration: none;
+  cursor: pointer;
+}
+#kp li a{
+  text-decoration: none;
+  cursor: pointer;
+}
+#fg li a{
+  text-decoration: none;
+  cursor: pointer;
+}
+

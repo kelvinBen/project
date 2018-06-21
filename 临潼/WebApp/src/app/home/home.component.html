@@ -1,0 +1,140 @@
+<div class="box">
+  <div class="news left">
+    <h2><span class="more"><a href="" target="_blank">更多..</a></span>新闻中心</h2>
+    <ul>
+      <div class="pic_news left">
+        <div class="bannerContainer">
+          <ul class="bannerPicList">
+            <li [class.active]="currentPic==0"> <img src="../../assets/images/newspic.jpg" alt="" width='303px;' height='234px;' /></li>
+            <li [class.active]="currentPic==1"> <img src="../../assets/images/newspic.jpg" alt="" /></li>
+            <li [class.active]="currentPic==2"> <img src="../../assets/images/newspic.jpg" alt="" /></li>
+          </ul>
+          <ul class="bannerBtnList">
+            <li><span class="picBtn" (click)="changebanner(0)">●</span></li>
+            <li><span class="picBtn" (click)="changebanner(1)">●</span></li>
+            <li><span class="picBtn" (click)="changebanner(2)">●</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="center_news right" id="news1">
+        <section class="c_n_top">
+          <h3>广安区卫计局开展“道德讲堂”活动</h3>
+          <p>
+            气象国土多部门联合开展山洪地质灾害应急演练.... [
+            <a href="/" target="_blank">详情</a>]
+          </p>
+        </section>
+        <ul>
+          <li><a href="/" target="_blank">广安区喜摘全市人口计生统计与信息岗位技能竞赛桂冠</a></li>
+          <li><a href="/" target="_blank">广安区卫计局开展“道德讲堂”活动</a></li>
+          <li><a href="/" target="_blank">广安区中医院开展“全国高血压日”义诊宣传活动</a></li>
+          <li><a href="/" target="_blank">广安区“五心”做好孕前优生健康检查工作</a></li>
+          <li><a href="/" target="_blank">广安区实施“五项工程”帮助计生家庭发家致富</a></li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+  <div class="yujingNeews right" style="font-size:12px;">
+    <h3 style="color:#C24F3C">
+      <span>
+              <a href="" class="more">更多..</a>
+          </span> 预警信息
+    </h3>
+    <div id="alert_now_content">
+      <table cellspacing="0" cellpadding="0" width="100%">
+        <tbody>
+          <tr>
+            <td colspan="1" rowspan="1" valign="top" align="center" height="65" width="80">
+              <img height="65" width="80" src="../../assets/images/EarlyWarning/Blizzard(1).jpg" id="current_img">
+            </td>
+            <td colspan="1" rowspan="1" valign="top" align="left">
+              <div id="alert_now_title_content">
+                临潼区气象台2017年1月17日08时55分升级发布霾橙色预警信号：预计未来24小时内临潼地区将出现重度到严重霾，易形成重度到严重空气污染，请注意防范
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="1" colspan="2">
+              <p class="fy">
+                防御指南
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="1" class="fycontent" colspan="2">
+              <div id="waringInfo">
+                1.机场、高速公路、轮渡码头等单位加强交通管理，保障安全；<br/> 2.驾驶人员谨慎驾驶；
+                <br/> 3.空气质量差，人员需适当防护；
+                <br/> 4.人员减少户外活动，呼吸道疾病患者尽量避免外出，外出时可带上口罩。
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="blank"></div>
+  <div class="news left">
+    <div class="zhishu left">
+      <h3>
+        精细化预报
+      </h3>
+      <div style="width:100%;height:225px" id="jxyb">
+
+      </div>
+    </div>
+    <div class="blank"></div>
+    <div class="zhishu left" style="height:365px">
+      <h3>临潼七日预报</h3>
+      <div>
+        <iframe frameborder="0" src="" width="738px" height="341px"></iframe>
+      </div>
+    </div>
+    <div class="blank"></div>
+    <div class="zhishu left" style="height: 725px;">
+      <h3 style="background: url(../../assets/images/endnewsh4.png) left bottom no-repeat">
+        <a href="#">
+          <font style="color:#fff">气象站</font>
+        </a>&nbsp;|
+        <a href="#">
+          <font style="color:#fff">大喇叭</font>
+        </a>&nbsp;|
+        <a href="#">
+          <font style="color:#fff">显示屏</font>
+        </a>
+      </h3>
+      <app-map [type]=1></app-map>
+    </div>
+  </div>
+
+  <div class="right" style="width: 252px; height:auto">
+    <div class="yujingNeews right" style="height:auto">
+      <h3><span><a href="/" class="more">更多..</a></span>卫星云图 / 雷达图</h3>
+      <div>
+        <img src="../../assets/images/fy2.JPG" style="width:100%">
+        <img src="../../assets/images/doppler.GIF" style="width:100%">
+      </div>
+    </div>
+    <div class="blank"></div>
+    <div class="yujingNeews right" style="height:196px">
+      <h3><span><a href="" class="more">更多..</a></span>防灾减灾与气象服务</h3>
+      <ul id="fz"></ul>
+    </div>
+    <div class="blank"></div>
+    <div class="yujingNeews right" style="height:196px">
+      <h3><span><a href="" class="more">更多..</a></span>农业气象科普</h3>
+      <ul id="kp"></ul>
+    </div>
+    <div class="blank"></div>
+    <div class="yujingNeews right" style="height:196px">
+      <h3><span><a href="" class="more">更多..</a></span>法律法规</h3>
+      <ul id="fg"></ul>
+    </div>
+    <div class="blank"></div>
+    <div class="yujingNeews right" style="height:290px;">
+      <h3>互动交流</h3>
+      <iframe frameborder="0" scrolling="no" src="http://show.v.t.qq.com/index.php?c=show&a=index&n=lintongqixiang&w=254&h=120&fl=1&l=4&o=21&co=0" width="254" height="290"></iframe>
+    </div>
+  </div>
+</div>

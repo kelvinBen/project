@@ -1,0 +1,30 @@
+<div id="mainBody">
+  <div id="cloud1" class="cloud"></div>
+  <div id="cloud2" class="cloud"></div>
+</div>
+<div class="logintop">
+  <span>欢迎登录临潼气象信息网后台管理界面平台</span>
+  <ul>
+    <li><a routerLink='/'>回首页</a></li>
+  </ul>
+</div>
+
+<div class="loginbody">
+  <span class="systemlogo"></span>
+  <div #loginDiv class="loginbox">
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <ul>
+        <li>
+          <input name="uname" type="text" class="loginuser" required [(ngModel)]="loginModel.name" />
+        </li>
+        <li>
+          <input name="psw" type="password" class="loginpwd" required [(ngModel)]="loginModel.password" />
+        </li>
+        <li>
+          <input name="" type="submit" class="loginbtn" value="登录" />
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<div class="loginbm">Copyright 临潼气象局网 All Rights Reserved (2008-2015) 版权所有 复制必究</div>

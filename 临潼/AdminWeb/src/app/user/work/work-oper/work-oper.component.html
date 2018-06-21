@@ -1,0 +1,54 @@
+<ul class="breadcrumb">
+  <li>工作日志</li>
+  <li *ngIf="!(type && type == 2)"><a routerLink="/admin/work" >工作日志列表</a></li>
+  <li *ngIf="type && type == 2"><a routerLink="/admin/check" >工作日志列表</a></li>
+  <li class="active">{{type?'查看':(pId?"编辑":"新增")}}</li>
+</ul>
+<form novalidate class="pad" #pForm="ngForm" (ngSubmit)="onSubmit()">
+  <div layout="row" class="pad-bottom">
+    <md-select placeholder="小分类" required name="small" style="width:320px;" [(ngModel)]="vm.SmallClassID">
+      <md-option *ngFor="let s of smallClasses" [value]="s.Id">
+        {{s.SmallClassName}}
+      </md-option>
+    </md-select>
+  </div>
+  <div layout="row" class="pad-bottom-sm">
+    <md-form-field style="width:640px;">
+      <input mdInput placeholder="标题" required [(ngModel)]="vm.Title" name="title" #title="ngModel" [readonly]="type">
+      <md-error *ngIf="title.invalid && title.errors.required">
+        必填项
+      </md-error>
+    </md-form-field>
+  </div>
+  <div layout="row" class="pad-bottom-sm">
+    <md-form-field style="width:300px;">
+      <input mdInput [mdDatepicker]="picker" placeholder="时间" #time="ngModel" required [readonly]="type" [(ngModel)]="selTime"
+        name="tt">
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
+      <md-error *ngIf="time.invalid && time.errors.required">
+        必填项
+      </md-error>
+    </md-form-field>
+    <md-form-field class="pad-left" style="width:320px;">
+      <input mdInput placeholder="作者" #author="ngModel" required [readonly]="type" [(ngModel)]="vm.Author" name="author">
+      <md-error *ngIf="author.invalid && author.errors.required">
+        必填项
+      </md-error>
+    </md-form-field>
+  </div>
+  <div layout="row" class="pad-bottom-sm">
+    <quill-editor name="content" [(ngModel)]="vm.Context"></quill-editor>
+  </div>
+  <div layout="row" style="margin-top:50px;">
+    <div>
+      <a md-raised-button type="reset" color='warn' *ngIf="!type">重置</a>
+    </div>
+    <div class="pad-left">
+      <a md-raised-button type="button" color='primary' routerLink='/admin/work'>取消</a>
+    </div>
+    <div class="pad-left">
+      <button md-raised-button color="primary" type="submit" [disabled]="!pForm.valid" *ngIf="!type">提交</button>
+    </div>
+  </div>
+</form>

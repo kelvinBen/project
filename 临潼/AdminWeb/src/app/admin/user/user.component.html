@@ -1,0 +1,35 @@
+<ul class="breadcrumb">
+  <li>用户管理</li>
+  <li class="active">用户列表</li>
+</ul>
+<div layout="column">
+  <div class="pad" flex>
+    <a md-raised-button color='primary' routerLink='/admin/user/add'>增加</a>
+  </div>
+  <md-card flex>
+    <ngx-datatable class="material" [rows]="users" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+      [limit]="10">
+      <ngx-datatable-column prop="Name" name="用户名"></ngx-datatable-column>
+      <ngx-datatable-column prop="Address" name="地址"></ngx-datatable-column>
+      <ngx-datatable-column prop="Type" name="角色">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{value==1?'管理员':'街办用户'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Note" name="备注"></ngx-datatable-column>
+      <ngx-datatable-column prop="Id" name="操作">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink='/admin/user/1/view/{{value}}'>
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink='/admin/user/edit/{{value}}'>
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(value)">
+            <md-icon>delete</md-icon>
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </md-card>
+</div>

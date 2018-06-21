@@ -1,0 +1,236 @@
+[
+  {
+    "type": "information",
+    "tables": [
+      {
+        "name": "事件初报表",
+        "tablename": "ics001",
+        "table": "事件初报表",
+        "url": "app.ics_primarytable",
+        "tempurl": "",
+        "required": false
+      },
+      {
+        "name": "ECS201-1事故图",
+        "table": "ECS 201-1",
+        "tablename": "ics2011",
+        "url": "app.ics2011",
+        "tempurl": "app/views/ics/Document/ICS 201-1 事故图.doc",
+        "required": false
+      },
+      {
+        "name": "ECS201-2当前行动",
+        "table": "ECS 201-2",
+        "tablename": "ics2012",
+        "url": "app.ics2012",
+        "tempurl": "app/views/ics/Document/ICS 201-2 当前的行动.doc",
+        "required": false
+      },
+      {
+        "name": "ECS201-3应急组织框架",
+        "table": "ECS 201-3",
+        "tablename": "ics2013",
+        "url": "app.ics2013",
+        "tempurl": "app/views/ics/Document/ICS 201-3 组织架构图.doc",
+        "required": false
+      },
+      {
+        "name": "ECS201-4资源状况总结",
+        "table": "ECS 201-4",
+        "tablename": "ics2014",
+        "url": "app.ics2014",
+        "tempurl": "app/views/ics/Document/ICS 201-4 资源总结.doc",
+        "required": false
+      },
+      {
+        "name": "ECS201-5人员状况",
+        "table": "ECS 201-5",
+        "tablename": "ics2015",
+        "url": "app.ics2015",
+        "tempurl": "app/views/ics/Document/ICS 201-5 人员状况.doc",
+        "required": false
+      },
+      {
+        "name": "ECS201-6天气",
+        "table": "ECS 201-6",
+        "tablename": "ics2016",
+        "url": "app.ics2016",
+        "tempurl": "app/views/ics/Document/ICS 201-6 天气.doc",
+        "required": false
+      },
+      {
+        "name": "ECS201-7对外联络",
+        "table": "ECS 201-7",
+        "tablename": "ics2017",
+        "url": "app.ics2017",
+        "tempurl": "app/views/ics/Document/ICS 201-7 对外联络.doc",
+        "required": false
+      }
+    ]
+  },
+  {
+    "type": "task",
+    "tables": [
+      {
+        "name": "ECS202响应目标",
+        "table": "ECS 202",
+        "tablename": "ics202",
+        "url": "app.ics202",
+        "tempurl": "app/views/ics/Document/ICS 202 响应目标.doc",
+        "required": true
+      },
+      {
+        "name": "ECS234 任务表",
+        "table": "ECS 234",
+        "tablename": "ics234",
+        "url": "app.ics234",
+        "tempurl": "app/views/ics/Document/ICS_234 任务表.doc",
+        "required": true
+      },
+      {
+        "name": "ECS204任务分配表",
+        "table": "ECS 204",
+        "tablename": "ics204",
+        "url": "app.ics204",
+        "tempurl": "app/views/ics/Document/ICS 204 任务分配表.doc",
+        "required": true
+      }
+    ]
+  },
+  {
+    "type": "plan",
+    "tables": [
+      {
+        "name": "ECS203组织分工表",
+        "table": "ECS 203",
+        "tablename": "ics203",
+        "url": "app.ics203",
+        "tempurl": "app/views/ics/Document/ICS 203 组织分工表.doc",
+        "required": false
+      },
+      {
+        "name": "ECS205通讯计划",
+        "table": "ECS 205",
+        "tablename": "ics205",
+        "url": "app.ics205",
+        "tempurl": "app/views/ics/Document/ICS 205 通讯计划.doc",
+        "required": false
+      },
+      {
+        "name": "ECS206医疗计划",
+        "table": "ECS 206",
+        "tablename": "ics206",
+        "url": "app.ics206",
+        "tempurl": "app/views/ics/Document/ICS 206 医疗计划.doc",
+        "required": false
+      },
+      {
+        "name": "ECS208安全计划",
+        "table": "ECS 208",
+        "tablename": "ics208",
+        "url": "app.ics208",
+        "tempurl": "app/views/ics/Document/ICS 208 安全计划.doc",
+        "required": false
+      },
+      {
+        "name": "ECS209事故状态总结",
+        "table": "ECS 209",
+        "tablename": "ics209",
+        "url": "app.ics209",
+        "tempurl": "app/views/ics/Document/ICS 209 事故状态总结.doc",
+        "required": false
+      },
+      {
+        "name": "ECS210资源状态变化",
+        "tablename": "ics210",
+        "table": "ECS 210",
+        "url": "app.ics210",
+        "tempurl": "app/views/ics/Document/ICS 210 资源状态变化.doc",
+        "required": false
+      },
+      {
+        "name": "ECS211事故入场清单",
+        "table": "ECS 211",
+        "tablename": "ics211",
+        "url": "app.ics211",
+        "tempurl": "app/views/ics/Document/ICS 211 事故入场清单.doc",
+        "required": false
+      },
+      {
+        "name": "ECS215作业计划工作表",
+        "table": "ECS 215",
+        "tablename": "ics215",
+        "url": "app.ics215",
+        "tempurl": "app/views/ics/Document/ICS 202 响应目标.doc",
+        "required": false
+      },
+      {
+        "name": "ECS220飞行作业总结工作表",
+        "table": "ECS 220",
+        "tablename": "ics220",
+        "url": "app.ics220",
+        "tempurl": "app/views/ics/Document/ICS 220 飞行作业总结工作表.doc",
+        "required": false
+      },
+      {
+        "name": "ECS221复员退场",
+        "table": "ECS 221",
+        "tablename": "ics221",
+        "url": "app.ics221",
+        "tempurl": "app/views/ics/Document/ICS 221 复员退场.doc",
+        "required": false
+      },
+      {
+        "name": "ECS230日常会议",
+        "table": "ECS 230",
+        "tablename": "ics230",
+        "url": "app.ics230",
+        "tempurl": "app/views/ics/Document/ICS 230 日常会议.doc",
+        "required": false
+      },
+      {
+        "name": "ECS232处于风险的资源总结",
+        "table": "ECS 232",
+        "tablename": "ics232",
+        "url": "app.ics232",
+        "tempurl": "app/views/ics/Document/ICS 232 处于风险的资源总结y.doc",
+        "required": false
+      }
+    ]
+  },
+  {
+    "type": "log",
+    "tables": [
+      {
+        "type": "information",
+        "name": "个人日志",
+        "table": "ECS 214A",
+        "tablename": "ics214A",
+        "url": "app.ics214A",
+        "tempurl": "app/views/ics/Document/ICS 214A 个人日志.doc",
+        "required": true
+      },
+      {
+        "name": "小组日志",
+        "tablename": "ics214",
+        "table": "ECS 214",
+        "url": "app.ics214",
+        "tempurl": "app/views/ics/Document/ICS 214 小组日志.doc",
+        "required": true
+      }
+    ]
+  },
+  {
+    "type": "others",
+    "tables": [
+      {
+        "name": "事件初报表",
+        "tablename": "ics001",
+        "table": "事件初报表",
+        "url": "app.ics_primarytable",
+        "tempurl": "",
+        "required": false
+      }
+    ]
+  }
+]

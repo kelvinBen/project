@@ -1,0 +1,58 @@
+<ul class="breadcrumb">
+  <li class="active">历史数据查询</li>
+</ul>
+<div layout="column">
+  <div layout="row" class="pad">
+    <md-select  placeholder="月份" [(ngModel)]="selMon">
+      <md-option value='01'>01</md-option>
+      <md-option value='02'>02</md-option>
+      <md-option value='03'>03</md-option>
+      <md-option value='04'>04</md-option>
+      <md-option value='05'>05</md-option>
+      <md-option value='06'>06</md-option>
+      <md-option value='07'>07</md-option>
+      <md-option value='08'>08</md-option>
+      <md-option value='09'>09</md-option>
+      <md-option value='10'>10</md-option>
+      <md-option value='11'>11</md-option>
+      <md-option value='12'>12</md-option>
+    </md-select>
+    <div flex style="padding-left:10px;padding-top:7px;">
+      <button md-raised-button color="primary" (click)="query()">历史月要素查询</button>
+      <button md-raised-button color="primary" (click)="export()">导出</button>
+    </div>
+  </div>
+  <md-card flex>
+    <ngx-datatable class="material" [rows]="cimissValueModels" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+      [rowHeight]="'auto'" [limit]="10">
+      <ngx-datatable-column prop="Station_Name" name="站名" [width]="70">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Year" name="年份" >
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Mon" name="月份" >
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Avg" name="平均气温">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Max" name="最高气温">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Min" name="最低气温">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="PRE_Max_Day" name="最大日降水量">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Days_Max_Coti_PRE" name="最长连续降水日数">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="PRE_Conti_Max" name="最长连续降水量">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="PRE_Max_Conti" name="最大连续降水量">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="PRE_Max_1h" name="1小时最大降水量">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="WIN_S_Inst_Max" name="极大风速">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="WIN_D_INST_Max_C" name="极大风向">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="WIN_S_INST_Max_ODay_C" name="极大风向出现日">
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </md-card>
+</div>

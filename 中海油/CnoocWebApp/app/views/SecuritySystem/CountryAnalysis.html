@@ -1,0 +1,131 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li >
+            <a ui-sref="app.sstotalwarns">{{"warnanalysis"|translate}}
+            </a>
+        </li>
+        <li class="active">{{"countryinfoall"|translate}}</li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="countryAnalysisController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{"infostatistics"|translate}}</div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped table-hover">
+                <tr class="text-center">
+                    <td>{{"January"|translate}}</td>
+                    <td>{{"February"|translate}}</td>
+                    <td>{{"March"|translate}}</td>
+                    <td>{{"April"|translate}}</td>
+                    <td>{{"May"|translate}}</td>
+                    <td>{{"June"|translate}}</td>
+                    <td>{{"July"|translate}}</td>
+                    <td>{{"August"|translate}}</td>
+                    <td>{{"September"|translate}}</td>
+                    <td>{{"October"|translate}}</td>
+                    <td>{{"November"|translate}}</td>
+                    <td>{{"December"|translate}}</td>
+                    <td>{{"trend"|translate}}</td>
+                    <td>Total</td>
+                </tr>
+                <tr class="text-center">
+                    <td>
+                        <a ng-click="showSecurityList(1)">{{MonthCount('01')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(2)">{{MonthCount('02')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(3)">{{MonthCount('03')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(4)">{{MonthCount('04')}}</a>
+                    </td>
+                    <td>
+                        <a  ng-click="showSecurityList(5)">{{MonthCount('05')}}</a>
+                    </td>
+                    <td>
+                        <a  ng-click="showSecurityList(6)">{{MonthCount('06')}}</a>
+                    </td>
+                    <td>
+                        <a  ng-click="showSecurityList(7)">{{MonthCount('07')}}</a>
+                    </td>
+                    <td>
+                        <a  ng-click="showSecurityList(8)">{{MonthCount('08')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(9)">{{MonthCount('09')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(10)">{{MonthCount('10')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(11)">{{MonthCount('11')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(12)">{{MonthCount('12')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showTrendChart()"><i class="fa fa-line-chart"></i></a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(-1)">{{Events.length}}</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{"pieallchart"|translate}}</div>
+        <div class="panel-body">
+            <form class="form-inline" style="text-align: center;">
+                <div class="form-group">
+                    <input date-range-picker class="form-control date-picker" type="text" ng-model="dateRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                </div>
+                <div class="form-group">
+                    <select class="select form-control" name="type" ng-model="selType" ng-options="a.id as a.name for a in typeList">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success form-control" ng-click="search()">
+                        <i class="fa fa-search"></i> {{"query"|translate}}
+                    </button>
+                </div>
+            </form>
+            <div class="row-fluid">
+                <highchart config="chartConfig" style="width:98%;min-height:400px;"></highchart>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"social"|translate}}
+        </div>
+        <div class="panel-body">
+            <form class="form-inline" style="text-align: center;">
+                <div class="form-group">
+                    <input date-range-picker class="form-control date-picker" type="text" ng-model="chartDateRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-success form-control" ng-click="chartSearch()">
+                        <i class="fa fa-search"></i>{{"query"|translate}}
+                    </button>
+                </div>
+            </form>
+            <div class="row-fluid">
+                <highchart config="securityConfig" style="width:98%;min-height:400px;"></highchart>
+            </div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="trendChart.html">
+        <div class="container">
+          <highchart config="trendChartConfig" style="width:600px;height:300px;"></highchart>
+        </div>
+    </script>
+</div>

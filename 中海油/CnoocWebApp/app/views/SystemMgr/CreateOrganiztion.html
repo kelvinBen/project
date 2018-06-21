@@ -1,0 +1,361 @@
+﻿@using MvcWebSite
+@{
+    Layout = null;
+    List<string> continents = new List<string>();
+    Dictionary<string, string[]> cons = new Dictionary<string, string[]>();
+    string lang = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower();
+    var roots = ViewData["root"] as IEnumerable<MvcWebSite.cnooc_organiztion>;
+    var contries = ViewData["contry"] as IEnumerable<MvcWebSite.cnooc_countryrisk>;
+    foreach (var dt in contries)
+    {
+        if (cons.Keys.Contains(dt.continent_en) == false)
+        {
+            var sList = new List<string>();
+            sList.Add(dt.continent);
+            sList.Add(dt.continent_en);
+            cons.Add(dt.continent_en, sList.ToArray());
+        }
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Content/lib/html5.js"></script>
+    <script type="text/javascript" src="~/Content/lib/respond.min.js"></script>
+    <script type="text/javascript" src="~/Content/lib/PIE-2.0beta1/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/Hui-iconfont/1.0.7/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/icheck/icheck.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/skin/blue/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/subStyle.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/zTree/v3/css/metroStyle/metroStyle.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/My97DatePicker/skin/WdatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/webuploader/0.1.5/webuploader.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title></title>
+    <style>
+        .form-horizontal .form-label {
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body>
+    <form action="@Url.Action("CreateOrganiztion")" method="post" class="form form-horizontal" id="org_edit">
+        <input id="lang" name="lang" value="@lang" type="hidden" />
+        <div class="page-container bg-fff">
+            <div class="panel panel-primary">
+                <div class="panel-header">@Html.GetLangbyKey("createorganiztion")</div>
+                <div class="panel-body" style="padding:0px;">
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            <span class="c-red">*</span>
+                            @Html.GetLangbyKey("institutional")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input type="text" class="input-text" id="name" name="name">
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            <span class="c-red">*</span>
+                            @Html.GetLangbyKey("belongingto")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <span class="select-box" style="width:353px;">
+                                <select class="select" size="1" name="parent" id="parent" onchange="parentChange()">
+                                    @foreach (var item in roots)
+                                    {
+                                        <option value="@item.organiztion_id">
+                                            @if (lang == "zh-cn")
+                                            { @item.organiztion_name }
+                                            else
+                                            {@item.organiztion_name_en}
+                                        </option>
+                                    }
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row cl" id="showDiv">
+                        <label class="form-label col-xs-2">
+                            <span class="c-red">*</span>
+                            @Html.GetLangbyKey("companyCountry")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <span class="select-box" style="width:150px;">
+                                <select class="select size-M" id="continentSel" name="continentSel" style="width:100%" onchange="continentFun();">
+                                    <option value="-1">@Html.GetLangbyKey("none")</option>
+                                    @foreach (var item in cons)
+                                    {
+                                        <option value="@item.Key">
+                                            @{
+                                                string[] vs = item.Value;
+                                                string s = lang == "zh-cn" ? vs[0] : vs[1];
+                                            }
+                                            @s
+                                        </option>
+                                    }
+                                </select>
+                            </span>
+                            <span class="select-box" style="width:200px;display:none;" id="cntBox">
+                                <select class="select size-M" id="contrySel" name="contrySel" style="width:100%"></select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("Samplegraph")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input type="hidden" id="pic" name="pic"/>
+                            <div id="fileList" class="uploader-list">
+                                <div class="file-item thumbnail">
+                                    <img />
+                                    <div class="info"></div>
+                                </div>
+                            </div>
+                            <div id="filePicker">@Html.GetLangbyKey("selectimg")</div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="ctlBtn" type="button" class="btn btn-primary radius size-MINI" onclick="begionUpload();">@Html.GetLangbyKey("upload")</button>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            <span class="c-red">*</span>
+                            @Html.GetLangbyKey("createtime")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input type="text" onfocus="WdatePicker({maxDate:'%y-%M-%d'})" value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                   id="ctime" name="ctime" class="input-text Wdate" style="width:200px;" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            <span class="c-red">*</span>
+                            @Html.GetLangbyKey("worker")：
+                        </label>
+                        <div class="formControls col-xs-9 skin-minimal">
+                            <span class="select-box" style="width:200px;">
+                                <select class="select size-M" id="worker" name="worker" style="width:100%">
+                                    <option value="1">@Html.GetLangbyKey("yes")</option>
+                                    <option value="-1" selected="selected">@Html.GetLangbyKey("no")</option>
+
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("Companyprofile")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <textarea name="intro" cols="" rows="" class="textarea" onkeyup="textarealength(this,100)"></textarea>
+                            <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("lon")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input id="lon" name="lon" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("lat")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input id="lat" name="lat" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("email")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input id="email" name="email" class="input-text" type="email" />
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("telephone")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input id="phone" name="phone" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("fax")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input id="fax" name="fax" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-xs-2">
+                            @Html.GetLangbyKey("address")：
+                        </label>
+                        <div class="formControls col-xs-9">
+                            <input id="add" name="add" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="row cl text-c">
+                        <input class="btn btn-primary radius" id="okBtn" type="submit" value="&nbsp;&nbsp;@Html.GetLangbyKey("submit")&nbsp;&nbsp;">
+                    </div>
+                    <div class="row cl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript" src="~/Content/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/lib/jquery.form/jquery.form.js"></script>
+    <script type="text/javascript" src="~/Content/lib/layer/2.1/layer.js"></script>
+    <script type="text/javascript" src="~/Content/lib/icheck/jquery.icheck.min.js"></script>
+    <script type="text/javascript" src="~/Content/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Content/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="~/Content/h-ui/js/H-ui.js"></script>
+    <script type="text/javascript" src="~/Content/h-ui/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="~/Content/lib/webuploader/0.1.5/webuploader.min.js"></script>
+    @if (lang == "zh-cn")
+    {
+        <script type="text/javascript" src="~/Content/lib/My97DatePicker/cn_WdatePicker.js"></script>
+        <script type="text/javascript" src="~/Content/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+    }
+    else
+    {
+        <script type="text/javascript" src="~/Content/lib/My97DatePicker/en_WdatePicker.js"></script>
+        <script type="text/javascript" src="~/Content/lib/jquery.validation/1.14.0/messages_en.js"></script>
+    }
+    <script type="text/javascript">
+        var uploader = null;
+        var ratio = window.devicePixelRatio || 1;
+        // 缩略图大小
+        var thumbnailWidth = 110 * ratio;
+        var thumbnailHeight = 110 * ratio;
+        $(function () {
+            continentFun();
+            //表单验证
+            $("#org_edit").validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 2
+                    }
+                },
+                onkeyup: false,
+                focusCleanup: true,
+                success: "valid",
+                submitHandler: function (form) {
+                    $(form).ajaxSubmit({
+                        type: 'post',
+                        success: function () {
+                            parent.layer.closeAll();
+                        },
+                    });
+                }
+            });
+            // 初始化Web Uploader
+            uploader = WebUploader.create({
+                auto: false,
+                // swf文件路径
+                swf: '../../Content/lib/webuploader/0.1.5/Uploader.swf',
+                // 文件接收服务端。
+                server: '@Url.Action("UpLoadProcess", "Ajax")',
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#filePicker',
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                }
+            });
+            //当文件被加入队列以后触发
+            uploader.onFileQueued = function (file) {
+                uploader.makeThumb(file, function (error, ret) {
+                    $img = $('#fileList').find('img');
+                    $info = $('#fileList .info');
+                    // thumbnailWidth x thumbnailHeight 为 100 x 100
+                    uploader.makeThumb(file, function (error, src) {
+                        if (error) {
+                            $info.html('@Html.GetLangbyKey("CannotPreview")');
+                            return;
+                        }
+                        $img.attr('src', src);
+                        $info.html(file.name);
+                    }, thumbnailWidth, thumbnailHeight);
+                });
+            }
+            //在新文件加入前移除队列中已有的文件，保证只有一个文件在上传队列中
+            uploader.on('beforeFileQueued', function (file) {
+                var fs = uploader.getFiles();
+                $.each(fs, function (i, f) { uploader.removeFile(f, true); });
+            });
+            uploader.on('uploadSuccess', function (file, response) {
+                $('#pic').val(response.name);
+                $info = $('#fileList .info');
+                $info.html('@Html.GetLangbyKey("uploadsuccess")');
+            });
+            uploader.on('uploadError', function (file, reason) {
+                $info = $('#fileList .info');
+                $info.html('@Html.GetLangbyKey("Uploadfailed")');
+            });
+        });
+        function begionUpload() {
+            var fs = uploader.getFiles();
+            if (fs.length == 0) {
+                return;
+            }
+            uploader.upload();
+        }
+    </script>
+    <script type="text/javascript">
+        //大洲选择
+        function continentFun() {
+            var sel = $('#continentSel').val();
+            if (sel == '-1') {
+                $('#cntBox').hide();
+                return;
+            }
+            $('#cntBox').show();
+            $.getJSON('@Url.Action("ContryList")' + '?continent=' + sel, function (data) {
+                $('#contrySel').empty();
+                var name = "";
+                $.each(data, function (i, item) {
+                    if ('@lang' == 'zh-cn') name = item.name;
+                    else name = item.enname;
+                    $('#contrySel').append("<option value='" + item.country_id + "'>" + name + "</option>");
+                });
+            });
+        }
+
+        function parentChange() {
+            var sel = $('#parent').val();
+            if (sel == '2016011803') {
+                $('#showDiv').hide();
+                return;
+            }
+            $('#showDiv').show();
+        }
+    </script>
+</body>
+</html>

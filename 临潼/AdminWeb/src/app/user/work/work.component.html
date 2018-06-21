@@ -1,0 +1,47 @@
+<ul class="breadcrumb">
+  <li>工作日志管理</li>
+  <li class="active">工作日志</li>
+</ul>
+<div layout="column">
+  <div layout="row" class="pad">
+    <md-select placeholder="小分类" required style="width:180px;" [(ngModel)]="selSmall" (change)="query()">
+      <md-option *ngFor="let s of smallClasses" [value]="s.Id">
+        {{s.SmallClassName}}
+      </md-option>
+    </md-select>
+  </div>
+  <div class="pad" flex>
+    <a md-raised-button color='primary' routerLink='/admin/work/add'>增加</a>
+  </div>
+  <md-card flex>
+    <ngx-datatable class="material" [rows]="temps" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+      [limit]="10">
+      <ngx-datatable-column prop="SmallClassID" name="类别">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{getSmallName(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Title" name="标题"></ngx-datatable-column>
+      <ngx-datatable-column prop="Author" name="作者"></ngx-datatable-column>
+      <ngx-datatable-column prop="Time" name="时间"></ngx-datatable-column>
+      <ngx-datatable-column prop="Status" name="状态">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template width="60px;">
+          {{statusStr(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Id" name="操作">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink='/admin/work/1/view/{{value}}'>
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink='/admin/work/edit/{{value}}'>
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(value)">
+            <md-icon>delete</md-icon>
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </md-card>
+</div>

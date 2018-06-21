@@ -1,0 +1,83 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"dailymeeting"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics230Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS 230（{{"dailymeeting"|translate}}）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" >
+                    <table class="table  table-bordered table-hover">
+                        <tbody >
+                        <tr>
+                            <td>{{"incidentname"|translate}}</td>
+                            <td colspan="1";><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.name"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td colspan="1";><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.eventnum"></td>
+                            <td>{{"operationalperiod"|translate}}</td>
+                            <td colspan="2">
+                                {{"datefrom"|translate}}：
+                                <input type="date" style="border: 0;width: 35%;height: 95%;" ng-model="starttime" >
+                                {{"dateto"|translate}}：
+                                <input type="date" style="border: 0;width:35%;height: 95%;" ng-model="endtime" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">{{"meetnames"|translate}}</td>
+                            <td colspan="2" style="text-align: center">{{"purpose"|translate}}</td>
+                            <td style="text-align: center">{{"attendees"|translate}}</td>
+                            <td style="text-align: center">{{"Location"|translate}}</td>
+                        </tr>
+                        <tr >
+                            <td colspan="2">
+                                <input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.meetname">
+                            </td>
+                            <td colspan="2">
+                                <input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.meetgoal">
+                            </td>
+                            <td>
+                                <input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.meetperson">
+                            </td>
+                            <td>
+                                <input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.meetlocate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.user"></td>
+                            <td>{{"positiontitle"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.role"></td>
+                            <td>{{"Signature"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.sign"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 230（{{"dailymeeting"|translate}}）</td>
+                            <td style="line-height: 60px;" colspan="1">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='2';><input type="date" style="border: 0;" ng-model="model.esDate"><input type="time" style="border: 0;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

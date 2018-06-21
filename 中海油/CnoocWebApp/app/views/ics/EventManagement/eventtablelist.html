@@ -1,0 +1,59 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"eventresponserecord"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="eventtablelistCtrl" style="overflow: hidden;">
+    <div class="row col-sm-12 col-md-12 col-lg-12">
+        <div class="form-inline" style="padding-left: 30px;">
+            <label>{{"event"|translate}}：</label>
+            <select class="form-control" ng-model="curevent" ng-options="t.name for t in events"
+                    ng-change="changeevent()">
+            </select>
+            <label>{{"singlestage"|translate}}：</label>
+            <select class="form-control" ng-model="curperiod"
+                    ng-options="(t.name+'('+t.starttime+'-'+t.endtime+')')  for t in periods"
+                    ng-change="changeperiod()">
+            </select>
+        </div>
+        <div class="row col-sm-12 col-md-12 col-lg-12" style="margin: 20px;">
+            <div class="form-group">
+                <div class="table-responsive">
+                    <table class="table table-hover" datatable="ng" dt-instance="dtInstance">
+                        <thead>
+                        <tr>
+                            <th style="text-align: left;">{{"formname"|translate}}</th>
+                            <th style="text-align: left;">{{"fillin"|translate}}</th>
+                            <th style="text-align: left;">{{"fillintime"|translate}}</th>
+                            <th style="text-align: left;">{{"operation"|translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in tables|orderBy:'-time'">
+                            <td style="text-align: left;">{{item.name}}</td>
+                            <td style="text-align: left;">{{item.user}}</td>
+                            <td style="text-align: left;">{{item.time}}</td>
+                            <td style="text-align: left;">
+                                <button type="button" class="btn btn-primary" ng-click="viewtable(item)">
+                                    {{"view"|translate}}
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

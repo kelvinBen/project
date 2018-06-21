@@ -1,0 +1,36 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li >
+            <a ui-sref="app.sstotalwarns">{{"warnanalysis"|translate}}
+            </a>
+        </li>
+        <li class="activate">{{"sumwarninfo"|translate}}</li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="eventListController">
+    <table class="table table-border table-bordered table-hover table-bg table-striped"
+    datatable='ng' style="border-collapse:collapse">
+        <thead>
+            <tr class="text-c">
+                <th style="width:90px">{{"date"|translate}}</th>
+                <th style="width:60px">{{"country"|translate}}</th>
+                <th>{{"eventwarn"|translate}}</th>
+                <th style="min-width:50px;">{{"resourcefrom"|translate}}</th>
+            </tr>
+        </thead>
+        <tbody class="text-c">
+            <tr class="text-c" ng-repeat="u in events">
+                <td>{{u.event_date | dateFormatter}}</td>
+                <td>{{u.country_name}}</td>
+                <td>{{u.content | limitTo: 20}}</td>
+                <td><a href="{{u.source}}" target="_blank">{{u.source | limitTo: 20}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

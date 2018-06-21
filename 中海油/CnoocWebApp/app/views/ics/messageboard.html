@@ -1,0 +1,75 @@
+<h3>
+<ol class="breadcrumb">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <!--<li><a href="#">{{"emergencymanagement"|translate}}</a></li>-->
+    <li class="active">{{"messageboard"|translate}}</li>
+</ol>
+</h3>
+<div class="panel panel-primary" ng-controller="messageboardCtl">
+   <div class="panel-heading">
+      <!-- <div class="pull-right label label-danger">5</div> -->
+      <div class="pull-right label label-success">12</div>
+      <div class="panel-title">{{"messageboard"|translate}}</div>
+   </div>
+
+   <div class="panel-body">
+       <table class="table table-hover table-bordered table-striped table-condensed" datatable="ng" dt-options="dtOptions" style="border-collapse:collapse">
+           <thead>
+           <tr>
+               <th></th>
+           </tr>
+           </thead>
+            <tbody>
+                <tr ng-repeat="r in messages">
+                    <td>
+                        <div class="media-box">
+                           <!-- <div class="pull-left">
+                              <!-- <img src="" alt="Image" class="media-box-object img-circle thumb32" />
+                           </div> -->
+                           <div class="media-box-body clearfix">
+                              <small class="pull-right">{{r.time}}</small>
+                              <strong class="media-box-heading text-primary">
+                                 <span class="circle circle-success circle-lg text-left"></span>{{getUserName(r.userid)}}</strong>
+                              <p class="mb-sm">
+                                 <small ng-bind-html="r.message"></small>
+                              </p>
+                           </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td>
+                        <div class="media-box">
+                           <div class="pull-left">
+                              <img src="" alt="Image" class="media-box-object img-circle thumb32" />
+                           </div>
+                           <div class="media-box-body clearfix">
+                              <small class="pull-right">2h</small>
+                              <strong class="media-box-heading text-primary">
+                                 <span class="circle circle-success circle-lg text-left"></span>Catherine Ellis</strong>
+                              <p class="mb-sm">
+                                 <small>Cras sit amet nibh libero, in gravida nulla. Nulla...</small>
+                              </p>
+                           </div>
+                        </div>
+                    </td>
+
+                </tr> -->
+            </tbody>
+       </table>
+       <div class="panel panel-info" style="margin-top: 20px;">
+         <div class="panel-heading">
+           <h4 class="panel-title">发布留言</h4>
+         </div>
+         <div class="panel-body" style="padding:0px;">
+             <textarea class="form-control" rows="8" cols="40" placeholder="您可以在这里发布留言" ng-model="postmsg"></textarea>
+         </div>
+         <div class="panel-footer">
+             <button type="button" class="btn btn-info btn-sm" ng-click="write()">
+                 发布
+             </button>
+         </div>
+       </div>
+   </div>
+   <!-- END panel-footer-->
+</div>

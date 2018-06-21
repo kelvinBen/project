@@ -1,0 +1,36 @@
+<table width="100%" ng-controller="riskTableController" style="border:1px sold #fafbfc">
+    <!-- <tr>
+        <td colspan="2" bgcolor="#404040" style="width:50%;color:#ffffff;text-align:center;">2016 国家风险等级</td>
+        <td colspan="2" bgcolor="#404040" style="width:50%;color:#ffffff;text-align:center;">动态跟踪系统预警级别</td>
+    </tr>
+    <tr>
+        <td colspan="2" bgcolor="#595959" style="width:50%;color:#ffffff;text-align:center;">Control Risk</td>
+        <td colspan="2" bgcolor="#595959" style="width:50%;color:#ffffff;text-align:center;">国际公司</td>
+    </tr> -->
+    <!-- <tr class="text-center">
+        <td  bgcolor="#595959" style="width:25%;color:#ffffff;text-align:center;">国家/地区</td>
+        <td  bgcolor="#595959" style="width:25%;color:#ffffff;text-align:center;">综合等级</td>
+        <td  bgcolor="#595959" style="width:25%;color:#ffffff;text-align:center;">当日预警级别</td>
+        <td  bgcolor="#595959" style="width:25%;color:#ffffff;text-align:center;">当日预警指数</td>
+    </tr> -->
+    <tr>
+        <td  bgcolor="#fafbfc"style="width:25%;text-align:center;color:#000000">
+            {{"country"|translate}}
+        </td>
+        <td bgcolor="#fafbfc" style="width:25%;text-align:center;color:#00000">
+            {{"risklevel"|translate}}
+        </td>
+        <td bgcolor="#fafbfc" style="width:25%;text-align:center;color:#00000">
+            {{"todaywarnlevel"|translate}}
+        </td>
+        <td bgcolor="#fafbfc" style="width:25%text-align:center;color:#00000">
+            {{"todaywarnnum"|translate}}
+        </td>
+    </tr>
+    <tr ng-repeat="item in warningList|orderBy:'-risk'" class="text-center">
+        <td bgcolor="#ffffff" style="color:#000000">{{item.zh}}</td>
+        <td bgcolor="{{getbkcolor(item.risk)}}" style="color:#000000">{{item.risk.toFixed(2)}}</td>
+        <td bgcolor="{{getgradebkcolor(item.grade)}}" style="color:#000000">{{getGrade(item.grade)}}</td>
+        <td bgcolor="#ffffff" style="color:#000000">{{getdwli(item)}}</td>
+    </tr>
+</table>

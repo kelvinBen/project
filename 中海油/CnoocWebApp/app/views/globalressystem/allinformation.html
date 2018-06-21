@@ -1,0 +1,145 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"globalressystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"allinformation"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" ng-controller="allinformationCtrl as tree">
+    <div class="row" style="min-height: 300px;">
+        <div class="col-lg-3" style="background-color: white; overflow: hidden;">
+            <div class="panel panel-primary" style="">
+                <div class="panel-heading">{{"orginstitution"|translate}}</div>
+                <div class="panel-body" style="overflow:hidden;">
+                    <span ng-if="tree.doing_async">...loading...</span>
+                    <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)"  initial-selection="Granny Smith"></abn-tree>
+                </div>
+             </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9" style="background-color: white; border-radius: 10px;">
+            <div class="panel panel-default">
+                <div class="panel-body" >
+                    <div class="table-responsive col-lg-12 col-md-12 col-sm-12">
+                        <table class="table table-striped table-bordered table-hover" style="text-align: center;">
+                            <tr>
+                                <td rowspan="2">{{"emorganiztion"|translate}}</td>
+                                <td>{{"total"|translate}}</td>
+                                <td>1家</td>
+                                <td>{{"headcompany"|translate}}</td>
+                                <td>1家</td>
+                                <td>{{"twounit"|translate}}</td>
+                                <td>1家</td>
+                            </tr>
+                            <tr>
+                                <td>{{"threeunit"|translate}}</td>
+                                <td colspan="6">1家</td>
+                            </tr>
+                            <tr>
+                            <td rowspan="2">{{"emergencyspecialist"|translate}}</td>
+                            <td>{{"total"|translate}}</td>
+                            <td>1位</td>
+                            <td>{{"headcompany"|translate}}</td>
+                            <td>1位</td>
+                            <td>{{"twounit"|translate}}</td>
+                            <td>1位</td>
+                        </tr>
+                            <tr>
+                                <td>{{"threeunit"|translate}}</td>
+                                <td colspan="6">1位</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">{{"emergencyteam"|translate}}</td>
+                                <td>{{"total"|translate}}</td>
+                                <td>4个</td>
+                                <td>专业救援队伍</td>
+                                <td>4个</td>
+                                <td>兼职救援队伍</td>
+                                <td>4个</td>
+                            </tr>
+                            <tr>
+                                <td>志愿救援队伍</td>
+                                <td colspan="6">4个</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">{{"emergencyequipment"|translate}}</td>
+                                <td>{{"total"|translate}}</td>
+                                <td>12中（个）</td>
+                                <td>矿山类</td>
+                                <td>12中（个）</td>
+                                <td>危化类</td>
+                                <td>12中（个）</td>
+                            </tr>
+                            <tr>
+                                <td>油气田类</td>
+                                <td>12中（个）</td>
+                                <td>隧道类</td>
+                                <td>12中（个）</td>
+                                <td>水上类</td>
+                                <td>12中（个）</td>
+                            </tr>
+                            <tr>
+                                <td>旅游类</td>
+                                <td colspan="6">12中（个）</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">{{"emergencymaterials"|translate}}</td>
+                                <td>{{"total"|translate}}</td>
+                                <td>12中（个）</td>
+                                <td>防汛抗旱类</td>
+                                <td>12中（个）</td>
+                                <td>防震减灾类</td>
+                                <td>12中（个）</td>
+                            </tr>
+                            <tr>
+                                <td>防疫应急类</td>
+                                <td>12中（个）</td>
+                                <td>有害生物灾害应急类</td>
+                                <td>12中（个）</td>
+                                <td>危险化学品事故救援类</td>
+                                <td>12中（个）</td>
+                            </tr>
+                            <tr>
+                                <td>矿山事故救援类</td>
+                                <td>12中（个）</td>
+                                <td>油污染处置类</td>
+                                <td>12中（个）</td>
+                                <td>其他专项类</td>
+                                <td>12中（个）</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">{{"emergencyplan"|translate}}</td>
+                                <td>{{"plancount"|translate}}</td>
+                                <td>2中（个）</td>
+                                <td>{{"headcompany"|translate}}</td>
+                                <td>2中（个）</td>
+                                <td>{{"twounit"|translate}}</td>
+                                <td>2中（个）</td>
+                            </tr>
+                            <tr>
+                                <td>{{"threeunit"|translate}}</td>
+                                <td colspan="6">2中（个）</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">{{"outemergency"|translate}}</td>
+                                <td>{{"total"|translate}}</td>
+                                <td>2中（个）</td>
+                                <td>{{"headcompany"|translate}}</td>
+                                <td>2中（个）</td>
+                                <td>{{"twounit"|translate}}</td>
+                                <td>2中（个）</td>
+                            </tr>
+                            <tr>
+                                <td>{{"threeunit"|translate}}</td>
+                                <td colspan="6">2中（个）</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="header-wrapper">
+    <span class="header-log">
+      临潼气象服务后台管理界面平台
+    </span>
+    <div class="header-title">
+    </div>
+    <div class="header-account">
+      <p-menu #menu popup="popup" [model]="items"></p-menu>
+      <button type="button" class="btn btn-info btn-sm" (click)='menu.toggle($event)'>
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        {{user.username}}
+      </button>
+    </div>
+  </div>
+  <div class="body-wrapper">
+    <div class="pane-wrapper">
+      <app-accordion-menu></app-accordion-menu>
+    </div>
+    <div class="canvas-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="foot-wrapper">
+    <div class="foot-wrapper-left">临潼气象服务后台管理界面平台</div>
+  </div>
+</div>

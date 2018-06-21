@@ -1,0 +1,44 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.eventindex">{{"eventfill"|translate}}</a></li>
+    <li class="active">{{"addperiod"|translate}}</li>
+</ol>
+<form action="" ng-controller="filladdCtrl" ng-submit="submitForm()" >
+    <div class="row" >
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"phases"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control"  />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"eventstarttime"|translate}}：</label>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <input style="margin-top: 20px;" type="date" class="form-control" ng-model="vm.startDate" />
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <input style="margin-top: 20px;" type="time" class="form-control" ng-model="vm.starttime" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"eventendtime"|translate}}：</label>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <input style="margin-top: 20px;" type="date" class="form-control" ng-model="vm.endDate" />
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <input style="margin-top: 20px;" type="time" class="form-control" ng-model="vm.endtime" />
+                        </div>
+                    </div>
+                </form>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-4 col-lg-offset-4" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>

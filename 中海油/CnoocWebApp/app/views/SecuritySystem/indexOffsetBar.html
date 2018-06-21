@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse">
+        <thead>
+            <tr class="text-center">
+                <td>
+                    {{"country"|translate}}
+                </td>
+                <td>
+                    {{"countryriskindex"|translate}}
+                </td>
+                <td>
+                    {{"todaywarnlevel"|translate}}
+                </td>
+                <td>
+                    {{"emergencystatus"|translate}}
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center" ng-repeat="w in waring">
+                <td>
+                    {{w.id}}
+                </td>
+                <td>
+                    {{w.risk}}
+                </td>
+                <td>
+                    {{w.grade}}
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

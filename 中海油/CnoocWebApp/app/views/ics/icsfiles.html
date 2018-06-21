@@ -1,0 +1,73 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"homepage"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"Emergencydocument"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="icsfilesCtl">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"Emergencydocument"|translate}}
+        </div>
+        <div class="panel-body">
+            <form class="form-inline">
+                <div class="form-group">
+                    <select class="form-control select" ng-model="selOrg" ng-options="a.organization for a in groupList" style="width: 200px;">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control select" ng-model="selType" ng-options="a for a in typeList" style="width: 200px;">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" ng-click="search()">
+                        <i class="fa fa-search"></i>{{"query"|translate}}
+                    </button>
+                </div>
+            </form>
+            <div style="margin:10px;">
+            </div>
+            <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width: 70px;">
+                            {{"num"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"filename"|translate}}
+                        </th>
+                        <th class="text-center" style="width: 200px;">
+                            {{"date"|translate}}
+                        </th>
+                        <th class="text-center" style="width: 120px;">
+                            {{"operation"|translate}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="u in fList" class="text-center">
+                        <td>{{$index + 1}}</td>
+                        <td>
+                            {{u.content}}
+                        </td>
+                        <td>
+                            {{u.date}}
+                        </td>
+                        <td class="td-manage">
+                            <a href="../../../upload/ics/{{u.url}}" target="blank" class="btn btn-primary btn-sm" title="{{'downfile'|translate}}">
+                                <i class="fa fa-download"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

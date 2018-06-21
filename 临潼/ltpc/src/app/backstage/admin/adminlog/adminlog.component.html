@@ -1,0 +1,41 @@
+<div class="nav">
+  <span style="padding-left:20px;">首页</span>
+  <span>/</span>
+  <span>工作日志审核</span>
+</div>
+<div class="input" style="width:90%;">
+  <span>类别：</span>
+  <select class="form-control" [(ngModel)]='category' (change)='getSubCateList()'>
+      <option *ngFor='let c of cates' [value]='c.Id'>{{c.BigClassName}}</option>
+  </select>
+  <span>子类别：</span>
+  <select class="form-control" [(ngModel)]='subCate'>
+   <option *ngFor='let s of subCates' [value]='s.Id'>{{s.SmallClassName}}</option>
+  </select>
+  <button type="button" class="btn btn-primary" (click)='search()'>查询</button>
+</div>
+<div class="addNews">
+  <select *ngIf="listCount!=0" [(ngModel)]="selPage" (change)="getList()" class="form-control" style="width: 70px;">
+    <option *ngFor="let p of page" [value]="p">{{p}}</option>
+  </select>
+</div>
+<div class="filelist">
+  <table class="table table-bordered table-hover">
+    <tr>
+      <td>标题</td>
+      <td>日期</td>
+      <td>作者</td>
+      <td>状态</td>
+      <td>操作</td>
+    </tr>
+    <tr *ngFor='let a of fileList'>
+      <td>{{a.Title}}</td>
+      <td>{{a.Time| date:'yyyy-MM-dd'}}</td>
+      <td>{{a.Author}}</td>
+      <td>{{statusStr(a.Status)}}</td>
+      <td>
+        <a routerLink='../adminlogview/{{a.Id}}'><button type="button" class="btn btn-info btn-sm">审核</button></a>
+      </td>
+    </tr>
+  </table>
+</div>

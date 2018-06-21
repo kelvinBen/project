@@ -1,0 +1,54 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"organizationchart"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" ng-controller="organiztionCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{vm.organization}}
+        </div>
+        <div class="panel-body" style="padding: 0px">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" ng-src="{{url}}"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div ng-controller="organiztionCtrl" class="row" mouse-capture ng-keydown="keyDown($event)" ng-keyup="keyUp($event)" style="overflow: hidden; margin: 10px;">
+     <div class="row">
+        <div class="myTabContent col-sm-6 col-md-6 col-lg-6" >
+            <img src="app/img/org.png" height="100%" width="100%" ng-hide="false">
+            <div class="orgChart" ng-hide="true">
+                <ul>
+                    <li ng-repeat="(k,node) in obj" ng-include="'app/views/ics/EventManagement/orgtemp.html'"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6" ui-view="" >
+            <div class="panel panel-primary">
+                <div class="panel-heading">角色职责</div>
+                <div class="panel-body">
+                    <h3>国际公司应急委员会主任</h3><br>
+                    -领导国际公司的应急响应及应急处理工作，审批国际公司的应急管理预案，担任突发事件处置行动的最高指挥；<br>
+                    -宣布国际公司应急状态的启动和结束；<br>
+                    -主持首次应急处理会议；<br>
+                    -批准重大应急决策；<br>
+                    -决定向中海石油有限公司报告；<br>
+                    -必要时派出相关领导及人员赴现场。<br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

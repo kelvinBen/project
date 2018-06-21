@@ -1,0 +1,382 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"writemessage"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="writeCtrl" style="background-color: #ffffff;">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="box-content">
+                <div id="form" action="#" class="form fill-up validatable" method="post">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">{{"paraset"|translate}}</div>
+                        <div class="panel-body">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="mychk">{{"outboxtype"|translate}}:</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <div class="checkbox c-checkbox">
+                                            <label style="font-weight:bold">
+                                                <input type="checkbox" ng-model="chk_sms" />
+                                                <span class="fa fa-check"></span>{{"news"|translate}}
+                                            </label>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <div class="checkbox c-checkbox">
+                                            <label style="font-weight:bold">
+                                                <input type="checkbox" ng-model="chk_email" />
+                                                <span class="fa fa-check"></span>{{"email"|translate}}
+                                            </label>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="msg.category_type">{{"infotype"|translate}}:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                </div>
+                                <div class="form-group">
+                                    <select name="msg.category_type" class="form-control"
+                                    ng-model="formdata.category_type">
+                                        <option value="1">{{"security"|translate}}</option>
+                                        <option value="2">{{"weather"|translate}}</option>
+                                        <option value="3">{{"emergency"|translate}}</option>
+                                    </select>
+                                </div>
+                            </form>
+                        <!--<div class="form-group col-lg-2">
+                            <label for="mychk">{{"outboxtype"|translate}}</label>
+                        </div>
+                        <div class="form-group col-lg-2">
+                            <label>
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="chk_sms" />
+                                        <span class="fa fa-check"></span>{{"news"|translate}}
+                                    </label>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label>
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="chk_email" />
+                                        <span class="fa fa-check"></span>{{"email"|translate}}
+                                    </label>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label>{{"infotype"|translate}}</label>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <select name="msg.category_type" class="select form-control"
+                                    ng-model="formdata.category_type">
+                                <option value="1">{{"security"|translate}}</option>
+                                <option value="2">{{"weather"|translate}}</option>
+                                <option value="3">{{"emergency"|translate}}</option>
+                            </select>
+                        </div>-->
+                    </div>
+                    </div>
+                    <div class="panel panel-primary"  ng-show="chk_email">
+                        <div class="panel-heading">{{"email"|translate}}</div>
+                        <div class="panel-body">
+                            <form role="form-horizontal" method="post">
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon text-sm">{{"Addressee"|translate}}:</span>
+                                    <textarea type="text" class="form-control" ng-model="email_receiver" />
+                                </div>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon text-sm">{{"theme"|translate}}:</span>
+                                    <input type="text" class="form-control" ng-model="formdata.title"/>
+                                </div>
+                                <div class="mb-editor">
+                                    <!-- END action buttons  -->
+                                    <script type="text/ng-template" id="ng-wig/views/ng-wig.html">
+                                        <div class="ng-wig">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" title="Header"
+                                                        ng-click="execCommand('formatblock', '&lt;h1&gt;')"
+                                                        class="btn btn-sm btn-default"><em class="fa fa-header"></em>
+                                                </button>
+                                                <button type="button" title="Paragraph"
+                                                        ng-click="execCommand('formatblock', '&lt;p&gt;')"
+                                                        class="btn btn-sm btn-default"><em class="fa fa-paragraph"></em>
+                                                </button>
+                                                <button type="button" title="Unordered List"
+                                                        ng-click="execCommand('insertunorderedlist')"
+                                                        class="btn btn-sm btn-default"><em class="fa fa-list-ul"></em>
+                                                </button>
+                                                <button type="button" title="Ordered List"
+                                                        ng-click="execCommand('insertorderedlist')"
+                                                        class="btn btn-sm btn-default"><em class="fa fa-list-ol"></em>
+                                                </button>
+                                                <button type="button" title="Bold" ng-click="execCommand('bold')"
+                                                        class="btn btn-sm btn-default"><em class="fa fa-bold"></em>
+                                                </button>
+                                                <button type="button" title="Italic" ng-click="execCommand('italic')"
+                                                        class="btn btn-sm btn-default"><em class="fa fa-italic"></em>
+                                                </button>
+                                                <button type="button" title="link" ng-click="execCommand('createlink')"
+                                                        class="btn btn-sm btn-default"><em class="fa fa-link"></em>
+                                                </button>
+                                                <button type="button" title="Edit Html"
+                                                        ng-class="{ 'nw-button--active': editMode }"
+                                                        ng-click="toggleEditMode()" class="btn btn-sm btn-default"><em
+                                                        class="fa fa-pencil"></em></button>
+                                            </div>
+                                            <div class="nw-editor"><textarea ng-show="editMode" ng-model="content"
+                                                                             class="nw-editor__src"> </textarea>
+                                                <iframe scrolling="{{ autoexpand ? 'no' : 'yes' }}" frameBorder="0"
+                                                        ng-hide="editMode" ng-model="content" ng-wig-editable=""
+                                                        class="nw-editor__res"></iframe>
+                                            </div>
+                                        </div>
+                                    </script>
+                                    <textarea ng-wig="formdata.content"></textarea>
+                                    <br/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="false">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">{{"email"|translate}}</div>
+                            <div class="panel-body">
+                                <div class="row mt-10">
+                                    <div class="col-sm-1" style="text-align:center;margin-top:8px">
+                                        <label class="control-label font-gray">{{"Addressee"|translate}}</label>
+                                    </div>
+                                    <div class="col-sm-11">
+                                            <textarea style="min-width: 600px;width:100%"
+                                                      ng-model="formdata.receiver_name" readonly></textarea>
+                                    </div>
+                                </div>
+                                <!-- ------------------------ 信息标题 ------------------------- -->
+                                <div class="row mt-10 ">
+                                    <div class="col-sm-1" style="text-align:center;margin-top:8px">
+                                        <label class="control-label font-gray">{{"theme"|translate}}</label>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <input name="msg.title" type="text" placeholder={{"title"|translate}}
+                                               class="input-text"
+                                               value="" ng-model="formdata.title"/>
+                                    </div>
+                                </div>
+                                <div class="row  mt-10">
+                                    <div class="col-sm-1" style="text-align:center;margin-top:8px">
+                                    </div>
+                                    <!--<div class="col-lg-3" style="text-align:center;margin-top:8px">-->
+                                        <!--<div class="skin-minimal">-->
+                                            <!--<div class="check-box">-->
+                                                <!--<input class="chk" type="checkbox" ng-model="chk_isreceipt">-->
+                                                <!--<label for="checkbox-1">{{"回执"|T}}</label>-->
+                                            <!--</div>-->
+                                            <!--<div class="check-box">-->
+                                                <!--<input class="chk" type="checkbox" ng-model="chk_istop">-->
+                                                <!--<label for="checkbox-2">{{"是否置顶"|T}}</label>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <div class="col-sm-1" style="text-align:center;margin-top:8px">
+                                        <label class="control-label font-gray">{{"limitdate"|translate}}:</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="input-group" style="width:200px;">
+                                            <input type="text" name="establishDate" ng-model="dt"
+                                                   class="form-control"
+                                                   datepicker-popup="yyyy-MM-dd" is-open="opened"
+                                                   datepicker-options="dateOptions"
+                                                   ng-required="true" close-text="Close"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default"
+                                                                style="height: 34px" ng-click="open($event)">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  mt-10" style="margin-top:1px">
+                                    <div class="col-sm-1" style="text-align:center;margin-top:8px">
+                                        <label class="control-label font-gray">{{"emailcontent"|translate}}:</label>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <script type="text/html" style="margin:auto;height:250px;width:100%;"
+                                                ng-model="formdata.content" meta-umeditor
+                                                meta-umeditor-config='config'
+                                                meta-umeditor-placeholder="请输入邮件内容">
+                                                </script>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary"  ng-show="chk_sms">
+                        <div class="panel-heading">{{"message"|translate}}</div>
+                        <div class="panel-body">
+                            <form role="form-horizontal" method="post">
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon text-sm">{{"Addressee"|translate}}:</span>
+                                    <input type="text" class="form-control" ng-model="formdata.sms_receiver" ng-change="changesmsreceiver()"/>
+                                </div>
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon text-sm">{{"messagecontent"|translate}}:</span>
+                                    <textarea type="text" class="form-control" ng-model="formdata.sms_content"/>
+                                </div>
+                                <div class="form-group" >
+                                    <div class="col-lg-6">
+                                        <label class="control-label font-gray">({{"totalof"|translate}}{{sms_receiver_count}}{{"people"|translate}}):</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label class="control-label font-gray">({{"hasentered"|translate}}{{formdata.sms_content.length}}{{"words"|translate}}):</label>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                            <div class="col-lg-1" style="text-align:center;">
+                                                <input class="input-text" ng-model="template_name"/>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input type="button" class="btn btn-primary" value="存为短信模板"
+                                                       ng-click="savemsgtempate()"/>
+                                            </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ------------------------ 发件人 ------------------------- -->
+                    <!-- ------------------------ 信息内容 ------------------------- -->
+
+
+                    <!-- ------------------------ 发送途径 ------------------------- -->
+                    <!-- ------------------------ 信息类型 ------------------------- -->
+                    <!-- ------------------------ 是否回执------------------------- -->
+
+
+                    <div class="myline"></div>
+
+                    <div class="row  mt-10" style="text-align:center">
+                        <input class="btn btn-primary" value={{"Submitaudit"|translate}}
+                               ng-click="sendmessage()"/>
+                    </div>
+                </div>
+
+                <!-- 记录选中的节点 -->
+                <input name="msg.sender" id="selectNode" type="hidden" value=""/>
+
+                </form>
+
+            </div>
+
+        </div>
+        <!--  ---------------  选择联系人页面------------------ -->
+        <div class="col-lg-4" >
+            <uib-tabset justified="true">
+                <uib-tab  select="changetab(0)">
+                    <uib-tab-heading>
+                        <span style="font-size: small">{{"orginstitution"|translate}}</span>
+                    </uib-tab-heading>
+                </uib-tab>
+                <uib-tab  select="changetab(1)">
+                    <uib-tab-heading>
+                        <span style="font-size: small">{{"group"|translate}}</span>
+                    </uib-tab-heading>
+                </uib-tab>
+                <uib-tab  select="changetab(2)">
+                    <uib-tab-heading>
+                        <span style="font-size: small">{{"emorganiztion"|translate}}</span>
+                    </uib-tab-heading>
+                </uib-tab>
+                <uib-tab  select="changetab(3)">
+                    <uib-tab-heading>
+                        <span style="font-size: small">{{"messtemplate"|translate}}</span>
+                    </uib-tab-heading>
+                </uib-tab>
+            </uib-tabset>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="tabs-1" style="max-height:600px;height: 100%;overflow: auto" ng-show="active==0">
+                        <div js-tree="treeConfigCompany" ng-model="jsTreeDataCompany" tree="treeInstanceCompany"
+                             tree-events-obj="treeEventsObj">
+                        </div>
+                    </div>
+                    <div id="tabs-2" style="max-height:600px;height: 100%;overflow: auto" ng-show="active==1">
+                        <div js-tree="treeConfigGroup" ng-model="jsTreeDataGroup" tree="treeInstanceGroup"
+                             tree-events-obj="treeEventsObj2"></div>
+                    </div>
+                    <div id="tabs-3" style="max-height:600px;height: 100%;overflow: auto" ng-show="active==2">
+                        <div js-tree="treeConfigEm" ng-model="jsTreeDataEm" tree="treeInstanceEm" tree-events-obj="treeEventsObj3"></div>
+                    </div>
+                    <div id="tabs-4" style="max-height:600px;height: 100%;overflow: auto" ng-show="active==3">
+                        <ul class="list-group">
+                            <!--<div class="col-g-9">
+                                <a href="#" class="list-group-item" ng-click="formdata.sms_content=item.content">{{item.name}}</a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="javascript:;" class="btn btn-danger radius"
+                                   ng-click="deletetemplate(item.template_id)">
+                                    {{"singledelete"|translate}}
+                                </a>
+                            </div>-->
+                            <li class="list-group-item" ng-repeat="item in templates">
+                                <a href="javascript:;" ng-click="formdata.sms_content=item.content">{{item.name}}</a>
+                                <a href="javascript:;" class="badge btn btn-sm btn-danger"
+                                   ng-click="deletetemplate(item.template_id)">
+                                    {{"singledelete"|translate}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-lg-3" ng-show="false">-->
+            <!--<div class="row">-->
+                <!--<div id="tabs">-->
+                    <!--<ul>-->
+                        <!--<li><a href="#tabs-1">组织机构</a></li>-->
+                        <!--<li><a href="#tabs-2">短信群</a></li>-->
+                        <!--<li><a href="#tabs-3">短信模板</a></li>-->
+                    <!--</ul>-->
+                    <!--<div id="tabs-1" style="height:100%;">-->
+                        <!--<div js-tree="treeConfigCompany" ng-model="jsTreeDataCompany" tree="treeInstanceCompany"-->
+                             <!--tree-events-obj="treeEventsObj" style="height:95%;overflow:auto;">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="tabs-2" style="height:100%;overflow:auto;">-->
+                        <!--<div js-tree="treeConfigGroup" ng-model="jsTreeDataGroup" tree="treeInstanceGroup"-->
+                             <!--tree-events-obj="treeEventsObjGroup"></div>-->
+                    <!--</div>-->
+                    <!--<div id="tabs-3" style="height:100%;overflow:auto;">-->
+                        <!--<div class="list-group" ng-repeat="item in templates" style="margin-bottom:0px;">-->
+                            <!--<div class="col-g-9">-->
+                                <!--<a href="#" class="list-group-item" ng-click="formdata.sms_content=item.content">{{item.name}}</a>-->
+                            <!--</div>-->
+                            <!--<div class="col-lg-3">-->
+                                <!--<a href="javascript:;" class="btn btn-danger radius"-->
+                                   <!--ng-click="deletetemplate(item.template_id)">-->
+                                    <!--{{"删除"|T}}-->
+                                <!--</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+
+
+

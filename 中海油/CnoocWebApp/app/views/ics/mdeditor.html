@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>Simple example - Editor.md examples</title>
+    <link rel="stylesheet" href="../../../bower_components/editor.md/examples/css/style.css"/>
+    <link rel="stylesheet" href="../../../bower_components/editor.md/css/editormd.css"/>
+</head>
+<body>
+<div id="layout" ng-controller="mdeditorCtrl" ng-app="mdeditapp">
+    <button id="btnSave" ng-click="save()">保存</button>
+    <div id="test-editormd">
+        <textarea style="display:none;"></textarea>
+    </div>
+</div>
+<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../../bower_components/editor.md/editormd.min.js"></script>
+<script src="../../../bower_components/angular/angular.js"></script>
+<script src="../../../app/js/Service/eventservices.js"></script>
+<script type="text/javascript">
+    var testEditor;
+    var id;
+
+    $(function () {
+//        testEditor = editormd("test-editormd", {
+//            width: "100%",
+//            height: "900px",
+//            syncScrolling: "single",
+//            path: "../lib/"
+//        });
+
+//        $("#btnSave").bind('click', function(){
+//            var html=testEditor.getMarkdown();
+//            var url = "icsapi/icsguide/"+ id;
+//            var data={};
+//            data.id = id;
+//            data.document = html;
+//            $.ajax({
+//                type: "PUT",
+//                url: url,
+//                dataType: 'json',
+//                data:data,
+//                success:function(response){
+//                    var res = response
+//                },
+//                error: function (xhr, textStatus, errorThrown) {
+//                    console.log('Error in Operation');
+//                }
+//            });
+//        });
+
+        var url = 'http://'+ window.location.host + '/icsapi/icsguide';
+        $.get(url, function(result){
+            //$("mdcontent").html(result[0].document);
+            //testEditor.insertValue(result[0].document);
+            if(result.length>0){
+                id = result[0].id;
+                testEditor = editormd("test-editormd", {
+                    width: "100%",
+                    height: "900px",
+                    syncScrolling: "single",
+                    appendMarkdown : result[0].document,
+                    path: "../../../bower_components/editor.md/lib/"
+                });
+            }
+        });
+    });
+
+    angular.module('mdeditapp', ['ics_service.event']).controller('mdeditorCtrl', mdeditorCtrl)
+
+    mdeditorCtrl.$inject = ['$scope', '$location', 'icsdb'];
+    function mdeditorCtrl($scope,$location,icsdb) {
+        $scope.save = function(){
+            var html=testEditor.getMarkdown();
+            var data={};
+            data.id = id;
+            data.document = html;
+            icsdb.get("icsguide").then(function(data){
+               if(data.length>0){
+                   data[0].document=html;
+                   icsdb.update("icsguide",data[0].id,data[0]).then(function(data1){
+                    //    $state.go('app.ics_systemguide');
+                    // $location.url('/app/ics_systemguide');
+                   });
+               }
+            });
+           // icsdb.update("icsguide",id,data).then(function(data){
+
+            //});
+        };
+    }
+</script>
+</body>
+</html>

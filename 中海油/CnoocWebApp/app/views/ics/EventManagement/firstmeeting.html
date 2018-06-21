@@ -1,0 +1,92 @@
+
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"preliminaryjudge"|translate}}</li>
+    </ol>
+</h3>
+<div ng-controller="firstmeetingCtrl"  class="row" style="margin: 10px; overflow: hidden;">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="myTabContent " style="" >
+            <form name="formValidate" ng-submit="submit()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset class="b0">
+                            <legend>{{"firstemergency"|translate}}</legend>
+                        </fieldset>
+                        <fieldset ng-hide="true">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"meetingnature"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" ng-model="vm.data.meetingtype">
+                                        <option value="首次应急会议">
+                                            {{"primarymeet"|translate}}
+                                        </option>
+                                        <option value="应急过程会议">
+                                            {{"emergencyprocessmeet"|translate}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"meetname"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input  name="sometext" required="" ng-model="vm.data.meetingname" class="form-control" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"meetagenda"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <textarea rows="4"  name="sometext" required="" ng-model="vm.data.topic" class="form-control" ></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"time"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="datetime-local" name="sometext" required="" ng-model="dt" class="form-control" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"place"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.data.locate" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"attendmeeting"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <textarea rows="4" type="text" name="sometext" required="" ng-model="vm.data.person" class="form-control" ></textarea>
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-6">
+                                <input type="checkbox" ng-model="sendMsg">{{"releasenotice"|translate}}</input>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="panel-footer text-center">
+                        <button type="submit" class="btn btn-danger">{{"submit"|translate}}</button>
+                        <button type="button" class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

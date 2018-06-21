@@ -1,0 +1,203 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!-- Bootstrap styles-->
+    <link rel="stylesheet" href="../../../css/bootstrap.css" data-ng-if="!app.layout.isRTL">
+    <link rel="stylesheet" href="../../../css/bootstrap-rtl.css" data-ng-if="app.layout.isRTL">
+    <link rel="stylesheet" type="text/css" href="./arcgis314/esri/css/esri.css"/>
+    <link rel="stylesheet" href="../../../../bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css"/>
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div class="container-fluid">
+    <div class="row">
+        <h3>
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home"></i>
+                    <a>{{'digitalmap'|translate}}</a>
+                </li>
+                <li>
+                    <span>{{'carmanage'|translate}}</span>
+                </li>
+                <li>
+                    <span>{{'addposition'|translate}}</span>
+                </li>
+            </ul>
+        </h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <abn-tree tree-data="treeDatas" tree-control="group_tree" expand-level="2">
+            </abn-tree>
+        </div>
+        <div class="col-sm-10" style="height:100%" ng-hide="true">
+            <esri-map zoom="4" basemap="streets" id="allmap">
+                <div class="legend" style="float:left;z-index:100;position:absolute;padding-top:800px;"
+                     id="worker_legend">
+                    <img src="../../../img/woker_legend.png"/>
+                </div>
+            </esri-map>
+        </div>
+    </div>
+</div>
+<script src="../../../js/base.js"></script>
+<script src="../../../js/Service/digitalmap.js"></script>
+<script src="../../../js/Service/exevent.js"></script>
+<script src="../../../js/Service/export.js"></script>
+<script src="../../../js/Service/messagegroup_user.js"></script>
+<script src="../../../js/Service/organiztion_user.js"></script>
+<script src="../../../js/Service/PublicSentiment.js"></script>
+<script src="../../../js/Service/SecuritySystem.js"></script>
+<script src="../../../js/Service/sendmsg.js"></script>
+<script src="../../../js/Service/service.js"></script>
+<script src="../../../js/Service/SystemMgr.js"></script>
+<script src="../../../js/Service/weather.js"></script>
+<script src="../../../js/Service/webmessage.js"></script>
+<script type="text/javascript"
+        src="../../../../bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
+<script type="text/javascript" src="../../../js/esri/googleLayer.js"></script>
+<script type="text/javascript" src="./arcgis314/init.js"></script>
+<script type="text/javascript" src="../../../js/esri/map.js"></script>
+<script type="text/javascript">
+    var curApp = angular.module('myApp', ['map', 'ui.bootstrap', 'pascalprecht.translate', 'cnooc_service', 'angularBootstrapNavTree']);
+
+    curApp.filter("dateFilter", function ($filter) {
+        return function (item, format) {
+            if (item != null) {
+                var parsedDate = new Date(parseInt(item.substr(6)));
+                return $filter('date')(parsedDate, format);
+            }
+            return "";
+        };
+    });
+
+    curApp.config(['$translateProvider', function ($translateProvider) {
+
+        var lang = window.localStorage.lang || 'zh-cn';
+        $translateProvider.preferredLanguage(lang);
+        $translateProvider.useStaticFilesLoader({
+            prefix: '../../../i18n/',
+            suffix: '.json'
+        });
+    }]);
+
+    curApp.filter("T", ['$translate', function ($translate) {
+        return function (key) {
+            if (key) {
+                return $translate.instant(key);
+            }
+            else
+                return key;
+        };
+    }]);
+
+    curApp.controller('myCtrl', function ($scope, $http, $filter, $timeout, $location, position, organiztion, evacuationroute) {
+
+        $scope.treeDatas = [];
+        $scope.group_tree = tree = {};
+        $scope.countries = [];
+
+        var by = function (name) {
+            return function (o, p) {
+                var a, b;
+                if (typeof o === "object" && typeof p === "object" && o && p) {
+                    a = o[name];
+                    b = p[name];
+                    if (a === b) {
+                        return 0;
+                    }
+                    if (typeof a === typeof b) {
+                        return a < b ? -1 : 1;
+                    }
+                    return typeof a < typeof b ? -1 : 1;
+                }
+                else {
+                    throw ("error");
+                }
+            }
+        }
+
+
+        $scope.changetreeselect = function (branch) {
+            if (branch.data != undefined) {
+
+                //$timeout($scope.$broadcast("ShowInfoWindow", { data: branch.data }), 3000);
+                $scope.$broadcast("ShowInfoWindow", {data: branch.data});
+                $scope.$broadcast("ZoomTo", {lon: branch.data.lon, lat: branch.data.lat});
+
+            }
+        }
+
+        $scope.$on("layer-load", function (event, data) {
+            //$scope.isEditRouting = false;
+            //$scope.$broadcast("DisplayRoute", { data: $scope.routes });
+            var mapheight = angular.element("#allmap").outerHeight();
+            angular.element('#worker_legend').css("padding-top", (mapheight - 120) + 'px');
+
+            organiztion.getorganiztion().then(function (insDatas) {
+                //$scope.$broadcast("CreateOrganiztionMarker", { data: insDatas, layername: 'country' });
+                angular.copy(insDatas, $scope.countries);
+                $scope.treeDatas = $scope.formatDatas(insDatas);
+                $scope.$broadcast("creategraphicLayer", {alpha: 1, layername: 'country', show: 'show'});
+                $scope.$broadcast("CreateOrganiztionMarker", {
+                    data: $scope.countries,
+                    layername: 'country',
+                    url: 'app.orginfowindow'
+                });
+                //$scope.$apply();
+            }, function (status) {
+            })
+        });
+
+        $scope.formatDatas = function (data) {
+            var tree = [];
+            angular.forEach(data, function (item, i) {
+                if (item.organiztion_id == '2016011802') {
+                    tree.push({
+                        label: item.organiztion_name,
+                        id: item.organiztion_id,
+                        selected: false,
+                        expanded: true,
+                        children: []
+                    });
+                }
+            });
+            if (tree.length > 0) {
+                angular.forEach(data, function (item, i) {
+                    if (item.parent_id == tree[0].id) {
+                        tree[0].children.push({
+                            label: item.organiztion_name,
+                            id: item.organiztion_id,
+                            children: [],
+                            onSelect: $scope.changetreeselect,
+                            data: item
+                        });
+                    }
+                });
+                //$scope.group_tree.select_bran
+                if (tree[0].children.length > 0) {
+                    //tree[0].children[0].selected = true;
+                    $scope.group_tree.select_branch(tree[0].children[0]);
+                }
+            }
+
+            return tree;
+        }
+
+    });
+</script>
+</body>
+</html>

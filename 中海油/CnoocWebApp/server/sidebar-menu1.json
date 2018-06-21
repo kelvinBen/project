@@ -1,0 +1,543 @@
+[{
+    "text": "应急(事故)指挥系统",
+    "sref": "app.ics_systemindex",
+    "icon": "fa fa-book",
+    "submenu": [{
+        "text": "事件管理",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "事件状态",
+            "sref": "app.ics_eventindex",
+            "icon": "fa fa-tag",
+            "translate": "eventstatus"
+        }, {
+            "text": "事件响应",
+            "sref": "app.ics_eventtypeselect",
+            "icon": "fa fa-tag",
+            "translate": "eventresponse"
+        }, {
+            "text": "组织机构图",
+            "sref": "app.ics_organiztion",
+            "icon": "fa fa-tag",
+            "translate": "organizationchart"
+        },{
+            "text": "行动职责表",
+            "sref": "app.ics_actionguidemgr",
+            "icon": "fa fa-tag",
+            "submenu": [],
+            "translate": "actiondutystatement"
+        }
+        , {
+            "text": "事件响应记录",
+            "sref": "app.ics_eventtablelist",
+            "icon": "fa fa-tag",
+            "translate": "eventresponserecord"
+        }, {
+            "text": "社会舆情",
+            "sref": "app.ics_socialpublic",
+            "icon": "fa fa-tag",
+            "translate": "socialpublic"
+        },{
+            "text": "历史事件",
+            "sref": "app.ics_eventhistory",
+            "icon": "fa fa-tag",
+            "translate": "historyevent"
+        }],
+        "translate": "eventmanagement"
+    }, {
+        "text": "专项预案",
+        "sref": "app.ics_systemguide",
+        "icon": "fa fa-tag",
+        "submenu": [],
+        "translate": "specialplan"
+    },{
+        "text": "表单下载",
+        "sref": "app.ics_tableview",
+        "icon": "fa fa-tag",
+        "submenu": [],
+        "translate": "formdown"
+    },{
+        "text": "留言板",
+        "sref": "app.ics_messageboard",
+        "icon": "fa fa-tag",
+        "submenu": [],
+        "translate": "messageboard"
+    },{
+        "text": "文件上传",
+        "sref": "app.ics_otherfileupload",
+        "icon": "fa fa-tag",
+        "submenu": [],
+        "translate": "fileupload"
+    },
+        {
+            "text": "信息管理",
+            "translate": "infomgr",
+            "sref": "app.msinformanage",
+            "icon": "fa fa-folder-o",
+            "submenu": [
+                {
+                    "text": "地图标识管理",
+                    "sref": "app.ics_managemarker",
+                    "icon": "fa fa-tag",
+                    "submenu": [],
+                    "translate": "mapmarkermanage"
+                },
+                {
+                    "text": "专项预案管理",
+                    "sref": "app.ics_systemguidemanage",
+                    "icon": "fa fa-tag",
+                    "submenu": [],
+                    "translate": "specialplanmanagement"
+                },{
+                    "text": "ICS角色管理",
+                    "sref": "app.ics_role",
+                    "icon": "fa fa-tag",
+                    "translate": "icsrolemgr"
+                },{
+                    "text": "ICS角色权限管理",
+                    "sref": "app.authority",
+                    "icon": "fa fa-tag",
+                    "translate": "icsrolepermgr"
+                },{
+                    "text": "应急组织机构管理",
+                    "sref": "app.ics_eventorganization",
+                    "icon": "fa fa-tag",
+                    "translate": "eventorganization"
+                }
+
+            ]
+        }
+        ],
+    "translate": "emergencysystem"
+}, {
+    "text": "海外安保预警信息系统",
+    "sref": "app.securitysystem",
+    "icon": "fa fa-book",
+    "submenu": [{
+        "text": "安保预警",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "信息录入",
+            "sref": "app.informationinput",
+            "icon": "fa fa-tag",
+            "translate": "ininfo",
+            "role": "informationinput"
+        }, {
+            "text": "分析参数设置",
+            "sref": "app.parametermanagement",
+            "icon": "fa fa-tag",
+            "translate": "analysisparameter",
+            "role": "parametermanagement"
+        }, {
+            "text": "预警信息统计分析",
+            "sref": "app.sstotalwarns",
+            "icon": "fa fa-tag",
+            "translate": "warnanalysis"
+        }, {
+            "text": "警讯与报告发布",
+            "sref": "#",
+            "icon": "fa fa-folder-o",
+            "translate": "alertandreport",
+            "submenu": [{
+                "text": "警讯即时通讯",
+                "sref": "app.instantMsg",
+                "icon": "fa fa-tag",
+                "translate": "instantmessaging"
+            }, {
+                "text": "每日安保预警报告",
+                "sref": "app.dayReports",
+                "icon": "fa fa-tag",
+                "translate": "daywarnreport"
+            }, {
+                "text": "月度安保风险与预警报告",
+                "sref": "app.monthReports",
+                "icon": "fa fa-tag",
+                "translate": "monthwarnreport"
+            }]
+        }],
+        "translate": "securityearlywarning"
+    }, {
+        "text": "安保管理",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "通用安保建议",
+            "sref": "app.smsecurityadvise",
+            "icon": "fa fa-tag",
+            "translate": "Genericadvice"
+        }, {
+            "text": "海外安保建议",
+            "sref": "app.residentintroduction",
+            "icon": "fa fa-tag",
+            "translate": "overseaadvice"
+        }, {
+            "text": "高访历史查询",
+            "sref": "app.highvisit",
+            "icon": "fa fa-tag",
+            "translate": "Superior"
+        }, {
+            "text": "医疗卫生建议",
+            "sref": "app.smmedicaladvise",
+            "icon": "fa fa-tag",
+            "translate": "medicaladvice"
+        }, {
+            "text": "安保培训要求",
+            "sref": "app.smsecuritytrain",
+            "icon": "fa fa-tag",
+            "translate": "trainrequest"
+        }, {
+            "text": "安保资源管理",
+            "sref": "#",
+            "icon": "fa fa-folder-o",
+            "translate": "Securityresourcemgr",
+            "role": "sssecuritydata",
+            "type": 0,
+            "submenu": [{
+                "text": "通用安保建议管理",
+                "sref": "app.smsecurityadvisemgr",
+                "icon": "fa fa-tag",
+                "translate": "Genericadvicemgr"
+            }, {
+                "text": "海外安保建议管理",
+                "sref": "app.residentintroductionmgr",
+                "icon": "fa fa-tag",
+                "translate": "overseaadvicemgr"
+            }, {
+                "text": "高层出访记录管理",
+                "sref": "app.accessrecordmgr",
+                "icon": "fa fa-tag",
+                "translate": "visitrecordmgr"
+            }, {
+                "text": "医疗卫生建议管理",
+                "sref": "app.MedicalAdviseMgr",
+                "icon": "fa fa-tag",
+                "translate": "medicaladvicemgr"
+            }, {
+                "text": "安保培训要求管理",
+                "sref": "app.SecurityDataMgr",
+                "icon": "fa fa-tag",
+                "translate": "trainadvicemgr"
+            }]
+        }],
+        "translate": "securitymanagement"
+    }],
+    "translate": "securitysystem"
+}, {
+    "text": "电子地图系统",
+    "sref": "app.mslocatesearch",
+    "icon": "fa fa-book",
+    "submenu": [{
+        "text": "综合信息",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "地理位置查询",
+            "sref": "app.mslocatesearch",
+            "icon": "fa fa-tag",
+            "submenu": [],
+            "translate": "locatesearch"
+        }, {
+            "text": "综合查询",
+            "sref": "app.mscomsearch",
+            "icon": "fa fa-tag",
+            "submenu": [],
+            "translate": "comprehensive"
+        }],
+        "translate": "infos"
+    }, {
+        "text": "功能显示图层",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "设施信息查询",
+            "sref": "app.msshowproduct",
+            "icon": "fa fa-tag",
+            "translate": "facilityinformationquery"
+        }, {
+            "text": "车辆船舶信息查询",
+            "sref": "app.msshowcars",
+            "icon": "fa fa-tag",
+            "translate": "vehicleshippinginforquery"
+        }],
+        "translate": "msmaplayer"
+    }, {
+        "text": "信息管理",
+        "sref": "app.msinformanage",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "项目信息管理",
+            "sref": "app.msprojectmanage",
+            "icon": "fa fa-tag",
+            "translate": "projectinfomanage"
+        }, {
+            "text": "设施信息管理",
+            "sref": "app.msmachinemanage",
+            "icon": "fa fa-tag",
+            "translate": "installationinfo"
+        },  {
+            "text": "危险源信息管理",
+            "sref": "app.msdangermanage",
+            "icon": "fa fa-tag",
+            "translate": "hazardsourcemanagement"
+        },{
+            "text": "车辆信息管理",
+            "sref": "app.mscarmanage",
+            "icon": "fa fa-tag",
+            "translate": "carsinfmgr"
+        }, {
+            "text": "位置信息管理",
+            "sref": "app.positionmanage",
+            "icon": "fa fa-tag",
+            "translate": "positionmanage"
+        }, {
+            "text": "撤离路线管理",
+            "sref": "app.evacuationroutemanage",
+            "icon": "fa fa-tag",
+            "translate": "route"
+        }],
+        "translate": "infomgr"
+    }],
+    "translate": "mapsystem"
+}, {
+    "text": "灾害天气预警系统",
+    "sref": "app.disasterWeather",
+    "icon": "fa fa-book",
+    "submenu": [{
+        "text": "气象信息查询",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "天气查询",
+            "sref": "app.dwweathersearch",
+            "icon": "fa fa-tag",
+            "translate": "dwweathersearch"
+        }, {
+            "text": "预警查询",
+            "sref": "app.warnmap",
+            "icon": "fa fa-tag",
+            "translate": "warnquery"
+        }, {
+            "text": "地理位置查询",
+            "sref": "app.dwlocatesearch",
+            "icon": "fa fa-tag",
+            "translate": "locatesearch"
+        }],
+        "translate": "weartherinfoquery"
+    }, {
+        "text": "气象信息管理",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "预警信息查询",
+            "sref": "app.dwinsertwarndata",
+            "icon": "fa fa-tag",
+            "translate": "warninfoquery"
+        }, {
+            "text": "灾害信息录入",
+            "sref": "app.dwinsertdisasterdata",
+            "icon": "fa fa-tag",
+            "translate": "disasterinfo"
+        }, {
+            "text": "图表分析",
+            "sref": "app.dwgraphics",
+            "icon": "fa fa-tag",
+            "translate": "chartanalysis"
+        }],
+        "translate": "dwinformanage"
+    }],
+    "translate": "disasterweathersys"
+}, {
+    "text": "舆情信息系统",
+    "sref": "app.publicSentiment",
+    "icon": "fa fa-book",
+    "submenu": [{
+        "text": "舆情信息分类",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "安保预警类",
+            "sref": "app.security",
+            "icon": "fa fa-tag",
+            "translate": "security"
+        }, {
+            "text": "灾害天气类",
+            "sref": "app.disaster",
+            "icon": "fa fa-tag",
+            "translate": "weather"
+        }, {
+            "text": "应急事件类",
+            "sref": "app.emergency",
+            "icon": "fa fa-tag",
+            "translate": "emergency"
+        }],
+        "translate": "pinfotype"
+    }, {
+        "text": "综合信息",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "组织机构",
+            "sref": "app.institutional",
+            "icon": "fa fa-tag",
+            "translate": "orginstitution"
+        }, {
+            "text": "短信发布群",
+            "sref": "app.message",
+            "icon": "fa fa-tag",
+            "translate": "messagegroup"
+        }],
+        "translate": "infos"
+    }, {
+        "text": "信息发布",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "写信息",
+            "sref": "app.writeMessage",
+            "icon": "fa fa-tag",
+            "translate": "writeMessage"
+        }, {
+            "text": "信息审核",
+            "sref": "app.examMessage",
+            "icon": "fa fa-tag",
+            "translate": "infoaudit"
+        }, {
+            "text": "发件箱",
+            "sref": "app.outbox",
+            "icon": "fa fa-tag",
+            "translate": "outbox"
+        }
+        , {
+                "text": "收件箱",
+                "sref": "app.inbox",
+                "icon": "fa fa-tag",
+                "translate": "inbox"
+            }],
+        "translate": "Informationdelivery"
+    }, {
+        "text": "差旅乘机应急预警",
+        "sref": "app.travelwarning",
+        "icon": "fa fa-tag",
+        "translate": "travelwarning"
+    }],
+    "translate": "publicsentiment"
+}, {
+    "text": "全球应急资源管理系统",
+    "sref": "http://10.68.200.138/HSESea/Login.aspx",
+    "icon": "fa fa-book",
+    "target": "1" ,
+    "translate": "globalressystem"
+}, {
+    "text": "人员动态跟踪系统",
+    "sref": "http://10.68.200.138/HSESea/Login.aspx",
+    "icon": "fa fa-book",
+    "target": "1" ,
+    "translate": "persondynamics"
+},  {
+    "text": "重大危险源及风险隐患管控系统",
+    "sref": "http://10.68.200.138/HSESea/Login.aspx",
+    "icon": "fa fa-book",
+    "target": "1" ,
+    "translate": "RiskControlSystem"
+}, {
+    "text": "系统管理",
+    "sref": "#",
+    "icon": "fa fa-book",
+    "role": "SystemMgr",
+    "submenu": [{
+        "text": "用户管理",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "用户管理",
+            "sref": "app.userManage",
+            "icon": "fa fa-tag",
+            "translate": "usermgr"
+        }],
+        "translate": "usermgr"
+    }, {
+        "text": "部门管理",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "组织机构管理",
+            "sref": "app.Organizationmanagement",
+            "icon": "fa fa-tag",
+            "translate": "orgmgr"
+        },  {
+            "text": "短信群管理",
+            "sref": "app.Messagegroupmgr",
+            "icon": "fa fa-tag",
+            "translate": "messagegmgr"
+        }],
+        "translate": "Departmentmanagement"
+    }, {
+        "text": "权限管理",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "角色管理",
+            "sref": "app.rolemanagement",
+            "icon": "fa fa-tag",
+            "translate": "rolemgr"
+        }, {
+            "text": "角色权限管理",
+            "sref": "app.roleofauthoritymanagement",
+            "icon": "fa fa-tag",
+            "translate": "permissionsmgr"
+        }],
+        "translate": "authmgr"
+    },  {
+        "text": "采集源管理",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "站点管理",
+            "sref": "app.webcrawler",
+            "icon": "fa fa-tag",
+            "translate": "website"
+        }, {
+            "text": "采集信息管理",
+            "sref": "app.collectioninfomgr",
+            "icon": "fa fa-tag",
+            "translate": "collectinfo"
+        }],
+        "translate": "collsourcemgr"
+    }, {
+        "text": "社会舆情",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "信息源管理",
+            "sref": "app.ics_message",
+            "icon": "fa fa-tag",
+            "translate": "messgr"
+        }, {
+            "text": "社会舆情信息",
+            "sref": "app.ics_socialpublic",
+            "icon": "fa fa-tag",
+            "translate": "socialpublicinfos"
+        }],
+        "translate": "socialpublic"
+    }, {
+        "text": "海外安保对比查询",
+        "sref": "#",
+        "icon": "fa fa-folder-o",
+        "submenu": [{
+            "text": "推荐预警对比管理",
+            "sref": "app.contrastMgr",
+            "icon": "fa fa-tag",
+            "translate": "contrastMgr"
+        }],
+        "translate": "overseasecuritycontrast"
+    }, {
+        "text": "系统日志",
+        "sref": "app.systemlog",
+        "icon": "fa fa-tag",
+        "submenu": [],
+        "translate": "systemlog"
+    }],
+    "translate": "systemgr"
+}]

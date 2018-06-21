@@ -1,0 +1,70 @@
+<div class="row" style="margin: 10px;">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading font-bold" style="text-align: center;">
+                {{"reviewprepare"|translate}}
+            </div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"accidentname"|translate}}</td>
+                            <td colspan="1"><input  type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"operationalperiod"|translate}}</td>
+                            <td colspan="2">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">{{"accidentinfomation"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"accidentdate"|translate}}</td>
+                            <td colspan="5"><input type="data" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"accidentsite"|translate}}</td>
+                            <td colspan="5"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"relevant"|translate}}</td>
+                            <td colspan="5"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"accidentinfluence"|translate}}</td>
+                            <td colspan="5"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"preparename"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"prepareposition"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="1">{{"preparesign"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="3">{{"reviewprepare"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="1">{{"datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='3';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div style="margin: 10px;text-align: left">
+                    <button type="submit" class="btn btn-default">{{"remove"|translate}}</button>
+                    <button type="submit" class="btn btn-success" ng-click="save()">{{"save"|translate}}</button>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

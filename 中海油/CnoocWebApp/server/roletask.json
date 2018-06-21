@@ -1,0 +1,826 @@
+[
+  {
+    "step":"1",
+    "roles":[
+      {
+        "roleid": "1",
+        "panels":["summary","guide","basic"],
+        "response":"",
+        "guide":[
+          {
+            "name":"初步形势判断",
+            "type":"prejudge"
+          }
+        ]
+      },
+      {
+        "roleid": "2",
+        "panels":["summary","guide","basic"],
+        "response":""
+      },
+      {
+        "roleid": "3",
+        "panels":["summary","guide","basic"],
+        "response":"",
+        "guide":[
+          {
+            "name":"补充基本情况表格"
+          }
+        ]
+      },
+      {
+        "roleid": "4",
+        "panels":["summary","guide","basic"],
+        "response":"",
+        "guide":[
+          {
+            "name":"补充基本情况表格"
+          }
+        ],
+        "tables":[
+          {
+            "name":"ICS 201-1 事故图",
+            "url":"app.ics2011"
+          },
+          {
+            "name":"ICS 201-3 应急组织框架",
+            "url":"app.ics2013"
+          },
+          {
+            "name":"ICS 201-4 资源状况总结",
+            "url":"app.ics2014"
+          },
+          {
+            "name":"ICS 201-5 人员状况",
+            "url":"app.ics2015"
+          },
+          {
+            "name":"ICS 201-6 天气",
+            "url":"app.ics2016"
+          },
+          {
+            "name":"ICS 201-7 对外联络",
+            "url":"app.ics2017"
+          }
+        ]
+      },
+      {
+        "roleid": "5",
+        "panels":["summary","guide","basic"],
+        "response":"",
+        "guide":[
+          {
+            "name":"补充基本情况表格"
+          }
+        ],
+        "tables":[
+          {
+            "name":"ICS 201-1 事故图",
+            "url":"app.ics2011"
+          },
+          {
+            "name":"ICS 201-3 应急组织框架",
+            "url":"app.ics2013"
+          },
+          {
+            "name":"ICS 201-4 资源状况总结",
+            "url":"app.ics2014"
+          },
+          {
+            "name":"ICS 201-5 人员状况",
+            "url":"app.ics2015"
+          },
+          {
+            "name":"ICS 201-6 天气",
+            "url":"app.ics2016"
+          },
+          {
+            "name":"ICS 201-7 对外联络",
+            "url":"app.ics2017"
+          }
+        ]
+      },
+      {
+        "roleid": "6",
+        "panels":["basic"],
+        "response":"",
+        "guide":[
+          {
+            "name":"补充基本情况表格"
+          }
+        ],
+        "tables":[
+          {
+            "name":"ICS 201-1 事故图",
+            "url":"app.ics2011"
+          },
+          {
+            "name":"ICS 201-3 应急组织框架",
+            "url":"app.ics2013"
+          },
+          {
+            "name":"ICS 201-4 资源状况总结",
+            "url":"app.ics2014"
+          },
+          {
+            "name":"ICS 201-5 人员状况",
+            "url":"app.ics2015"
+          },
+          {
+            "name":"ICS 201-6 天气",
+            "url":"app.ics2016"
+          },
+          {
+            "name":"ICS 201-7 对外联络",
+            "url":"app.ics2017"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "step":"2",
+    "roles":[
+      {
+        "roleid": "1",
+        "panels":["summary","guide"],
+        "guide":[
+          {
+            "name":"启动应急，召开首次会议",
+            "type":"start"
+          }
+        ]
+      },
+      {
+        "roleid": "2",
+        "panels":["summary","guide"],
+        "guide":[
+          {
+            "name":"启动应急，召开首次会议"
+          }
+        ]
+      },
+      {
+        "roleid": "3",
+        "panels":["summary","guide"],
+        "guide":[
+          {
+            "name":"启动应急，召开首次会议"
+          }
+        ]
+      },
+      {
+        "roleid": "4",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "5",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "6",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "7",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "9",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "11",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "13",
+        "panels":["summary","guide"]
+      }
+    ]
+  },
+  {
+    "step":"3",
+    "roles":[
+      {
+        "roleid": "1",
+        "panels":["summary","guide","task","meeting"]
+      },
+      {
+        "roleid": "2",
+        "panels":["summary","guide","task","meeting"]
+      },
+      {
+        "roleid": "3",
+        "panels":["summary","guide","task","meeting"]
+      },
+      {
+        "roleid": "4",
+        "panels":["summary","guide","task","meeting"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "5",
+        "panels":["summary","guide","task","meeting"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "6",
+        "panels":["summary","guide","task","meeting"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "7",
+        "panels":["summary","guide","task","meeting"]
+      },
+      {
+        "roleid": "8",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "9",
+        "panels":["summary","guide","task","meeting"]
+      },
+      {
+        "roleid": "10",
+        "panels":["summary","guide","action"]
+      },
+      {
+        "roleid": "11",
+        "panels":["summary","guide","task","meeting"]
+      },
+      {
+        "roleid": "12",
+        "panels":["summary","guide"]
+      },
+      {
+        "roleid": "13",
+        "panels":["summary","guide","task","meeting"]
+      },
+      {
+        "roleid": "14",
+        "panels":["summary","guide"]
+      }
+    ]
+  },
+  {
+    "step":"4",
+    "roles":[
+      {
+        "roleid": "1",
+        "panels":["summary","guide","meeting"]
+      },
+      {
+        "roleid": "2",
+        "panels":["summary","guide","meeting"]
+      },
+      {
+        "roleid": "3",
+        "panels":["summary","guide","meeting"]
+      },
+      {
+        "roleid": "4",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          },
+          {
+            "name":"形势判断",
+            "type":"judge"
+          }
+        ]
+      },
+      {
+        "roleid": "5",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          },
+          {
+            "name":"形势判断",
+            "type":"judge"
+          }
+        ]
+      },
+      {
+        "roleid": "6",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          },
+          {
+            "name":"形势判断",
+            "type":"judge"
+          }
+        ]
+      },
+      {
+        "roleid": "7",
+        "panels":["summary","guide","task","action"],
+        "guide": [{
+            "name": "分配行动",
+            "type": "ics204"
+        }, {
+            "name": "总结当前行动",
+            "type": "ics2012"
+        }, {
+            "name": "设置公共信息",
+            "type": "publicInfo"
+        }],
+        "tables":[{"url":"app.ics_grouplog", "name":"ics214(小组日志)"}]
+      },
+      {
+        "roleid": "8",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          },
+          {
+              "name":"个人日志",
+              "type":"ics214A"
+          }
+        ]
+      },
+      {
+        "roleid": "9",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"分配行动",
+            "type":"ics204"
+          },
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "10",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "11",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"分配行动",
+            "type":"ics204"
+          },
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "12",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "13",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"分配行动",
+            "type":"ics204"
+          },
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "14",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "step":"5",
+    "roles":[
+      {
+        "roleid": "1",
+        "panels":["summary","guide","task"]
+      },
+      {
+        "roleid": "2",
+        "panels":["summary","guide","task"]
+      },
+      {
+        "roleid": "3",
+        "panels":["summary","guide","task"]
+      },
+      {
+        "roleid": "4",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "5",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "6",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "7",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "8",
+        "panels":["summary","guide","action"]
+      },
+      {
+        "roleid": "9",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "10",
+        "panels":["summary","guide","action"]
+      },
+      {
+        "roleid": "11",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "12",
+        "panels":["summary","guide","action"]
+      },
+      {
+        "roleid": "13",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "14",
+        "panels":["summary","guide","action"]
+      }
+    ]
+  },
+  {
+    "step":"6",
+    "roles":[
+      {
+        "roleid": "1",
+        "panels":["summary","guide","meeting"]
+      },
+      {
+        "roleid": "2",
+        "panels":["summary","guide","meeting"]
+      },
+      {
+        "roleid": "3",
+        "panels":["summary","guide","meeting"]
+      },
+      {
+        "roleid": "4",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          },
+          {
+            "name":"形势判断",
+            "type":"judge"
+          }
+        ]
+      },
+      {
+        "roleid": "5",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          },
+          {
+            "name":"形势判断",
+            "type":"judge"
+          }
+        ]
+      },
+      {
+        "roleid": "6",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          },
+          {
+            "name":"形势判断",
+            "type":"judge"
+          }
+        ]
+      },
+      {
+        "roleid": "7",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"分配行动",
+            "type":"ics204"
+          },
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "8",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "9",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"分配行动",
+            "type":"ics204"
+          },
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "10",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "11",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"分配行动",
+            "type":"ics204"
+          },
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "12",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "13",
+        "panels":["summary","guide","task","action"],
+        "guide":[
+          {
+            "name":"分配行动",
+            "type":"ics204"
+          },
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      },
+      {
+        "roleid": "14",
+        "panels":["summary","guide","action"],
+        "guide":[
+          {
+            "name":"总结当前行动",
+            "type":"ics2012"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "step":"7",
+    "roles":[
+      {
+        "roleid": "1",
+        "panels":["summary","guide","task"]
+      },
+      {
+        "roleid": "2",
+        "panels":["summary","guide","task"]
+      },
+      {
+        "roleid": "3",
+        "panels":["summary","guide","task"]
+      },
+      {
+        "roleid": "4",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "5",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "6",
+        "panels":["summary","guide","task"],
+        "guide":[
+          {
+            "name":"会议记录",
+            "type":"meeting"
+          },
+          {
+            "name":"填写响应目标",
+            "type":"ics202"
+          },
+          {
+            "name":"填写任务表",
+            "type":"ics234"
+          }
+        ]
+      },
+      {
+        "roleid": "7",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "8",
+        "panels":["summary","guide","action"]
+      },
+      {
+        "roleid": "9",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "10",
+        "panels":["summary","guide","action"]
+      },
+      {
+        "roleid": "11",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "12",
+        "panels":["summary","guide","action"]
+      },
+      {
+        "roleid": "13",
+        "panels":["summary","guide","task","action"]
+      },
+      {
+        "roleid": "14",
+        "panels":["summary","guide","action"]
+      }
+    ]
+  }
+]

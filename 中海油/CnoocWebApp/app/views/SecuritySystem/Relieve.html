@@ -1,0 +1,139 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <a ui-sref="app.instantMsg">
+                {{"intimemess"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"relieve"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="relieveController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{"relieve"|translate}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <label class="col-sm-2 control-label">{{"relieveemergency"|translate}}：</label>
+                <div class="col-sm-10">
+                    <label class="radio-inline c-radio">
+                        <input id="inlineradio1" type="radio" name="i-radio" ng-model="type" value="0" checked="checked" ng-change="parameterChange()"/>
+                        <span class="fa fa-circle"></span>{{"warn"|translate}}</label>
+                    <label class="radio-inline c-radio">
+                        <input id="inlineradio2" type="radio" name="i-radio" ng-model="type" value="1" ng-change="parameterChange()"/>
+                        <span class="fa fa-circle"></span>{{"emergencystatus"|translate}}</label>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="col-xs-2 control-label">{{"country"|translate}}：</label>
+                <div class="col-xs-6">
+                    <select class="select form-control" ng-model="selCountry" name="countryId" ng-options="d.country_id as d.name for d in countryList" ng-change="parameterChange()" required></select>
+                </div>
+            </div>
+            <div class="row form-group" ng-controller="DatepickerCtrl as dpick">
+                <label class="col-xs-2 control-label">{{"date"|translate}}：</label>
+                <div class="col-xs-6">
+                    <p class="input-group">
+                        <input type="text" name="eventDate" uib-datepicker-popup="{{dpick.format}}" ng-model="date.time" is-open="dpick.opened" ng-change="parameterChange()" uib-datepicker-options="dpick.dateOptions" close-text="Close" class="form-control" required/>
+                        <span class="input-group-btn">
+                          <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                              <em class="fa fa-calendar"></em>
+                          </button>
+                      </span>
+                    </p>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" ng-show="type==0">
+                <tr class="text-center">
+                    <td style="width: 50px;">
+
+                    </td>
+                    <td>
+                        {{"warnclass"|translate}}
+                    </td>
+                    <td>
+                        {{"releasedate"|translate}}
+                    </td>
+                    <td>
+                        {{"beforevalid"|translate}}
+                    </td>
+                </tr>
+                <tr ng-repeat="g in grades" class="text-center">
+                    <td>
+                        <div class="checkbox c-checkbox">
+                            <label style="font-weight:bold">
+                                <input type="checkbox" ng-model="g.select" ng-checked="false" name="oktype" />
+                                <span class="fa fa-check"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        {{g.grade}}
+                    </td>
+                    <td>
+                        {{g.time | dateFormatter}}
+                    </td>
+                    <td>
+                        {{g.grade_validity | dateFormatter}}
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" ng-show="type==1">
+                <tr class="text-center">
+                    <td style="width: 50px;">
+
+                    </td>
+                    <td>
+                        {{"emergencystatus"|translate}}
+                    </td>
+                    <td>
+                        {{"releasedate"|translate}}
+                    </td>
+                    <td>
+                        {{"beforevalid"|translate}}
+                    </td>
+                </tr>
+                <tr ng-repeat="g in emergencies" class="text-center">
+                    <td>
+                        <div class="checkbox c-checkbox">
+                            <label style="font-weight:bold">
+                                <input type="checkbox" ng-model="g.select" ng-checked="false" name="oktype" />
+                                <span class="fa fa-check"></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        {{g.emergency}}
+                    </td>
+                    <td>
+                        {{g.time | dateFormatter}}
+                    </td>
+                    <td>
+                        {{g.emergency_validity | dateFormatter}}
+                    </td>
+                </tr>
+            </table>
+
+            <div style="margin:20px;">
+            </div>
+            <div class="row form-group text-center">
+                <button type="button" class="btn btn-default" ng-click="cancel()">
+                    {{"cancel"|translate}}
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="ok()">
+                    {{"resolve"|translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

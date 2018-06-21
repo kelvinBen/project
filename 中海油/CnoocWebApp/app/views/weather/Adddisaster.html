@@ -1,0 +1,121 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{'disasterweathersys'|translate}}</a>
+        </li>
+        <li>
+            <span>{{'disinfomgr'|translate}}</span>
+        </li>
+        <li>
+            <span>{{'adddisasterinfo'|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="AdddisasterCtrl" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset class="b0">
+                            <legend>{{'adddisasterinfo'|translate}}</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'type'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <select name="select" required="" ng-model="vm.type" class="form-control" ng-options="t for t in types" >
+                                    </select>
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div ng-controller="DatepickerCtrl as dpick" class="form-group">
+                                <label class="col-sm-2 control-label">{{"time"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <p class="input-group">
+                                        <input type="text" name="date" required="" uib-datepicker-popup="{{dpick.format}}" ng-model="vm.date" is-open="dpick.opened" min-date="dpick.minDate" max-date="'2019-12-22'" uib-datepicker-options="dpick.dateOptions" date-disabled="dpick.disabled(date, mode)"
+                                               close-text="Close" class="form-control" />
+                              <span class="input-group-btn">
+                                 <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                    <em class="fa fa-calendar"></em>
+                                 </button>
+                              </span>
+                                    </p>
+                                    <span ng-show="form.validateInput('date', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <small class="text-muted">Value: {{dpick.date}}</small>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'country'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <select name="select" required="" ng-model="vm.country" class="form-control" ng-options="t.name for t in countries" ng-change="filtercity()">
+                                    </select>
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'area'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <select name="select" required="" ng-model="vm.city" class="form-control" ng-options="t.name for t in cities">
+                                    </select>
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'influencedegree'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.severity" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'disarea'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.incidence" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'content'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.content" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'resourcefrom'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.source" class="form-control" />
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="panel-footer text-center">
+                        <button class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                        <button type="submit" class="btn btn-info">{{'submit'|translate}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

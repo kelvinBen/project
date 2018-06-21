@@ -1,0 +1,81 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"icsrolemgr"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="icsrolemgrControl" style="margin-bottom:0px;">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{"icsrolemgr"|translate}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <select name="account" style="width: 300px;" class="form-control" ng-model="selOrg" ng-options="a as a.organization for a in groupList" ng-change="queryRoleList()">
+                        </select>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <button type="button" class="btn btn-primary" ng-click="add()">
+                            <i class="fa fa-plus"></i>{{"add"|translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{"rolelist"|translate}}</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped table-hover table-condensed">
+                        <tr class="text-center">
+                            <td>
+                                {{"num"|translate}}
+                            </td>
+                            <td>
+                                {{"rolename"|translate}}
+                            </td>
+                            <td>
+                                {{"theorg"|translate}}
+                            </td>
+                            <td>
+                                {{"staffpost"|translate}}
+                            </td>
+                            <td>
+                                {{"operation"|translate}}
+                            </td>
+                        </tr>
+                        <tr ng-repeat="r in roleList" class="text-center">
+                            <td>
+                                {{$index+1}}
+                            </td>
+                            <td>
+                                {{r.rolename}}
+                            </td>
+                            <td>
+                                {{eventOrgName(r.organization)}}
+                            </td>
+                            <td>
+                                {{r.job}}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm" title={{"singledelete"|translate}} ng-click="delete(r.id)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" title={{"edit"|translate}} ng-click="edit(r.id)">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

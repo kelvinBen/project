@@ -1,0 +1,74 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <!-- <li>
+            警讯与报告发布
+        </li> -->
+        <li class="active">
+            {{"monthwarnreport"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="monthReportController">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+        {{"monthwarnreport"|translate}}
+    </div>
+    <div class="panel-body">
+        <div class="row-fluid">
+            <button type="button" class="btn btn-primary" ng-click="upload()">
+                {{"uploadmonthrepoet"|translate}}
+            </button>
+        </div>
+        <div style="margin: 10px;">
+        </div>
+        <form class="form-inline">
+            <div class="form-group">
+                <input date-range-picker class="form-control date-picker" type="text" ng-model="dateRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+            </div>
+            <div class="form-group">
+                <select class="form-control select" name="country" ng-model="selCountry" ng-disabled="disabledCountry" ng-options="a.country_id as a.name for a in countryList" style="width: 200px;" ng-change="coungryChange()">
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" ng-click="searchReports()">
+                    <i class="fa fa-search"></i>{{"query"|translate}}
+                </button>
+            </div>
+        </form>
+        <div style="margin: 10px;">
+        </div>
+        <table class="table table-border table-bordered table-hover table-bg table-striped"
+        style="border-collapse:collapse" datatable="ng">
+            <thead>
+                <tr class="text-center">
+                    <th style="width:80px">{{"num"|translate}}</th>
+                    <th>{{"country"|translate}}</th>
+                    <th>{{"date"|translate}}</th>
+                    <th>{{"operation"|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" ng-repeat="u in reports">
+                    <td>{{$index+1}}</td>
+                    <td>{{u.country | countryFormatter}}</td>
+                    <td>{{u.report_time | dateFormatter}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" title={{"detail"|translate}} ng-click="view(u)">
+                            <i class="fa fa-file-text-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary" title={{"singledelete"|translate}} ng-click="delete(u.report_id)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>

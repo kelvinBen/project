@@ -1,0 +1,132 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"ininfo"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+
+<div class="container-fluid" ng-controller="infoController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"warninfolist"|translate}}
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <div>
+                    <button type="submit" class="btn btn-success" ng-click="add()">
+                        <em class="fa fa-plus"></em> {{"ininfo"|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="reaudits()">
+                        <i class="fa fa-check"></i>{{"Batchentry"|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="export()">
+                        <i class="fa fa-database"></i>{{"export"| translate}}
+                    </button>
+                </div>
+                <div style="margin: 10px"></div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input date-range-picker class="form-control date-picker" type="text" ng-model="date" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                    </div>
+                    <div class="form-group">
+                        <select class="select form-control " ng-model="selCountry" 
+                        ng-options="d.country_id as d.name for d in country"></select>
+                    </div>
+                    <div class="form-group">
+                        <select class="select form-control" ng-model="eventStatus" ng-options="d.id as d.label for d in statusList"></select>
+                    </div>
+                    <button type="button" class="btn btn-success" ng-click="search()">
+                        <i class="fa fa-search"></i> {{"query"|translate}}
+                    </button>
+                </div>
+                <div style="margin: 10px"></div>
+                <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" datatable="ng" dt-options="dtOptions">
+                    <thead>
+                        <tr>
+                            <th style="width:25px;">
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="checkAll" ng-checked="checkAll"  ng-change="checkAllSelected()" />
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th style="width:60px;">{{"date"|translate}}</th>
+                            <th style="width:60px;">
+                                {{"limitdate"|translate}}
+                            </th>
+                            <!--<th class="text-center">{{"country"|translate}}</th>-->
+                            <th class="text-center">
+                                {{'title'|translate}}
+                            </th>
+                            <th class="text-center">{{"eventwarn"|translate}}</th>
+                            <!--<th class="text-center">{{"resourcefrom"|translate}}</th>-->
+                            
+                            <th class="text-center">{{"auditstatus"|translate}}</th>
+                            <th style="width: 100px;" class="text-center">{{"operation"|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in events" class="text-center">
+                            <td class="text-center">
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="u.checked" ng-checked="u.checked" />
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>{{u.event_date | dateFormatter}}</td>
+                            <td>
+                                {{showExpiryTime(u.event_id) | dateFormatter}}
+                            </td>
+                            <!--<td>{{u.country_name}}</td>-->
+                            <td>
+                                {{u.title }}
+                            </td>
+                            <td>                            
+                                <a ng-hide="showUrl(u.source)" href="{{u.source}}" target="_blank">{{u.content | limitTo : 100}}</a>                                
+                                <div ng-show="showUrl(u.source)">{{u.content | limitTo : 100}}</div>
+                            </td>
+                            <!--<td>
+                                <a href="{{u.source}}" target="_blank">
+                                {{u.source | limitTo: 20}}
+                            </a>
+                            </td>-->
+                            <td>
+                                <span class="label label-primary radius" ng-show="u.type==2">
+                                {{"readyinput"|translate}}
+                            </span>
+                                <span class="label label-danger radius" ng-show="u.type==1">
+                                {{"noentry"|translate}}
+                            </span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary" title='{{ "Input"|translate}}' ng-show="u.type==1" ng-click="reaudit(u.event_id)">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                                <!-- <a href="javascript:;" title="查看详情" ng-click="viewDetails(u.event_id)">
+                                    <em class="fa fa-file-image-o"></em>
+                                </a> -->
+                                <button type="button" class="btn btn-sm btn-primary" title='{{ "edit"|translate}}' ng-click="edit(u.event_id)">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger" title='{{ "singledelete"|translate}}' ng-click="delete(u.event_id)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

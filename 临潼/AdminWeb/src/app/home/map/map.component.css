@@ -1,0 +1,5 @@
+@import url('https://js.arcgis.com/3.21/esri/css/esri.css');
+.mapContainer{
+    width: 100%;
+    height: 100%;
+}

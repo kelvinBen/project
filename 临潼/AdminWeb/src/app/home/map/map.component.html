@@ -1,0 +1,22 @@
+<div *ngIf="mapSelLayer===3" style="text-align:center;padding:5px 0px">
+    <table style="margin:0 auto;">
+        <tr>
+            <td>
+                <b>大喇叭监控统计:</b>
+            </td>
+            <td *ngFor="let h of hornStatusMap">
+                {{h.Status}}:{{h.Sum}}
+            </td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="mapSelLayer===4" style="text-align:center;">
+    <div style="margin:0 auto;">
+        <md2-datepicker style="margin-left:-10px;" flex type="datetime" [(ngModel)]="selTime" placeholder="查询时间" format="y-MM-dd HH:mm"></md2-datepicker>
+        <button md-raised-button color="primary" (click)="loadData()">查询</button>
+        <button md-raised-button color="primary" (click)="forwardradar()">后退</button>
+        <button md-raised-button color="primary" (click)="backwardradar()">前进</button>
+    </div>
+</div>
+<div id="mapDiv" class="mapContainer">
+</div>

@@ -1,0 +1,15 @@
+<div class="box">
+  <div class="detail_content">
+    <ul style="margin-top:30px;">
+      <li>
+        <p>{{detail.Title}}</p>
+        <div class="author">
+          <span>来源：{{detail.Author}} </span>
+          <span style="margin-left:140px;">时间：{{detail.Time | date:'yyyy-MM-dd'}}</span>
+        </div>
+        <div class="content" [innerHTML]="detail.Context">
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="container-fluid" ng-controller="meetlistCtrl">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <button type="button"  class="btn btn-danger" ng-click="add()">添加</button>
+            <div class="panel panel-default" style="margin-top: 10px;">
+                <div class="panel-heading">
+                    <span>响应过程会议列表</span>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%;" ></th>
+                                <th  style="width:10%">会议名称</th>
+                                <th  style="width:10%">会议时间</th>
+                                <th  style="width:18%">会议地点</th>
+                                <th  style="width:15%">会议主持人</th>
+                                <th  style="width:18%">目的</th>
+                                <th  style="width:10%">参与人员</th>
+                                <th  style="width:10%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr ng-repeat="rr in items">
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>{{rr.name}}</td>
+                                <td>{{rr.time}}</td>
+                                <td>{{rr.place}}</td>
+                                <td>{{rr.host}}</td>
+                                <td>{{rr.aim}}</td>
+                                <td>{{rr.staff}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-info" ng-click="view()" title="查看详情">
+                                        <em class="fa fa-eye"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" ng-click="delete(rr.id)" title="删除">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

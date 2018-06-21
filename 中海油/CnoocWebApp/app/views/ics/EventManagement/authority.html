@@ -1,0 +1,543 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"authoritymanagenment"|translate}}</li>
+    </ol>
+</h3>
+<div class="container-fluid" ng-controller="icsroleCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-3">
+                    <select name="account" class="form-control" ng-model="selOrg" ng-options="a as a.organization for a in groupList" ng-change="queryRoleList()">
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <select name="account" class="form-control" ng-model="selRole" ng-options="a.roleid as a.rolename for a in roleList">
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <select name="account" class="form-control" ng-model="selPeriod" ng-options="a.step as a.name for a in periodList">
+                    </select>
+                </div>
+            </div>
+            <div class="panel panel-default" style="margin-top: 20px;margin-bottom: 0px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{"statefeature"|translate}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row-fluid" ng-repeat="a in viewModel">
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" class="needsclick" ng-model="a.checked"/>
+                                <span class="fa fa-check"></span>{{a.name}}</label>
+                        </div>
+                        <div class="panel panel-default" ng-if="!a.guide && a.tables && a.tables.length > 0" ng-show="a.checked">
+                          <div class="panel-body">
+                              <div class="col-sm-3 col-md-3 col-lg-3" ng-repeat="b in a.tables">
+                                  <div class="checkbox c-checkbox needsclick">
+                                      <label class="needsclick">
+                                          <input type="checkbox" class="needsclick" ng-model="b.checked" />
+                                          <span class="fa fa-check"></span>{{b.table}}</label>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default" ng-if="a.guide && a.guide.length > 0" ng-show="a.checked">
+                          <div class="panel-body">
+                              <div  ng-class="{'col-xs-12': b.type=='othertables', 'col-xs-3': b.type != 'othertables'}" ng-repeat="b in a.guide">
+                                  <div class="checkbox c-checkbox needsclick">
+                                      <label class="needsclick">
+                                          <input type="checkbox" class="needsclick" ng-model="b.checked" />
+                                          <span class="fa fa-check"></span>{{b.name}}</label>
+                                  </div>
+                                  <div class="panel panel-default" ng-if="b.tables && b.tables.length > 0" ng-show="b.checked">
+                                    <div class="panel-body">
+                                        <div class="col-sm-4 col-md-4 col-lg-4" ng-repeat="c in b.tables">
+                                            <div class="checkbox c-checkbox needsclick">
+                                                <label class="needsclick">
+                                                    <input type="checkbox" class="needsclick" ng-model="c.checked" />
+                                                    <span class="fa fa-check"></span>{{c.name}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
+                        <div class="col-xs-2">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>事件简介</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>基本情况</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>任务</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>会议通知</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>行动（工作安排）</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>计划</label>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS 205（通讯计划）</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS 206（医疗计划）</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS 208（安全计划）</label>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>日志</label>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS 214（小组日志）</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS 214A（个人日志）</label>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>行动指南</label>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>初步形势判断</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>形势判断</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>ICS230(会议记录)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>ICS202(响应目标)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>ICS234(任务表)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>ICS 204(分配行动)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>ICS 201-2(总结当前行动)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS 220（飞行作业总结）</label>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <h3 class="panel-title">补充基本情况表格</h3>
+                              </div>
+                              <div class="panel-body">
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                          <input type="checkbox" value="" class="needsclick" />
+                                          <span class="fa fa-check"></span>ICS201-1(事故图)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS201-3(应急组织架构图)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS201-4(资源状况总结)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS201-5(人员状况)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS201-6(天气)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS201-7(对外联络)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS209(事故状态总结)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS210(资源状态总结)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS211(事故入场清单)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-4 col-md-4 col-lg-4">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS232(处于风险的周边区域状况)</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-3 col-md-3 col-lg-3">
+                                      <div class="checkbox c-checkbox needsclick">
+                                          <label class="needsclick">
+                                              <input type="checkbox" value="" class="needsclick" />
+                                              <span class="fa fa-check"></span>ICS203(组织分工表)</label>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="panel-footer text-center">
+                    <button type="button" class="btn btn-primary" ng-click="getRoleModel()">
+                        {{"sure"|translate}}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- <div class="container-fluid" >
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <form role="form">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-1 col-md-1 col-sm-1 control-label" style="text-align: right; margin-top:27px;">公司：</label>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <select name="account" class="form-control">
+                                <option>国际公司</option>
+                            </select>
+                            <br/>
+                        </div>
+                        <label class="col-sm-1 col-md-1 col-sm-1 control-label" style="text-align: right; margin-top:27px;">角色：</label>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <select name="account" class="form-control">
+                                <option>应急管理办公室</option>
+                                <option>公共关系及法律支持组</option>
+                                <option>后勤支持组组</option>
+                                <option>资源协调组</option>
+                                <option>财务及保险组</option>
+                            </select>
+                            <br/>
+                        </div>
+                        <label class="col-sm-1 col-md-1 col-sm-1 control-label" style="text-align: right; margin-top:27px;">阶段：</label>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <select name="account" class="form-control">
+                                <option>接警、报告和记录</option>
+                                <option>初步形势判断</option>
+                                <option>首次应急会议</option>
+                                <option>形势判断</option>
+                                <option>应急过程会议</option>
+                                <option>形势判断</option>
+                                <option>扩大应急响应</option>
+                                <option>应急解除</option>
+                            </select>
+                            <br/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-left">
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                <input type="checkbox" value="" class="needsclick" />
+                                <span class="fa fa-check"></span>ICS 201-1（事故图）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 201-2（当前的行动）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 201-3（应急组织架构图）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 201-4（资源状况总结）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 201-5（人员状况）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 201-6（天气）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 201-7（对外联络）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 202（响应目标）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 203（组织分工表）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 204（任务分配表）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 205（通讯计划）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 206（医疗计划）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 208（安全计划）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 209（事故状态总结）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 210（资源状态总结）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 211（事故入场清单）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 214（小组日志）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 214A（个人日志）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 215（作业计划表）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 220（飞行作业总结）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 221（复原退场）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 230（日常例会）</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>ICS 232（处于风险的周边区域状况）</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 30px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">保存</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div> -->

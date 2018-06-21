@@ -1,0 +1,112 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.projectmanage">{{'digitalmap'|translate}}</a>
+        </li>
+        <li>
+            <span>{{"hazardsourcemanagement"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="DangerManageCtrl">
+    <div class="cl pd-5 bg-1 bk-gray" style="margin-bottom: 5px;">
+            <span class="l">
+                <a href="javascript:;" class="btn btn-danger radius" ng-click="deletesomeconfirm()">
+                     <em class="fa fa-trash-o"></em>{{'delete'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" ng-click="addutility();">
+                    <em class="fa fa-plus"></em>{{'add'|translate}}
+                </a>
+            </span>
+            <span class="r">
+                <a href="javascript:;" class="btn btn-success radius" onclick="window.print()">
+                    <i class="fa fa-print"></i>{{'print'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="utility_export()" ng-hide="true">
+                    <em class="fa fa-file-excel-o"></em>{{'export'|translate}}
+                </a>
+            </span>
+    </div>
+ <div  class="panel panel-default">
+     <div class="panel-heading" style="padding-left: 15px;">
+         <h4>
+             {{'dangerinfo'|translate}}
+         </h4>
+     </div>
+     <div class="panel-body">
+         <table class="table table-border table-bordered table-hover table-bg"  datatable="ng">
+             <thead>
+             <tr class="text-c">
+                 <!--<th style="width: 5%;">-->
+                     <!--<input type="checkbox" value="" name="" ng-model="select_all" ng-change="selectall()">-->
+                 <!--</th>-->
+                 <th style="width:25px;">
+                     <div class="checkbox c-checkbox">
+                         <label style="font-weight:bold">
+                             <input type="checkbox" ng-model="select_all" value=""  ng-change="selectall()" />
+                             <span class="fa fa-check"></span>
+                         </label>
+                     </div>
+                     <!-- <input type="checkbox" ng-click="checkAllSelected()"> -->
+                 </th>
+                 <th style="text-align: center;">{{"num"|translate}}</th>
+                 <th style="text-align: center;">{{"viewdanger"|translate}}</th>
+                 <th style="text-align: center;">{{"status"|translate}}</th>
+                 <th style="text-align: center;">{{"unitname"|translate}}</th>
+                 <th style="text-align: center;">{{"nums"|translate}}</th>
+                 <th style="text-align: center;">{{"level"|translate}}</th>
+                 <th style="text-align: center;">{{"fillintime"|translate}}</th>
+                 <th style="text-align: center;">{{"finishplantime"|translate}}</th>
+                 <th style="text-align: center;">{{"finishstatus"|translate}}</th>
+                 <th style="text-align: center;">{{"contollevel"|translate}}</th>
+                 <th style="text-align: center;width: 15%;">{{"operation"|translate}}</th>
+             </tr>
+             </thead>
+             <tbody id="tabBody">
+             <tr ng-repeat="cur in dangers" class="text-c">
+                 <!--<th >-->
+                     <!--<input type="checkbox" ng-model="cur.selected">-->
+                 <!--</th>-->
+                 <td class="text-center">
+                     <div class="checkbox c-checkbox">
+                         <label style="font-weight:bold">
+                             <input type="checkbox" ng-model="cur.selected" />
+                             <span class="fa fa-check"></span>
+                         </label>
+                     </div>
+                     <!-- <input type="checkbox" ng-checked="u.checked" ng-model="u.checked"> -->
+                 </td>
+                 <td>{{$index+1}}</td>
+                 <td>{{cur.name}}</td>
+                 <td>{{cur.status}}</td>
+                 <td>{{getProjectName(cur.projectid)}}</td>
+                 <td>{{cur.no}}</td>
+                 <td>{{cur.level}}</td>
+                 <td>{{cur.createtime}}</td>
+                 <td>{{cur.finishtime}}</td>
+                 <td>{{cur.finishstatus}}</td>
+                 <td>{{cur.controllevel}}</td>
+                 <td>
+                     <!--<a href="javascript:;" ng-click="edit(cur)" title="{{'edit'|translate}}">-->
+                         <!--<em class="fa fa-edit"></em>-->
+                     <!--</a>-->
+                     <!--<a href="javascript:;" ng-click="deleteconfirm(cur.id)" title="{{'singledelete'|translate}}">-->
+                         <!--<em class="fa fa-trash-o"></em>-->
+                     <!--</a>-->
+
+                     <button type="button" class="btn btn-primary btn-sm" title="{{'edit'| translate}}" ng-click="edit(cur)">
+                         <i class="fa fa-edit"></i>
+                     </button>
+                     <button type="button" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}" ng-click="deleteconfirm(cur.id)">
+                         <i class="fa fa-trash-o"></i>
+                     </button>
+
+
+                 </td>
+             </tr>
+             </tbody>
+         </table>
+     </div>
+ </div>
+</div>

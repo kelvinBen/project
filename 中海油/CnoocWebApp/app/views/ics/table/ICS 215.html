@@ -1,0 +1,150 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"operationalplanning"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px;overflow: hidden" ng-controller="ics215Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS 215（{{"operationalplanning"|translate}}）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" >
+                    <table class="table  table-bordered table-hover">
+                         <tr >
+                            <td style="text-align: center">{{"incidentname"|translate}}：</td>
+                            <td><input type="text" style="border: 0;" ng-model="event.name"></td>
+                            <td style="text-align: center">{{"incidentnumber"|translate}}：</td>
+                            <td><input type="text" style="border: 0;" ></td>
+                            <td colspan="9">{{"operationalperiod"|translate}}：
+                                <input type="date" style="width:120px;" ng-model="starttime"> -
+                                <input type="date" style="width:120px;" ng-model="endtime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center">{{"branch"|translate}}</td>
+                            <td style="text-align: center">{{"division"|translate}}</td>
+                            <td style="text-align: center">{{"workassignment"|translate}}</td>
+                            <td colspan="2"  style="text-align: center">{{"resources"|translate}}</td>
+                            <td style="text-align: center">{{"overheadposition"|translate}}</td>
+                            <td style="text-align: center">{{"specialequipme"|translate}}</td>
+                            <td style="text-align: center">{{"reportinglocation"|translate}}</td>
+                            <td style="text-align: center">{{"requestedarrivaltime"|translate}}</td>
+                            <td style="text-align: center;">{{"operation"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resources">
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.department" e-name="department" e-form="rowform" >{{ user.department  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.team" e-name="team" e-form="rowform" >{{ user.team  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.task" e-name="task" e-form="rowform" >{{ user.task  }}</span>
+                            </td>
+                            <td colspan="2">
+                                {{"Req"|translate}}：<span editable-text="user.type" e-name="type"   e-form="rowform">{{ user.type }}</span>
+                                {{"have"|translate}}：<span editable-text="user.count" e-name="count"   e-form="rowform">{{ user.count }}</span>
+                                {{"need"|translate}}：<span editable-text="user.number" e-name="number"   e-form="rowform">{{ user.number }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.management" e-name="management"  e-form="rowform">{{ user.management }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.specialequip" e-name="specialequip"  e-form="rowform">{{ user.specialequip }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.address" e-name="address"  e-form="rowform">{{ user.address }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.time" e-name="time"  e-form="rowform">{{ user.time }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="12" style="float: left;"><button ng-click="addUser()" class="btn btn-default">{{"addline"|translate}}</button></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" colspan="2"  style="vertical-align: middle;text-align: center;">ICS 215 {{"operationalplanning"|translate}}
+                            <td colspan="2">{{"totalresources"|translate}}</td>
+                            <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.sumrequire"></td>
+                            <!--<td rowspan="4" colspan="4">-->
+                                <!--<ul style="list-style: none;float: left;">-->
+                                    <!--<li>编制：</li>-->
+                                    <!--<li style="margin-top:10px;">姓名：<input type="text" style="border: 0;border-bottom: dotted;" ng-model="model.esName"></li>-->
+                                    <!--<li style="margin-top:10px;">岗位/职位：<input type="text" style="border: 0;border-bottom: dotted;" ng-model="model.esPost"></li>-->
+                                    <!--<li style="margin-top:10px;">签名：<input type="text" style="border: 0;border-bottom: dotted;"></li>-->
+                                    <!--<li style="margin-top:10px;">日期/时间：<input type="text" style="border: 0;border-bottom: dotted;" ng-model="model.esDate"></li>-->
+                                <!--</ul>-->
+                            <!--</td>-->
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"haveresources"|translate}}</td>
+                            <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.sumnow"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"needresources"|translate}}</td>
+                            <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.sumlack"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esName"></td>
+                            <td colspan="2">{{"positiontitle"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esPost"></td>
+                            <td colspan="2">{{"Signature"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 215（{{"operationalplanning"|translate}}）</td>
+                            <td style="line-height: 60px;" colspan="3">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='3';><input type="date" style="border: 0;" ng-model="vm.data.esDate"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 " style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}
+                    </button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

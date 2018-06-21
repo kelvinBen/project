@@ -1,0 +1,229 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"analysisparameter"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="parameterController">
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true,'time-out': 2000}"></toaster-container>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <span>{{"analysisparameter"|translate}}</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" style="width: 150px">
+                <select ng-model="selCountry" class="form-control" name="country" ng-change="queryCountry()" ng-options="s.country_id as s.name for s in countryRisks"></select>
+            </div>
+            <div style="margin: 10px"></div>
+            <table class="table table-bordered table-striped table-hover">
+                <tr style="font-weight: bold;">
+                    <th style="width:25%;text-align: center">{{"saferisk"|translate}}</th>
+                    <th style="width:25%;text-align: center">{{"politicsrisk"|translate}}</th>
+                    <th style="width:25%;text-align: center">{{"population"|translate}}</th>
+                    <th style="width:25%;text-align: center">{{"operation"|translate}}</th>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <!-- editable status (select-local)-->
+                        <span editable-select="selCountryModel.security_id" e-name="security" e-form="rowform" e-ng-options="s.index_id as s.name for s in securityList">{{ showSecurity(selCountryModel.security_id) }}</span>
+                    </td>
+                    <td>
+                        <span editable-select="selCountryModel.politics_id" e-name="politics" e-form="rowform" e-ng-options="s.index_id as s.name for s in politicsList">{{ showPolitics(selCountryModel.politics_id) }}</span>
+                    </td>
+                    <td>
+                        <span editable-text="selCountryModel.population" e-name="security" e-form="rowform" e-required>{{selCountryModel.population}}</span>
+                    </td>
+                    <td style="white-space: nowrap">
+                        <!-- form-->
+                        <form editable-form="" name="rowform" onaftersave="updateCountryPar()" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                            <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                <em class="fa fa-save"></em>
+                            </button>
+                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                <em class="fa fa-times"></em>
+                            </button>
+                        </form>
+                        <div ng-show="!rowform.$visible" class="buttons">
+                            <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                <em class="fa fa-pencil"></em>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div style="margin: 10px"></div>
+            <table class="table table-bordered table-striped table-hover">
+                <tr style="font-weight: bold;">
+                    <td>{{"eventproperty"|translate}}</td>
+                    <td>{{"eventrange"|translate}}</td>
+                    <td>{{"eventserious"|translate}}</td>
+                    <td>{{"eventaim"|translate}}</td>
+                    <td>{{"todayevent"|translate}}</td>
+                    <td>{{"countryall"|translate}}</td>
+                    <td>{{"monthmove"|translate}}</td>
+                    <td>{{"operation"|translate}}</td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>
+                        <span editable-text="countryFormula.iti" e-name="iti" e-form="rowform2" onbeforesave="checkValue($data)" e-required="">
+                            {{ countryFormula.iti }}
+                        </span>
+                    </td>
+                    <td>
+                        <span editable-text="countryFormula.isi" e-name="isi" e-form="rowform2" onbeforesave="checkValue($data)" e-required="">
+                            {{ countryFormula.isi }}
+                        </span>
+                    </td>
+                    <td>
+                        <span editable-text="countryFormula.iri" e-name="iri" e-form="rowform2" onbeforesave="checkValue($data)" e-required="">
+                            {{ countryFormula.iri }}
+                        </span>
+                    </td>
+                    <td>
+                        <span editable-text="countryFormula.ipi" e-name="ipi" e-form="rowform2" onbeforesave="checkValue($data)" e-required="">
+                            {{ countryFormula.ipi }}
+                        </span>
+                    </td>
+                    <td>
+                        <span editable-text="countryFormula.eventi" e-name="eventi" e-form="rowform2" onbeforesave="checkValue($data)" e-required="">
+                            {{ countryFormula.eventi }}
+                        </span>
+                    </td>
+                    <td>
+                        <span editable-text="countryFormula.countryi" e-name="countryi" e-form="rowform2" onbeforesave="checkValue($data)" e-required="">
+                            {{ countryFormula.countryi }}
+                        </span>
+                    </td>
+                    <td>
+                        <span editable-text="countryFormula.avgi" e-name="avgi" e-form="rowform2" onbeforesave="checkValue($data)" e-required="">
+                            {{ countryFormula.avgi }}
+                        </span>
+                    </td>
+                    <td style="white-space: nowrap;text-align: center;">
+                        <form editable-form="" name="rowform2" onaftersave="updateFormula()" ng-show="rowform2.$visible" shown="false" class="form-buttons form-inline">
+                            <button type="submit" ng-disabled="rowform2.$waiting" title="Save" class="btn btn-sm btn-info">
+                                <em class="fa fa-save"></em>
+                            </button>
+                            <button type="button" ng-disabled="rowform2.$waiting" ng-click="rowform2.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                <em class="fa fa-times"></em>
+                            </button>
+                        </form>
+                        <div ng-show="!rowform2.$visible" class="buttons">
+                            <button ng-click="rowform2.$show()" title="Edit" class="btn btn-sm btn-info">
+                                <em class="fa fa-pencil"></em>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div style="margin: 20px"></div>
+            <div class="row">
+              <div class="col-xs-6">
+                  <div class="form-group" style="width: 200px">
+                      <select class="form-control" name="pType" ng-model="selParType" ng-change="queryParameters()" ng-options="a.type_index as a.type for a in parTypes"></select>
+                  </div>
+              </div>
+              <div class="col-xs-6 text-right">
+                  <button type="button" class="btn btn-sm btn-primary" title="{{'addparameter'|translate}}" ng-click="addParameter()">
+                      <i class="fa fa-plus"></i>
+                  </button>
+              </div>
+            </div>
+            <table class="table table-bordered table-striped table-hover">
+                <tr style="font-weight: bold">
+                    <td style="width:25%;text-align: center">{{"paratype"|translate}}</td>
+                    <td style="width:30%;text-align: center">{{"paraname"|translate}}</td>
+                    <td style="width:25%;text-align: center">{{"numvalue"|translate}}</td>
+                    <td style="width:20%;text-align: center">{{"operation"|translate}}</td>
+                </tr>
+                <tr ng-repeat="par in tableSource" style="text-align: center;">
+                    <td>
+                        {{ par.type }}
+                    </td>
+                    <td>
+                        <span editable-text="par.name" e-name="name" e-form="rowform1" onbeforesave="checkName($data, par.index_id)" e-required="">
+                            {{ par.name }}
+                        </span>
+                    </td>
+                    <td>
+                        <span editable-text="par.value" e-name="value" e-form="rowform1" onbeforesave="checkValue($data)" e-required="">
+                            {{ par.value }}
+                        </span>
+                    </td>
+                    <td style="white-space: nowrap;text-align: center;">
+                        <!-- form-->
+                        <form editable-form="" name="rowform1" onaftersave="updatePar(par.index_id)" ng-show="rowform1.$visible" shown="false" class="form-buttons form-inline">
+                            <button type="submit" ng-disabled="rowform1.$waiting" title="Save" class="btn btn-sm btn-info">
+                                <em class="fa fa-save"></em>
+                            </button>
+                            <button type="button" ng-disabled="rowform1.$waiting" ng-click="rowform1.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                <em class="fa fa-times"></em>
+                            </button>
+                        </form>
+                        <div ng-show="!rowform1.$visible" class="buttons">
+                            <button ng-click="rowform1.$show()" title="Edit" class="btn btn-sm btn-info">
+                                <em class="fa fa-pencil"></em>
+                            </button>
+                            <button ng-click="deleteParamer(par.index_id)" title="Delete" class="btn btn-sm btn-danger">
+                                <em class="fa fa-trash"></em>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script type="text/ng-template" id="typeDiaglogId">
+        <div class="container-fluid">
+            <form name="addForm" method="post" novalidate="novalidate"
+            class="form-horizontal form-validate" ng-submit="add()">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label>{{"paratype"|translate}}：
+                            </label>
+                            <select class="form-control" ng-model="addType" name="type" ng-options="a.type_index as a.type for a in parTypes"></select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label><span style="color:red">*</span>{{"paraname"|translate}}：</label>
+                            <input type="text" name="name" ng-model="addName" class="form-control" required="" />
+                            <span ng-show="validateInput('name')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label><span style="color:red">*</span>{{"numvalue"|translate}}：</label>
+                            <input type="text" name="val" ng-model="addValue" class="form-control" required ng-pattern='/^[0-9]+.?[0-9]*$/' />
+                            <span ng-show="validateInput('val')" class="text-danger">{{"requirednum"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-12 text-center">
+                            <button type="button" class="btn btn-default" ng-click="close()">
+                                {{"cancel"|translate}}
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                {{"add"|translate}}
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </script>
+</div>

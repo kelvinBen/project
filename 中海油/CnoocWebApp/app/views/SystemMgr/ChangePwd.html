@@ -1,0 +1,81 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{'系统管理'|T}}</a>
+        </li>
+        <li>
+            <span>{{'用户管理'|T}}</span>
+        </li>
+        <li>
+            <span>{{'修改密码'|T}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="changepwdCtrl" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset class="b0">
+                            <legend>{{'修改密码'|T}}</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'姓名'|T}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.real_name" class="form-control" readonly/>
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'邮箱'|T}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.email" class="form-control" readonly/>
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'手机'|T}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.phone" class="form-control" readonly/>
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'新密码'|T}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.passwd" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset >
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'确认新密码'|T}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.confirmpasswd" class="form-control" />
+                                    <span ng-show="passwdError" class="text-danger">{{"两次输入的密码必须一致"|T}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                    <div class="panel-footer text-center">
+                        <button class="btn btn-info" ng-click="cancel()">{{"取消"|T}}</button>
+                        <button type="submit" class="btn btn-info">{{'提交'|T}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

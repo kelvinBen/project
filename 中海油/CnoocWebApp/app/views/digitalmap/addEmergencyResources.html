@@ -1,0 +1,121 @@
+<h3>
+    <ul class="breadcrumb" ng-controller="addEmergencyResourcesCtrl">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.projectmanage">{{'digitalmap'|translate}}</a>
+        </li>
+        <li>
+            <a ui-sref="app.EmergencyResourcesMgr"><span>{{'EmergencyResourcesMgr'|translate}}</span></a>
+        </li>
+        <li>
+            <span>{{ title | translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="addEmergencyResourcesCtrl" class="container-fluid">
+
+    <from name="formValidate" novalidate="" class="form-validate form-horizontal">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="b0">
+                    <legend>{{title|translate}}</legend>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'organization'|translate}}</label>
+                        <div class="col-sm-6">
+                            <select name="select" required="" ng-model="org" class="form-control" ng-options="t.organiztion_name for t in organiztions"
+                                ng-change="orgChange()">
+                                    </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'Importantposition'|translate}}</label>
+                        <div class="col-sm-6">
+                            <select name="select" required="" ng-model="vm.fid" class="form-control" ng-options="t.position_id as t.name for t in flist">
+                                    </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'emergencyresourcesname'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="sometext" required="" ng-model="vm.name" class="form-control" />
+
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'emergencyresourcescate'|translate}}</label>
+                        <div class="col-sm-6">
+                            <select name="select" required="" ng-model="vm.category" class="form-control">
+                                        <option value="{{'Firefightingequipment'|translate}}">{{"Firefightingequipment"|translate}}</option>
+                                        <option value="{{'lifesaving'|translate}}">{{"lifesaving"|translate}}</option>
+                                        <option value="{{'Oilspill'|translate}}">{{"Oilspill"|translate}}</option>
+                                        <option value="{{'other'|translate}}">{{"other"|translate}}</option>
+                                    </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'positiontype'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="sometext" required="" ng-model="vm.model" class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'resourcetype'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="sometext" required="" ng-model="vm.spec" class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'quantity'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="number" name="sometext" required="" ng-model="vm.num" class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'time'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="date" name="sometext" required="" ng-model="vm.time" class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'positioninfo'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="sometext" required="" ng-model="vm.position" class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'note'|translate}}</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" name="" cols="30" rows="4" required="" ng-model="vm.note">{{vm.note}}</textarea>
+                            <!--<input type="text" name="sometext" required="" ng-model="vm.position" class="form-control" />-->
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="panel-footer text-center">
+                <button class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                <button type="submit" class="btn btn-info" ng-click="submitForm()">{{"submit"|translate}}</button>
+            </div>
+        </div>
+    </from>
+
+</div>

@@ -1,0 +1,118 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li><a ui-sref="app.travelwarning">{{"travelwarning"|translate}}</a></li>
+        <li class="active">
+            <span>{{'add'|translate}}</span>
+        </li>
+    </ul>
+</h3>
+
+<div class="container-fluid" ng-controller="addTravelwarningCtrl">
+    <form method="post" name="roleForm" novalidate="novalidate" ng-submit="ok(event)" class="form-validate form-horizontal">
+        <div class="panel panel-primary" style="margin-bottom: 0px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'add'|translate}}{{"travelwarning"|translate}}</h3>
+            </div>
+            <div class="panel-body">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label for="name">
+                                <span style="color:red">*</span> {{"passenger"|translate}}：
+                            </label>
+                            <input type="text" class="form-control" name="name" required ng-model="vm.username" ng-change="changemessage()">
+                            <span ng-show="validateInput('name', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="phone">
+                                <span style="color:red">*</span> {{"mobilephone"|translate}}：
+                            </label>
+                            <input type="text" name="phone" class="form-control" required ng-model="vm.phone"   ng-change="changemessage()">
+                            <span ng-show="validateInput('phone', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label for="fno">
+                                    <span style="color:red">*</span> {{"flightnumber"|translate}}：
+                            </label>
+                            <input type="text" class="form-control" name="fno" required ng-model="vm.flightnumber" ng-change="changemessage()">
+                            <span ng-show="validateInput('fno', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="address">
+                                <span style="color:red">*</span> {{"startrange"|translate}}：
+                            </label>
+                            <input type="text" name="address" class="form-control" required ng-model="vm.address" ng-change="changemessage()">
+                            <span ng-show="validateInput('address', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label for="st">
+                                <span style="color:red">*</span> {{"starttime"|translate}}：
+                            </label>
+                            <input type="datetime-local" class="form-control" name="st" required ng-model="vm.starttime"  ng-change="changemessage()">
+                            <span ng-show="validateInput('st', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="et">
+                                <span style="color:red">*</span> {{"endtime"|translate}}：
+                            </label>
+                            <input type="datetime-local" name="et" class="form-control" required ng-model="vm.endtime" ng-change="changemessage()">
+                            <span ng-show="validateInput('et', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label for="wt">
+                                <span style="color:red">*</span> {{"delaymessage"|translate}}：
+                            </label>
+                            <input type="number" min="0" class="form-control" name="wt" required ng-model="vm.warningminute"  ng-change="changemessage()">
+                            <span ng-show="validateInput('wt', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="wphone">
+                                <span style="color:red">*</span>{{"warningpersonphone"|translate}} ：
+                            </label>
+                            <input type="text" class="form-control" name="wphone" required ng-model="vm.warnphone">
+                            <span ng-show="validateInput('wphone', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label for="wt">
+                                <span style="color:red">*</span> {{"warnmessagecontent"|translate}}：
+                            </label>
+                            <textarea  rows="3" class="form-control" name="wm" required ng-model="vm.warnmessage"></textarea>
+                            <span ng-show="validateInput('wm', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-danger" ng-click="cancel()">
+                    {{'cancel'|translate}}
+                </button>
+                <button type="reset" class="btn btn-danger">
+                    {{'reset'|translate}}
+                </button>
+                <button type="sumbit" class="btn btn-primary">
+                    {{'sure' | translate}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

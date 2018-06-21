@@ -1,0 +1,19 @@
+﻿
+    <div style="padding:0px;height:800px" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'trailing'" id="mainbody">
+        <div data-dojo-type="dijit/layout/ContentPane" style="padding:0px;width:100%;height:100%;" data-dojo-props="region:'center', splitter:false">
+            <div style="padding:0px;height:100%;width:100%;" data-dojo-type="dijit/layout/BorderContainer">
+                <div data-dojo-type="dijit/layout/ContentPane" style="padding:0px;height:100%;width:100%;" id="allmap" data-dojo-props="region:'center', splitter:true">
+                    <div class="info">
+                        <select id="mapType" data-dojo-type="dijit/form/Select">
+                            <option value="0">地图</option>
+                            <option value="1" selected="selected">卫星</option>
+                        </select>
+                    </div>
+                </div>
+                <div data-dojo-type="dijit/layout/ContentPane" style="padding:0px;width:200px" data-dojo-props="region:'left', splitter:true">
+                    <ul id="cityTree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+

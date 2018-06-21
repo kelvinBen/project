@@ -1,0 +1,68 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"historyevent"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" ng-controller="eventhistoryCtrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">{{"historyevent"|translate}}{{"singlelist"|translate}}</div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover" style="margin-top: 10px;">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%;">{{"accidentname"|translate}}</th>
+                        <th style="width:5%">{{"cartype"|translate}}</th>
+                        <th style="width:5%">{{"place"|translate}}</th>
+                        <th style="width:10%">{{"installationame"|translate}}</th>
+                        <th style="width:5%">{{"singleposition"|translate}}</th>
+                        <th style="width:10%">{{"reportperiod"|translate}}</th>
+                        <th style="width:10%">{{"datefrom"|translate}}</th>
+                        <th style="width:10%">{{"dateto"|translate}}</th>
+                        <th style="width:10%">{{"status"|translate}}</th>
+                        <th style="width:10%">{{"note"|translate}}</th>
+                        <th style="width:10%">{{"operation"|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody style="text-align: left;">
+                    <tr ng-repeat="item in eventdetails">
+                        <td>{{item.name}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.locate}}</td>
+                        <td>{{item.utility}}</td>
+                        <td>{{item.utility_locate}}</td>
+                        <td>{{item.period}}</td>
+                        <td>{{item.time}}</td>
+                        <td>{{item.endtime}}</td>
+                        <td>{{getstepname(item.step)}}</td>
+                        <td>{{item.comment}}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}
+                                    ng-click="viewtables(item.id)">
+                                <em class="fa icon-magnifier"></em>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger" title={{"singledelete"|translate}}
+                                    ng-click="deletetable(item.id,$index)">
+                                <em class="fa icon-trash"></em>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

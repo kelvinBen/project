@@ -1,0 +1,207 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"publicsentiment"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" style="height:100%" ng-controller="viewmessageCtrl">
+    <div class="row" style="margin-bottom: 10px;margin-left: 10px;">
+        <input type="button" class="size-MINI btn btn-success  btnOk" value='{{"Reply"|translate}}' ng-click="reply()" />
+        <input type="button" class="size-MINI btn btn-primary  btnOk" value='{{"Forward"|translate}}' ng-click="forward()" />
+        <input type="button" class="size-MINI btn btn-danger  btnOk" value='{{"delete"|translate}}' ng-click="delete()" />
+    </div>
+    <div class="panel panel-primary" ng-show="hasEmail">
+        <div class="panel-heading">{{"email"|translate}}</div>
+        <div class="panel-body">
+            <table class="table mb-mails mb-view">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="clearfix">
+                            <div class="mb-mail-date">{{mailview.mail.date}}</div>
+                            <div class="pull-left">
+                                <span>{{"Sender"|translate}}:</span>
+                                <span class="mb-mail-from">{{formdata.sender_name}}</span>
+                                <p class="mb-mail-to-list">{{"Addressee"|translate}}: {{formdata.email_receiver}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="pull-left">
+                                <span>{{"time"|translate}}:</span><strong>{{formdata.create_time|date:"yyyy-MM-dd HH:mm:ss"}}</strong>
+                            </div>
+                        </div>
+                        <div class="mb-mail-preview mt-lg">
+                            <h4>{{formdata.title}}</h4>
+                            <div ng-bind-html="formdata.content"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-primary" ng-show="hasSMS">
+        <div class="panel-heading">{{"message"|translate}}</div>
+        <div class="panel-body">
+            <table class="table mb-mails mb-view">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="clearfix">
+                            <div class="mb-mail-date">{{mailview.mail.date}}</div>
+                            <div class="pull-left">
+                                <span>{{"Sender"|translate}}:</span>
+                                <span class="mb-mail-from">{{formdata.sender_name}}</span>
+                                <p class="mb-mail-to-list">{{"Addressee"|translate}}: {{formdata.sms_receiver}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="pull-left">
+                                <span>{{"time"|translate}}:</span><strong>{{formdata.create_time|date:"yyyy-MM-dd HH:mm:ss"}}</strong>
+                            </div>
+                        </div>
+                        <div class="mb-mail-preview mt-lg">
+                            <h4>{{formdata.title}}</h4>
+                            <div ng-bind-html="formdata.sms_content"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="height:100%" ng-show="false">
+        <div class="border box col-lg-12" style="height:100%;overflow:auto;">
+            <div class="box-header">
+                <div class="row mt-5">
+                    <div class="col-sm-1" style="text-align:left;margin-top:8px">
+
+                    </div>
+                    <div class="col-sm-11" style="text-align:left;margin-top:8px">
+
+                        <input type="button" class="size-MINI btn btn-primary  btnOk" value='{{"Reply"|translate}}' ng-click="reply()" />
+                        <input type="button" class="size-MINI btn btn-primary  btnOk" value='{{"Forward"|translate}}' ng-click="forward()" />
+                        <input type="button" class="size-MINI btn btn-primary  btnOk" value='{{"singledelete"|translate}}' ng-click="delete()" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="box-content">
+                <form id="form" action="#" class="form fill-up validatable" method="post">
+                    <div>
+                        <!-- ------------------------ 发件人 ------------------------- -->
+                        <div class="row ">
+                            <div class="col-sm-1" style="text-align:right;">
+                                <label class="control-label font-gray">{{"title"|translate}}:</label>
+
+                            </div>
+                            <div class="col-sm-11">
+                                <strong>{{formdata.title}}</strong>
+                                <span class="label label-info" ng-show="formdata.is_return">{{"needresponse"|translate}}</span>
+                                <span class="label label-info" ng-show="formdata.top">{{"needtop"|translate}}</span>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-1" style="text-align:right;">
+                                <label class="control-label font-gray">{{"Sender"|translate}}:</label>
+                            </div>
+                            <div class="col-sm-11" style="text-align:left;">
+                                <strong>{{formdata.sender_name}}</strong>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-1" style="text-align:right;">
+                                <label class="control-label font-gray">{{"time"|translate}}:</label>
+                            </div>
+                            <div class="col-sm-11" style="text-align:left;">
+                                <strong>{{formdata.create_time|date:"yyyy-MM-dd HH:mm:ss"}}</strong>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-1" style="text-align:right;margin-top:8px">
+                                <label class="control-label font-gray">@Html.GetLangbyKey("addressee"):</label>
+                            </div>
+                            <div class="col-sm-11">
+                                <textarea style="min-width: 600px;width:100%" ng-model="formdata.receiver"
+                                          readonly></textarea>
+                            </div>
+                        </div>
+
+                        <!-- ------------------------ 信息标题 ------------------------- -->
+
+
+                        <!-- ------------------------ 信息内容 ------------------------- -->
+
+
+                        <!-- ------------------------ 信息类型 ------------------------- -->
+                        <div class="row mt-5">
+                            <div class="col-sm-1" style="text-align:right;">
+                                <label class="control-label font-gray">@Html.GetLangbyKey("sendType"):</label>
+                            </div>
+                            <div class="col-sm-2" style="text-align:left;">
+                                <label class="control-label font-gray">{{getType(formdata.type)}}</label>
+                            </div>
+                            <div class="col-sm-2" style="text-align:center;">
+                                <label class="control-label font-gray">@Html.GetLangbyKey("messageType"):</label>
+                                <label class="control-label font-gray">{{getCate(formdata.category_type)}}</label>
+                            </div>
+                            <div class="col-sm-3" style="text-align:center;">
+                                <label class="control-label font-gray">@Html.GetLangbyKey("effectiveDate"):</label>
+                                <label class="control-label font-gray">{{formdata.invalid_time|date:"yyyy-MM-dd"}}</label>
+                            </div>
+                        </div>
+                        <div class="myline" ng-show="formdata.type!=1"></div>
+                        <div class="row" style="margin-top:5px" ng-show="formdata.type!=1">
+                            <div class="col-sm-1" style="text-align:right;margin-top:8px">
+                                <label class="control-label font-gray">{{"messagecontent"|translate}}:</label>
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="box-content tabContent_pub"
+                                     style="border:solid;border-width:1px;height:30px;">
+                                    <div id="div2" ng-bind="formdata.sms_content">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="myline" ng-show="formdata.type!=0"></div>
+                        <div class="row" style="margin-top:5px" ng-show="formdata.type!=0">
+                            <div class="col-sm-1" style="text-align:right;">
+                                <label class="control-label font-gray">@Html.GetLangbyKey("messageContent"):</label>
+                            </div>
+                            <div class="col-sm-11">
+                                <div class="box-content tabContent_pub"
+                                     style="padding:10px;overflow:auto;border:solid;border-width:1px;">
+                                    <!--流行病介绍-->
+                                    <div id="div1" ng-bind-html="formdata.content">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ------------------------ 有效期 ------------------------- -->
+
+                    </div>
+
+                    <!-- 记录选中的节点 -->
+                    <input name="msg.sender" id="selectNode" type="hidden" value=""/>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

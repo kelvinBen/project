@@ -1,0 +1,7 @@
+<div #mapDiv id="mapDiv" class="mapContainer">
+    <div style="float:right;" *ngIf="type==1">
+        <p-radioButton name="group1" value="1" label="气象工作站" [(ngModel)]="mapSelLayer" (click)="displayLayer()"></p-radioButton>
+        <p-radioButton name="group1" value="2" label="大喇叭" [(ngModel)]="mapSelLayer" (click)="displayLayer()"></p-radioButton>
+        <p-radioButton name="group1" value="3" label="显示屏" [(ngModel)]="mapSelLayer" (click)="displayLayer()"></p-radioButton>
+    </div>
+</div>

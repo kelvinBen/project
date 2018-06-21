@@ -1,0 +1,116 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"homepage"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"hazardsource"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"hazardrisk"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"HiddenGov"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"ParameterSetting"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="ParameterSettingCtrl as tree">
+    <div class="row-fluid">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="well wd-wide">
+                <span ng-if="tree.doing_async">...loading...</span>
+                <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div style="margin-top: 10px;">
+                <input class="form-control"   placeholder="在以下信息中搜索">
+            </div>
+            <div class="panel panel-primary" style="margin-top: 5px;">
+                <div class="panel-body" style="height:100%;overflow:auto">
+                    <div class="form-inline">
+                        <a class="btn btn-primary radius" href="javascript:;">
+                            <em class="fa fa-plus"></em>{{"add"|translate}}
+                        </a>
+                        <a class="btn btn-success radius" href="javascript:;" title="{{'edit'|translate}}">
+                            <em class="fa fa-edit"></em>{{"edit"|translate}}
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger radius">
+                            <em class="fa fa-trash-o"></em>{{"singledelete"|translate}}
+                        </a>
+                    </div>
+                    <div class="table-responsive" style="text-align: center;margin-top: 5px;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th style="text-align: center;"><input type="checkbox"></th>
+                                <th style="text-align: center;">{{"num"|translate}}</th>
+                                <th style="text-align: center;">{{"usertype"|translate}}</th>
+                                <th style="text-align: center;">{{"uname"|translate}}</th>
+                                <th style="text-align: center;">{{"staffname"|translate}}</th>
+                                <th style="text-align: center;">{{"contactway"|translate}}</th>
+                                <th style="text-align: center;">{{"mailbox"|translate}}</th>
+                                <th style="text-align: center;">{{"usingstate"|translate}}</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>普通用户</td>
+                                <td>邝立坤</td>
+                                <td>邝立坤</td>
+                                <td>0086-13501023467</td>
+                                <td></td>
+                                <td>使用中</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>2</td>
+                                <td>普通用户</td>
+                                <td>吴玉蕊</td>
+                                <td>吴玉蕊</td>
+                                <td>0086-13501217769</td>
+                                <td></td>
+                                <td>使用中</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>3</td>
+                                <td>普通用户</td>
+                                <td>俞进</td>
+                                <td>俞进</td>
+                                <td>0086-13910532909	</td>
+                                <td></td>
+                                <td>使用中</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>4</td>
+                                <td>普通用户</td>
+                                <td>赵英年</td>
+                                <td>赵英年</td>
+                                <td>0086-13910552259	</td>
+                                <td></td>
+                                <td>使用中</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>5</td>
+                                <td>普通用户</td>
+                                <td>王 欣	</td>
+                                <td>王 欣	</td>
+                                <td>0086-13910808084</td>
+                                <td>wangxin13@cnooc.com.cn</td>
+                                <td>使用中</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

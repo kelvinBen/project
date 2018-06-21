@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Angular Esri Quick Start</title>
+    <link rel="stylesheet" href="../../css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../../../bower_components/fontawesome/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../../../bower_components/layer/skin/layer.css" media="screen" title="no title" charset="utf-8">
+    <title></title>
+</head>
+
+<body ng-controller="myCtl">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <table class="tabel table-hover table-bordered table-striped table-condensed" style="width:100%;margin-bottom: 20px; margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            姓名
+                        </th>
+                        <th class="text-center">
+                            职位
+                        </th>
+                        <th class="text-center">
+                            电话
+                        </th>
+                        <th class="text-center">
+                            电子邮件
+                        </th>
+                        <th class="text-center">
+                            状态
+                        </th>
+                        <th class="text-center">
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="a in editOrg.users">
+                        <td  class="text-center">
+                            {{getUser(a.userid).real_name}}
+                        </td>
+                        <td class="text-center">
+                            {{a.tempRole ||a.role.job}}
+                        </td>
+                        <td class="text-center">
+                            {{getUser(a.userid).phone}}
+                        </td>
+                        <td class="text-center">
+                            {{getUser(a.userid).email}}
+                        </td>
+                        <td class="text-center">
+                            {{getStatus(a.status)}}
+                        </td>
+                        <td style="white-space: nowrap" class="text-center">
+                            <button type="button" class="btn btn-info btn-xs" ng-click="sortUser(true, a)" ng-show="$index != 0">
+                                <i class="fa fa-arrow-up"></i>
+                            </button>
+                            <button type="button" class="btn btn-info btn-xs" ng-click="sortUser(flase, a)" ng-hide="$index == editOrg.users.length - 1">
+                                <i class="fa fa-arrow-down"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="edit(a)">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="del(a)">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="text-right" colspan="6">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="row-fluid">
+            <input type="checkbox" ng-model="bSend"/>
+            <span>是否发送通知</span>
+        </div>
+        <div class="row-fluid" ng-show="bSend">
+            <div class="col-xs-12">
+                <label for="wphone">
+                    <span style="color:red"></span> 通知电话(多个已 ; 分割)：
+                </label>
+                <input type="text" class="form-control" name="wphone" required ng-model="vm.warnphone">
+            </div>
+            <div class="col-xs-12">
+                <label for="wt">
+                    <span style="color:red"></span> 通知短信内容：
+                </label>
+                <textarea  rows="3" class="form-control" name="wm" required ng-model="vm.warnmessage"></textarea>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <label>
+                <span style="color:red"></span>
+            </label>
+        </div>
+        <div class="row-fluid">
+            <div class="col-sm-12 text-center">
+                <button type="button" class="btn btn-default" ng-click="close()">
+                    取消
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="ok()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" style="display: none;margin-bottom: 0px;" id="addDlg">
+      <div class="panel-body">
+          <div class="form-group">
+              <label for="">用户:</label>
+              <select class="form-control" ng-options="a.user_id as a.real_name for a in users" ng-model="addModel.userid">
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="">职位</label>
+              <select class="form-control" ng-options="a as a.tempRole for a in roleList" ng-model="addRole">
+              </select>
+          </div>
+      </div>
+      <div class="panel-footer text-center">
+          <button type="button" class="btn btn-default" ng-click="closeDlg()">
+              取消
+          </button>
+          <button type="button" class="btn btn-primary" ng-click="addOk()">
+              确定
+          </button>
+      </div>
+    </div>
+
+    <div class="panel panel-default" style="display: none;margin-bottom: 0px;" id="editDlg">
+      <div class="panel-body">
+          <div class="form-group">
+              <label for="">状态:</label>
+              <select class="form-control" ng-options="a.id as a.name for a in statusList" ng-model="selNode.status">
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="">原职位</label>
+              <input type="text" value="{{selNode.role.job}}" readonly="" class="form-control">
+          </div>
+          <div class="form-group">
+              <label for="">代理职位</label>
+              <select class="form-control" ng-options="a as a.tempRole for a in roleList" ng-model="tempRoleID" ng-disabled="selNode.status == 1">
+              </select>
+          </div>
+      </div>
+      <div class="panel-footer text-center">
+          <button type="button" class="btn btn-default" ng-click="closeDlg()">
+              取消
+          </button>
+          <button type="button" class="btn btn-primary" ng-click="editOk()">
+              确定
+          </button>
+      </div>
+    </div>
+    <script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../../bower_components/layer/layer.js" charset="utf-8"></script>
+    <script src="../../../bower_components/angular/angular.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/service.js" charset="utf-8"></script>
+    <script src="../../js/Service/eventservices.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        angular.module('myApp', ['ics_service.event'])
+            .controller('myCtl', function($scope, $location, icsdb, users) {
+                $scope.statusList = [{
+                    id: 0,
+                    name: '在岗'
+                },{
+                    id: 1,
+                    name: '不在岗'
+                }];
+                $scope.vm={warnmessage:"",warnphone:""};
+                $scope.bSend = true;
+                $scope.getRequest = function() {
+                    var url = location.search; //获取url中"?"符后的字串
+                    var theRequest = new Object();
+                    if (url.indexOf("?") != -1) {
+                        var str = url.substr(1);
+                        strs = str.split("&");
+                        for (var i = 0; i < strs.length; i++) {
+                            theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+                        }
+                    }
+                    return theRequest;
+                };
+                $scope.request = $scope.getRequest();
+                var queryPar = '?eventid='+localStorage.eventid;
+                $scope.editOrg = {users: []};
+                $scope.init = function () {
+                    icsdb.getdetail('eventstatus', queryPar).then(function (data) {
+                        if (data && data.length && data.length > 0){
+                            $scope.srcData = data[0];
+                            var orgs = angular.fromJson(data[0].org);
+                            $scope.srcOrgs = orgs;
+                            var ary = [];
+                            $.each(orgs[0].children, function (i, item) {
+                                if (item.id == $scope.request.orgid){
+                                    angular.forEach(item.users, function (u) {
+                                        if (!u.status) u.status = 0;//默认在岗
+                                        if (!u.tempRole) u.tempRole = '';
+                                        ary.push(u);
+                                    });
+                                    ary = ary.sort(function (a, b) {
+                                        return a.sort - b.sort;
+                                    });
+                                    $scope.editOrg.users = ary;
+                                    angular.forEach($scope.editOrg.users,function(item,index){
+                                        if($scope.vm.warnphone!="")
+                                                $scope.vm.warnphone+=";";
+                                        $scope.vm.warnphone+=$scope.getUser(item.userid).phone;
+                                    });
+                                    return false;
+                                }
+                            });
+                        }
+                    });
+                };
+                users.users().then(function (dts) {
+                    $scope.users = dts;
+                    $scope.init();
+                    $scope.roleList = [];
+                    icsdb.getdetail('eventroles', '?organization='+$scope.request.orgid).then(function (data) {
+                        angular.forEach(data, function (item) {
+                            item.tempRole = '代' + item.job;
+                            $scope.roleList.push(item);
+                        });
+                    });
+                });
+                $scope.sortUser = function (flag, node) {
+                    $.each($scope.editOrg.users, function (i, item) {
+                        if (node.userid == item.userid){
+                            if (flag){//up
+                                var pre = $scope.editOrg.users[i-1];
+                                var tempIndex = item.sort;
+                                item.sort = pre.sort;
+                                pre.sort = tempIndex;
+                            }else{//down
+                                var next = $scope.editOrg.users[i+1];
+                                var tempIndex = item.sort;
+                                item.sort = next.sort;
+                                next.sort = tempIndex;
+                            }
+                            return false;
+                        }
+                    });
+                    $scope.editOrg.users = $scope.editOrg.users.sort(function (a, b) {
+                        return a.sort - b.sort;
+                    });
+                };
+                $scope.getUser = function (uid) {
+                    var u = null;
+                    $.each($scope.users, function (i,item) {
+                        if(item.user_id == uid){
+                            u = item;
+                            return false;
+                        }
+                    })
+                    return u;
+                };
+                $scope.getStatus = function (status) {
+                    if (status == 0) return '在岗';
+                    else if (status == 1) return '不在岗';
+                };
+                $scope.close = function() {
+                    parent.layer.closeAll();
+                };
+                $scope.ok = function() {
+                    $.each($scope.srcOrgs[0].children, function (i, item) {
+                        if (item.id == $scope.request.orgid){
+                            item.users = $scope.editOrg.users;
+                            return false;
+                        }
+                    });
+                    $scope.srcData.org = angular.toJson($scope.srcOrgs);
+                    console.log($scope.srcOrgs);
+                    icsdb.update('eventstatus', $scope.srcData.id, $scope.srcData).then(function (data) {
+                        localStorage.tempphone = $scope.vm.warnphone;
+                        localStorage.tempmessage= $scope.vm.warnmessage;
+                        //$scope.close();
+                        //$location.path('/app.writeroute');
+                        parent.say();
+                        $scope.close();
+                    },function (status) {
+                        alert('error!');
+                    });
+                };
+                $scope.edit = function (node) {
+                    $scope.selNode = angular.copy(node)
+                    $scope.tempRoleID = null;
+                    $scope.ly = layer.open({
+                        type: 1,
+                        area: ['400px', 'auto'],
+                        title: '编辑',
+                        skin: 'layui-layer-lan',
+                        content: $('#editDlg')
+                    });
+                };
+                $scope.editOk = function () {
+                    if ($scope.selNode.status == 0 && $scope.tempRoleID){
+                        $scope.selNode.role.role = $scope.tempRoleID.role;
+                        $scope.selNode.tempRole = $scope.tempRoleID.tempRole;
+
+                        users.getdetail($scope.selNode.userid).then(function(data){
+                            if($scope.vm.warnmessage!="")
+                                $scope.vm.warnmessage+=";";
+                           $scope.vm.warnmessage+=data.real_name+"由"+$scope.selNode.role.job+"变更为"+$scope.tempRoleID.job;
+                        });
+                        //$scope.vm.warnmessage+=$scope.selNode."";
+                    }
+                    if($scope.selNode.status==1 ){
+                        users.getdetail($scope.selNode.userid).then(function(data){
+                            if($scope.vm.warnmessage!="")
+                                $scope.vm.warnmessage+=";";
+                            $scope.vm.warnmessage+=data.real_name+"状态变更为不在岗";
+                        });
+                    }
+                    $.each($scope.editOrg.users, function (i, item) {
+                        if (item.userid == $scope.selNode.userid){
+                            $scope.editOrg.users[i] = $scope.selNode;
+                            return false;
+                        }
+                    });
+                    $scope.closeDlg();
+                };
+                $scope.closeDlg = function () {
+                    layer.close($scope.ly);
+                };
+                $scope.del = function (node) {
+                    var ary = [];
+                    angular.forEach($scope.editOrg.users, function (item) {
+                        if (item.userid != node.userid){
+                            ary.push(item);
+                        }
+                    });
+                    $scope.editOrg.users = ary;
+                };
+                $scope.addOk = function () {
+                    if (!$scope.addRole){
+                        layer.alert('代理职位不能为空.',{icon: 2});
+                        return;
+                    }
+                    $scope.addModel.role = $scope.addRole;
+                    $scope.addModel.tempRole = $scope.addRole.tempRole;
+                    $scope.editOrg.users.push($scope.addModel);
+                    $scope.closeDlg();
+                };
+                $scope.add = function () {
+                    $scope.addRole = null;
+                    $scope.addModel = {
+                        "userid":'',
+                        "sort":$scope.editOrg.users.length + 1,
+                        "role": null,
+                        "status": 0,
+                        "tempRole": ''
+                    };
+                    $scope.ly = layer.open({
+                        type: 1,
+                        area: ['400px', 'auto'],
+                        title: '编辑',
+                        skin: 'layui-layer-lan',
+                        content: $('#addDlg')
+                    });
+                };
+                $scope.send = function () {
+                    $location.path('/app/sendOrgUsers');
+                };
+            });
+    </script>
+</body>
+
+</html>

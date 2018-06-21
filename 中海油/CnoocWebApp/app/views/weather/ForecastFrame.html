@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "";
+    var city_id = ViewData["cityid"];
+    var city_name = ViewData["cityname"];
+}
+<!DOCTYPE html>
+<html>
+
+<body ng-app="myApp" ng-controller="myCtrl" style="width:770px;height:250px;">
+    <div style="width:100%;height:250px;">
+        <div style="width:100%;text-align:center;">
+            <h4>@city_name</h4>
+        </div>
+        <div style="padding:0px;height:190px;width:100%;" id="allmap">
+            <div style="width:100%;">
+                <div class="seven_days" ng-repeat="weather in weathers.days">
+                    <ul style="list-style: none;">
+                        <p></p>
+                        <li>{{weather.time.substring(4,6)}}月{{weather.time.substring(6,8)}}日</li>
+                        <p></p>
+                        <li><img src="~/Content/h-ui/images/weather/pic_rain.png" height="40" width="40" alt=""></li>
+                        <p></p>
+                        <li>{{weather.dayweather}}</li>
+                        <li>{{weather.mintemp}}/{{weather.maxtemp}}℃</li>
+                        <p></p>
+                        <li><img src="~/Content/h-ui/images/weather/pic_wind.png" height="30" width="30" alt=""></li>
+                        <li>{{weather.wind}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/bower_components/angular/angular.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/Script/service/service.js"></script>
+    <script type="text/javascript" src="~/Script/service/PublicSentiment.js"></script>
+    <script type="text/javascript" src="~/Script/service/weather.js"></script>
+    <script type="text/javascript">
+        var myApp = angular.module('myApp', ['cnooc_service.Weather']);
+
+
+        myApp.controller('myCtrl', function ($scope, $http, weatherex) {
+            $scope.weather = {};
+            weatherex.GetLatestWeather(@city_id).then(function (data) {
+                $scope.weathers = angular.fromJson(data.jsondata);
+
+            }, function (error) {
+            });
+        });
+    </script>
+</body>
+
+</html>
+@*<script type="text/javascript">
+    $(function () {
+        var times = [];
+        var maxT = [];
+        var minT = [];
+        //var options = { cityid: "1", method: 'POST', handleAs: 'json' };
+        $.get("@Url.Action("GetSevenForcastInfo")", { cityid: "@city_id" }, function (data) {
+            var tr = document.createElement("tr");
+            var tr1 = document.createElement("tr");
+            var tr2 = document.createElement("tr");
+            var tr3 = document.createElement("tr");
+            var tr4 = document.createElement("tr");
+            var tr5 = document.createElement("tr");
+            var tr6 = document.createElement("tr");
+            $.each(data, function (i, item) {
+                times.push(item.Date);
+                maxT.push(parseFloat(item.Temp.MAX));
+                minT.push(parseFloat(item.Temp.Min));
+
+                var td = document.createElement("td");
+                td.appendChild(document.createTextNode(item.Date));
+                tr.appendChild(td);
+
+                var td1 = document.createElement("td");
+                td1.appendChild(document.createTextNode(item.Weather.WName1));
+                tr1.appendChild(td1);
+
+                var td2 = document.createElement("td");
+                var d = document.createElement("div");
+                d.className = "tqIcon " + item.Weather.WImage1;
+                td2.appendChild(d);
+                tr2.appendChild(td2);
+
+                //var td3 = document.createElement("td");
+                //td3.appendChild(document.createTextNode(item.Weather.WName2));
+                //tr3.appendChild(td3);
+
+                //var td4 = document.createElement("td");
+                //var d4 = document.createElement("div");
+                //d4.className = "tqIcon " + item.Weather.WImage2;
+                // td4.appendChild(d4);
+                //tr4.appendChild(td4);
+                var td5 = document.createElement("td");
+                var d5 = document.createElement("a");
+                d5.className = "maxTemp";
+                d5.text = item.Temp.MAX + "°C";
+                td5.appendChild(d5);
+                tr5.appendChild(td5);
+
+                var td6 = document.createElement("td");
+                var d6 = document.createElement("a");
+                d6.className = "minTemp";
+                d6.text = item.Temp.Min + "°C";
+                td6.appendChild(d6);
+                tr6.appendChild(td6);
+            });
+            document.getElementById("d1").appendChild(tr);
+            document.getElementById("d1").appendChild(tr1);
+            document.getElementById("d1").appendChild(tr2);
+
+            document.getElementById("d2").appendChild(tr3);
+            document.getElementById("d2").appendChild(tr4);
+            document.getElementById("d2").appendChild(tr5);
+            document.getElementById("d2").appendChild(tr6);
+            //createChart(times, maxT, minT);
+        }, 'json');
+    });
+    </script>*@

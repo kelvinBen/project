@@ -1,0 +1,26 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                海外安保预警系统
+            </a>
+        </li>
+        <li>
+            <span>预警地图</span>
+        </li>
+    </ul>
+</h3>
+<style type="text/css">
+    .esri-view {
+        padding: 0;
+        margin: 0;
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<div class="container-fluid" ng-controller="systemindexCtrl" id="mainDiv">
+    <div class="row">
+        <iframe src="app/views/ics/systemindex/map.html" width="100%" frameborder="0" id="mapFrame" height="900px"></iframe>
+    </div>
+</div>

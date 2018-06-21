@@ -1,0 +1,122 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"publicsentiment"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="inboxCtrl">
+    <div class="text-l">
+        {{"typeofgenus"|T}}：
+        <select name="msgType" id="type" class="select" style="width:200px;height:31px;border-radius:4px;"
+                ng-model="cate_select">
+            <option value=0 selected="selected">{{"all"|translate}}</option>
+            <option value=1>{{"security"|translate}}</option>
+            <option value=2>{{"weather"|translate}}</option>
+            <option value=3>{{"emergency"|translate}}</option>
+        </select>
+
+        <button class="btn btn-success radius" id="" name="" ng-click="filterData()">
+            {{"search"|translate}}
+        </button>
+    </div>
+
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l">
+                <a href="javascript:;" class="btn btn-danger radius">
+                    {{"delete"|translate}}
+                </a>
+                <a href="javascript:;" class="btn btn-primary radius">
+                    {{"read"|translate}}
+                </a>
+            </span>
+        <span class="r" style="margin-top:8px">{{"alldata"|translate}}：<strong>{{count}}</strong> 条</span>
+    </div>
+    <table st-table="displayedCollection" st-safe-src="untops"
+           class="table table-border table-bordered table-hover table-bg table-sort table-striped">
+        <thead>
+        <tr>
+            <th scope="col" colspan="10">{{"inboxlist"|translate}}</th>
+        </tr>
+        <tr>
+            <th style="width:5%">
+                <div class="check-box">
+                    <input type="checkbox" id="selectAll">
+                </div>
+            </th>
+            <th style="text-align: center;width:5%">{{"Sender"|translate}}</th>
+            <th style="text-align: center;width:5%">{{"type"|translate}}</th>
+            <th style="text-align: center;width:5%">{{"detail"|translate}}</th>
+            <th style="text-align: center;width:45%">{{"title"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"sendtime"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"limittime"|translate}}</th>
+            <th style="text-align: center;width:5%">{{"status"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"operation"|translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- ---------------- 置顶标题区域 -------------------- -->
+        <tr class="text-c" ng-repeat="u in tops">
+            <td>
+                <input type="checkbox" class="chk" ng-model="u.selected">
+            </td>
+            <td>{{u.sender_name}}</td>
+            <td>{{getType(u.type)}}</td>
+            <td>{{getCate(u.category_type)}}</td>
+            <td style="text-align:left;">
+                <span class="label label-info" ng-show="u.is_return">需要回执</span>
+                <span class="label label-info" ng-show="u.top">置顶</span>
+                {{u.title}}
+            </td>
+            <td>{{u.send_time|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+            <td>{{u.invalid_time|date:"yyyy-MM-dd"}}</td>
+            <td>{{getStatus(u.isread)}}</td>
+            <td class="td-manage">
+                <div class="row">
+                    <div class="span3">
+                        <input type="button" class="size-MINI btn btn-primary  btnDetail" value={{"查看详情"|T}}
+                               ng-click="viewdetail(u.id,u.website_message_id)"/>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr class="text-c" ng-repeat="u in displayedCollection">
+            <td>
+                <input type="checkbox" class="chk" ng-model="u.selected">
+            </td>
+            <td ng-class="{true:gray_text,false:''}[u.is_invalid]">{{u.sender_name}}</td>
+            <td ng-class="{true:gray_text,false:''}[u.is_invalid]">{{getType(u.type)}}</td>
+            <td ng-class="{true:gray_text,false:''}[u.is_invalid]">{{getCate(u.category_type)}}</td>
+            <td ng-class="{true:gray_text,false:''}[u.is_invalid]" style="text-align:left;"><span
+                    class="label label-info" ng-show="u.is_return">需要回执</span><span class="label label-info"
+                                                                                    ng-show="u.is_invalid">已过期</span>{{u.title}}
+            </td>
+            <td ng-class="{true:gray_text,false:''}[u.is_invalid]">{{u.send_time|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+            <td ng-class="{true:gray_text,false:''}[u.is_invalid]">{{u.invalid_time|date:"yyyy-MM-dd"}}</td>
+            <td ng-class="{true:gray_text,false:''}[u.is_invalid]">{{getStatus(u.isread)}}</td>
+            <td class="td-manage">
+                <div class="row">
+                    <div class="span3">
+                        <input type="button" class="size-MINI btn btn-primary  btnDetail" value={{"查看详情"|T}} ng-click="viewdetail(u.id,u.website_message_id)" />
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="11" class="text-r" style="padding:0px;">
+                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+
+

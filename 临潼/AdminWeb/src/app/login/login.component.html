@@ -1,0 +1,26 @@
+<div id="MainDiv">
+  <div class="pen-title">
+    <h1>临潼气象服务后台管理</h1>
+  </div>
+  <div class="container active">
+    <div class="card"></div>
+    <div class="card">
+      <h1 class="title">Login</h1>
+      <form novalidate #pForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="input-container">
+          <input type="text" id="name" name="name" required="required" [(ngModel)]="vm.name"/>
+          <label for="name">Username</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input type="password" id="psw" name="psw" required="required" [(ngModel)]="vm.password"/>
+          <label for="psw">Password</label>
+          <div class="bar"></div>
+        </div>
+        <div class="button-container">
+          <button type="submit"><span>Go</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

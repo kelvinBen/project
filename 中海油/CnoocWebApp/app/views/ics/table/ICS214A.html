@@ -1,0 +1,97 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"personallog"|translate}}</li>
+    </ol>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics214ACtl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS {{"personallog"|translate}}</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"accidentname"|translate}}</td>
+                            <td><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"  ></td>
+                            <td>{{"operationalperiod"|translate}}</td>
+                            <td colspan="2">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;"  ng-model="starttime">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;"  ng-model="endtime">
+                            </td>
+                        </tr>
+                        <tr style="background: #efefef;">
+                            <td colspan="7" style="padding-left: 50px;">{{"actionrecord"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"Datetime"|translate}}</td>
+                            <td colspan="5">{{"eventnote"|translate}}</td>
+                            <td colspan="1">{{"edit"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resources">
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.time" e-name="time" e-form="rowform" >{{ user.time  }}</span>
+                            </td>
+                            <td colspan="5">
+                                <!-- editable status (select-local)-->
+                                <span editable-text="user.node" e-name="node"   e-form="rowform">{{ user.node }}</span>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tr>
+                            <td colspan="7" style="float: left;border: 0;">
+                                <button ng-click="addUser()" class="btn btn-default">{{"add"|translate}}</button>
+                            </td>
+                        </tr>
+                        <tfoot>
+                        <tr>
+                            <td>{{"preparename"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"  ng-model="model.esName"></td>
+                            <td>{{"prepareposition"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esPost"></td>
+                            <td>{{"preparesign"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} {{"personallog"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="1">{{"datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='2'><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esDate"></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 " style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}
+                    </button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

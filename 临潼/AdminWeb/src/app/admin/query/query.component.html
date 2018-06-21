@@ -1,0 +1,85 @@
+<ul class="breadcrumb">
+  <li class="active">气象数据查询</li>
+</ul>
+<div layout="column">
+  <div layout="row" class="pad">
+    <md-form-field style="width:130px;margin-top:7px;">
+      <input mdInput [mdDatepicker]="picker" placeholder="日期" [(ngModel)]="selTime">
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
+    </md-form-field>
+    <md-select style="padding-left:10px;" placeholder="时次" [(ngModel)]="selHour">
+      <md-option [value]='0'>00</md-option>
+      <md-option [value]='1'>01</md-option>
+      <md-option [value]='2'>02</md-option>
+      <md-option [value]='3'>03</md-option>
+      <md-option [value]='4'>04</md-option>
+      <md-option [value]='5'>05</md-option>
+      <md-option [value]='6'>06</md-option>
+      <md-option [value]='7'>07</md-option>
+      <md-option [value]='8'>08</md-option>
+      <md-option [value]='9'>09</md-option>
+      <md-option [value]='10'>10</md-option>
+      <md-option [value]='11'>11</md-option>
+      <md-option [value]='12'>12</md-option>
+      <md-option [value]='13'>13</md-option>
+      <md-option [value]='14'>14</md-option>
+      <md-option [value]='15'>15</md-option>
+      <md-option [value]='16'>16</md-option>
+      <md-option [value]='17'>17</md-option>
+      <md-option [value]='18'>18</md-option>
+      <md-option [value]='19'>19</md-option>
+      <md-option [value]='20'>20</md-option>
+      <md-option [value]='21'>21</md-option>
+      <md-option [value]='22'>22</md-option>
+      <md-option [value]='23'>23</md-option>
+    </md-select>
+    <div flex style="padding-left:10px;padding-top:7px;">
+      <button md-raised-button color="primary" (click)="query()">查询</button>
+      <button md-raised-button color="primary" (click)="export()">导出</button>
+    </div>
+  </div>
+  <md-card flex>
+    <ngx-datatable class="material" [rows]="cimissValueModels" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+      [rowHeight]="'auto'" [limit]="10">
+      <ngx-datatable-column prop="Station_Name" name="站名"  [width]="130">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Station_ID_C" name="区站号" [width]="100">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Datetime" name="时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTime(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="PRE_1h" name="过去1小时降水量">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="PRE_3h" name="过去3小时降水量">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="PRE_6h" name="过去6小时降水量">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM" name="气温"  [width]="100">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Max" name="最高气温"  [width]="110">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Max_OTime" name="最高气温出现时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTimeEx(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Min" name="最低气温" [width]="110">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Min_OTime" name="最低气温出现时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTimeEx(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="WIN_S_Inst_Max" name="极大风速" [width]="110">
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="WIN_S_INST_Max_OTime" name="极大风速出现时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTimeEx(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </md-card>
+</div>

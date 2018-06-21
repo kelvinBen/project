@@ -1,0 +1,25 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"setbrowsing"|translate}}</li>
+    </ol>
+</h3>
+<div class="container-fluid" ng-controller="publicinfoCtl">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{"publicbrower"|translate}}({{evtModel.name}} -- {{role.organization}})</h3>
+        </div>
+        <div class="panel-body">
+            <div text-angular="" ng-model="model.content" name="wysiswyg-editor" class="btn-group-small"></div>
+        </div>
+    </div>
+    <div class="row-fluid text-center">
+        <button type="button" class="btn btn-default" ng-click="$state.go('app.ics_eventindex')">
+            {{"cancel"|translate}}
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="save()">
+            {{"sure"|translate}}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container-fluid" ng-controller="eventinfolistCtrl">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <button type="button"  class="btn btn-danger" ng-click="add()">添加</button>
+            <div class="panel panel-default" style="margin-top: 10px;">
+                <div class="panel-heading">
+                    <span>任务表</span>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%;" ></th>
+                                <th  style="width:10%">事故名称</th>
+                                <th  style="width:10%">事故时间</th>
+                                <th  style="width:10%">作业周期</th>
+                                <th  style="width:10%">目标</th>
+                                <th  style="width:10%">策略</th>
+                                <!--<th  style="width:10%">任务名称</th>-->
+                                <!--<th  style="width:10%">描述</th>-->
+                                <!--<th  style="width:10%">注意事项</th>-->
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr ng-repeat="rr in items">
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>{{rr.eventname}}</td>
+                                <td>{{rr.time}}</td>
+                                <td>{{rr.cycle}}</td>
+                                <td>{{rr.aim}}</td>
+                                <td>{{rr.strategy}}</td>
+                                <!--<td>{{rr.name}}</td>-->
+                                <!--<td>{{rr.description}}</td>-->
+                                <!--<td>{{rr.notice}}</td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

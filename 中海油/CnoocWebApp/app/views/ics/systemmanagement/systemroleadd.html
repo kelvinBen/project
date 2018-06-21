@@ -1,0 +1,71 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">系统管理</a></li>
+    <li><a href="#">系统角色管理</a></li>
+    <li class="active">添加系统角色</li>
+</ol>
+<form action="" ng-controller="systemroleaddCtrl" ng-submit="submitForm()" >
+    <div class="row" >
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top:27px;">部门：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top: 20px;">
+                            <select name="account" class="form-control" ng-model="vm.department">
+                                <option>有限公司应急协调办公室</option>
+                                <option>有限公司应急指挥中心</option>
+                                <option>应急管理委员会</option>
+                                <option>应急协调办公室</option>
+                                <option>公共关系及法律支持组</option>
+                                <option>资源协调组</option>
+                                <option>财务及保险组</option>
+                                <option>后勤支持组</option>
+                                <option>应急管理专家组成员</option>
+                            </select>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top: 6px;">职务：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <select name="account" class="form-control" ng-model="vm.post">
+                                <option>主任</option>
+                                <option>副主任</option>
+                                <option>成员</option>
+                                <option>委员</option>
+                                <option>组长</option>
+                                <option>副组长</option>
+                                <option>组员</option>
+                            </select>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 6px;">姓名：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" class="form-control" ng-model="vm.name" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">办公电话：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control"  ng-model="vm.telephone"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">电话：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control" ng-model="vm.phone" />
+                        </div>
+                    </div>
+                </form>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-4 col-lg-offset-4" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">提交</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>

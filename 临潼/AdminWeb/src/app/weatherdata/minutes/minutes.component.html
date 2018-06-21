@@ -1,0 +1,70 @@
+<ul class="breadcrumb">
+  <li class="active">5分钟数据查询</li>
+</ul>
+<div layout="column">
+  <div layout="row" class="pad">
+    <md2-datepicker style="margin-left:-10px;" type="datetime" [(ngModel)]="selTime" placeholder="查询时间" format="y-MM-dd HH:mm"></md2-datepicker>
+
+    <div flex style="padding-left:10px;padding-top:7px;">
+      <button md-raised-button color="primary" (click)="query()">查询</button>
+      <button md-raised-button color="primary" (click)="export()">导出</button>
+    </div>
+  </div>
+  <md-card flex>
+    <ngx-datatable class="material" [rows]="cimissValueModels" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+      [rowHeight]="'auto'" [limit]="10">
+      <ngx-datatable-column prop="Station_Name" name="站名" [width]="130">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{getStationName(row.Station_Id_C)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Station_Id_C" name="区站号" [width]="100">
+      </ngx-datatable-column>
+      <!-- <ngx-datatable-column prop="Datetime" name="时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTime(value)}}
+        </ng-template>
+      </ngx-datatable-column> -->
+      <ngx-datatable-column prop="PRE" name="降水量">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{value > 99999?'///':value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM" name="气温" [width]="110">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{value > 99999?'///':value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Max" name="最高气温" [width]="110">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{value > 99999?'///':value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Max_OTime" name="最高气温出现时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTimeEx(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Min" name="最低气温" [width]="110">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{value > 99999?'///':value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="TEM_Min_OTime" name="最低气温出现时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTimeEx(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="WIN_S_Inst_Max" name="极大风速" [width]="110">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{value > 99999?'///':value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="WIN_S_INST_Max_OTime" name="极大风速出现时间">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{formatTimeEx(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </md-card>
+</div>

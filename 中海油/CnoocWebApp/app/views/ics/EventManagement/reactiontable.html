@@ -1,0 +1,95 @@
+<ol class="breadcrumb"  style="margin-top: -20px; margin-left: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+    <li class="active">{{"responseform"|translate}}</li>
+</ol>
+<div class="row" style="margin: 10px;" ng-controller="reactiontableCtrl">
+    <div class="col-sm-12 col-md-12 col-lg-12" >
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">{{"responseform"|translate}}</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-striped table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"emergencyeventname"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.name"></td>
+                            <td>{{"happentime"|translate}}</td>
+                            <td><input type="date" style="border: 0;width: 100%;height: 100%; width: 100%" ng-model="dt"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"incidentplace"|translate}}</td>
+                            <td><select name="" id="" style="border: none; width: 100%;" ng-model="vm.data.locate">
+                                <option value="伊拉克">{{"Iraq"|translate}}</option>
+                                <option value="印尼">{{"Indonesia"|translate}}</option>
+                                <option value="巴西">{{"Brazil"|translate}}</option>
+                            </select></td>
+                            <td>{{"accidentnature"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"longitude"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"ng-model="vm.data.lon"></td>
+                            <td>{{"latitude"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"ng-model="vm.data.lat"></td>
+                        </tr>
+                        <tr style="height: 120px;">
+                            <td style="vertical-align: middle;">{{"eventbrief"|translate}}</td>
+                            <td colspan='3';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"calledtime"|translate}}</td>
+                            <td><input type="data" style="border: 0;width: 100%;height: 100%; width: 100%"></td>
+                            <td>{{"calledperson"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"interstarttime"|translate}}</td>
+                            <td><input type="date" style="border: 0;width: 100%;height: 100%; width: 100%;"></td>
+                            <td>{{"commandcenter"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"corporation"|translate}}</td>
+                            <td><input type="date" style="border: 0;width: 100%;height: 100%; width:100%"></td>
+                            <td>{{"dutyroom"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"communicationscheck"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"expertcontact"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"Informationdelivery"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"Partners"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"aheadinfo"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"superior"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr style="height: 120px;">
+                            <td style="vertical-align: middle;" >{{"personnelsignature"|translate}}</td>
+                            <td colspan='3';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr style="height: 120px;">
+                            <td style="vertical-align: middle;" >{{"responserecord"|translate}}</td>
+                            <td colspan='3';><input type="text" style="border:0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

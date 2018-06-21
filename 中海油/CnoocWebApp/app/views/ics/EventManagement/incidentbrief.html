@@ -1,0 +1,57 @@
+<div class="row" style="margin: 10px;">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading font-bold" style="text-align: center;">
+                {{"eventwrite"|translate}}
+            </div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"accidentname"|translate}}</td>
+                            <td><input  type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"operationalperiod"|translate}}</td>
+                            <td colspan="2">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;">
+                            </td>
+                        </tr>
+                        <tr style="height: 200px;">
+                            <td colspan="7"  rowspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" placeholder="地图/草图（包括草图，能反映作业整体区域、事故现场/区域、受影响和受威胁的区域及飞行勘查的结果、轨迹、受影响的海岸线或其它能描述当时状况和资源分配的图形）"></td>
+                        </tr>
+                        <tr></tr>
+                        <tr  style="height: 120px;">
+                            <td colspan="7" rowspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" placeholder="情况总结和健康安全简报(为事故简报或指令传达)：识别健康安全隐患并制定必要的应对措施（消除危害、配备劳保用品、危害警示）来保护应急反应人员不受这些危害的影响。"></td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>{{"preparename"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2">{{"prepareposition"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"preparesign"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="3">{{"incidentchart"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="1">{{"datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='3';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div style="margin: 10px;text-align: left">
+                    <button type="submit" class="btn btn-default">{{"remove"|translate}}</button>
+                    <button type="submit" class="btn btn-success" ng-click="save()">{{"save"|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

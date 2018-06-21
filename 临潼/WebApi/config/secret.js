@@ -1,0 +1,1 @@
+exports.secretToken = 'aMdoeb5ed11zorRdkD5greDML81DcnrzeSD737ferFejmplx';

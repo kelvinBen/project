@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>Angular Esri Quick Start</title>
+
+    <link rel="stylesheet" href="../../../arcgis4/esri/css/main.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <style type="text/css">
+        html,
+        body,
+        .panel {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .panel-body {
+            padding: 0;
+            margin: 0;
+            height: 93%;
+            width: 100%;
+        }
+
+        .esri-view {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .risk_red {
+            color: #ffffff;
+            background-color: #ff0000;
+            border-color: #f04b4b;
+        }
+
+        .risk_red:focus,
+        .risk_red.focus {
+            color: #ffffff;
+            background-color: #ff0000;
+            border-color: #ec2626;
+        }
+
+        .risk_red:hover {
+            color: #ffffff;
+            background-color: #ff0000;
+            border-color: #ec2626;
+        }
+
+        .risk_orange {
+            color: #ffffff;
+            background-color: #FF6600;
+            border-color: #e76915;
+        }
+
+        .risk_orange:focus,
+        .risk_orange.focus {
+            color: #ffffff;
+            background-color: #FF6600;
+            border-color: #e76915;
+        }
+
+        .risk_orange:hover {
+            color: #ffffff;
+            background-color: #FF6600;
+            border-color: #e76915;
+        }
+
+        .risk_yellow {
+            color: #2d2a2a;
+            background-color: #FFFF00;
+            border-color: #f0f020;
+        }
+
+        .risk_yellow:focus,
+        .risk_yellow.focus {
+            color: #2d2a2a;
+            background-color: #FFFF00;
+            border-color: #f0f020;
+        }
+
+        .risk_yellow:hover {
+            color: #2d2a2a;
+            background-color: #FFFF00;
+            border-color: #f0f020;
+        }
+
+        .risk_blue {
+            color: #ffffff;
+            background-color: #0000FF;
+            border-color: #0909eb;
+        }
+
+        .risk_blue:focus,
+        .risk_blue.focus {
+            color: #ffffff;
+            background-color: #0000FF;
+            border-color: #0909eb;
+        }
+
+        .risk_blue:hover {
+            color: #ffffff;
+            background-color: #0000FF;
+            border-color: #0909eb;
+        }
+    </style>
+</head>
+
+<body ng-controller="MapController">
+    <div class="panel-body">
+        <esri-map-view map="map" view-options="{extent:{xmin:-180,ymin:-90,xmax:180,ymax:90}}">
+        </esri-map-view>
+    </div>
+    <script src="../../../arcgis4/init.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../../bower_components/angular/angular.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../../bower_components/angular-esri-map/dist/angular-esri-map.js" charset="utf-8" type="text/javascript"></script>
+    <!--<script src="../../../js/service/eventservices.js" charset="utf-8" type="text/javascript"></script>-->
+    <script type="text/javascript">
+    angular.module('esri-map-example', ['esri.map'])
+        .service('world', ['$q', '$http', function ($q, $http) {
+            return {
+                get: function () {
+                    var deferred = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '../../../../server/world.json'
+                    }).success(function (data, status, headers, config) {
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+                    return deferred.promise;
+                }
+            }
+        }])
+        .service('eventservice', ['$q', '$http', function ($q, $http) {
+            var memURL = '../../../icsapi/event/';
+            return {
+                get: function () {
+                    var deferred = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: memURL
+                    }).success(function (data, status, headers, config) {
+                        //console.log('getProvince===='+JSON.stringify(data));
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+                    return deferred.promise;
+                },
+                getdetail: function (id) {
+                    var deferred = $q.defer();
+                    var url = memURL + id;
+                    $http({
+                        method: 'GET',
+                        url: url
+                    }).success(function (data, status, headers, config) {
+                        //console.log('getProvince===='+JSON.stringify(data));
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+                    return deferred.promise;
+                },
+                add: function (data) {
+                    var deferred = $q.defer();
+                    $http({
+                        method: 'POST',
+                        url: memURL,
+                        data: data,
+                    }).success(function (data, status, headers, config) {
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+                    return deferred.promise;
+                },
+                delete: function (id) {
+                    var deferred = $q.defer();
+                    var url = memURL + id;
+                    $http({
+                        method: 'DELETE',
+                        url: url,
+                    }).success(function (data, status, headers, config) {
+                        //console.log('getProvince===='+JSON.stringify(data));
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+                    return deferred.promise;
+                },
+                update: function (id, data) {
+                    var deferred = $q.defer();
+                    var url = memURL + id;
+                    $http({
+                        method: 'PUT',
+                        url: url,
+                        data: data
+                    }).success(function (data, status, headers, config) {
+                        //console.log('getProvince===='+JSON.stringify(data));
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+                    return deferred.promise;
+                }
+            }
+        }])
+        .controller('MapController', function ($scope, $http, esriLoader, world, eventservice, eventtables) {
+            $scope.riskColors = ['#ff0000', '#FF6600', '#FFFF00', '#0000FF'];
+            $scope.map = null;
+            $scope.eventlist = [];
+            // $scope.warningList = null;
+            $scope.worldJson = null;
+
+            world.get().then(function (d) { //世界国家地图
+                $scope.worldJson = d;
+                $scope.getevent();
+
+            });
+
+            $scope.getevent = function () {
+                eventservice.get().then(function (data) {
+                    $scope.eventlist = data;
+                    eventtables.get().then(function (data) {
+                        angular.forEach($scope.eventlist, function (item, index) {
+                            angular.forEach(data, function (item2, index2) {
+                                if (item.id == item2.eventid) {
+                                    var data = angular.fromJson(item2.datajson);
+                                    if (data.lon) {
+                                        item.lon = data.lon;
+                                    }
+                                    if (data.lat) {
+                                        item.lat = data.lat;
+                                    }
+                                }
+                            });
+                        });
+                        $scope.createMap();
+                    });
+
+                });
+            };
+
+            $scope.createMap = function () {
+                esriLoader.require(['esri/views/MapView', 'esri/Map', 'esri/Graphic', 'esri/symbols/SimpleFillSymbol', 'esri/layers/GraphicsLayer', 'esri/geometry/Polygon', 'esri/geometry/Point', 'esri/symbols/SimpleMarkerSymbol', 'esri/PopupTemplate'],
+                    function (MapView, Map, Graphic, SimpleFillSymbol, GraphicsLayer, Polygon, Point, SimpleMarkerSymbol, PopupTemplate) {
+                        $scope.map = new Map({
+                            logo: false
+                        });
+                        var fillSymbol = new SimpleFillSymbol({
+                            color: [187, 190, 198, 0.8],
+                            outline: { // autocasts as new SimpleLineSymbol()
+                                color: [255, 255, 255, 0.5],
+                                width: 1
+                            }
+                        });
+                        var polygons = $scope.createWorld(SimpleFillSymbol, Polygon, Graphic);
+                        var layer = new GraphicsLayer({
+                            graphics: polygons
+                        });
+                        $scope.map.add(layer);
+
+                        //var layer_event = new GraphicsLayer();
+                        var pts = $scope.createEventPoint(Point, SimpleMarkerSymbol, Graphic, PopupTemplate);
+                        $scope.layer2 = new GraphicsLayer({
+                            graphics: pts
+                        });
+                        $scope.map.add($scope.layer2)
+
+                        //$scope.layer2.on("load", function(){
+                        // $scope.layer2.enableMouseEvents();
+                        //$scope.map.graphics.on("mouse-out", closeDialog);
+                        $scope.layer2.on("mouse-over", function (mouseEvent) {
+                            //var zm =$scope.map.getZoom();
+                            if (mouseEvent.graphic != null) {
+                                var data = mouseEvent.graphic.attributes;
+                                // var url = datas.url;
+                                // url+="/";
+                                //url += item.organiztion_id;
+                                //var content = "<iframe  src=\"{0}\" frameborder=\"0\" width=\"420\" height=\"170\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\"></iframe>";
+                                //var content = "<iframe  src=\"{0}\" frameborder=\"0\"  marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\"></iframe>";
+                                //content = String.format(content, url);
+                                var content = "成立时间:" + $filter('date')(data.create_time, 'yyyy-MM-dd') + "</br>" +
+                                    "办公室位置:" + data.locate + "</br>" +
+                                    "项目所处阶段:" + data.stage + "</br>" +
+                                    "设施状况:" + data.status + "</br>" +
+                                    "设施数量:平台 " + data.plate_num + " 陆地设施: " + data.utility_num + "</br>" +
+                                    "应急设备配置:" + data.emerg_utility + "</br>" +
+                                    "所属公司:" + data.company;
+
+                                $scope.map.infoWindow.setContent(content);
+                                $scope.map.infoWindow.setTitle("项目名称:" + data.name);
+                                //$scope.map.infoWindow.resize(460, 200);
+                                //map.infoWindow.show(pt);
+                                $scope.map.infoWindow.show(mouseEvent.graphic.geometry);
+                            }
+                        });
+
+                        $scope.layer2.on("mouse-out", function (mouseEvent) {
+                            $scope.map.infoWindow.hide();
+                        });
+                        //});
+
+
+                        //$scope.map.graphics.enableMouseEvents();
+                        // $scope.map.graphics.on("mouse-out", closeDialog);
+                        //$scope.map.graphics.on("mouse-out", function(mouse));
+
+
+
+                    });
+            };
+
+            $scope.createEventPoint = function (Point, SimpleMarkerSymbol, Graphic, PopupTemplate) {
+                var ary = [];
+                var sym = null;
+                //var data = $scope.worldJson;
+                angular.forEach($scope.eventlist, function (item, i) { //country polygon
+                    if (item.lon) {
+                        sym = new SimpleMarkerSymbol({
+                            style: "square",
+                            color: "blue",
+                            size: "20px",  // pixels
+                            outline: {  // autocasts as esri/symbols/SimpleLineSymbol
+                                color: [255, 255, 0],
+                                width: 1  // points
+                            }
+                        });
+
+                        if (item.grade == 3) {
+                            sym.color = "red";
+                        }
+                        else if (item.grade == 2) {
+                            sym.color = "cyan";
+                        }
+                        else if (item.grade == 1) {
+                            sym.color = "yellow";
+                        }
+
+                        var p = new Point(item.lon, item.lat);
+
+                        //var content = item.name;
+
+                        var template = new PopupTemplate({
+                            // ZIP is the name of a field in the service containing the zip code number of the feature
+                            title: "Marriage in NY, Zip Code: {ZIP}"
+                        });
+                        template.title = item.name;
+                        template.content = [{ type: "text", text: "开始时间" }];
+
+                        var pointGraphic = new Graphic({
+                            popupTemplate: template,
+                            geometry: p,
+                            symbol: sym
+                            //symbol: $scope.createSimpleFillSymbol(SimpleFillSymbol, item.properties.id)
+                        });
+                        ary.push(pointGraphic);
+                    }
+
+                });
+                return ary;
+            };
+
+            // $scope.createMap();
+
+            $scope.createSimpleFillSymbol = function (SimpleFillSymbol, id) {
+                if (!id) {
+                    return new SimpleFillSymbol({
+                        color: [187, 190, 198, 0.8],
+                        outline: { // autocasts as new SimpleLineSymbol()
+                            color: [255, 255, 255, 0.5],
+                            width: 1
+                        }
+                    });
+                }
+                //                    for (var i = 0; i < $scope.warningList.length; ++i) {
+                //                        var item = $scope.warningList[i];
+                //                        if (item.id == id) {
+                //                            var col = [0, 0, 255, 0.8];
+                //                            if (item.risk > 0.28)
+                //                                col = [255, 255, 0, 0.8];
+                //                            if (item.risk > 0.52)
+                //                                col = [255, 102, 0, 0.8];
+                //                            if (item.risk > 0.76)
+                //                                col = [255, 0, 0, 0.8];
+                //                            return new SimpleFillSymbol({
+                //                                color: col,
+                //                                outline: { // autocasts as new SimpleLineSymbol()
+                //                                    color: [255, 255, 255, 0.5],
+                //                                    width: 1
+                //                                }
+                //                            });
+                //                        }
+                //                    }
+            };
+            $scope.createWorld = function (SimpleFillSymbol, Polygon, Graphic) {
+                var ary = [];
+                var data = $scope.worldJson;
+                angular.forEach(data.features, function (item, i) { //country polygon
+                    var p = new Polygon();
+                    var n = item.properties.childNum;
+                    if (n > 1) {
+                        var coordinates = item.geometry.coordinates;
+                        angular.forEach(coordinates, function (coord) {
+                            if (coord.length != 1) {
+                                p.addRing(coord);
+                            } else {
+                                p.addRing(coord[0]);
+                            }
+                        })
+                    } else {
+                        p.addRing(item.geometry.coordinates[0]);
+                    }
+                    var polygonGraphic = new Graphic({
+                        popupTemplate: null,
+                        geometry: p,
+                        symbol: $scope.createSimpleFillSymbol(SimpleFillSymbol, item.properties.id)
+                    });
+                    ary.push(polygonGraphic);
+                });
+                return ary;
+            };
+            $scope.createLayer = function (polygons, fields, FeatureLayer) {
+                var ly = new FeatureLayer({
+                    fields: fields,
+                    source: polygons,
+                    geometryType: "polygon",
+                    spatialReference: {
+                        wkid: 4326
+                    }
+                });
+                $scope.map.add(ly);
+            };
+
+        });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a href="#">{{"emergencymanagement"|translate}}</a></li>
+    <li class="active">{{"eventview"|translate}}</li>
+</ol>
+<div class="container-fluid" ng-controller="viewCtrl as tree">
+    <div class="row">
+       <div class="row" ng-hide="true">
+           <div class="col-sm-5 col-md-5 col-lg-5">
+               <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right;margin-top: 6px;">{{"eventstarttime"|translate}}：</label>
+               <div class="col-sm-5 col-md-5 col-lg-5">
+                   <input type="date" class="form-control" ng-model="vm.startDate" />
+               </div>
+               <div class="col-sm-5 col-md-5 col-lg-5">
+                   <input type="time" class="form-control" ng-model="vm.starttime" />
+               </div>
+           </div>
+           <div class="col-sm-5 col-md-5 col-lg-5">
+               <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 6px;">{{"eventendtime"|translate}}：</label>
+               <div class="col-sm-5 col-md-5 col-lg-5">
+                   <input type="date" class="form-control" ng-model="vm.endDate" />
+               </div>
+               <div class="col-sm-5 col-md-5 col-lg-5">
+                   <input  type="time" class="form-control" ng-model="vm.endtime" />
+               </div>
+           </div>
+           <div class="col-sm-2 col-md-2 col-lg-2">
+               <button type="button" class="btn btn-success" ng-click="add()" title="查询">
+                   <em class="fa fa-search">&nbsp;{{"query"|translate}}</em>
+               </button>
+           </div>
+       </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="well wd-wide">
+                    <span ng-if="tree.doing_async">...loading...</span>
+                    <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9" ui-view>
+
+            </div>
+        </div>
+    </div>
+</div>

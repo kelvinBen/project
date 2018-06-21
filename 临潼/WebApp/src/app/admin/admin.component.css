@@ -1,0 +1,84 @@
+#main { display: flex; }
+#main > article { flex:1; order: 2; }
+#main > nav     { width: 250px;   order: 1; }
+
+.toolbar {
+    position: relative;
+    /*margin: 0 -30px;*/
+    padding: 0 30px;
+    color: #ffffff;
+    background: rgba(16, 108, 200, 0.9);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+.toolbar h3 {
+    margin: 0;
+    padding: 16px 0;
+    line-height: 28px;
+}
+
+.toolbar .source-code {
+    float: right;
+    fill: currentColor;
+    color: #ffffff;
+}
+
+h3 {
+    display: block;
+    font-size: 28px;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+[button] {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  background: transparent;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0 16px;
+  margin: 6px 8px;
+  min-width: 88px;
+  line-height: 36px;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  color: rgba(0, 0, 0, 0.9);
+  background-color: #fafafa; }
+  [button]:hover, [button]:focus {
+    text-decoration: none; }
+  [button]:active {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4); }
+  [button][disabled] {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.8;
+    box-shadow: none; }
+  [button][button="primary"] {
+    color: #ffffff;
+    background: #106CC8; }
+  [button][class*="block"] {
+    width: 100%; }
+  [button][class*="large"] {
+    font-size: 16px;
+    padding: 0 12px;
+    min-width: 128px;
+    line-height: 48px;
+    border-radius: 4px; }

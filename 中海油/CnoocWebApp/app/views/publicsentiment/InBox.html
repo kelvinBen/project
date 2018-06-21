@@ -1,0 +1,39 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"publicsentiment"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" style="background-color:#ffffff;" ng-controller="inboxCtl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>
+                {{'outboxlist'|translate}}
+            </h4>
+        </div>
+        <div class="panel-body">
+            <table datatable="ng" class="table table-border table-bordered table-hover table-bg table-striped">
+                <thead class="text-c">
+                <tr>
+                    <th>{{"Sender"|translate}}</th>
+                    <th>{{"content"|translate}}</th>
+                    <th>{{"sendtime"|translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-c" ng-repeat="u in messages">
+                    <td>{{u.SrcMobile}}</td>
+                    <td>{{u.Content}}</td>
+                    <td>{{u.RecvTime}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

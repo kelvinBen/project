@@ -1,0 +1,54 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li  class="active">
+            <span>{{ 'systemlog' | translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="systemlogCtl">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ 'systemlog' | translate}}</h3>
+      </div>
+      <div class="panel-body">
+          <table datatable="ng" class="table table-bordered table-hover table-striped tablecontent">
+              <thead>
+                  <tr>
+                      <th>
+                          {{'date'|translate}}
+                      </th>
+                      <th>
+                          {{'callmode'|translate}}
+                      </th>
+                      <th>
+                          {{'callinterface'|translate}}
+                      </th>
+                      <th>
+                          {{'userid'|translate}}
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="u in logs">
+                      <td>
+                          {{u.time}}
+                      </td>
+                      <td>
+                          {{u.method}}
+                      </td>
+                      <td>
+                          {{u.url}}
+                      </td>
+                      <td>
+                          {{u.userid}}
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+</div>

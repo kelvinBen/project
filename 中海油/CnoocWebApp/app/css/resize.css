@@ -1,0 +1,15 @@
+
+
+#sidebar-resizer {
+    background-color: #5D9CEC;
+    position: absolute;
+    top: 2px;
+    bottom: 0;
+    left: 200px;
+    width: 6px;
+    cursor: e-resize;
+}
+
+#sidebar-resizer:hover, #preview-resizer:hover {
+    background-color: #AAA;
+}

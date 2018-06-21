@@ -1,0 +1,298 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"intimemess"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="InstantController">
+    <uib-accordion close-others="false">
+        <uib-accordion-group is-open="true" panel-class="panel-primary">
+            <uib-accordion-heading>
+                {{"warnstatus"|translate}}
+            </uib-accordion-heading>
+            <div>
+                <table class="table table-bordered">
+                    <tr class="text-center">
+                        <td>
+                            {{"country"|translate}}
+                        </td>
+                        <td ng-repeat="w in warningList">
+                            {{w.zh}}
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td>
+                            {{"todaywarnlevel"|translate}}
+                        </td>
+                        <td ng-repeat="w in warningList" bgcolor='{{getgradebkcolor(w.grade)}}'>
+                            {{getGrade(w.grade)}}
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td>
+                             {{"todaywarnnum"|translate}}
+                        </td>
+                        <td ng-repeat="w in warningList">
+                            {{getdwli(w.dwli)}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </uib-accordion-group>
+        <div class="panel panel-default">
+          <div class="panel-body">
+          <form class="form-inline">
+              <div class="form-group">
+                  <select class="form-control select" name="country" ng-model="countryServer.selCountry"
+                  ng-options="a.country_id as a.name for a in countryList" style="width: 200px;"
+                  ng-change="coungryChange()">
+                  </select>
+              </div>
+          </form>
+          </div>
+        </div>
+        <uib-accordion-group is-open="true" panel-class="panel-primary">
+            <uib-accordion-heading>{{"currentwarn"|translate}}</uib-accordion-heading>
+            <div>
+                <div class="row-fluid">
+                    <div class="col-xs-6 text-left" style="padding-left: 0px;">
+                        <button type="button" class="btn btn-danger" ng-click="releaseFun()">
+                            <i class="fa fa-pencil"></i>{{"releasewarn"|translate}}
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="relieveFun()">
+                            <i class="fa fa-close"></i>{{"relievewarn"|translate}}
+                        </button>
+                    </div>
+                    <!-- <div class="col-xs-6 text-right" style="padding-right: 0px;">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-search"></i>有效期事件
+                        </button>
+                    </div> -->
+                </div>
+                <div style="margin:10px">
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td style="width: 50%">
+                            <div ng-repeat="w in waringPrompt" style="padding-bottom: 5px;">
+                                <span class="label label-info radius">
+                                    {{w}}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div  style="padding-bottom: 5px;">
+                                <span class="label label-warning radius">
+                                    {{showEventPrompt}}
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <!-- <div ng-repeat="w in waringPrompt" style="padding-bottom: 5px;">
+                    <span class="label label-info radius">
+                        {{w}}
+                    </span>
+                </div> -->
+                <div style="margin:5px">
+                </div>
+                <div class="row-fluid">
+                    <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse">
+                        <tr class="text-center">
+                            <td style="width:80px">{{"warnlevel"|translate}}</td>
+                            <td style="width:80px">{{"coloridentify"|translate}}</td>
+                            <td>{{"nationcompanyaction"|translate}}</td>
+                            <td>{{"overseaorgaction"|translate}}</td>
+                            <td>{{"staffaction"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="u in waringLevel">
+                            <td class="text-center">{{u.level}}</td>
+                            <td class="text-center"><img ng-src="app/img/jibie{{u.level}}.png" /></td>
+                            <td><span string-html="u.international"></span></td>
+                            <td><span string-html="u.overseas"></span></td>
+                            <td><span string-html="u.employee"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </uib-accordion-group>
+        <uib-accordion-group is-open="true" panel-class="panel-primary">
+            <uib-accordion-heading>{{"eventlist"|translate}}</uib-accordion-heading>
+            <div>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input date-range-picker class="form-control date-picker" type="text" ng-model="countryServer.eventRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" ng-click="searchEvents()">
+                            <i class="fa fa-search"></i>{{"query"|translate}}
+                        </button>
+                    </div>
+                </form>
+                <div style="margin: 10px">
+                </div>
+                <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" datatable="ng">
+                    <thead>
+                        <tr>
+                            <th style="width:60px">{{"date"|translate}}</th>
+                            <th style="width:60px">
+                                {{"limitdate"|translate}}
+                            </th>
+                            <th style="width:60px">{{"country"|translate}}</th>
+                            <th>{{"title"|translate}}</th>
+                            <th>{{"eventwarn"|translate}}</th>
+                            <!--<th style="min-width:50px;">{{"resourcefrom"|translate}}</th>-->
+                            <th style="width:100px">{{"startemergency"|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in eventList">
+                            <td>{{u.event_date | dateFormatter}}</td>
+                            <td>{{u.expirytime | dateFormatter}}</td>
+                            <td>{{u.cname}}</td>
+                            <td>{{u.title}}</td>
+                            <td>
+                                <a ng-hide="showUrl(u.source)" href="{{u.source}}" target="_blank">{{u.content | limitTo : 100}}</a>
+                                
+                                <div ng-show="showUrl(u.source)">{{u.content | limitTo : 100}}</div>
+                            </td>
+                            <td class="text-center">
+                                <a type="button" class="btn btn-sm btn-info" title={{"startemergency"|translate}} ng-click="send()">
+                                    <i class="fa fa-send-o"></i>
+                                </a>
+                                <a type="button" class="btn btn-sm btn-info" title={{"startemergency"|translate}} ng-click="sendEx(u)">
+                                    <i class="fa icon-phone"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </uib-accordion-group>
+    </uib-accordion>
+    <!-- <div class="row">
+        <div class="col-xs-3" style="padding-right:5px;">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                预警状态统计
+              </div>
+              <div class="panel-body" style="padding: 0px;">
+                  <div ng-include="'app/views/SecuritySystem/riskandgradetable.html'"></div>
+              </div>
+            </div>
+        </div>
+        <div class="col-xs-9" style="padding-left:5px;">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    警讯即时短讯
+                </div>
+                <div class="panel-body">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <select class="form-control select" name="country" ng-model="selCountry" ng-options="a.country_id as a.name for a in countryList" style="width: 200px;" ng-change="coungryChange()">
+                            </select>
+                        </div>
+                    </form>
+                    <div style="margin: 10px;"></div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            当前预警级别
+                        </div>
+                        <div class="panel-body">
+                            <div class="row-fluid">
+                                <button type="button" class="btn btn-danger" ng-click="releaseFun()">
+                                    <i class="fa fa-pencil"></i>发布预警
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="relieveFun()">
+                                    <i class="fa fa-close"></i>解除预警
+                                </button>
+                            </div>
+                            <div style="margin:10px">
+                            </div>
+                            <div ng-repeat="w in waringPrompt" style="padding-bottom: 5px;">
+                                <span class="label label-info radius">
+                                    {{w}}
+                                </span>
+                            </div>
+                            <div style="margin:5px">
+                            </div>
+                            <div class="row-fluid">
+                                <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse">
+                                    <tr>
+                                        <td style="width:80px">预警级别</td>
+                                        <td style="width:80px">预警色标</td>
+                                        <td>国际公司行动</td>
+                                        <td>海外机构行动</td>
+                                        <td>员工行动</td>
+                                    </tr>
+                                    <tr class="text-center" ng-repeat="u in waringLevel">
+                                        <td>{{u.level}}</td>
+                                        <td><img ng-src="app/img/jibie{{u.level}}.png" /></td>
+                                        <td><span string-html="u.international"></span></td>
+                                        <td><span string-html="u.overseas"></span></td>
+                                        <td><span string-html="u.employee"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            事件列表
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <input date-range-picker class="form-control date-picker" type="text" ng-model="eventRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" ng-click="searchEvents()">
+                                        <i class="fa fa-search"></i>查询
+                                    </button>
+                                </div>
+                            </form>
+                            <div style="margin: 10px">
+                            </div>
+                            <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" datatable="ng">
+                                <thead>
+                                    <tr>
+                                        <th style="width:90px">日期</th>
+                                        <th style="width:100px">国家</th>
+                                        <th>事件及预警</th>
+                                        <th style="min-width:50px;">来源</th>
+                                        <th style="width:90px">
+                                            有效期
+                                        </th>
+                                        <th style="width:100px">查看详情</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="u in eventList">
+                                        <td>{{u.event_date | dateFormatter}}</td>
+                                        <td>{{u.cname}}</td>
+                                        <td>{{u.content | limitTo : 20}}</td>
+                                        <td><a ng-href="{{u.source}}" target="_blank">{{u.source  | limitTo : 20}}</a></td>
+                                        <td>{{u.expirytime | dateFormatter}}</td>
+                                        <td class="text-center">
+                                            <a type="button" class="btn btn-sm btn-info" title="查看详情" ng-click="viewDetails(u.event_id)">
+                                                <i class="fa fa-file-o"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

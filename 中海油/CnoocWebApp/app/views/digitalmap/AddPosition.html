@@ -1,0 +1,92 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{'digitalmap'|translate}}</a>
+        </li>
+        <li>
+            <span>{{"positionmanage"|translate}}</span>
+        </li>
+        <li>
+            <span>{{'addposition'|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="AddPositionCtrl" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset class="b0">
+                            <legend>{{'addposition'|translate}}</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'positionname'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.name" class="form-control" />
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'positiontype'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.type" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'thecompany'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <select name="select" required="" ng-model="vm.organiztion" class="form-control" ng-options="t.organiztion_name for t in organiztions" ng-change="filterproject()">
+                                    </select>
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'planpic'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <img src={{imgsrc}} width="100" height="100"/>
+                                    <input type="file" nv-file-select="" uploader="uploader" multiple/>
+                                    <button class="btn btn-success radius" ng-click="uploadPic(picFile)"><i class="icon-ok"></i>{{"upload"|translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'longitude'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.lon" class="form-control" />
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'latitude'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="sometext" required="" ng-model="vm.lat" class="form-control" />
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="panel-footer text-center">
+                        <button class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                        <button type="submit" class="btn btn-info">{{'submit'|translate}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

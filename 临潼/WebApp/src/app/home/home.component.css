@@ -1,0 +1,44 @@
+.bannerContainer {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+
+.bannerPicList {
+  padding: 0px;
+  width: 303px;
+  height: 234px;
+}
+
+.bannerPicList li {
+  display: none;
+  margin-left: 0px;
+}
+
+.bannerPicList li.active {
+  display: block;
+}
+
+.bannerBtnList {
+  position: absolute;
+  top: 540px;
+  left: 0px;
+  z-index: 10001;
+  margin-left: 21%;
+}
+
+.bannerBtnList li {
+  float: left;
+  margin: 0 5px;
+  list-style-type: none;
+}
+
+.bannerBtnList span.picBtn {
+  margin: 5px;
+  height: 10px;
+  width: 10px;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}

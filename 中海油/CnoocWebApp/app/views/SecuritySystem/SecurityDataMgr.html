@@ -1,0 +1,208 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"trainadvicemgr"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="curseMgrController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"classmgr"|translate}}
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid text-right">
+                <button type="button" class="btn btn-primary" ng-click="addCurse()">
+                    <i class="fa fa-plus-square-o"></i>{{"addclass"|translate}}
+                </button>
+            </div>
+            <div style="margin:10px;">
+            </div>
+            <table class="table table-border table-bordered table-hover table-bg table-striped" style="border-collapse:collapse" datatable="ng">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            {{"num"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"classname"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"classnote"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"operation"|translate}}
+                        </th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="c in curses" class="text-center">
+                    <td>
+                        {{$index + 1}}
+                    </td>
+                    <td>
+                        {{ c.name }}
+                    </td>
+                    <td>
+                        {{ c.note }}
+                    </td>
+                    <td>
+                        <a href="javascript:;" title="{{'edit' | translate}}" ng-click="editCurse(c)">
+                            <em class="fa fa-edit"></em>
+                        </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:;" title="{{'singledelete' | translate}}" ng-click="delCurse(c.course_id)">
+                            <em class="fa fa-trash-o"></em>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"classdesign"|translate}}
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid">
+                <div class="col-xs-6 form-group">
+                    <select class="select form-control" ng-model="person" ng-options="a.person_id as a.name for a in persons">
+                    </select>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <button type="button" class="btn btn-primary" ng-click="curseDesign()">
+                        <i class="fa fa-plus-square-o"></i>{{"classdesign"|translate}}
+                    </button>
+                </div>
+            </div>
+            <div style="margin:10px;">
+            </div>
+            <table class="table table-border table-bordered table-hover table-bg table-striped" style="border-collapse:collapse" datatable="ng">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            {{"num"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"classname"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"Required"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"operation"|translate}}
+                        </th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="c in selUserCurses" class="text-center">
+                    <td>
+                        {{$index + 1}}
+                    </td>
+                    <td>
+                        {{ curseName(c.course_id) }}
+                    </td>
+                    <td>
+                        <span class="label radius label-primary" ng-show="c.select_type==1">{{"Require"|translate}}</span>
+                        <span class="label radius label-success" ng-show="c.select_type==0">{{"Elective"|translate}}</span>
+                    </td>
+                    <td>
+                        <a href="javascript:;" title="{{'edit' | translate}}" ng-click="editCurseDesign(c)">
+                            <em class="fa fa-edit"></em>
+                        </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:;" title="{{'singledelete' | translate}}" ng-click="delDesignCurse(c.id)">
+                            <em class="fa fa-trash-o"></em>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script type="text/ng-template" id="addDlg">
+        <div class="panel panel-primary" style="margin-bottom: 0px;">
+          <div class="panel-heading">
+            <!--<h3 class="panel-title">{{'addclass' | translate}}</h3>-->
+            <h3 class="panel-title">编辑</h3>
+          </div>
+          <div class="panel-body">
+              <div class="row-fluid form-group">
+                <label for="">{{"classname"|translate}}</label>
+                <input type="text" class="form-control" ng-model="vm.name">
+              </div>
+              <div class="row-fluid form-group">
+                <label for="">{{"classnote"|translate}}</label>
+                <textarea name="name" rows="3" cols="40" class="form-control" ng-model="vm.note"></textarea>
+              </div>
+          </div>
+          <div class="panel-footer text-center">
+              <button type="button" class="btn btn-default" ng-click="close()">
+                  {{'cancel' | translate}}
+              </button>
+              <button type="button" class="btn btn-primary" ng-click="ok()">
+                  {{'submit' | translate}}
+              </button>
+          </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="addDlg1">
+        <div class="panel panel-primary" style="margin-bottom: 0px;">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{"classdesign"|translate}}</h3>
+          </div>
+          <div class="panel-body">
+              <div class="row-fluid form-group">
+                <label for="">{{"classname"|translate}}</label>
+                <select class="form-control" ng-model="vm.course_id" ng-options="a.course_id as a.name for a in courseList">
+                </select>
+              </div>
+              <div class="row-fluid form-group">
+                <label for="">是否必修</label>
+                <select class="form-control" ng-model="vm.select_type" ng-options="a.id as a.label for a in statusList">
+                </select>
+              </div>
+          </div>
+          <div class="panel-footer text-center">
+              <button type="button" class="btn btn-default" ng-click="close()">
+                  {{'cancel' | translate}}
+              </button>
+              <button type="button" class="btn btn-primary" ng-click="ok()">
+                  {{'submit' | translate}}
+              </button>
+          </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="editDlg">
+        <div class="panel panel-default" style="margin-bottom: 0px;">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{"classdesign"|translate}}</h3>
+          </div>
+          <div class="panel-body">
+              <div class="row-fluid form-group">
+                <label for="">{{"classname"|translate}}</label>
+                <input type="text" class="form-control" readonly="" value="{{courName(vm.course_id)}}">
+              </div>
+              <div class="row-fluid form-group">
+                <label for="">是否必修</label>
+                <select class="form-control" ng-model="vm.select_type" ng-options="a.id as a.label for a in statusList">
+                </select>
+              </div>
+          </div>
+          <div class="panel-footer text-center">
+              <button type="button" class="btn btn-default" ng-click="close()">
+                  {{'cancel' | translate}}
+              </button>
+              <button type="button" class="btn btn-primary" ng-click="ok()">
+                  {{'submit' | translate}}
+              </button>
+          </div>
+        </div>
+    </script>
+</div>

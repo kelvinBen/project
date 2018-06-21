@@ -1,0 +1,137 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"globalressystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"emergencyorganization"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" ng-controller="allinformationCtrl as tree">
+    <div class="row" style="min-height: 600px;">
+        <div class="col-lg-3" style="background-color: white; overflow: hidden;">
+            <div class="panel panel-primary" style="">
+                <div class="panel-heading">{{"orginstitution"|translate}}</div>
+                <div class="panel-body" style="overflow:hidden;">
+                    <span ng-if="tree.doing_async">...loading...</span>
+                    <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)"  initial-selection="Granny Smith"></abn-tree>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9" style="background-color: white; border-radius: 10px;">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"startupdate"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="date" class="form-control " /></span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"endupdate"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="date" class="form-control " /></span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"startsettime"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="date" class="form-control " /></span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"endsettime"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="date" class="form-control " /></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"emergencyorgname"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;">
+                        <select name="account" class="form-control">
+                             <option>应急管理委员会</option>
+                             <option>应急协调办公室</option>
+                             <option>公共关系与法律支持组</option>
+                             <option>后勤支持组</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"inunitname"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;">
+                         <select name="account" class="form-control">
+                             <option>应急管理委员会</option>
+                             <option>应急协调办公室</option>
+                             <option>公共关系与法律支持组</option>
+                             <option>后勤支持组</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-lg-10">
+                    <button class="btn btn-danger" >{{"singledelete"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'edit'|translate}}</button>
+                    <button class="btn btn-info" >{{"print"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'import'|translate}}</button>
+                </div>
+                <div class="col-lg-2 text-right">
+                    <button class="btn btn-danger" ng-click="cancel()">{{"add"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'export'|translate}}</button>
+                </div>
+            </div>
+            <div class="panel panel-default"style="margin-top: 5px;" >
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{"num"|translate}}</th>
+                                <th>{{"emergencyorgname"|translate}}</th>
+                                <th>{{"inunitname"|translate}}</th>
+                                <th>{{"peoplenum"|translate}}</th>
+                                <th>{{"keyperson"|translate}}</th>
+                                <th>{{"officephone"|translate}}</th>
+                                <th>{{"updatetime"|translate}}</th>
+                                <th>{{"geogpoint"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>1</td>
+                                <td>总公司委员会</td>
+                                <td>中国海洋委员会</td>
+                                <td>20</td>
+                                <td>王总</td>
+                                <td>010-88888888</td>
+                                <td>2015-10-24</td>
+                                <td>已定位</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>2</td>
+                                <td>总公司委员会</td>
+                                <td>中国海洋委员会</td>
+                                <td>20</td>
+                                <td>王总</td>
+                                <td>010-88805892</td>
+                                <td>2015-10-10</td>
+                                <td>未定位</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

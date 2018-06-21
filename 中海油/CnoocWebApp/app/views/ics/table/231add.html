@@ -1,0 +1,32 @@
+<div ng-controller="addCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">
+            添加参会人员
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="get">
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <select ui-jq="chosen" class="form-control" style="height:35px;">
+                            <option>应急管理委员会</option>
+                            <option>有限公司应急协调办公室</option>
+                            <option>应急协调办公室</option>
+                            <option>公共关系及法律支持组</option>
+                            <option> 资源协调组</option>
+                            <option>财务保险组</option>
+                            <option>后勤支持组</option>
+                            <option>应急管理</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="submit" class="btn btn-default" ng-click="cancel()">取消</button>
+                        <button type="submit" class="btn btn-success" ng-click="define()">确定</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

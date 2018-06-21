@@ -1,0 +1,28 @@
+<div class="nav">
+  <span style="padding-left:20px;">首页</span>
+  <span>/</span>
+  <span>用户管理</span>
+</div>
+<div>
+  <div class="addNews">
+    <a routerLink='../adminstationadd'><button type="button" class="btn btn-danger" style="float:right;">添加用户</button></a>
+  </div>
+  <div class="filelist">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <td width="150px;">用户名</td>
+        <td width="250px;">地址</td>
+        <td>备注</td>
+        <td width="150px;">操作</td>
+      </tr>
+      <tr *ngFor='let u of userlist'>
+        <td>{{u.Name}}</td>
+        <td>{{u.Address}}</td>
+        <td>{{u.Note}}</td>
+        <td>
+          <a routerLink='../adminstationadd/{{u.Id}}'><button type="button" class="btn btn-info btn-sm">编辑</button></a>
+          <button type="button" class="btn btn-danger btn-sm" (click)="userdelete(u.Id)">删除</button>
+        </td>
+      </tr>
+    </table>
+  </div>

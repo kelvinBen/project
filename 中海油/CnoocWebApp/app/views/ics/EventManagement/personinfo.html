@@ -1,0 +1,55 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li class="active">{{"personalinfo"|translate}}</li>
+</ol>
+<form action="" ng-submit="submitForm()" >
+    <div class="row" >
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px">{{"usernames"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;" type="text" class="form-control" ng-model="vm.username" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top:27px;">{{"realname"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;" type="text" class="form-control" ng-model="vm.realname" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                    <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"personpost"|translate}}：</label>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <input style="margin-top: 20px;" type="text" class="form-control" ng-model="vm.post" />
+                    </div>
+                </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"birthday"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;" type="date" class="form-control" ng-model="vm.birthday" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"officephone"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control"  ng-model="vm.telephone"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"contactway"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control" ng-model="vm.phone" />
+                        </div>
+                    </div>
+                </form>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-4 col-lg-offset-4" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"save"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>

@@ -1,0 +1,106 @@
+
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"judge"|translate}}</li>
+    </ol>
+</h3>
+<div ng-controller="judgmentCtrl" style="margin: 10px; overflow: hidden;" class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="myTabContent " style="margin-left: 10px;" >
+            <form name="formValidate" ng-submit="submit()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset class="b0">
+                            <legend>{{"judge"|translate}}</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{"judge"|translate}}</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="action">
+                                        <option value="0">
+                                            {{"maintainstatus"|translate}}
+                                        </option>
+                                        <option value="1">
+                                            {{"expandresponse"|translate}}
+                                        </option>
+                                        <option value="2">
+                                            {{"endresponse"|translate}}
+                                        </option>
+                                    </select>
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!-- <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'预警等级'}}</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" ng-model="curevent.level">
+                                        <option value="1">
+                                            I级
+                                        </option>
+                                        <option value="2">
+                                            II级
+                                        </option>
+                                        <option value="3">
+                                            III级
+                                        </option>
+                                        <option value="4">
+                                            IV级
+                                        </option>
+                                    </select>
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset> -->
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{"processmeetname"|translate}}</label>
+                                <div class="col-sm-8">
+                                    <input  name="sometext" required="" ng-model="vm.data.meetingname" class="form-control" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{"time"|translate}}</label>
+                                <div class="col-sm-8">
+                                    <input type="datetime-local" name="sometext" required="" ng-model="dt" class="form-control" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{"place"|translate}}</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="sometext" required="" ng-model="vm.data.locate" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{"attendmeeting"|translate}}</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="sometext" required="" ng-model="vm.data.person" class="form-control" />
+                                    <span ng-show="form.validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="panel-footer text-center">
+                        <input type="checkbox" ng-model="useSend">{{"reportnotice"|translate}}</input>
+                        <button type="button" class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                        <button type="submit" class="btn btn-info">{{"submit"|translate}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

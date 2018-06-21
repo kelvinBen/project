@@ -1,0 +1,63 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"icsformmgr"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div>
+    <button type="button" class="btn btn-info"  style="margin-top: 5px;margin-left: 5px;" ng-click="add()"> {{"add"|translate}}</button>
+    <button type="button" class="btn btn-danger"  style="margin-top: 5px;margin-left: 5px;">{{"singledelete"|translate}}</button>
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default" style=" margin-top: 15px;" >
+                    <div class="panel-heading">
+                        <span>{{"icsformmgr"|translate}}</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="margin-top: 10px;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 5%;" ></th>
+                                    <th  style="width:15%">{{"icsnum"|translate}}</th>
+                                    <th  style="width:15%">{{"formname"|translate}}</th>
+                                    <th  style="width:15%">{{"esdepartment"|translate}}</th>
+                                    <th  style="width:15%">{{"espost"|translate}}</th>
+                                    <th  style="width:10%">{{"operation"|translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody style="text-align: left;">
+                                <tr ng-repeat="rr in items">
+                                    <td>
+                                        <label>
+                                            <input  type="checkbox" style="margin-top:0px;">
+                                        </label>
+                                    </td>
+                                    <td>{{rr.icsnum}}</td>
+                                    <td>{{rr.tablename}}</td>
+                                    <td>{{rr.esdepartment}}</td>
+                                    <td>{{rr.espost}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-success" title={{"edit"|translate}}>
+                                            <em class="fa fa-edit"></em>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger" ng-click="delete(rr.id)" title={{"singledelete"|translate}}>
+                                            <em class="fa fa-trash-o"></em>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,315 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"publicsentiment"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="pubtypeCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{contenttype}}</div>
+        <div class="panel-body">
+            <table class="table table-hover mb-mails" datatable="ng" dt-options="dtOptions">
+                <thead>
+                <tr>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in msgs ">
+                    <td>
+                        <img ng-src={{item.picurl}} class="mb-mail-avatar pull-left" ng-if="item.picurl"/>
+                        <div class="mb-mail-date pull-right">
+                            {{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                        </div>
+                        <div class="mb-mail-meta">
+                            <div class="pull-left">
+                                <div class="mb-mail-subject">{{item.title}}</div>
+                                <div class="mb-mail-from"></div>
+                            </div>
+                            <div ng-bind-html="item.content | limitTo:50" class="mb-mail-preview"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    <div class="row" ng-show="false">
+        <uib-tabset justified="true" class="bg-white p0" active="activeindex">
+            <uib-tab index ="0">
+                <uib-tab-heading>
+                    <em class="fa fa-clock-o fa-fw"></em>{{"security"|translate}}
+                </uib-tab-heading>
+                <div>
+                    <!-- START list group-->
+                    <table class="table table-hover mb-mails" datatable="ng" dt-options="dtOptions">
+                        <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                        <tr ng-repeat="item in security_msgs ">
+                            <td>
+                                <img ng-src="item.picurl" alt="Mail Avatar"
+                                     class="mb-mail-avatar pull-left"/>
+                                <div class="mb-mail-date pull-right">
+                                    {{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                                </div>
+                                <div class="mb-mail-meta">
+                                    <div class="pull-left">
+                                        <div class="mb-mail-subject">{{item.title}}</div>
+                                        <div class="mb-mail-from"></div>
+                                    </div>
+                                    <div ng-bind-html="item.content | limitTo:50" class="mb-mail-preview"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- END list group-->
+                </div>
+            </uib-tab>
+            <uib-tab index ="1" >
+                <uib-tab-heading>
+                    <em class="fa fa-money fa-fw"></em>{{"weather"|translate}}
+                </uib-tab-heading>
+                <div>
+                    <!-- START table responsive-->
+                    <table class="table table-hover mb-mails" datatable="ng" dt-options="dtOptions">
+                        <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in disaster_msgs ">
+                            <td>
+                                <img ng-src="http://p3.pstatp.com/list/45900110a50b789438f" alt="Mail Avatar"
+                                     class="mb-mail-avatar pull-left"/>
+                                <div class="mb-mail-date pull-right">
+                                    {{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                                </div>
+                                <div class="mb-mail-meta">
+                                    <div class="pull-left">
+                                        <div class="mb-mail-subject">{{item.title}}</div>
+                                        <div class="mb-mail-from"></div>
+                                    </div>
+                                    <div ng-bind-html="item.content | limitTo:50" class="mb-mail-preview"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- END table responsive-->
+                    <div class="panel-footer text-right"><a href="#" class="btn btn-default btn-sm">View All
+                        Transactions</a>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index ="2"  >
+                <uib-tab-heading>
+                    <em class="fa fa-money fa-fw"></em>{{"emergency"|translate}}
+                </uib-tab-heading>
+                <div>
+                    <!-- START table responsive-->
+                    <table class="table table-hover mb-mails">
+                        <tbody>
+                        <tr ng-repeat="item in disaster_list ">
+                            <td>
+                                <img ng-src="http://p3.pstatp.com/list/45900110a50b789438f" alt="Mail Avatar"
+                                     class="mb-mail-avatar pull-left"/>
+                                <div class="mb-mail-date pull-right">
+                                    {{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                                </div>
+                                <div class="mb-mail-meta">
+                                    <div class="pull-left">
+                                        <div class="mb-mail-subject">{{item.title}}</div>
+                                        <div class="mb-mail-from"></div>
+                                    </div>
+                                    <div ng-bind-html="item.content | limitTo:50" class="mb-mail-preview"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- END table responsive-->
+                    <div class="panel-footer text-right"><a href="#" class="btn btn-default btn-sm">View All
+                        Transactions</a>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+        <div class="span12" ng-show="false">
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-header">
+                        <ul class="nav nav-tabs nav-tabs-left ul_pub">
+                            <li id="li_security">
+                                <a data-toggle="tab" _href="security" ng-click="activetab(0)">
+                                            <span>
+                                                @Html.GetLangbyKey("security")
+                                            </span>
+                                </a>
+                            </li>
+                            <li id="li_disaster">
+                                <a data-toggle="tab" _href="disaster" ng-click="activetab(1)">
+                                            <span>
+                                                @Html.GetLangbyKey("disaster")
+                                            </span>
+                                </a>
+                            </li>
+                            <li id="li_emergency">
+                                <a data-toggle="tab" _href="emergency" ng-click="activetab(2)">
+                                            <span>
+                                                @Html.GetLangbyKey("emergency")
+                                            </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-content tabContent_pub" style="padding-top:10px" ng-show="activeindex==0">
+                    <table st-table="displayedCollection1" st-safe-src="security_msgs"
+                           class="table table-border table-bordered table-hover table-bg table-sort">
+                        <thead>
+                        <tr>
+                            <th colspan="9">
+                                <input st-search="" class="form-control" placeholder="global search ..." type="text"/>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in displayedCollection1">
+                            <td style="padding:0px;">
+                                <div class="box-section news with-icons">
+                                    <div class="news-time">
+                                        @Html.GetLangbyKey("date")：
+                                        {{item.event_date}}<br/>
+                                        <a href="#" ng-click="writemessage(item)">
+                                            <img alt="" src="app/img/sendMsg.png"/>
+                                        </a>
+                                    </div>
+                                    <div class="news-content">
+                                        <div class="news-title">
+                                            <a class="abstracts">{{item.title}}</a>
+                                        </div>
+                                        <div class="news-text">
+                                            <a class="abstracts">{{item.content|limitTo:500}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="11" class="text-center" style="padding:0px;">
+                                <div st-pagination="" st-items-by-page="itemsByPage"
+                                     st-template="~/Script/view/pagination.custom.html" st-displayed-pages="7"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+                <div class="box-content tabContent_pub" style="padding-top:10px" ng-show="activeindex==1">
+                    <table st-table="displayedCollection2" st-safe-src="disaster_msgs"
+                           class="table table-border table-bordered table-hover table-bg table-sort">
+                        <thead>
+                        <tr>
+                            <th colspan="9">
+                                <input st-search="" class="form-control" placeholder="global search ..." type="text"/>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in displayedCollection2">
+                            <td style="padding:0px;">
+                                <div class="box-section news with-icons">
+                                    <div class="news-time">
+                                        @Html.GetLangbyKey("date")：
+                                        {{item.time|date:"yyyy-MM-dd"}}<br/>
+                                        <a href="#" ng-click="writemessage(item)">
+                                            <img alt="" src="app/img/sendMsg.png"/>
+                                        </a>
+                                    </div>
+                                    <div class="news-content">
+                                        <div class="news-title">
+                                            <a class="abstracts">{{item.content}}</a>
+                                        </div>
+                                        <div class="news-text">
+                                            <a class="abstracts"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="11" class="text-center" style="padding:0px;">
+                                <div st-pagination="" st-items-by-page="itemsByPage"
+                                     st-template="~/Script/view/pagination.custom.html" st-displayed-pages="7"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+                <div class="box-content tabContent_pub" style="padding-top:10px" ng-show="activeindex==2">
+                    <table st-table="displayedCollection3" st-safe-src="emergy_msgs"
+                           class="table table-border table-bordered table-hover table-bg table-sort">
+                        <thead>
+                        <tr>
+                            <th colspan="9">
+                                <input st-search="" class="form-control" placeholder="global search ..." type="text"/>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in displayedCollection3">
+                            <td style="padding:0px;">
+                                <div class="box-section news with-icons">
+                                    <div class="news-time">
+                                        @Html.GetLangbyKey("date")：
+                                        {{item.event_date}}<br/>
+                                        <a href="#" ng-click="writemessage(item)">
+                                            <img alt="" src="app/img/sendMsg.png"/>
+                                        </a>
+                                    </div>
+                                    <div class="news-content">
+                                        <div class="news-title">
+                                            <a class="abstracts">{{item.title}}</a>
+                                        </div>
+                                        <div class="news-text">
+                                            <a class="abstracts">{{item.content}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="11" class="text-center" style="padding:0px;">
+                                <div st-pagination="" st-items-by-page="itemsByPage"
+                                     st-template="~/Script/view/pagination.custom.html" st-displayed-pages="7"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

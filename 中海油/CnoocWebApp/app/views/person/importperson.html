@@ -1,0 +1,142 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"persondynamics"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"importperson"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" ng-controller="allinformationCtrl as tree">
+    <div class="row" style="min-height: 600px;">
+        <div class="col-lg-3" style="background-color: white; overflow: hidden;">
+            <div class="panel panel-primary" style="">
+                <div class="panel-heading">{{"orginstitution"|translate}}</div>
+                <div class="panel-body" style="overflow:hidden;">
+                    <span ng-if="tree.doing_async">...loading...</span>
+                    <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)"  initial-selection="Granny Smith"></abn-tree>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9" style="background-color: white; overflow: hidden;">
+            <div class="panel panel-primary" style="">
+                <div class="panel-heading">{{"persondetail"|translate}}</div>
+                <div class="panel-body" style="overflow:hidden;">
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-lg-10">
+                            <button class="btn btn-danger" >{{"deleterecord"|translate}}</button>
+                            <button type="submit" class="btn btn-info">{{'import'|translate}}</button>
+                        </div>
+                        <div class="col-lg-2 text-right">
+                            <button class="btn btn-danger" ng-click="cancel()">{{"add"|translate}}</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{"num"|translate}}</th>
+                                <th>{{"dep"|translate}}</th>
+                                <th>{{"staffname"|translate}}</th>
+                                <th>{{"personpost"|translate}}</th>
+                                <th>{{"emwork"|translate}}</th>
+                                <th>{{"incontract"|translate}}</th>
+                                <th>{{"operation"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>1</td>
+                                <td>应急管理委员会</td>
+                                <td>邝立坤</td>
+                                <td>成员</td>
+                                <td>组长</td>
+                                <td>010-85969462</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="{{'edit'|translate}}">
+                                        <em class="fa fa-edit"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" title="{{'singledelete'|translate}}">
+                                        <em class="fa fa-trash-o"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>2</td>
+                                <td>应急管理委员会</td>
+                                <td>吴玉蕊</td>
+                                <td>成员</td>
+                                <td>组长</td>
+                                <td>010-85967582</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="{{'edit'|translate}}">
+                                        <em class="fa fa-edit"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" title="{{'singledelete'|translate}}">
+                                        <em class="fa fa-trash-o"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>3</td>
+                                <td>应急管理委员会</td>
+                                <td>刘颖</td>
+                                <td>成员</td>
+                                <td>组长</td>
+                                <td>010-85969462</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="{{'edit'|translate}}">
+                                        <em class="fa fa-edit"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" title="{{'singledelete'|translate}}">
+                                        <em class="fa fa-trash-o"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>4</td>
+                                <td>应急管理委员会</td>
+                                <td>段成刚</td>
+                                <td>成员</td>
+                                <td>组长</td>
+                                <td>010-85969462</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title="{{'edit'|translate}}">
+                                        <em class="fa fa-edit"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" title="{{'singledelete'|translate}}">
+                                        <em class="fa fa-trash-o"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

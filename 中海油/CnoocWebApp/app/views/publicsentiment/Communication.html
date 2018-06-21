@@ -1,0 +1,54 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicinfosystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"publicinfosystem"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" style="height:100%;" ng-controller="communicationCtrl">
+    <div class="row" style="height:100%;">
+        <div class="col-lg-3" style="background-color: white;height:100%;">
+            <div class="panel panel-primary">
+                <div class="panel-heading ">{{"maillist"|translate}}</div>
+                <div class="panel-body" style="height:100%;overflow:auto">
+                    <abn-tree tree-data="organiztions" tree-control="org_tree" initial-selection="{{selGroup}}"
+                              on-select="tree_click_handler(branch)">
+                    </abn-tree>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9" style="background-color: white; border-radius: 10px;margin-top:0px;height:100%;">
+            <div class="padded">
+                <table class="table table-border table-bordered table-hover table-bg table-sort"
+                       datatable="ng">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center;">{{"num"|translate}}</th>
+                        <th style="text-align: center;">{{"staffname"|translate}}</th>
+                        <th style="text-align: center;">{{"staffpost"|translate}}</th>
+                        <th style="text-align: center;">{{"mobilephone"|translate}}</th>
+                        <th style="text-align: center;">{{"telephone"|translate}}</th>
+                        <th style="text-align: center;">{{"email"|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-c">
+                    <tr ng-repeat="u in users">
+                        <td>{{$index+1}}</td>
+                        <td>{{u.real_name}}</td>
+                        <td>{{u.career}}</td>
+                        <td>{{u.telephone}}</td>
+                        <td>{{u.phone}}</td>
+                        <td>{{u.email}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

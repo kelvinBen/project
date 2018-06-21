@@ -1,0 +1,60 @@
+<h3>
+	<ol class="breadcrumb">
+		<!--<li><a href="#">{{"homepage"|translate}}</a></li>
+		<li class="active">{{"actionmanagement"|translate}}</li>-->
+
+		<li>
+			<i class="icon-home"></i>
+			<a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+		</li>
+		<li class="active">
+			<span>{{"eventmanagement"|translate}}</span>
+		</li>
+		<li class="active">
+			<span>{{"actionmanagement"|translate}}</span>
+		</li>
+	</ol>
+</h3>
+<div class="container-fluid" ng-controller="actionguidmgrCtl">
+	<form class="form-horizontal" name="reportForm" method="post" ng-submit="upload()">
+		<div class="panel panel-primary" style="padding-bottom: 0px;">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{"filemanagement"|translate}}</h3>
+			</div>
+			<div class="panel-body">
+				<fieldset>
+					<div class="row-fluid form-group">
+						<div class="col-sm-12">
+							<label>{{"excelfile"|translate}}</label>
+							<div class="row">
+								<div class="col-xs-12">
+									<form class="form-horizontal" name="uploadForm" method="post" style="margin-top: 10px;">
+										<div class="form-group col-xs-8">
+											<input filestyle="" type="file" data-button-text="选择" data-class-button="btn btn-default" data-classinput="form-control"
+												nv-file-select="" uploader="uploaderCtl" class="form-control" filters='xlsefilter' />
+										</div>
+										<div class="col-xs-4" style="padding-top: 5px;">
+											<label class="label label-warning" ng-show="errorFlag">
+                                                {{'errorfiletype' | translate}}
+                                            </label>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="panel-footer text-center">
+				<!-- <button type="button" class="btn btn-default">
+                    {{"cancel" | translate}}
+                </button> -->
+				<button type="sumbit" class="btn btn-primary">
+                    {{"submit" | translate}}
+                </button>
+			</div>
+		</div>
+	</form>
+</div>

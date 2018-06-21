@@ -1,0 +1,58 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.eventindex">{{"emergencymanagement"|translate}}</a></li>
+    <li class="active">{{"notice"|translate}}</li>
+</ol>
+<div ng-controller="webmessageCtrl" class="row" style="overflow: hidden;margin: 10px;">
+    <div class="row">
+        <div class="myTabContent " style="margin-left: 10px;" >
+            <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default" style="margin: 0px 20px;">
+                    <div class="panel-body">
+                        <fieldset class="b0" style="font-size: 16px;">
+                            <legend>{{"notice"|translate}}</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"noticetype"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" ng-model="templateType" ng-change="changeTemplate()">
+                                        <option value="0">
+                                            {{"eventnotice"|translate}}
+                                        </option>
+                                        <option value="1">
+                                            {{"noticestart"|translate}}
+                                        </option>
+                                        <option value="2">
+                                            {{"firstdirection"|translate}}
+                                        </option>
+                                        <option value="3">
+                                            {{"meetingnotice"|translate}}
+                                        </option>
+                                        <option value="4">
+                                            {{"processmeeting"|translate}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{"noticecontent"|translate}}</label>
+                                <div class="col-sm-6">
+                                    <textarea rows="10" ng-model="content" required="" class="form-control" placeholder="2016年5月5日12时，伊拉克公司在巴格达区域（场地）发生溢油事故，事故现场共造成0人伤害，财产损失0元，溢油1吨，事故等级为III级，目前现场正积极组织应急响应及事故。/n国际公司应急协调办公室/n2016年5月5日"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="panel-footer text-center">
+                        <button type="submit" class="btn btn-danger">{{"submit"|translate}}</button>
+                        <button class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">社会舆情</a></li>
+    <li class="active">信息源管理</li>
+</ol>
+<form action="" ng-controller="messageaddCtrl" ng-submit="submitForm()" >
+    <div class="row" >
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">事件：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control" ng-model="vm.event" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">国家：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <select name="account" class="form-control" style="margin-top: 27px;" ng-model="vm.country">
+                                <option>印尼</option>
+                                <option>伊拉克</option>
+                                <option>巴西</option>
+                            </select>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right;">时间：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style=""  type="date" class="form-control"  ng-model="vm.date" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">信息来源：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control" ng-model="vm.resource" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 35px;">审核状态：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <select name="account" class="form-control" style="margin-top: 27px;" ng-model="vm.check">
+                                <option>已审核</option>
+                                <option>未审核</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-4 col-lg-offset-4" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">提交</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>

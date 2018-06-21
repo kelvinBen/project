@@ -1,0 +1,95 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"globalressystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"emergencyplan"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" ng-controller="allinformationCtrl as tree">
+    <div class="row" style="min-height: 600px;">
+        <div class="col-lg-3" style="background-color: white; overflow: hidden;">
+            <div class="panel panel-primary" style="">
+                <div class="panel-heading">{{"orginstitution"|translate}}</div>
+                <div class="panel-body" style="overflow:hidden;">
+                    <span ng-if="tree.doing_async">...loading...</span>
+                    <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)"  initial-selection="Granny Smith"></abn-tree>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9" style="background-color: white; border-radius: 10px;">
+            <div class="row">
+                <div class="col-lg-10">
+                    <button class="btn btn-danger" >{{"add"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'edit'|translate}}</button>
+                    <button class="btn btn-info" >{{"reset"|translate}}</button>
+                </div>
+            </div>
+            <div class="panel panel-default"style="margin-top: 5px;" >
+                <div class="panel-heading">
+                    {{"unitoritem"|translate}}
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <label class="radio-inline c-radio">
+                            <input id="inlineradio1" type="radio" name="i-radio" value="option1" checked="checked" />
+                            <span class="fa fa-circle"></span>{{"newoceanitem"|translate}}</label>
+                        <label class="radio-inline c-radio">
+                            <input id="inlineradio2" type="radio" name="i-radio" value="option2" />
+                            <span class="fa fa-circle"></span>{{"newunit"|translate}}</label>
+                    <br>
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                            <span class="col-lg-1 text-left" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"projectname"|translate}}：</span>
+                            <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                        </div>
+                        <span class="col-lg-1" style="padding: 0px; margin: 0px; line-height: 30px;"> {{"weatherstart"|translate}}：</span>
+                        <label class="radio-inline c-radio">
+                            <input id="inlineradio3" type="radio" name="i-radio1" value="option3" checked="checked" />
+                            <span class="fa fa-circle"></span>{{"enable"|translate}}</label>
+                        <label class="radio-inline c-radio">
+                            <input id="inlineradio4" type="radio" name="i-radio1" value="option4" />
+                            <span class="fa fa-circle"></span>{{"disable"|translate}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default"style="margin-top: 5px;" >
+                <div class="panel-heading">
+                    {{"itemdetail"|translate}}
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                        <span class="col-lg-2 text-center" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"inarea"|translate}}：</span>
+                        <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                        <span class="col-lg-2 text-center" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"itemperson"|translate}}：</span>
+                        <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                        <span class="col-lg-2 text-center" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"itempersoncall"|translate}}：</span>
+                        <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                        <span class="col-lg-2 text-center" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"itempersonemail"|translate}}：</span>
+                        <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                        <span class="col-lg-2 text-center" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"hseperson"|translate}}：</span>
+                        <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                        <span class="col-lg-2 text-center" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"hsephone"|translate}}：</span>
+                        <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 10px; margin-bottom: 10px;">
+                        <span class="col-lg-2 text-center" style="padding: 0px; margin-left: -15px; line-height: 30px;"> {{"hseemail"|translate}}：</span>
+                        <span class="col-lg-9"><input type="text" class="form-control " /></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

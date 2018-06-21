@@ -1,0 +1,158 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"homepage"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"hazardsource"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"hazardrisk"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"HiddenGov"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"HiddenEntry"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div  class="form-inline" style="margin-left: 5px;">
+            <label>{{"datefrom"|translate}}：</label><input  type="date" class="form-control" style="width:260px;" value=""/>
+            <label style="margin-left: 30px;">{{"dateto"|translate}}：</label><input  type="date" class="form-control" style="width:260px;" value=""/>
+            <label style="margin-left: 30px;">{{"dep"|translate}}：</label>
+            <select class="form-control" style="width: 260px;">
+                <option></option>
+            </select>
+            <label style="margin-left: 30px;">{{"occurrence"|translate}}：</label><input  type="date" class="form-control" style="width:260px;" value=""/>
+        </div>
+        <div style="margin-top: 10px;">
+            <input class="form-control"   placeholder="在以下信息中搜索">
+        </div>
+        <div class="panel panel-primary" style="margin-top: 5px;">
+            <div class="panel-body" style="height:100%;overflow:auto">
+                <div class="form-inline">
+                    <button type="submit" class="btn btn-success">
+                        <em class="fa fa-plus"></em> {{"Input"|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-search"></i> {{"import"|translate}}
+                    </button>
+                </div>
+                <div class="table-responsive" style="text-align: center;margin-top: 5px;">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <th style="text-align: center;"><input type="checkbox"></th>
+                                <th style="text-align: center;">{{"hiddenname"|translate}}</th>
+                                <th style="text-align: center;">{{"hiddennum"|translate}}</th>
+                                <th style="text-align: center;">{{"unitname"|translate}}</th>
+                                <th style="text-align: center;">{{"status"|translate}}</th>
+                                <th style="text-align: center;">{{"factor"|translate}}</th>
+                                <th style="text-align: center;">{{"level"|translate}}</th>
+                                <th style="text-align: center;">{{"fillintime"|translate}}</th>
+                                <th style="text-align: center;">{{"finishplantime"|translate}}</th>
+                                <th style="text-align: center;">{{"finishstatus"|translate}}</th>
+                                <th style="text-align: center;">{{"contollevel"|translate}}</th>
+                                <th style="text-align: center;">{{"viewdanger"|translate}}</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>员工不安全行为</td>
+                                <td>21</td>
+                                <td>中海石油伊拉克有限公司</td>
+                                <td>已解决</td>
+                                <td>员工摩擦</td>
+                                <td>二级</td>
+                                <td>2016-06-02</td>
+                                <td>2016-06-18</td>
+                                <td>已完成</td>
+                                <td>一级</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>承包商不安全行为</td>
+                                <td>22</td>
+                                <td>中海石油乌干达公司</td>
+                                <td>已解决</td>
+                                <td>承包商</td>
+                                <td>四级</td>
+                                <td>2016-05-22</td>
+                                <td>2016-05-28</td>
+                                <td>已完成</td>
+                                <td>一级</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>设备隐患</td>
+                                <td>01</td>
+                                <td>中海石油非洲赤道几内亚分公司</td>
+                                <td>已解决</td>
+                                <td>设备</td>
+                                <td>二级</td>
+                                <td>2016-03-11</td>
+                                <td>2016-04-17</td>
+                                <td>已完成</td>
+                                <td>一级</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>生产（设施）场地环境不良</td>
+                                <td>09</td>
+                                <td>中海石油阿尔及利亚有限公</td>
+                                <td>已解决</td>
+                                <td>环境</td>
+                                <td>三级</td>
+                                <td>2016-07-01</td>
+                                <td>2016-07-23</td>
+                                <td>已完成</td>
+                                <td>一级</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>管理缺陷</td>
+                                <td>02</td>
+                                <td>中海石油中东（卡塔尔）有限公司</td>
+                                <td>已解决</td>
+                                <td>管理阶层</td>
+                                <td>一级</td>
+                                <td>2016-06-13</td>
+                                <td>2016-06-28</td>
+                                <td>已完成</td>
+                                <td>一级</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

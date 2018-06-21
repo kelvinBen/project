@@ -1,0 +1,21 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"primaryevent"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="actiondutyctrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <iframe width="100%" height="900px" seamless frameborder="0" ng-src="{{modifyURL}}" ></iframe>
+    </div>
+</div>

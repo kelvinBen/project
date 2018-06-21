@@ -1,0 +1,22 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.eventindex">{{"emergencymanagement"|translate}}</a></li>
+    <li class="active">{{"emergencyprocess"|translate}}</li>
+</ol>
+<div ng-controller="jieduanCtrl" class="row">
+    <div class="row">
+        <div class="myTabContent col-sm-3 col-md-3 col-lg-3" style="margin-left: 10px;" >
+            <div ng-if='perm == 1'>
+                <ul style="list-style: none;">
+                    <li style="margin-top:10px;">{{"helicopter"|translate}}</li>
+                    <li style="margin-top:10px;">{{"phasesseven"|translate}}</li>
+                    <li class="active" style="margin-top:10px;">{{"starttimeseven"|translate}}</li>
+                    <li class="active" style="margin-top:10px;">{{"endtimezero"|translate}}</li>
+                </ul>
+                <div style="margin: 10px;">
+                    <img  src="img/workflow1.png" >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

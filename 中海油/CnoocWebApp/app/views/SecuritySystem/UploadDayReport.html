@@ -1,0 +1,94 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <a ui-sref="app.dayReports">
+                {{"daywarnreport"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"importrepoet"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="uploadDayController">
+    <form class="form-horizontal" name="reportForm" method="post" ng-submit="upload()">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{"importrepoet"|translate}}</h3>
+            </div>
+            <div class="panel-body">
+                <fieldset>
+                    <div class="row-fluid form-group">
+                        <div class="col-xs-12">
+                            <label for="">{{"date"|translate}}</label>
+                            <input date-range-picker class="form-control date-picker" type="text"
+                            ng-model="date" options="{format: 'YYYY-MM-DD',singleDatePicker:true}" style="width:210px;" />
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row-fluid form-group">
+                        <div class="col-sm-12">
+                            <label>Excel / PDF</label>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <form class="form-horizontal" name="uploadForm" method="post" style="margin-top: 10px;">
+                                        <div class="form-group col-xs-8">
+                                            <input filestyle="" type="file" data-button-text="" data-class-button="btn btn-default" data-classinput="form-control"
+                                              nv-file-select="" uploader="uploaderCtl" class="form-control" filters='xlsefilter'/>
+                                        </div>
+                                        <div class="col-xs-4" style="padding-top: 5px;">
+                                            <label class="label label-warning" ng-show="errorFlag">
+                                                {{"errorfiletype"|translate}}
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- <fieldset>
+                    <div class="row-fluid form-group">
+                        <div class="col-sm-12">
+                            <label>PDF文件</label>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <form class="form-horizontal" name="uploadForm2" ng-submit="upload()" method="post" style="margin-top: 10px;">
+                                        <div class="form-group col-xs-8">
+                                            <input filestyle="" type="file" data-button-text="选择" data-class-button="btn btn-default" data-classinput="form-control"
+                                              nv-file-select="" uploader="uploaderCtl" class="form-control" style="width:100%"/>
+                                        </div>
+                                    </form>
+                                    <div class="form-group col-xs-4">
+                                        <button type="sumbit" class="btn btn-primary">
+                                            {{"upload"|translate}}
+                                        </button>
+                                        <button type="reset" class="btn btn-success">
+                                            {{"reset"|translate}}
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </fieldset> -->
+            </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-default" ng-click="cancel()">
+                    {{"cancel"|translate}}
+                </button>
+                <button type="sumbit" class="btn btn-primary">
+                    {{"submit"|translate}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

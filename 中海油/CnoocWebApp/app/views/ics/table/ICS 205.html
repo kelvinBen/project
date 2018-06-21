@@ -1,0 +1,192 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"communicationsplan"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics205Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;"> ECS 205（{{"communicationsplan"|translate}}）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="2">{{"incidentname"|translate}}</td>
+                            <td><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"operationalperiod"|translate}}</td>
+                            <td colspan="2">
+                                {{"datefrom"|translate}}：
+                                <input type="date" style="border: 0;width: 35%;height: 95%;" ng-model="starttime" >
+                                {{"dateto"|translate}}：
+                                <input type="date" style="border: 0;width:35%;height: 95%;" ng-model="endtime" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="text-align: center; background:#efefef;">{{"phonelist"|translate}}</td>
+                        </tr>
+                        <tr style="font-weight: bold">
+                            <td>{{"staffname"|translate}}</td>
+                            <td>{{"post"|translate}}</td>
+                            <td>{{"mainnumber"|translate}}</td>
+                            <td>{{"fax"|translate}}</td>
+                            <td>{{"otherphonenum"|translate}}</td>
+                            <td>{{"otherphonenum"|translate}}</td>
+                            <td>{{"call"|translate}}</td>
+                            <td>{{"operation"|translate}}</td>
+                        </tr>
+                        <!--<table class="table table-bordered table-hover bg-white">-->
+                        <tr ng-repeat="user in vm.data.phones">
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.name" e-name="name" e-form="rowform" >{{ user.name}}</span>
+                            </td>
+                            <td>
+                                <!-- editable status (select-local)-->
+                                <span editable-text="user.post" e-name="post"   e-form="rowform">{{ user.post }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.mainphone" e-name="department"  e-form="rowform">{{ user.mainphone }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.fax" e-name="name" e-form="rowform" >{{ user.fax  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.secondphone" e-name="name" e-form="rowform" >{{ user.secondphone  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.thirdphone" e-name="name" e-form="rowform" >{{ user.thirdphone  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.talk" e-name="name" e-form="rowform" >{{ user.talk  }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!--</table>-->
+                        <tr>
+                            <td colspan="8" style="float: left;"><button ng-click="addUser()" class="btn btn-default">{{"addline"|translate}}</button></td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="8" style="text-align: center; background: #efefef;"> {{"call"|translate}}{{"singlelist"|translate}}</td>
+                        </tr>
+                        <tr style="font-weight: bold">
+                            <td>{{"system"|translate}}</td>
+                            <td>{{"channel"|translate}}</td>
+                            <td colspan="2">{{"function"|translate}}</td>
+                            <td>{{"frequency"|translate}}</td>
+                            <td>{{"Assignment"|translate}}</td>
+                            <td>{{"note"|translate}}</td>
+                            <td>{{"operation"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="aa in vm.data.talk">
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="aa.system" e-name="name" e-form="rowform1" >{{ aa.system  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable status (select-local)-->
+                                <span editable-text="aa.channel" e-name="post"   e-form="rowform1">{{ aa.channel }}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="aa.function" e-name="department"  e-form="rowform1">{{ aa.function }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="aa.frequency" e-name="name" e-form="rowform1" >{{ aa.frequency  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="aa.task" e-name="name" e-form="rowform1" >{{ aa.task  }}</span>
+                            </td>
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="aa.note" e-name="name" e-form="rowform1" >{{ aa.note  }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform1" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform1.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform1.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform1.$waiting" ng-click="rowform1.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform1.$visible" class="buttons">
+                                    <button ng-click="rowform1.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removetalk($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="float: left;"><button ng-click="addtalk()" class="btn btn-default">{{"addline"|translate}}</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esName"></td>
+                            <td colspan="2" style="text-align: center;">{{"positiontitle"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"  ng-model="model.esPost"></td>
+                            <td colspan="1" style="text-align: center;">{{"Signature"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esSign"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 205 {{"communicationsplan"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="2">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='2';><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esDate"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">提交</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

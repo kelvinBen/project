@@ -1,0 +1,140 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"CurrentActions"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics2012Ctrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS 201-2（{{"CurrentActions"|translate}}）<em class="icon icon-microphone"></em></div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td>{{"incidentname"|translate}}</td>
+                                <td colspan="1" ;><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                                <td>{{"incidentnumber"|translate}}</td>
+                                <td colspan="1" ;><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                <td>{{"operationalperiod"|translate}}</td>
+                                <td colspan="2" ;>
+                                    {{"datefrom"|translate}}：
+                                    <input type="datetime-local" style="border: 0;width: 35%;height: 95%;" ng-model="starttime">                                    {{"dateto"|translate}}：
+                                    <input type="datetime-local" style="border: 0;width:35%;height: 95%;" ng-model="endtime">
+                                </td>
+                            </tr>
+                            <tr style="height:80px;">
+                                <td colspan="1" style="line-height: 80px;">{{"currentplan"|translate}}</td>
+                                <td colspan="6">
+                                    <select ng-model="vm.data.currentaim" ng-options="t.taskname for t in tasks" ng-change="changetask()"></select>
+                                    <textarea ng-model="vm.data.curtask" style="width: 100%;border:0px"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">{{"Currenttactics"|translate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%;">{{"time"|translate}}</td>
+                                <td style="width: 70%;">{{"actions"|translate}}</td>
+                                <td style="width: 10%;">{{"operation"|translate}}</td>
+                            </tr>
+                            <tr ng-repeat="user in vm.data.actions">
+                                <td>
+                                    <span editable-datetime-local="user.time" e-name="goal" e-form="rowform"> {{ user.time | date:"yyyy-MM-dd HH:mm:ss" }}</span>
+                                </td>
+                                <td>
+                                    <!-- editable status (select-local)-->
+                                    <span editable-textarea="user.action" e-name="goal" e-form="rowform" e-rows="2" e-cols="100">{{user.action}}</span>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <!-- form-->
+                                    <form editable-form="" name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline">
+                                        <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                    </form>
+                                    <div ng-show="!rowform.$visible" class="buttons">
+                                        <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                        <button ng-click="removeitem(vm.data.actions,$index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button ng-click="additem(vm.data.actions)" class="btn btn-success" type="button" style="margin: 10px 0px;">{{"newsction"|translate}}</button>
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td>{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                                <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.user"></td>
+                                <td>{{"positiontitle"|translate}}</td>
+                                <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.role"></td>
+                                <td>{{"Signature"|translate}}</td>
+                                <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.user"></td>
+                                <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                            </tr>
+                            <tr style="height: 60px;">
+                                <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 201-2 </td>
+                                <td style="line-height: 60px;" colspan="1">{{"Datetime"|translate}}</td>
+                                <td style="line-height: 60px;" colspan='2' ;><input type="text" style="border: 0;width: 100%;height: 100%;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <div style="width: 400px;">
+                        <input filestyle="" type="file" data-button-text="选择" data-class-button="btn btn-default" data-classinput="form-control"
+                            nv-file-select="" uploader="uploaderCtl" class="form-control" />
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <td style="width: 70px">序号</td>
+                            <td>文件名</td>
+                            <td style="width: 100px">操作</td>
+                        </tr>
+                        <tr ng-repeat="a in files">
+                            <td>{{$index + 1}}</td>
+                            <td>
+                                <a href="#" target="_blank">{{a.filename}}</a>
+                            </td>
+                            <td>
+                                <button title="Delete" class="btn btn-sm btn-danger" ng-click="deleteFile(a.url)">
+                                    <em class="fa fa-trash"></em>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit(false)">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit(true)" ng-show="showExBtn">提交到国际公司</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

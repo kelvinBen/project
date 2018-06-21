@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name=”renderer” content=”webkit” />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../../../bower_components/fontawesome/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../../css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../../../bower_components/jsPlumb/css/jsPlumbToolkit-defaults.css">
+    <link rel="stylesheet" href="../../../bower_components/jsPlumb/css/main.css">
+    <link rel="stylesheet" href="../../../bower_components/jsPlumb/css/jsPlumbToolkit-demo.css">
+    <link rel="stylesheet" href="../../../bower_components/jsPlumb/demo/chart/demo.css">
+    <link rel="stylesheet" href="../../../bower_components/layer/skin/layer.css" media="screen" title="no title" charset="utf-8">
+    <title></title>
+</head>
+
+<body data-demo-id="chart" data-library="dom">
+    <div class="container-fluid">
+        <!-- <div class="row-fluid">
+            <!-- <div class="col-xs-6 text-left">
+                <select class="form-control" id="orgType" onchange="changeOrgType()" style="width: 200px;">
+                </select>
+            </div>
+            <div class="col-xs-12 text-right">
+                <button type="button" class="btn btn-primary" onclick="saveEventTabel()">
+                    保存
+                </button>
+            </div>
+        </div> -->
+
+    </div>
+    <div class="jtk-demo-canvas canvas-wide chart-demo jtk-surface jtk-surface-nopan" id="canvas" style="height:700px;">
+    </div>
+    </div>
+
+    <div class="panel panel-default" style="display: none;margin-bottom: 0px;" id="editDialog">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="">应急组织机构名称</label>
+                <input type="text" class="form-control" id="orgName" placeholder="">
+            </div>
+        </div>
+        <div class="panel-footer text-center">
+            <button type="button" class="btn btn-default" onclick="layer.closeAll();">
+                取消
+            </button>
+            <button type="button" class="btn btn-primary" onclick="editFun()">
+                确定
+            </button>
+        </div>
+    </div>
+    <div class="panel panel-default" style="display: none;margin-bottom: 0px;" id="addDialog">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="">机构位置:</label>
+                <select class="form-control" id="orgType" name="">
+                    <option value="-1">协助</option>
+                    <option value="0">上级</option>
+                    <option value="1">平级</option>
+                    <option value="2">下级</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">当前所选组织机构</label>
+                <input type="text" class="form-control" id="selOrgName" readonly>
+            </div>
+            <div class="form-group">
+                <label for="">添加应急组织机构名称</label>
+                <input type="text" class="form-control" id="addOrgName" placeholder="">
+            </div>
+            <!-- <div class="form-group">
+                <label for="">选择人员</label>
+                <input type="text" class="form-control" id="userId" placeholder="">
+            </div> -->
+        </div>
+        <div class="panel-footer text-center">
+            <button type="button" class="btn btn-default" onclick="layer.closeAll();">
+                取消
+            </button>
+            <button type="button" class="btn btn-primary" onclick="addFun()">
+                确定
+            </button>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src="../../../bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <!-- support lib for bezier stuff -->
+    <script src="../../../bower_components/jsPlumb/lib/jsBezier-0.8.js"></script>
+    <!-- event adapter -->
+    <script src="../../../bower_components/jsPlumb/lib/mottle-0.7.2.js"></script>
+    <!-- geometry functions -->
+    <script src="../../../bower_components/jsPlumb/lib/biltong-0.3.js"></script>
+    <!-- drag -->
+    <script src="../../../bower_components/jsPlumb/lib/katavorio-0.17.0.js"></script>
+    <!-- jsplumb util -->
+    <script src="../../../bower_components/jsPlumb/src/util.js"></script>
+    <script src="../../../bower_components/jsPlumb/src/browser-util.js"></script>
+    <!-- main jsplumb engine -->
+    <script src="../../../bower_components/jsPlumb/src/jsPlumb.js"></script>
+    <!-- base DOM adapter -->
+    <script src="../../../bower_components/jsPlumb/src/dom-adapter.js"></script>
+    <script src="../../../bower_components/jsPlumb/src/overlay-component.js"></script>
+    <!-- endpoint -->
+    <script src="../../../bower_components/jsPlumb/src/endpoint.js"></script>
+    <!-- connection -->
+    <script src="../../../bower_components/jsPlumb/src/connection.js"></script>
+    <!-- anchors -->
+    <script src="../../../bower_components/jsPlumb/src/anchors.js"></script>
+    <!-- connectors, endpoint and overlays  -->
+    <script src="../../../bower_components/jsPlumb/src/defaults.js"></script>
+    <!-- bezier connectors -->
+    <script src="../../../bower_components/jsPlumb/src/connectors-bezier.js"></script>
+    <!-- state machine connectors -->
+    <script src="../../../bower_components/jsPlumb/src/connectors-statemachine.js"></script>
+    <!-- flowchart connectors -->
+    <script src="../../../bower_components/jsPlumb/src/connectors-flowchart.js"></script>
+    <!-- SVG renderer -->
+    <script src="../../../bower_components/jsPlumb/src/renderers-svg.js"></script>
+
+    <!-- common adapter -->
+    <script src="../../../bower_components/jsPlumb/src/base-library-adapter.js"></script>
+    <!-- no library jsPlumb adapter -->
+    <script src="../../../bower_components/jsPlumb/src/dom.jsPlumb.js"></script>
+
+    <script src="../../../bower_components/layer/layer.js" charset="utf-8"></script>
+    <!-- /JS -->
+    <script type="text/javascript">
+        function say() {
+            //alert("parent.html------>I'm at parent.html");
+            var url=parent.location.href;
+            url = url.replace("ics_organiztion","writeroute");
+            parent.location.href = url;
+        }
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        };
+        var Request = GetRequest();
+        //var eventid = Request['eventid'];
+        //var periodid = Request['periodid'];
+        var eventid = localStorage.eventid;
+        var periodid = localStorage.periodid;
+        var treeData = null;
+        var table = null;
+        var allOrgList = null;
+
+        function loadAllUsers() {
+            $.get('../../../apis/api/Operator', function(data) { //所有用户
+                icsUsers = data;
+                orgData();
+            });
+        }
+
+        function orgData() {
+            $.get('../../../icsapi/eventstatus/?eventid=' + eventid, function(data) {
+                table = data[data.length - 1];
+                allOrgList = JSON.parse(table.org);
+                changeOrgType();
+            })
+        };
+        loadAllUsers();
+
+        function changeOrgType() {
+            var id = $('#orgType').val();
+            $.each(allOrgList, function(i, item) {
+                clear();
+                initHtml(item);
+                create();
+                return false;
+            });
+        };
+
+        function saveEventTabel() {
+            table.datajson = JSON.stringify(treeData);
+            $.post('icsapi/eventtables', table, function(data) {
+                layer.msg('保存成功', {
+                    icon: 1
+                });
+            });
+        };
+
+        init();
+
+        var icsUsers = null;
+
+        var selNode = null;
+
+        function editNode(id) {
+            selNode = getNode(id);
+            $('#orgName').val(selNode.organization);
+            layer.open({
+                type: 1,
+                area: ['400px', 'auto'],
+                title: '编辑',
+                skin: 'layui-layer-lan',
+                content: $('#editDialog')
+            });
+        };
+
+        function editFun() {
+            var n = $('#orgName').val();
+            if (!n){
+                layer.alert('应急组织机构名称不能为空.',{icon: 2});
+                return;
+            }
+            selNode.organization = n;
+            table.org = JSON.stringify(allOrgList);
+            saveDataToDb();
+            layer.closeAll();
+        };
+
+        function getUserByid(id) {
+            var u = null;
+            $.each(icsUsers, function(i, item) {
+                if (item.user_id == id) {
+                    u = item;
+                    return false;
+                }
+            });
+            return u;
+        }
+
+        function getNode(id) {
+            var n = null;
+            $.each(allOrgList[0].children, function(i, item) {
+                if (item.id == id) {
+                    n = item;
+                    return false;
+                }
+            });
+            return n;
+        };
+
+        var index = 1;
+
+        function addFun() {
+            var id = 'newNode' + index;
+            index += 1;
+            var type = $('#orgType').val();
+            var org = $('#addOrgName').val();
+            var node = {
+                "organization": org,
+                "users": [],
+                "parentid": '',
+                "id": id,
+                "companyid": selNode.companyid,
+                "assist": false,
+                "sort": parseInt(selNode.sort) + 1
+            };
+            if (type == -1){//协助
+                node.assist = true;
+                node.parentid = selNode.id;
+            }else if (type == 0){//上级
+                node.parentid = selNode.parentid;
+                selNode.parentid = node.id;
+            }else if (type == 1) { //平级
+                node.parentid = selNode.parentid;
+            } else if (type == 2) { //下级
+                node.parentid = selNode.id;
+                $.each(allOrgList[0].children, function(i, item) {
+                    if (item.parentid == selNode.id && item.assist == false) {
+                        item.parentid = node.id;
+                    }
+                });
+            }
+            allOrgList[0].children.push(node);
+            table.org = JSON.stringify(allOrgList);
+            saveDataToDb();
+            layer.closeAll();
+        };
+
+        function saveDataToDb() {
+            $.ajax({
+                url: 'icsapi/eventstatus/' + table.id,
+                type: 'PUT',
+                data: table,
+                success: function(response) {
+                    loadAllUsers();
+                }
+            });
+        };
+
+        function addNode(id) {
+            selNode = getNode(id);
+            $('#orgType').val(1);
+            $('#addOrgName').val('');
+            $('#selOrgName').val(selNode.organization);
+            layer.open({
+                type: 1,
+                area: ['500px', 'auto'],
+                title: '添加',
+                skin: 'layui-layer-lan',
+                content: $('#addDialog')
+            });
+        }
+
+        function deleNode(id) {
+            selNode = getNode(id);
+            var ary = [];
+            $.each(allOrgList[0].children, function(i, item) {
+                if (item.id != id) {
+                    ary.push(item);
+                    if (item.parentid == selNode.id) {
+                        item.parentid = selNode.parentid;
+                    }
+                }
+            });
+            allOrgList[0].children = ary;
+            table.org = JSON.stringify(allOrgList);
+            saveDataToDb();
+        };
+
+        function setNodeUser(id) {
+            selNode = getNode(id);
+            layer.open({
+                type: 2,
+                area: ['900px', '700px'],
+                offset: '100px',
+                skin: 'layui-layer-lan',
+                content: './eventOrgSetUsers.html?orgid='+selNode.id,
+                end: function (index, layero) {
+                    loadAllUsers();
+                }
+            })
+        };
+
+        function initHtml(data) {
+            var s = initChildHtml(data.id, data.children, -150);
+            $('#canvas').html(s);
+        };
+
+        function calLeft(i, length) {
+            var w = $('#canvas').width();
+            var a = w / length;
+            var l = (i * a + a / 2 - 140);
+            return l;
+        };
+
+        function initChildHtml(parent, data, topVal) {
+            var s = "";
+            var ary = [];
+            var ary1 = [];
+            $.each(data, function(i, item) {
+                if (item.parentid == parent) {
+                    if (item.assist) ary1.push(item);
+                    else ary.push(item);
+                }
+            });
+            //先绘制协助关系
+            var leftVal = 100;
+            $.each(ary1, function (i, item) {
+                var sty1 = 'style="left:' + leftVal + 'px; top:' + topVal + 'px;"';
+                s += '<div class="window" parent="role' + parent + '" type="0" id="role' + item.id + '" ' + sty1 + '><div class="panel panel-primary" style="margin-bottom:0px;">' +
+                    '<div class="panel-heading"><h3 class="panel-title text-center">' + item.organization + '</h3></div>' + initUserHtml(item.users) +
+                    '<div class="panel-footer text-right" style="padding:5px;">'+'<button type="button" class="btn btn-primary btn-xs" title="设置人员" onclick="setNodeUser(\''+item.id+'\')"><i class="fa fa-user"></i></button>&nbsp;&nbsp;'+
+                    '<button type="button" class="btn btn-primary btn-xs" title="添加" onclick="addNode(\'' + item.id + '\')">' +
+                    '<i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-xs" title="编辑" onclick="editNode(\'' + item.id + '\')">' +
+                    '<i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-xs" title="删除" onclick="deleNode(\'' + item.id + '\')"><i class="fa fa-trash-o"></i></button></div></div></div>';
+                topVal += item.users.length *20 + 100;
+                s += initChildHtml(item.id, data, topVal);
+                // console.log(item.organization);
+            });
+            topVal += 150;
+            $.each(ary, function(i, item) {
+                leftVal = calLeft(i, ary.length);
+                var sty1 = 'style="left:' + leftVal + 'px; top:' + topVal + 'px;"';
+                s += '<div class="window" parent="role' + parent + '" type="1" id="role' + item.id + '" ' + sty1 + '><div class="panel panel-primary" style="margin-bottom:0px;">' +
+                    '<div class="panel-heading"><h3 class="panel-title text-center">' + item.organization + '</h3></div>' + initUserHtml(item.users) +
+                    '<div class="panel-footer text-right" style="padding:5px;">'+'<button type="button" class="btn btn-primary btn-xs" title="设置人员" onclick="setNodeUser(\''+item.id+'\')"><i class="fa fa-user"></i></button>&nbsp;&nbsp;'+
+                    '<button type="button" class="btn btn-primary btn-xs" title="添加" onclick="addNode(\'' + item.id + '\')">' +
+                    '<i class="fa fa-plus"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-xs" title="编辑" onclick="editNode(\'' + item.id + '\')">' +
+                    '<i class="fa fa-pencil"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-xs" title="删除" onclick="deleNode(\'' + item.id + '\')"><i class="fa fa-trash-o"></i></button></div></div></div>';
+                    // console.log(item.organization);
+                s += initChildHtml(item.id, data, topVal + item.users.length * 20);
+            });
+            return s;
+        }
+
+        function initUserHtml(users) {
+            users = users.sort(function (a, b) {
+                return a.sort - b.sort;
+            });
+            var s = '';
+            if (users.length > 0) {
+                var s = '<div class="panel-body" style="padding:5px;">';
+                var ary = [];
+                $.each(users, function(i, user) {
+                    var arr = [];
+                    if (i == 0) {
+                        arr.push(user);
+                        ary.push(arr);
+                    } else {
+                        var flag = false;
+                        $.each(ary, function(i, a) {
+                            if (a[0].role.id == user.role.id) {
+                                a.push(user);
+                                flag = true;
+                                return false;
+                            }
+                        });
+                        if (flag == false) {
+                            ary.push([user]);
+                        }
+                    }
+                });
+                $.each(ary, function(ii, item) {
+                    var ary1 = [];
+                    $.each(item, function(i, user) {
+                        if (i == 0) {
+                            s += item[0].role.job + ':';
+                        }
+                        var um = null;
+                        $.each(icsUsers, function(i, u) {
+                            if (u.user_id == user.userid) {
+                                um = u;
+                                return false;
+                            }
+                        });
+                        if (um) {
+                            s += um.real_name;
+                            if (user.status == 1) s += "(休假) ";
+                            else s += " ";
+                        }
+                    });
+                    s += '</br>';
+                    // if (ary1.length > 0){
+                    //     s += item[0].role.job + ':';
+                    //     $.each(ary1, function (j, user) {
+                    //         s += user.real_name;
+                    //         if (!user.status || user.status == 0) s+='(在岗)';
+                    //         else if (um.status == 1) s+= '(休假)';
+                    //         if (j != ary.length-1) s+=',';
+                    //     });
+                    //     s += '</br>';
+                    // }
+                });
+                s += '</div>';
+                return s;
+            }
+
+            return '<div class="panel-body text-center" style="padding:0px;">无人员</div>';
+        };
+
+        var color = "gray";
+        var instance = null;
+
+        function init() {
+            jsPlumb.ready(function() {
+                instance = jsPlumb.getInstance({
+                    Connector: ["Flowchart", {
+                        stub: 0
+                    }],
+                    DragOptions: {
+                        cursor: "pointer",
+                        zIndex: 2000
+                    },
+                    PaintStyle: {
+                        strokeStyle: color,
+                        lineWidth: 2
+                    },
+                    EndpointStyle: {
+                        radius: 9,
+                        fillStyle: color
+                    },
+                    HoverPaintStyle: {
+                        strokeStyle: "#ec9f2e"
+                    },
+                    EndpointHoverStyle: {
+                        fillStyle: "#ec9f2e"
+                    },
+                    Container: "canvas"
+                });
+            });
+        };
+
+        function clear() {
+            var windows = jsPlumb.getSelector(".chart-demo .window");
+            $.each(windows, function(i, item) {
+                instance.detachAllConnections(item);
+                instance.removeAllEndpoints(item);
+                instance.remove(item);
+            });
+        }
+
+        function create() {
+            jsPlumb.ready(function() {
+                // suspend drawing and initialise.
+                instance.batch(function() {
+                    // declare some common values:
+                    var arrowCommon = {
+                            foldback: 0.7,
+                            fillStyle: color,
+                            width: 14
+                        },
+                        // use three-arg spec to create two different arrows with the common values:
+                        overlays = [
+                            ["Arrow", {
+                                location: 0.5
+                            }, arrowCommon]
+                        ];
+
+                    // add endpoints, giving them a UUID.
+                    // you DO NOT NEED to use this method. You can use your library's selector method.
+                    // the jsPlumb demos use it so that the code can be shared between all three libraries.
+                    var windows = jsPlumb.getSelector(".chart-demo .window");
+                    for (var i = 0; i < windows.length; i++) {
+                        var win = windows[i];
+                        var id = win.getAttribute("id");
+                        var pid = win.getAttribute("parent");
+                        var type = win.getAttribute("type");
+                        if (pid == "") {
+                            instance.addEndpoint(windows[i], {
+                                uuid: id + "-bottom",
+                                anchor: "Bottom",
+                                maxConnections: -1
+                            });
+                        } else {
+                            var bottomid = id + "-bottom";
+                            var rightid = id + "-right";
+                            var topid = id + "-top";
+                            if (type == 0){
+                                instance.addEndpoint(windows[i], {
+                                    uuid: bottomid,
+                                    anchor: "Bottom",
+                                    maxConnections: -1
+                                });
+                                instance.addEndpoint(windows[i], {
+                                    uuid: rightid,
+                                    anchor: "Right",
+                                    maxConnections: -1
+                                });
+
+                                instance.connect({
+                                    uuids: [pid + '-bottom', rightid],
+                                    overlays: overlays,
+                                    detachable: false,
+                                    reattach: true
+                                });
+                            }else{
+                                instance.addEndpoint(windows[i], {
+                                    uuid: bottomid,
+                                    anchor: "Bottom",
+                                    maxConnections: -1
+                                });
+                                instance.addEndpoint(windows[i], {
+                                    uuid: topid,
+                                    anchor: "Top",
+                                    maxConnections: -1
+                                });
+
+                                instance.connect({
+                                    uuids: [pid + '-bottom', topid],
+                                    overlays: overlays,
+                                    detachable: false,
+                                    reattach: true
+                                });
+                            }
+
+                        }
+                    }
+                    instance.draggable(windows);
+
+                });
+
+                jsPlumb.fire("jsPlumbDemoLoaded", instance);
+            });
+        }
+    </script>
+</body>
+
+</html>

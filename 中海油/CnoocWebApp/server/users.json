@@ -1,0 +1,168 @@
+[{
+        "name": "国际公司",
+        "organiztionid": "81940c2be8212921",
+        "users": [{
+            "userid": "303",
+            "name": "陈 明",
+            "roleid": "1",
+            "role": "应急管理委员会主任"
+        }, {
+            "userid": "311",
+            "name": "赵顺强",
+            "roleid": "2",
+            "role": "应急管理委员会副主任"
+        }, {
+            "userid": "306",
+            "name": "周洪波",
+            "roleid": "3",
+            "role": "应急管理委员会委员"
+        }, {
+            "userid": "366",
+            "name": "王志中",
+            "roleid": "4",
+            "role": "应急协调办公室主任"
+        }, {
+            "userid": "368",
+            "name": "郭长太",
+            "roleid": "5",
+            "role": "应急协调办公室副主任"
+        }, {
+            "userid": "371",
+            "name": "韩凤池",
+            "roleid": "6",
+            "role": "应急协调办公室成员"
+        }, {
+            "userid": "393",
+            "name": "张  兵",
+            "roleid": "7",
+            "role": "公共关系及法律支持组组长"
+        }, {
+            "userid": "398",
+            "name": "吴新词",
+            "roleid": "8",
+            "role": "公共关系及法律支持组成员"
+        }, {
+            "userid": "321",
+            "name": "张  虹",
+            "roleid": "9",
+            "role": "后勤支持组组长"
+        }, {
+            "userid": "323",
+            "name": "李 燕",
+            "roleid": "10",
+            "role": "后勤支持组成员"
+        }, {
+            "userid": "311",
+            "name": "赵顺强",
+            "roleid": "11",
+            "role": "资源协调支持组组长"
+        }, {
+            "userid": "372",
+            "name": "蒋凯",
+            "roleid": "12",
+            "role": "资源协调支持组组员"
+        }, {
+            "userid": "253",
+            "name": "邝立坤",
+            "roleid": "13",
+            "role": "财务及保险组组长"
+        }, {
+            "userid": "254",
+            "name": "吴玉蕊",
+            "roleid": "14",
+            "role": "财务及保险组组员"
+        }]
+    }, {
+        "name": "伊拉克公司",
+        "organiztionid": "51eb38005a564980",
+        "users": [{
+            "userid": "263",
+            "name": "陈明",
+            "roleid": "21",
+            "role": "应急管理委员会主任"
+        }, {
+            "userid": "498",
+            "name": "陈明",
+            "roleid": "22",
+            "role": "应急管理委员会副主任"
+        }, {
+            "userid": "264",
+            "name": "陈明",
+            "roleid": "23",
+            "role": "应急管理委员会成员"
+        }, {
+            "userid": "497",
+            "name": "陈明",
+            "roleid": "24",
+            "role": "应急办公室主任"
+        }, {
+            "userid": "499",
+            "name": "陈明",
+            "roleid": "25",
+            "role": "应急办公室副主任"
+        }, {
+            "userid": "500",
+            "name": "陈明",
+            "roleid": "26",
+            "role": "应急办公室成员"
+        }, {
+            "userid": "501",
+            "name": "陈明",
+            "roleid": "27",
+            "role": "应急保障组组长"
+        }, {
+            "userid": "502",
+            "name": "陈明",
+            "roleid": "28",
+            "role": "应急保障组副组长"
+        }, {
+            "userid": "503",
+            "name": "陈明",
+            "roleid": "29",
+            "role": "应急保障组成员"
+        }
+        , {
+                "userid": "513",
+                "name": "陈明",
+                "roleid": "30",
+                "role": "危机公关组组长"
+            }
+        , {
+                "userid": "514",
+                "name": "陈明",
+                "roleid": "31",
+                "role": "危机公关组副组长"
+            }
+        , {
+                "userid": "515",
+                "name": "陈明",
+                "roleid": "32",
+                "role": "危机公关组组员"
+            }
+        , {
+                "userid": "510",
+                "name": "陈明",
+                "roleid": "33",
+                "role": "技术支持组组长"
+            }
+        , {
+                "userid": "511",
+                "name": "陈明",
+                "roleid": "34",
+                "role": "技术支持组副组长"
+            }
+        , {
+                "userid": "512",
+                "name": "陈明",
+                "roleid": "35",
+                "role": "技术支持组组员"
+            }
+        , {
+                "userid": "399",
+                "name": "陈明",
+                "roleid": "36",
+                "role": "伊朗办事处"
+            }]
+    }
+
+]

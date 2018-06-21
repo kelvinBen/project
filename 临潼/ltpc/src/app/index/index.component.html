@@ -1,0 +1,73 @@
+<header>
+  <div class="logo">
+    <div class="headlogo">
+      <img src="../../assets/images/logo.png"/>
+      <span class="houtailogin">
+        <a routerLink='/backstage/login' style="text-decoration:none;color:#fff;">气象工作站登陆</a>
+      </span>
+    </div>
+  </div>
+  <nav id="nav">
+    <ul>
+      <li class="liback"><a routerLink="/">网站首页</a></li>
+      <li class="liback"><a routerLink='/list/2'>单位概况</a></li>
+      <li class="liback"><a routerLink='/list/1'>新闻中心</a></li>
+      <li class="liback"><a routerLink='/list/3'>实时监测</a></li>
+      <li class="liback"><a routerLink='/list/4'>预报预警</a></li>
+      <li class="liback"><a routerLink='/list/5'>服务产品</a></li>
+      <li class="liback"><a routerLink='/list/6'>农情与气象</a></li>
+      <li class="liback"><a routerLink='/list/7'>气象工作站</a></li>
+      <li class="liback"><a routerLink='/list/8'>政策法规</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="bgcolor">
+  <div class="todayreport">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="130" style="background:url(../assets/images/sound.png) no-repeat 20px center;text-indent:50px;font-weight:bolder;color:#191919;font-size:14px">
+            <a href="#" style="text-decoration:none;">通知公告：</a>
+          </td>
+          <td style="color:red;font-size:14px;">
+            <div style="width:1000px;height:40px;padding:0px;">
+              <marquee direction="left" behavior="scroll" scrollmount="1" scrolldelay="2" width="90%" height="36" onMouseOut="this.start()"
+                onMouseOver="this.stop()" style="margin-left: 70px;margin-top: -20px; line-height:58px;">
+                <span *ngFor='let o of ontime' style="padding-right:100px;">
+                <a routerLink="/detail/{{o.id}}" style="text-decoration:none;">{{o.title}}
+                </a>
+            </span>
+              </marquee>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Routed views go here -->
+  <router-outlet></router-outlet>
+  <div class="blank"></div>
+  <div class="box">
+    <div class="links">
+      <p>相关链接:</p>
+      <ul>
+        <li><a href="http://www.cma.gov.cn/" target="_blank">中国气象局</a></li>
+        <li><a href="http://www.sxmb.gov.cn/index.php" target="_blank">陕西省气象局</a></li>
+        <li><a href="http://www.xaweather.com/" target="_blank">西安市气象局</a></li>
+        <li><a href="http://www.lintong.gov.cn/" target="_blank">临潼区门户网站</a></li>
+        <li><a href="http://10.172.97.90/v2/" target="_blank">西安市二期平台</a></li>
+        <li style="border-right:none;"><a href="http://lintong.sxny.gov.cn/templet/lintong/" target="_blank">临潼区农业信息网</a></li>
+      </ul>
+    </div>
+  </div>
+  <footer>
+    <div class="footnav">
+      <div class="footlogo">
+        <img src="../../assets/images/footer_logo.png" />临潼气象服务中心 版权所有 复制必究 郑重声明：临潼气象局版权所有 未经授权禁止使用
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="hotline">客户服务热线：029-83886724 客服邮箱：service@weather.com.cn</div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,109 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"disasterweathersys"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"disasterweatherquery"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" style="left:0px;" ng-controller="weathersearchControl">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="row">
+                    <select class="form-control" size="1" name="demo1" ng-change="changecompany(x)"
+                            ng-model="company_select" ng-options="a.organiztion_name for a in companys"></select>
+                </div>
+                <div class="row">
+                    <table class="table table-border table-bordered table-hover table-bg">
+                        <tr class="weather_bg">
+                            <th colspan="4">{{"num"|translate}}</th>
+                            <th>{{"oilinstallation"|translate}}</th>
+                            <th>{{"nearcity"|translate}}</th>
+                        </tr>
+                        <tr ng-repeat="uti in utilities" ng-click="SelectUtility($index)" class="{{uti.class}}">
+                            <td colspan="4">{{$index+1}}</td>
+                            <td>{{uti.name}}</td>
+                            <td>{{uti.city}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="weather_form">
+                    <br>
+                    <button class="btn btn-success radius" ng-click="loadutility()"><em class="fa fa-search"></em>{{"queryweather"|translate}}
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{"oilinstallation"|translate}}</div>
+                    <div class="panel-body">
+                        <div class="row cl" role="grid">
+                            <div class="col-xs-12 col-sm-2" style="text-align:right;">{{"country"|translate}}：</div>
+                            <div class="col-xs-12 col-sm-2">{{select_utility.city}}</div>
+                            <div class="col-xs-12 col-sm-2" style="text-align:right;">{{"productioninstallation"|translate}}：</div>
+                            <div class="col-xs-12 col-sm-2">{{select_utility.name}}</div>
+                        </div>
+                        <div class="row cl" role="grid">
+                            <div class="col-xs-12 col-sm-2" style="text-align:right;">{{"nearcity"|translate}}：</div>
+                            <div class="col-xs-12 col-sm-2">{{select_utility.country}}</div>
+                            <div class="col-xs-12 col-sm-2" style="text-align:right;">{{"nearcityweather"|translate}}：</div>
+                            <div class="col-xs-12 col-sm-2">{{cur_weather.dayweather}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel widget">
+                            <div class="row row-table">
+                                <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info pv-xl">
+                                    <em class="wi {{getweathericon(cur_weather.dayweather)}} fa-4x"></em>
+                                </div>
+                                <div class="col-md-2 col-sm-3 col-xs-6 pv br">
+                                    <div class="h4 m0 text-bold">{{cur_weather.mintemp}}/{{cur_weather.maxtemp}}</div>
+                                    <div class="text-uppercase">{{weather.wind}}</div>
+                                </div>
+                                <div class="col-md-2 col-sm-3 hidden-xs pv text-center br" ng-repeat="weather in weathers.days">
+                                    <div class="text-info text-sm">{{weather.time.substring(4,6)}}月{{weather.time.substring(6,8)}}日</div>
+                                    <div class="text-muted text-md">
+                                        <em class="wi {{getweathericon(weather.dayweather)}}"></em>
+                                    </div>
+                                    <div class="text-info">
+                                        <em class="wi wi-sprinkles"></em>
+                                        <span class="text-muted">{{weather.dayweather}}</span>
+                                    </div>
+                                    <div class="text-muted">{{weather.mintemp}}/{{weather.maxtemp}}</div>
+                                    <div class="text-muted">{{weather.wind}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary" ng-hide="true">
+                    <div class="panel-header">{{"sevenweather"|translate}}</div>
+                    <div class="panel-body">
+                        <div class="seven_days" ng-repeat="weather in weathers.days">
+
+                            <ul style="list-style: none;">
+                                <p></p>
+                                <li>{{weather.time.substring(4,6)}}月{{weather.time.substring(6,8)}}日</li>
+                                <p></p>
+                                <li>
+                                    <div class="tqIcon {{getweathericon(weather.dayweather)}}"/>
+                                </li>
+                                <p></p>
+                                <li>{{weather.dayweather}}</li>
+                                <li>{{weather.mintemp}}/{{weather.maxtemp}}</li>
+                                <p></p>
+                                <li></li>
+                                <li>{{weather.wind}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+

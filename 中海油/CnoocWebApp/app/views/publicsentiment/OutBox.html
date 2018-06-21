@@ -1,0 +1,252 @@
+
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"outbox"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="outboxCtrl">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{"outboxlist"|translate}}</h3>
+      </div>
+      <div class="panel-body">
+          <div class="row-fluid">
+              <form class="form-inline">
+                  <div class="form-group">
+                      <label for="">{{"infotype"|translate}}:</label>
+                      <select name="msgType" id="type" class="form-control" style="width:200px;" ng-model="cate_select">
+                        <option value="-1" selected="selected">{{"all"|translate}}</option>
+                        <option value="1">{{"security"|translate}}</option>
+                        <option value="2">{{"weather"|translate}}</option>
+                        <option value="3">{{"emergency"|translate}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="">{{"status"|translate}}：</label>
+                      <select name="status" style="width:200px;" class="form-control" ng-model="status_select">
+                        <option value="-1" selected="selected">{{"all"|translate}}</option>
+                        <option value="0">{{"Auditing"|translate}}</option>
+                        <option value="1">{{"sendsuccess"|translate}}</option>
+                        <option value="2">{{"sendfailed"|translate}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                      <input type="text" class="form-control" style="width:250px" placeholder='{{"content"|translate}}' name="content">
+                  </div>
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-success radius" id="" name="">
+                          {{"search"|translate}}
+                      </button>
+                  </div>
+              </form>
+          </div>
+          <div style="margin:10px;">
+          </div>
+          <div class="row-fluid">
+              <button type="button" class="btn btn-danger">
+                  {{"delete"|translate}}
+              </button>
+          </div>
+          <div style="margin:10px;">
+          </div>
+          <table datatable="ng" class="table table-bordered table-striped table-hover table-condensed">
+              <thead>
+                  <tr>
+                      <th class="text-center">
+                          <div class="checkbox c-checkbox">
+                              <label style="font-weight:bold">
+                                  <input type="checkbox" ng-model="checkAll" />
+                                  <span class="fa fa-check"></span>
+                              </label>
+                          </div>
+                      </th>
+                      <th>{{"Addressee"|translate}}</th>
+                      <th>{{"infotype"|translate}}</th>
+                      <th>{{"title"|translate}}</th>
+                      <th>{{"sendtime"|translate}}</th>
+                      <th>{{"limittime"|translate}}</th>
+                      <th>{{"status"|translate}}</th>
+                      <th>{{"emailcount"|translate}}</th>
+                      <th>{{"messagecount"|translate}}</th>
+                      <th style="width: 11%">{{"operation"|translate}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="u in messages">
+                      <td>
+                          <div class="checkbox c-checkbox">
+                              <label style="font-weight:bold">
+                                  <input type="checkbox" ng-model="u.selected"/>
+                                  <span class="fa fa-check"></span>
+                              </label>
+                          </div>
+                      </td>
+                      <td>{{u.receiver | limitTo : 25}}</td>
+                      <td>{{getCate(u.category_type)}}</td>
+                      <td style="text-align:left;">
+                          <span class="label label-info" ng-show="u.is_return">{{"needresponse"|translate}}</span>
+                          <span class="label label-info" ng-show="u.top">{{"needtop"|translate}}</span>
+                          {{u.title}}
+                      </td>
+                      <td>{{u.create_time|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                      <td>{{u.invalid_time|date:"yyyy-MM-dd"}}</td>
+                      <td>{{getStatus(u.status)}}</td>
+                      <td>{{u.email_receiver_count}}</td>
+                      <td>{{u.sms_receiver_count}}</td>
+                      <td>
+                          <!--<a href="javascript:;" title="{{'detail'|translate}}" ng-click="viewdetail(u.website_message_id)">-->
+                              <!--<em class="fa fa-search-plus fa-2x"></em>-->
+                          <!--</a>-->
+                          <!--<a href="javascript:;" title="{{'delete'|translate}}" ng-click="delete(u.website_message_id)">-->
+                              <!--<em class="fa fa-trash-o fa-2x"></em>-->
+                          <!--</a>-->
+
+                          <button type="button" class="btn btn-primary btn-sm" title="{{'detail'| translate}}" ng-click="viewdetail(u.website_message_id)">
+                              <i class="fa fa-search-plus"></i>
+                          </button>
+                          <button type="button" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}" ng-click="delete(u.website_message_id)">
+                              <i class="fa fa-trash-o"></i>
+                          </button>
+
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+
+    <!-- <table datatable="ng" class="table table-condensed table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col" colspan="11" class="text-l">{{"outboxlist"|translate}}</th>
+            </tr>
+            <tr>
+                <th style="width:50px">
+                    <div class="check-box">
+                        <input type="checkbox" id="selectAll">
+                    </div>
+                </th>
+                <th style="width: 100px;">{{"Addressee"|translate}}</th>
+                <th>{{"infotype"|translate}}</th>
+                <th>{{"title"|translate}}</th>
+                <th>{{"sendtime"|translate}}</th>
+                <th>{{"limittime"|translate}}</th>
+                <th>{{"status"|translate}}</th>
+                <th>{{"emailcount"|translate}}</th>
+                <th>{{"messagecount"|translate}}</th>
+                <th class="text-center">{{"operation"|translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="u in messages">
+                <td><input type="checkbox" class="chk" ng-model="u.selected"></td>
+                <td>{{u.receiver}}</td>
+                <td>{{getCate(u.category_type)}}</td>
+                <td style="text-align:left;">
+                    <span class="label label-info" ng-show="u.is_return">需要回执</span>
+                    <span class="label label-info" ng-show="u.top">置顶</span>
+                    {{u.title}}
+                </td>
+                <td>{{u.create_time|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td>{{u.invalid_time|date:"yyyy-MM-dd"}}</td>
+                <td>{{getStatus(u.status)}}</td>
+                <td>{{u.email_receiver_count}}</td>
+                <td>{{u.sms_receiver_count}}</td>
+                <td>
+                    <a href="javascript:;" title="{{'detail'|translate}}" ng-click="viewdetail(u.website_message_id)">
+                        <em class="fa fa-search-plus fa-2x"></em>
+                    </a>
+                    <a href="javascript:;" title="{{'delete'|translate}}" ng-click="delete(u.website_message_id)">
+                        <em class="fa fa-trash-o fa-2x"></em>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+</div>
+<!-- <div class="page-container" style="background-color:#ffffff;min-width: 1300px" ng-controller="outboxCtrl">
+    <div class="text-l">
+        {{"infotype"|translate}}:
+        <select name="msgType" id="type" class="select" style="width:200px;height:31px;border-radius:4px;"
+                ng-model="cate_select">
+            <option value="-1" selected="selected">{{"all"|translate}}</option>
+            <option value="1">{{"security"|translate}}</option>
+            <option value="2">{{"weather"|translate}}</option>
+            <option value="3">{{"emergency"|translate}}</option>
+        </select>
+        {{"status"|translate}}：
+        <select name="status" style="width:200px;height:31px;border-radius:4px;" class="select"
+                ng-model="status_select">
+            <option value="-1" selected="selected">{{"all"|translate}}</option>
+            <option value="0">{{"Auditing"|translate}}</option>
+            <option value="1">{{"sendsuccess"|translate}}</option>
+            <option value="2">{{"sendfailed"|translate}}</option>
+        </select>
+        <input type="text" class="input-text" style="width:250px" placeholder={{"content"|translate}}
+               name="content">
+        <button type="submit" class="btn btn-success radius" id="" name="">
+            {{"search"|translate}}
+        </button>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l">
+                <a href="javascript:;" class="btn btn-danger radius">
+{{"delete"|translate}}
+                </a>
+            </span>
+    </div>
+    <table datatable="ng" class="table table-border table-bordered table-hover table-bg table-striped">
+        <thead class="text-c">
+        <tr>
+            <th scope="col" colspan="11" class="text-l">{{"outboxlist"|translate}}</th>
+        </tr>
+        <tr>
+            <th style="width:2%">
+                <div class="check-box">
+                    <input type="checkbox" id="selectAll">
+                </div>
+            </th>
+            <th style="width:10%">{{"Addressee"|translate}}</th>
+            <th style="width:5%">{{"infotype"|translate}}</th>
+            <th style="width:10%">{{"title"|translate}}</th>
+            <th style="width:5%">{{"sendtime"|translate}}</th>
+            <th style="width:5%">{{"limittime"|translate}}</th>
+            <th style="width:5%">{{"status"|translate}}</th>
+            <th style="width:5%">{{"emailcount"|translate}}</th>
+            <th style="width:5%">{{"messagecount"|translate}}</th>
+            <th style="width:5%">{{"operation"|translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-c" ng-repeat="u in messages">
+            <td><input type="checkbox" class="chk" ng-model="u.selected"></td>
+            <td>{{u.receiver}}</td>
+            <td>{{getCate(u.category_type)}}</td>
+            <td style="text-align:left;">
+                <span class="label label-info" ng-show="u.is_return">需要回执</span>
+                <span class="label label-info" ng-show="u.top">置顶</span>
+                {{u.title}}
+            </td>
+            <td>{{u.create_time|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+            <td>{{u.invalid_time|date:"yyyy-MM-dd"}}</td>
+            <td>{{getStatus(u.status)}}</td>
+            <td>{{u.email_receiver_count}}</td>
+            <td>{{u.sms_receiver_count}}</td>
+            <td>
+                <a href="javascript:;" title="{{'detail'|translate}}" ng-click="viewdetail(u.website_message_id)">
+                    <em class="fa fa-search-plus fa-2x"></em>
+                </a>
+                <a href="javascript:;" title="{{'delete'|translate}}" ng-click="delete(u.website_message_id)">
+                    <em class="fa fa-trash-o fa-2x"></em>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div> -->

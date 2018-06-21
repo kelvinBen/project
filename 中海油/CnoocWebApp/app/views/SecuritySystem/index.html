@@ -1,0 +1,130 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"warnmap"|translate}}
+        </li>
+    </ul>
+</h3>
+<style media="screen">
+    .label-red {
+        background-color: #ff0101;
+        background-color: #ff0101;
+    }
+
+    .label-red[href]:hover,
+    .label-red[href]:focus {
+        background-color: #ff0101;
+    }
+</style>
+<div class="container-fluid" ng-controller="indexController" id="mainDiv">
+    <div class="panel panel-primary" style="margin-bottom: 0px;">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-4" style="padding-righ:0px;">
+                    <span>{{"countryrisklevel"|translate}}:</span>
+                    <a title="{{'extreme'|translate}}">
+                        <img src="app/img/C5.png" width="20" />
+                    </a>
+                    <a title="{{'high'|translate}}">
+                        <img src="app/img/C4.png" width="20" />
+                    </a>
+                    <a title="{{'middle'|translate}}">
+                        <img src="app/img/C3.png" width="20" />
+                    </a>
+                    <a title="{{'low'|translate}}">
+                        <img src="app/img/C2.png" width="20" />
+                    </a>
+                    <a title="{{'lowex'|translate}}">
+                        <img src="app/img/C1.png" width="20" />
+                    </a>
+                </div>
+                <div class="col-xs-4 text-center" style="padding-righ:0px;padding-left:0px;">
+                    <span>{{"emestatus"|translate}}:</span>
+                    <a title="{{'emergencyextreme'|translate}}">
+                        <img src="app/img/m1.png" width="20" />
+                    </a>
+                    <a title="{{'emergencyhigh'|translate}}">
+                        <img src="app/img/m2.png" width="20" />
+                    </a>
+                    <a title="{{'emergencymiddle'|translate}}">
+                        <img src="app/img/m3.png" width="20" />
+                    </a>
+                    <a title="{{'emergencylow'|translate}}">
+                        <img src="app/img/m4.png" width="20" />
+                    </a>
+                </div>
+                <div class="col-xs-4 text-right" style="padding-left:0px;">
+                    <span>{{"todaylevel"|translate}}:</span>
+                    <a title="{{'warnextreme'|translate}}">
+                        <img src="app/img/g1.png" width="20" alt="{{'onewarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnhigh'|translate}}">
+                        <img src="app/img/g2.png" width="20" alt="{{'twowarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnmiddle'|translate}}">
+                        <img src="app/img/g3.png" width="20" alt="{{'threewarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnlow'|translate}}">
+                        <img src="app/img/g4.png" width="20" alt="{{'fouewarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnno'|translate}}">
+                        <img src="app/img/g5.png" width="20" alt="{{'fivewarnlevel'|translate}}" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="padding: 0px;">
+            <div ng-hide="true">
+            <table class="table table-border table-bordered table-hover table-bg"  datatable="ng">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="9">{{'installation'|translate}}</th>
+                </tr>
+                <tr class="text-c">
+                    <th style="width: 5%;">
+                        <input type="checkbox" value="" name="" ng-model="select_all" ng-change="selectall()">
+                    </th>
+                    <th style="text-align: center;width: 5%;">{{"num"|translate}}</th>
+                    <th style="text-align: center;width: 10%;">{{"installationame"|translate}}</th>
+                    <th style="text-align: center;width: 10%;">{{"creationtime"|translate}}</th>
+                    <th style="text-align: center;width: 10%;">{{"oilcount"|translate}}</th>
+                    <th style="text-align: center;width: 10%;">{{"installationtype"|translate}}</th>
+                    <th style="text-align: center;width: 10%;">{{"dayoutput"|translate}}</th>
+                    <th style="text-align: center;width: 10%;">{{"theproject"|translate}}</th>
+                    <th style="text-align: center;width: 10%;">{{"operation"|translate}}</th>
+                </tr>
+                </thead>
+                <tbody id="tabBody">
+                <tr ng-repeat="cur in utilities" class="text-c">
+                    <th >
+                        <input type="checkbox" ng-model="cur.selected">
+                    </th>
+                    <td>{{$index+1}}</td>
+                    <td>{{cur.name}}</td>
+                    <td>{{cur.create_time|date:'yyyy-MM-dd'}}</td>
+                    <td>{{cur.oilwell_num}}</td>
+                    <td>{{cur.type}}</td>
+                    <td>{{cur.dailyoutput}}</td>
+                    <td>{{getProjectName(cur.project_id)}}</td>
+                    <td>
+                        <a href="javascript:;" ng-click="edit(cur)" title="{{'edit'|translate}}">
+                            <em class="fa fa-edit"></em>
+                        </a>
+                        <a href="javascript:;" ng-click="deleteconfirm(cur.utility_id)" title="{{'singledelete'|translate}}">
+                            <em class="fa fa-trash-o"></em>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+                </div>
+            <iframe src="app/views/SecuritySystem/map.html" width="100%" frameborder="0" id="mapFrame"></iframe>
+        </div>
+    </div>
+</div>

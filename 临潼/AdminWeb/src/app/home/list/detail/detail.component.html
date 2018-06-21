@@ -1,0 +1,14 @@
+<div class="nav">首页 > <span style="color:red;">{{smallClasse.SmallClassName}}</span></div>
+<div class="detail_content">
+  <ul style="margin-top:30px;">
+    <li>
+      <p>{{vm.Title}}</p>
+      <div class="author">
+        <span>来源：{{vm.Author}} </span>
+        <span style="margin-left:140px;">时间：{{vm.Time}}</span>
+      </div>
+      <div class="content" [innerHTML]="html" *ngIf="html"></div>
+      <!-- <embed src='http://www.lintongqx.com/ftp/预警信号/MSP3_SN-SIA-LTG_WFDWS_ME_LNO_LTG_201710030800_00000-00000.pdf' width='100%'  height='700px'/> -->
+    </li>
+  </ul>
+</div>

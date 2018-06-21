@@ -1,0 +1,58 @@
+<h3>
+    <ol class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li >
+            <a ui-sref="app.sstotalwarns">{{"warnanalysis"|translate}}
+            </a>
+        </li>
+        <li class="active">{{"infosum"|translate}}</li>
+    </ol>
+</h3>
+<style>
+    .table th,
+    .table td {
+        padding: 5px 0px;
+    }
+
+    .table> tbody> tr> td {
+        padding: 5px 0px;
+    }
+</style>
+<div class="container-fluid">
+    <div ng-controller="totalinfoController">
+        <div ng-repeat="ci in arr2" style="font-family:'微软雅黑';text-align:center; float:left;width:100%; margin-left:0px;">
+            <table class="table table-bg">
+                <tr>
+                    <td>
+                        <table class="table table-border table-striped" style="text-align:center;">
+                            <tr>
+                                <td style="background:#a4bedd; text-align:center; font-size:14px;">{{"followinfo"|translate}} ：</td>
+                            </tr>
+                            <tr ng-repeat="mo in months" style="text-align: center; width:10%">
+                                <td style="text-align:center;">{{mo}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td ng-repeat="ci2 in ci">
+                        <table class="table table-border table-striped" style="float:left">
+                            <tr>
+                                <td style="text-align:center;background:#a4bedd;font-size:14px;">{{ci2.name}}</td>
+                            </tr>
+                            <tr ng-repeat="mo in ci2.values" style="text-align: center; width:10%">
+                                <td style="text-align:center;">
+                                    <a ng-click="go($index+1, ci2.country_id)">{{mo.sum}}</a>
+                                    <!-- <a ng-href="@Url.Action(" SecurityList ")?m={{$index+1}}&id={{ci2.country_id}}">{{mo.sum}}</a> -->
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

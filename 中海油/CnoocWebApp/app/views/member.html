@@ -1,0 +1,68 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"personalcenter"|translate}}</a>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="memberCtl">
+    <form class="form-validate form-horizontal" name="formValidate" ng-submit="submitForm()" method="post" novalidate>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset class="b0">
+                    <legend>{{ 'personalcenter' | translate}}</legend>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'usernames'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="name" required="" ng-model="vm.real_name" class="form-control" />
+                            <span ng-show="validateInput('name')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'password'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="password" name="pwd" required="" ng-model="vm.passwd" class="form-control" />
+                            <span ng-show="validateInput('pwd')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'email'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="email" required="" ng-model="vm.email" class="form-control" />
+                            <span ng-show="validateInput('email')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'telephone'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="telephone" required="" ng-model="vm.telephone" class="form-control" />
+                            <span ng-show="validateInput('telephone')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{'phone'|translate}}</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="phone" required="" ng-model="vm.phone" class="form-control" />
+                            <span ng-show="validateInput('phone')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="panel-footer text-center">
+                <button class="btn btn-info" ng-click="reset()">{{"reset"|translate}}</button>
+                <button type="submit" class="btn btn-info">{{'submit'|translate}}</button>
+            </div>
+        </div>
+    </form>
+</div>

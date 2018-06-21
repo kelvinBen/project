@@ -1,0 +1,130 @@
+[
+  {
+    "step": 0,
+    "tables": [
+      {
+        "name": "应急反应记录表",
+        "tablename":"ics001",
+        "url":"app.reactiontable",
+        "required": true
+      }
+    ]
+  },
+  {
+    "step": 1,
+    "tables": [
+
+    ]
+  },
+  {
+    "step": 2,
+    "tables": [
+    ]
+  },
+  {
+    "step": 3,
+    "tables": [
+
+    ]
+  },
+  {
+    "step": 4,
+    "tables": [
+      {
+        "name": "ECS201-2当前行动",
+        "tablename":"ics2012",
+        "url":"app.ics2012",
+        "required": false
+      },
+      {
+        "name": "ECS202响应目标",
+        "tablename":"ics202",
+        "url":"app.ics202",
+        "required": true
+      },
+      {
+        "name": "ECS203组织分工表",
+        "tablename":"ics203",
+        "url":"app.ics203",
+        "required": false
+      },
+      {
+        "name": "ECS204任务分配表",
+        "tablename":"ics204",
+        "url":"app.ics204",
+        "required": true
+      },
+      {
+        "name": "ECS205通讯计划",
+        "tablename":"ics205",
+        "url":"app.ics205",
+        "required": false
+      },
+      {
+        "name": "ECS206医疗计划",
+        "tablename":"ics206",
+        "url":"app.ics206",
+        "required": false
+      },
+      {
+        "name": "ECS208安全计划",
+        "tablename":"ics208",
+        "url":"app.ics208",
+        "required": false
+      },
+      {
+        "name": "ECS209事故状态总结",
+        "tablename":"ics209",
+        "url":"app.ics209",
+        "required": false
+      },
+      {
+        "name": "ECS210资源状态变化",
+        "tablename":"ics210",
+        "url":"app.ics210",
+        "required": false
+      },
+      {
+        "name": "ECS211事故入场清单",
+        "tablename":"ics211",
+        "url":"app.ics211",
+        "required": false
+      },
+      {
+        "name": "ECS215作业计划工作表",
+        "tablename":"ics215",
+        "url":"app.ics215",
+        "required": false
+      },
+      {
+        "name": "ECS220飞行作业总结工作表",
+        "tablename":"ics220",
+        "url":"app.ics220",
+        "required": false
+      },
+      {
+        "name": "ECS221复员退场",
+        "tablename":"ics221",
+        "url":"app.ics221",
+        "required": false
+      },
+      {
+        "name": "ECS230日常会议",
+        "tablename":"ics230",
+        "url":"app.ics230",
+        "required": false
+      },
+      {
+        "name": "ECS232处于风险的资源总结",
+        "tablename":"ics232",
+        "url":"app.ics232",
+        "required": false
+      }
+    ]
+  },
+  {
+    "step": 5,
+    "tables": [
+    ]
+  }
+]

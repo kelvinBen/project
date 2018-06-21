@@ -1,0 +1,120 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{'disasterweathersys'|translate}}</a>
+        </li>
+        <li>
+            <span>{{"chartanalysis"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="graphicanaysisCtrl">
+    <div class="row">
+        <div class="col-lg-2">
+            <abn-tree tree-data="treeDatas" tree-control="group_tree" expand-level="2">
+            </abn-tree>
+        </div>
+        <div class="col-lg-10">
+            <div id="iframe_box">
+                <div class="page-container">
+                    <div class="cl pd-5 bg-1 bk-gray">
+                    <span class="l">
+                        <a href="javascript:;" class="btn btn-danger radius" onclick="window.print()">
+                            {{"print"|translate}}
+                        </a>
+                    </span>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">{{"chartanalysis"|translate}}</div>
+                        <div class="panel-body">
+                            <div class="row cl" role="grid">
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="check-box">
+                                        <!--<input type="checkbox" id="checkbox-1" ng-model="month_trend">-->
+                                            <div class="checkbox c-checkbox">
+                                                <label style="font-weight:bold">
+                                                    <input id="checkbox-1" type="checkbox" ng-model="month_trend" />
+                                                    <span class="fa fa-check"></span>
+                                                </label>
+                                                <label for="checkbox-1">{{"monthchartanalysis"|translate}}</label>
+                                            </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="check-box">
+                                        <!--<input type="checkbox" id="checkbox-1" ng-model="month_distri">-->
+                                        <div class="checkbox c-checkbox">
+                                            <label style="font-weight:bold">
+                                                <input id="checkbox-1" type="checkbox" ng-model="month_distri" />
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                            <label for="checkbox-1">{{"monthdistributionmap"|translate}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="check-box">
+                                        <!--<input type="checkbox" id="checkbox-1" ng-model="month_anay">-->
+                                        <div class="checkbox c-checkbox">
+                                            <label style="font-weight:bold">
+                                                <input id="checkbox-1" type="checkbox" ng-model="month_anay" />
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                            <label for="checkbox-1">{{"monthanalysismap"|translate}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-left: 10px">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label>{{"daterange"|translate}}：</label>
+                                        <input date-range-picker id="daterange1" name="daterange1" class="form-control date-picker"
+                                               type="text"
+                                               ng-model="date" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="form-control btn btn-success" ng-click="loaddata()">
+                                            {{'query'|translate}}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary" ng-show="month_trend">
+                        <div class="panel-heading">{{"monthchartanalysis"|translate}}</div>
+                        <div class="panel-body">
+                            <highchart id="chart1" config="chartConfig1" series="chart1.series"
+                                       style="min-width:100%;min-height:250px;"></highchart>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary" ng-show="month_distri">
+                        <div class="panel-heading">{{"monthdistributionmap"|translate}}</div>
+                        <div class="panel-body">
+                            <highchart id="chart2" config="chartConfig2" series="chartConfig2.series"
+                                       style="min-width:100%;min-height:250px;"></highchart>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary" ng-show="month_anay">
+                        <div class="panel-heading">{{"monthanalysismap"|translate}}</div>
+                        <div class="panel-body">
+                            <highchart id="chart3" config="chartConfig3" series="chart3.series"
+                                       style="min-width:100%;min-height:250px;"></highchart>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary" ng-show="weather_report">
+                        <div class="panel-heading">{{"infoallchart"|translate}}</div>
+                        <div class="panel-body">
+                            <highchart id="chart4" config="chartConfig4" series="chart4.series"
+                                       style="min-width:100%;min-height:250px;"></highchart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Angular Esri Quick Start</title>
+    <!-- <link rel="stylesheet" href="http://120.26.44.171:5557/esri/css/main.css"> -->
+    <!-- <link rel="stylesheet" href="http://120.26.44.171:5555/esri/css/esri.css" media="screen" title="no title" charset="utf-8"> -->
+    <link rel="stylesheet" href="../../../bower_components/fontawesome/css/font-awesome.min.css" media="screen" title="no title"
+        charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../../arcgis317/esri/css/esri.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <!-- <link rel="stylesheet" href="../../../bower_components/datatables/media/css/jquery.dataTables.css" media="screen" title="no title" charset="utf-8"> -->
+    <style type="text/css">
+        html,
+        body,
+        .row,
+        #map {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body ng-controller="MapController">
+    <div class="row">
+        <!-- <esri-map-view map="map" view-options="{extent:{xmin:-180,ymin:-90,xmax:180,ymax:90}}">
+    </esri-map-view> -->
+        <esri-map id="map" map-options="mapOptions.options" load="onMapLoad" extent-change="extentChanged">
+        </esri-map>
+    </div>
+
+    <script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../arcgis317/init.js"></script>
+    <script src="../../../bower_components/angular/angular.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../bower_components/angular-esri-map-v1.1.6/dist/angular-esri-map.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/SecuritySystem.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/service.js" charset="utf-8"></script>
+    <script src="../../js/Service/eventservices.js" charset="utf-8"></script>
+    <!-- <script src="../../../bower_components/DataTables-1.10.7/media/js/jquery.dataTables.js" charset="utf-8"></script> -->
+    <script type="text/javascript">
+    angular.module('esri-map-example', ['esri.map', 'cnooc_service.SecuritySystem', 'cnooc_service', 'ics_service.event'])
+        .service('world', ['$q', '$http', function ($q, $http) {
+            return {
+                get: function () {
+                    var deferred = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: '../../../server/world.json'
+                    }).success(function (data, status, headers, config) {
+                        deferred.resolve(data);
+                    }).error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+                    return deferred.promise;
+                }
+            }
+        }])
+        .controller('MapController', function ($scope, $location, esriLoader, world, countryrisk, SecuritySystem, eventservice, eventtables) {
+            $scope.mapOptions = {
+                options: {
+                    basemap: 'topo',
+                    center: {
+                        lng: -31.036,
+                        lat: 42.747
+                    },
+                    zoom: 3,
+                    displayGraphicsOnPan: true,
+                    sliderStyle: 'small',
+                    logo: false
+                }
+            };
+            $scope.map = null;
+            $scope.countryList = null;
+            //$scope.warningList = null;
+            $scope.worldJson = null;
+            $scope.events = [];
+            $scope.tables = [];
+            $scope.extentChanged = function (e) {
+                // see "Map Events" example for more info about this method
+                $scope.map.extent = e.extent;
+                // the extent-change event also gives us access to the target map,
+                // thus we can find out the current map scale
+                $scope.map.scale = e.target.getScale();
+            };
+            $scope.onMapLoad = function (mapCtl) {
+                $scope.map = mapCtl;
+                countryrisk.get().then(function (data) { //国家列表
+                    $scope.countryList = data;
+                    $scope.createMap();
+                });
+                //SecuritySystem.GetWaring().then(function(w) { //预警等级
+                //    $scope.warningList = w;
+                //});
+                // world.get().then(function(d) { //世界国家地图
+                //     $scope.worldJson = d;
+                // });
+                // $scope.$watchGroup(['countryList', 'worldJson'], function(newVal, oldVal) { //监视当数据都已经获取到的时候创建Map
+                //     if (newVal[0] && newVal[1]) $scope.createMap();
+                // });
+            }
+            $scope.createMap = function () {
+                esriLoader.require(['esri/symbols/SimpleFillSymbol', 'esri/symbols/SimpleLineSymbol', 'esri/graphic', 'esri/layers/ArcGISTiledMapServiceLayer', 'esri/geometry/Point',
+                    'esri/Color', 'esri/symbols/SimpleMarkerSymbol', 'esri/geometry/Polygon', 'esri/layers/GraphicsLayer', 'esri/symbols/PictureMarkerSymbol', 'esri/symbols/TextSymbol',
+                    'esri/symbols/Font', 'esri/SpatialReference', 'esri/geometry/Extent'
+                ],
+                    function (SimpleFillSymbol, SimpleLineSymbol, Graphic, ArcGISTiledMapServiceLayer, Point, Color,
+                        SimpleMarkerSymbol, Polygon, GraphicsLayer, PictureMarkerSymbol, TextSymbol, Font, SpatialReference, Extent) {
+                        var extent = new Extent(-17089281, -7234550, 22750920, 7010865, new SpatialReference({ wkid: 102100 }));
+                        $scope.map.setExtent(extent);
+                        var ly = new GraphicsLayer({
+                            id: 'world'
+                        });
+                        $scope.map.addLayer(ly);
+                        var ly2 = new GraphicsLayer({
+                            id: 'event'
+                        });
+                        $scope.map.addLayer(ly2);
+
+                        // $scope.createGradeMark(PictureMarkerSymbol, TextSymbol, Point, Graphic, Font, Color);
+                        eventservice.get().then(function (data) {
+                            $scope.event = data;
+
+                            // $scope.createWorld(SimpleFillSymbol, SimpleLineSymbol, Color, Polygon, Graphic);
+
+                            angular.forEach($scope.event, function (item, index) {
+                                // var idata = angular.fromJson(item.datajson);
+                                // item.primarydata=idata;
+                                eventtables.getdetail('?eventid=' + item.id + '&tablename=ics001').then(function (data) {
+                                    if (data && data.length > 0) {
+                                        var idata = angular.fromJson(data[0].datajson);
+                                        item.primarydata = idata;
+                                        $scope.createGradeMark(PictureMarkerSymbol, TextSymbol, Point, Graphic, Font, Color, item);
+                                    }
+                                });
+                            });
+
+
+
+
+                            //                                    eventtables.getdetail('?{"$fields": {"datajson": 0}}').then(function(data2){
+                            //                                        $scope.tables = data2;
+                            //                                        angular.forEach(data2,function(item,index){
+                            //                                            angular.forEach($scope.event,function(ev,index2){
+                            //                                                if(ev.id==item.eventid&&item.tablename=="ics001")
+                            //                                                {
+                            //                                                    var idata = angular.fromJson(item.datajson);
+                            //                                                    ev.primarydata = idata;
+                            //                                                    //ev.lat = idata.lat;
+                            //                                                }
+                            //                                            });
+                            //                                        });
+                            // $scope.createGradeMark(PictureMarkerSymbol, TextSymbol, Point, Graphic, Font, Color);
+                            // });
+                        });
+
+                        ly.on('mouse-over', function (evt) {
+                            if (evt.graphic != null) {
+                                var g = evt.graphic;
+                                var att = g.attributes;
+                                if (att.id) { //国家风险等级
+                                    var content = "";
+                                    var title = "";
+                                    angular.forEach($scope.event, function (item, index) {
+                                        // if (att.att.primarydata) {
+                                        if (item.countryid == att.id) {
+                                            var data = item.primarydata;
+                                            content += '事故时间：' + item.time;
+                                            if (item.primarydata.locate) {
+                                                content += "<br/>地点：" + item.primarydata.locate;
+                                            }
+                                            if (item.primarydata.type) {
+                                                content += "<br/>类型：" + item.primarydata.type;
+                                            }
+                                            if (item.primarydata.describe) {
+                                                content += "<br/>事故描述：" + item.primarydata.describe;
+                                            }
+                                            title = item.name;
+                                        }
+                                    });
+
+                                    $scope.map.infoWindow.setContent(content);
+                                    $scope.map.infoWindow.setTitle(title);
+                                    $scope.map.infoWindow.show(evt.screenPoint);
+                                    // }
+                                } else if (att.type == 1) { //当日预警级别
+
+                                } else if (att.type == 2) { //应急状态
+
+                                }
+                            }
+                        });
+                        ly.on('mouse-out', function (evt) {
+                            $scope.map.infoWindow.hide();
+                        });
+
+                        ly2.on('mouse-over', function (evt) {
+                            if (evt.graphic != null) {
+                                var g = evt.graphic;
+                                var att = g.attributes;
+                                if (att.type == 1) { //国家风险等级
+                                    if (att.att.primarydata) {
+                                        var data = att.att.primarydata;
+                                        var content = '事故事件：' + att.att.time;
+                                        if (att.att.primarydata.locate) {
+                                            content += "<br/>地点：" + att.att.primarydata.locate;
+                                        }
+                                        if (att.att.primarydata.type) {
+                                            content += "<br/>类型：" + att.att.primarydata.type;
+                                        }
+                                        if (att.att.primarydata.describe) {
+                                            content += "<br/>事故描述：" + att.att.primarydata.describe;
+                                        }
+                                        var title = att.att.name;
+                                        $scope.map.infoWindow.setContent(content);
+                                        $scope.map.infoWindow.setTitle(title);
+                                        $scope.map.infoWindow.show(evt.screenPoint);
+                                    }
+                                } else if (att.type == 1) { //当日预警级别
+
+                                } else if (att.type == 2) { //应急状态
+
+                                }
+                            }
+                        });
+                        ly2.on('mouse-out', function (evt) {
+                            $scope.map.infoWindow.hide();
+                        });
+                        ly.on('click', function (evt) {
+                            if (evt.graphic != null) {
+                                var g = evt.graphic;
+                                var att = g.attributes;
+                                if (att.type == 0 && att.id) { //国家风险等级
+                                    // var url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/index.html#/app/countryanalysis/' + att.id;
+                                    //var url = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/index.html#/app/ics_primarytable';
+                                    var url = top.location.toString();
+                                    var i = url.lastIndexOf('#');
+                                    url = url.substr(0, i) + '#/app/ics_primarytable';
+                                    top.location = url;
+                                }
+                            }
+                        });
+                    });
+            };
+
+            $scope.getCountryName = function (id) {
+                for (var i = 0; i < $scope.countryList.length; ++i) {
+                    if ($scope.countryList[i].country_id == id) {
+                        return $scope.countryList[i].name;
+                    }
+                }
+            };
+            $scope.createGradeMark = function (PictureMarkerSymbol, TextSymbol, Point, Graphic, Font, Color, item) {
+                var ly = $scope.map.getLayer('event');
+                var pic1 = new PictureMarkerSymbol({
+                    url: "../../img/m3.png",
+                    height: 10,
+                    width: 10
+                });
+                var pic2 = new PictureMarkerSymbol({
+                    url: "../../img/m2.png",
+                    height: 10,
+                    width: 10
+                });
+                var pic3 = new PictureMarkerSymbol({
+                    url: "../../img/m1.png",
+                    height: 10,
+                    width: 10
+                });
+                var pic4 = new PictureMarkerSymbol({
+                    url: "../../img/m1.png",
+                    height: 10,
+                    width: 10
+                });
+                // var pic5 = new PictureMarkerSymbol({
+                //     url: "../../img/jibie5.png",
+                //     height: 10,
+                //     width: 10
+                // });
+                // angular.forEach($scope.event, function(item) {
+                var sym = null;
+                if (item.grade == 1) sym = pic1;
+                else if (item.grade == 2) sym = pic2;
+                else if (item.grade == 3) sym = pic3;
+                //else if (item.level == 4) sym = pic4;
+                //else if (item.level == 5) sym = pic4;
+                else
+                    return;
+                if (!item.primarydata)
+                    return;
+                if (item.primarydata.lon && item.primarydata.lat) {
+                    var p = new Point({
+                        x: parseFloat(item.primarydata.lon),
+                        y: parseFloat(item.primarydata.lat)
+                    });
+                    var pointGraphic = new Graphic(p, sym, {
+                        type: 1,
+                        att: item
+                    });
+                    ly.add(pointGraphic);
+                    var txtSym = new TextSymbol(item.name).setColor(
+                        new Color([0, 0, 0])).setAlign(Font.ALIGN_START).setFont(
+                        new Font("8pt").setWeight(Font.WEIGHT_BOLD)).setOffset(0, 10);
+                    var txtGraphic = new Graphic(p, txtSym, {
+                        type: 2,
+                        att: item
+                    });
+                    // ly.add(txtGraphic);
+                }
+                // });
+            };
+            $scope.createSimpleFillSymbol = function (SimpleFillSymbol, SimpleLineSymbol, Color, id) {
+                if (!id) {
+                    return new SimpleFillSymbol(
+                        SimpleFillSymbol.STYLE_SOLID,
+                        new SimpleLineSymbol(
+                            SimpleLineSymbol.STYLE_SOLID,
+                            new Color([255, 255, 255, 0.5]), 1
+                        ),
+                        new Color([187, 190, 198, 0.5])
+                    );
+                }
+
+                for (var i = 0; i < $scope.event.length; ++i) {
+                    var item = $scope.event[i];
+                    if (item.countryid == id) {
+                        //var col = [128, 128, 128, 0.5];
+                        if (item.grade == 1)
+                            col = [255, 0, 0, 0.8];
+                        else if (item.grade == 2)
+                            col = [255, 153, 0, 0.8];
+                        else if (item.grade == 3)
+                            col = [255, 255, 0, 0.8];
+                        else if (item.grade == 4)
+                            col = [51, 204, 204, 0.8];
+                        else if (item.grade == 5)
+                            col = [0, 176, 80, 0.8];
+                        else
+                            col = [0, 176, 80, 0.8];
+                        return new SimpleFillSymbol(
+                            SimpleFillSymbol.STYLE_SOLID,
+                            new SimpleLineSymbol(
+                                SimpleLineSymbol.STYLE_SOLID,
+                                new Color([255, 255, 255, 1]), 1.5
+                            ),
+                            new Color(col)
+                        );
+                    }
+                }
+            };
+            $scope.createWorld = function (SimpleFillSymbol, SimpleLineSymbol, Color, Polygon, Graphic) {
+                var ly = $scope.map.getLayer('world');
+                var data = $scope.worldJson;
+                angular.forEach(data.features, function (item, i) { //country polygon
+                    var p = new Polygon();
+                    var n = item.properties.childNum;
+                    if (n > 1) {
+                        var coordinates = item.geometry.coordinates;
+                        angular.forEach(coordinates, function (coord) {
+                            if (coord.length != 1) {
+                                p.addRing(coord);
+                            } else {
+                                p.addRing(coord[0]);
+                            }
+                        })
+                    } else {
+                        p.addRing(item.geometry.coordinates[0]);
+                    }
+                    var polygonGraphic = new Graphic(p,
+                        $scope.createSimpleFillSymbol(SimpleFillSymbol, SimpleLineSymbol,
+                            Color, item.properties.id), {
+                            id: item.properties.id,
+                            type: 0
+                        });
+                    ly.add(polygonGraphic);
+                });
+            };
+            $scope.open = function () {
+                layer.open({
+                    type: 1,
+                    title: '预警详细信息列表',
+                    area: ['600px', '360px'],
+                    shadeClose: true, //点击遮罩关闭
+                    skin: 'layui-layer-molv',
+                    content: $('#infoDialog')
+                });
+            };
+        });
+</script>
+</body>
+
+</html>

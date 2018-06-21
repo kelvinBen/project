@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>Angular Esri Quick Start</title>
+
+    <!-- <link rel="stylesheet" href="http://120.26.44.171:5557/esri/css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="../../../arcgis317/esri/css/esri.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <style type="text/css">
+        html,
+        body,
+        .row,
+        #map {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body ng-controller="MapController">
+    <div class="row">
+        <!-- <esri-map-view map="map" view-options="{extent:{xmin:0,ymin:0,xmax:180,ymax:90}}">
+        </esri-map-view> -->
+        <esri-map id="map" map-options="mapOptions.options" load="onMapLoad">
+        </esri-map>
+    </div>
+    <script src="../../../bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <!-- <script src="http://120.26.44.171:5557/init.js" charset="utf-8" type="text/javascript"></script> -->
+    <script type="text/javascript" src="../../../arcgis317/init.js"></script>
+    <script src="../../../bower_components/angular/angular.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../bower_components/angular-esri-map-v1.1.6/dist/angular-esri-map.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/SecuritySystem.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/esri/googleLayer.js" charset="utf-8"></script>
+    <script src="../../js/Service/service.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        angular.module('esri-map-example', ['esri.map', 'cnooc_service.SecuritySystem', 'cnooc_service'])
+            .controller('MapController', function($scope, $location, esriLoader, countryrisk) {
+                function getQueryStr(sArgName) {
+                    var LocString = $location.absUrl();
+                    var args = LocString.split("?");
+                    var retval = "";
+                    if (args[0] == LocString) {
+                        return retval;
+                    }
+                    var str = args[1];
+                    args = str.split("&");
+                    for (var i = 0; i < args.length; i++) {
+                        str = args[i];
+                        var arg = str.split("=");
+                        if (arg.length <= 1) continue;
+                        if (arg[0] == sArgName) retval = arg[1];
+                    }
+                    return retval;
+                };
+                $scope.center = {};
+                $scope.country = {};
+                $scope.mapOptions = {
+                    options: {
+                        basemap: 'topo',
+                        center: [18, 30],
+                        displayGraphicsOnPan: true,
+                        sliderStyle: 'small',
+                        logo: false
+                    }
+                };
+                $scope.map = null;
+                $scope.onMapLoad = function(mapCtl) {
+                    $scope.map = mapCtl;
+                    countryrisk.getdetail(getQueryStr('id')).then(function(data) {
+                        $scope.country = data;
+                        $scope.createMap();
+                    }, function() {});
+                };
+                $scope.createMap = function() {
+                    esriLoader.require(['esri/symbols/SimpleFillSymbol', 'esri/symbols/SimpleLineSymbol', 'esri/graphic', 'esri/layers/ArcGISTiledMapServiceLayer', 'esri/geometry/Point',
+                            'esri/Color', 'esri/symbols/SimpleMarkerSymbol', 'esri/geometry/Polygon', 'esri/layers/GraphicsLayer', 'esri/symbols/PictureMarkerSymbol', 'esri/symbols/TextSymbol',
+                            'esri/symbols/Font', 'esri/SpatialReference', 'esri/geometry/Extent'
+                        ],
+                        function(SimpleFillSymbol, SimpleLineSymbol, Graphic, ArcGISTiledMapServiceLayer, Point, Color,
+                            SimpleMarkerSymbol, Polygon, GraphicsLayer, PictureMarkerSymbol, TextSymbol, Font, SpatialReference, Extent) {
+                            InitGoogleLayer();
+                            $scope.ly = new GraphicsLayer({
+                                id: 'world'
+                            });
+                            $scope.map.addLayer($scope.ly);
+                            var ly1 = new my.PortlandTiledMapServiceLayer();
+                            $scope.map.addLayer(ly1);
+                            $scope.createMark(SimpleMarkerSymbol, SimpleLineSymbol, Point, Graphic, Color);
+                        });
+                };
+                $scope.createMark = function(SimpleMarkerSymbol, SimpleLineSymbol,Point, Graphic, Color) {
+                    var ary = [];
+                    var p = new Point({
+                        longitude: parseFloat($scope.country.lon),
+                        latitude: parseFloat($scope.country.lat)
+                    });
+                    $scope.map.centerAndZoom(p, 10);
+                    var pt = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 15,
+                            new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                            new Color([255,0,0]), 1), new Color([0,255,0,0.25]));
+                    var pointGraphic = new Graphic(p, pt);
+                    $scope.ly.add(pointGraphic)
+                };
+            });
+    </script>
+</body>
+
+</html>

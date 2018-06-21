@@ -1,0 +1,58 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">首页</a></li>
+    <li class="active">用户管理</li>
+</ol>
+<div ng-controller="systemroleCtrl">
+    <button type="button" class="btn btn-info"  style="margin-top: 5px;margin-left: 5px;" ng-click="add()">新增</button>
+    <button type="button" class="btn btn-danger"  style="margin-top: 5px;margin-left: 5px;">删除</button>
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default" style=" margin-top: 15px;" >
+                    <div class="panel-heading">
+                        <span>ICS用户列表</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="margin-top: 10px;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 5%;" ></th>
+                                    <th  style="width:15%">单位</th>
+                                    <th  style="width:15%">姓名</th>
+                                    <th  style="width:15%">应急职务</th>
+                                    <th  style="width:15%">办公电话</th>
+                                    <th  style="width:15%">手机</th>
+                                    <th  style="width:10%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody style="text-align: left;">
+                                <tr ng-repeat="rr in items">
+                                    <td>
+                                        <label>
+                                            <input  type="checkbox" style="margin-top:0px;">
+                                        </label>
+                                    </td>
+                                    <td>{{rr.department}}</td>
+                                    <td>{{rr.name}}</td>
+                                    <td>{{rr.post}}</td>
+                                    <td>{{rr.telephone}}</td>
+                                    <td>{{rr.phone}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-success" title="编辑">
+                                            <em class="fa fa-edit"></em>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger" ng-click="delete(rr.id)" title="删除">
+                                            <em class="fa fa-trash-o"></em>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

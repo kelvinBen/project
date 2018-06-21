@@ -1,0 +1,54 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"homepage"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"hazardsource"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"hazardrisk"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"HiddenGov"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"InfoReport"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="InfoReportCtrl as tree">
+    <div class="row-fluid">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="well wd-wide">
+                <span ng-if="tree.doing_async">...loading...</span>
+                <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-primary">
+                <div class="panel-body" style="height:100%;overflow:auto">
+                    <div class="form-inline">
+                        <a href="javascript:;" class="btn btn-danger radius" onclick="window.print()">
+                            <em class="fa fa-print"></em>{{"print"|translate}}
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            {{"export"|translate}}
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            {{"sending"|translate}}
+                        </button>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <span style="margin-left: 20px;"><input type="checkbox"/> {{"monthstatistics"|translate}}</span>
+                        <span style="margin-left: 50%;"><input type="checkbox"/> {{"hiddennature"|translate}}</span><br>
+                        <span  style="margin-left: 20px;"><input type="checkbox"/> {{"hiddenregistration"|translate}}</span>
+                        <span  style="margin-left: 50%;"><input type="checkbox"/> {{"hiddenstage"|translate}}</span><br>
+                        <span  style="margin-left: 20px;margin-top: 20px;"><input type="checkbox"/> {{"primaryfactor"|translate}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

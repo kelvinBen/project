@@ -1,0 +1,169 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"globalressystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"emergencyplan"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" ng-controller="allinformationCtrl as tree">
+    <div class="row" style="min-height: 600px;">
+        <div class="col-lg-3" style="background-color: white; overflow: hidden;">
+            <div class="panel panel-primary" style="">
+                <div class="panel-heading">{{"orginstitution"|translate}}</div>
+                <div class="panel-body" style="overflow:hidden;">
+                    <span ng-if="tree.doing_async">...loading...</span>
+                    <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)"  initial-selection="Granny Smith"></abn-tree>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9" style="background-color: white; border-radius: 10px;">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <span class="col-lg-3" style="padding: 0px; margin: 0px;"> {{"orgname"|translate}}：</span>
+                    <span class="col-lg-9" style="padding: 0px; margin: 0px;"><input type="text" class="form-control " /></span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <span class="col-lg-3" style="padding: 0px; margin: 0px;"> {{"orgattribute"|translate}}：</span>
+                    <span class="col-lg-9" style="padding: 0px; margin: 0px;">
+                        <select name="account" class="form-control">
+                             <option>油气行业组织和会员组织</option>
+                             <option>所在国政府相关机构</option>
+                             <option>应急救援机构或单位</option>
+                             <option>其他协会</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <span class="col-lg-3" style="padding: 0px; margin: 0px;"> {{"emergencytype"|translate}}：</span>
+                    <span class="col-lg-9" style="padding: 0px; margin: 0px;">
+                        <select name="account" class="form-control">
+                             <option>消费</option>
+                             <option>堵漏</option>
+                             <option>环境保护</option>
+                             <option>医疗救援</option>
+                             <option>安防</option>
+                             <option>水上救援</option>
+                             <option>运输</option>
+                             <option>其他</option>
+                         </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-lg-10">
+                    <button class="btn btn-danger" >{{"singledelete"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'edit'|translate}}</button>
+                    <button class="btn btn-info" >{{"print"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'import'|translate}}</button>
+                </div>
+                <div class="col-lg-2 text-right">
+                    <button class="btn btn-danger" ng-click="cancel()">{{"add"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'export'|translate}}</button>
+                </div>
+            </div>
+            <div class="panel panel-default"style="margin-top: 5px;" >
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{"num"|translate}}</th>
+                                <th>{{"orgname"|translate}}</th>
+                                <th>{{"emergencytype"|translate}}</th>
+                                <th>{{"thecountry"|translate}}</th>
+                                <th>{{"orgattribute"|translate}}</th>
+                                <th>{{"connect"|translate}}</th>
+                                <th>{{"workphone"|translate}}</th>
+                                <th>{{"geogpoint"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>1</td>
+                                <td>OSCT</td>
+                                <td>环境保护</td>
+                                <td>其他国家</td>
+                                <td>其他协会</td>
+                                <td>TBA</td>
+                                <td>010-88888888</td>
+                                <td>未定位</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>2</td>
+                                <td>OSCT</td>
+                                <td>消费</td>
+                                <td>其他国家</td>
+                                <td>其他协会</td>
+                                <td>TBA</td>
+                                <td>010-88888888</td>
+                                <td>未定位</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>3</td>
+                                <td>OSCT</td>
+                                <td>堵漏</td>
+                                <td>其他国家</td>
+                                <td>其他协会</td>
+                                <td>TBA</td>
+                                <td>010-88888888</td>
+                                <td>未定位</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>4</td>
+                                <td>OSCT</td>
+                                <td>环境保护</td>
+                                <td>其他国家</td>
+                                <td>其他协会</td>
+                                <td>TBA</td>
+                                <td>010-88888888</td>
+                                <td>未定位</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>5</td>
+                                <td>OSCT</td>
+                                <td>环境保护</td>
+                                <td>其他国家</td>
+                                <td>其他协会</td>
+                                <td>TBA</td>
+                                <td>010-88888888</td>
+                                <td>未定位</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

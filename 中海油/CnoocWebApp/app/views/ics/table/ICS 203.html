@@ -1,0 +1,79 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.ics_eventindex">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"orgdivision"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics203Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS 203 （{{"orgdivision"|translate}}）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <th style="text-align: center;">{{"incidentname"|translate}}</th>
+                            <td><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <th style="text-align: center;">{{"incidentnumber"|translate}}</th>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"  ></td>
+                            <th style="text-align: center;">{{"operationalperiod"|translate}}</th>
+                            <td colspan="2">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;"  ng-model="starttime">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;"  ng-model="endtime">
+                            </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                    <div ng-repeat="tb in vm.data.groups">
+                        <table class="table  table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th colspan="2" style="text-align: center;"> {{tb.name}}：</th>
+                            </tr>
+                            <tr ng-repeat="user in tb.users">
+                                <td  style="text-align: left;width: 50%">{{user.rolename}}</td>
+                                <td style="width: 50%;text-align: left">{{user.name}}</td>
+                            </tbody>
+                            </table>
+                        </div>
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="2">{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esName"></td>
+                            <td>{{"positiontitle"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esPost"></td>
+                            <td>{{"Signature"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 203 {{"orgdivision"|translate}}</td>
+                            <td style="line-height: 60px;" >{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='2';><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esDate"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 " style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}
+                    </button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

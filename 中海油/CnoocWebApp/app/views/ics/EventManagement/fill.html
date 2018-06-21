@@ -1,0 +1,21 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.eventindex">{{"emergencymanagement"|translate}}</a></li>
+    <li class="active">{{"eventfill"|translate}}</li>
+</ol>
+<div  ng-controller="myCtrl as tree"  class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <button type="button" class="btn btn-danger" ng-click="add()" title="添加新阶段" style="margin-bottom: 10px;">
+                {{"addperiod"|translate}}
+            </button>
+            <div class="well wd-wide">
+                <span ng-if="tree.doing_async">...loading...</span>
+                <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9" ui-view>
+
+        </div>
+    </div>
+</div>

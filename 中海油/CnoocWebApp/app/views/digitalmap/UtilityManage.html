@@ -1,0 +1,105 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.projectmanage">{{'digitalmap'|translate}}</a>
+        </li>
+        <li>
+            <span>{{'installationinfo'|translate}}</span>
+        </li>
+    </ul>
+</h3>
+    <div class="container-fluid" ng-controller="utilityManageCtrl">
+        <div class="cl pd-5 bg-1 bk-gray" style="margin-bottom: 5px;">
+            <span class="l">
+                <a href="javascript:;" class="btn btn-danger radius" ng-click="deletesomeconfirm()">
+                     <em class="fa fa-trash-o"></em>{{'delete'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" ng-click="addutility();">
+                    <em class="fa fa-plus"></em>{{'add'|translate}}
+                </a>
+            </span>
+            <span class="r">
+                <a href="javascript:;" class="btn btn-success radius" onclick="window.print()">
+                    <i class="fa fa-print"></i>{{'print'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="utility_export()" ng-hide="true">
+                    <em class="fa fa-file-excel-o"></em>{{'export'|translate}}
+                </a>
+            </span>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding-left: 15px;">
+            <h4>
+                {{'installation'|translate}}
+            </h4>
+        </div>
+            <div class="panel-body">
+                <table class="table table-border table-bordered table-hover table-bg"  datatable="ng">
+                <thead>
+                    <tr class="text-c">
+                        <!--<th style="width: 5%;">-->
+                            <!--<input type="checkbox" value="" name="" ng-model="select_all" ng-change="selectall()">-->
+                        <!--</th>-->
+                        <th>
+                            <div class="checkbox c-checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="select_all"   ng-change="selectall()" />
+                                    <span class="fa fa-check"></span>
+                                </label>
+                            </div>
+                            <!-- <input type="checkbox" ng-click="checkAllSelected()"> -->
+                        </th>
+                        <th style="text-align: center;">{{"num"|translate}}</th>
+                        <th style="text-align: center;">{{"installationame"|translate}}</th>
+                        <th style="text-align: center;">{{"settime"|translate}}</th>
+                        <th style="text-align: center;">{{"oilcount"|translate}}</th>
+                        <th style="text-align: center;">{{"installationtype"|translate}}</th>
+                        <th style="text-align: center;">{{"dayoutput"|translate}}</th>
+                        <th style="text-align: center;">{{"theproject"|translate}}</th>
+                        <th style="text-align: center;width: 10%;">{{"operation"|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody id="tabBody">
+                    <tr ng-repeat="cur in utilities">
+                        <!--<th >-->
+                            <!--<input type="checkbox" ng-model="cur.selected">-->
+                        <!--</th>-->
+                        <td class="text-center">
+                            <div class="checkbox c-checkbox">
+                                <label style="font-weight:bold">
+                                    <input type="checkbox" ng-model="cur.selected" />
+                                    <span class="fa fa-check"></span>
+                                </label>
+                            </div>
+                            <!-- <input type="checkbox" ng-checked="u.checked" ng-model="u.checked"> -->
+                        </td>
+                        <td>{{$index+1}}</td>
+                        <td>{{cur.name}}</td>
+                        <td>{{cur.create_time|date:'yyyy-MM-dd'}}</td>
+                        <td>{{cur.oilwell_num}}</td>
+                        <td>{{cur.type}}</td>
+                        <td>{{cur.dailyoutput}}</td>
+                        <td>{{getProjectName(cur.project_id)}}</td>
+                        <td>
+                            <!--<a href="javascript:;" ng-click="edit(cur)" title="{{'edit'|translate}}">-->
+                                <!--<em class="fa fa-edit"></em>-->
+                            <!--</a>-->
+                            <!--<a href="javascript:;" ng-click="deleteconfirm(cur.utility_id)" title="{{'singledelete'|translate}}">-->
+                                <!--<em class="fa fa-trash-o"></em>-->
+                            <!--</a>-->
+
+                            <button type="button" class="btn btn-primary btn-sm" title="{{'edit'| translate}}" ng-click="edit(cur)">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}" ng-click="deleteconfirm(cur.utility_id)">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </div>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<md-toolbar color="primary">
+  <span>临潼气象服务后台管理平台</span>
+  <div class="spacer" *ngIf="vm.Type==1">
+    <a md-button routerLink="/admin/user">用户管理</a>
+    <a md-button routerLink='/admin/content'>内容管理</a>
+    <a md-button routerLink='/admin/check'>工作日志审核</a>
+    <!-- <a md-button routerLink='/admin/query'>气象数据查询</a> -->
+  </div>
+  <div class="spacer" *ngIf="vm.Type==2">
+    <a md-button routerLink='/admin/work'>工作日志</a>
+  </div>
+  <button md-icon-button [mdMenuTriggerFor]="menu">
+      <md-icon>person</md-icon>
+    </button>
+  <md-menu #menu="mdMenu">
+    <button md-menu-item (click)="logout()">
+        <span>用户登出</span>
+      </button>
+    <a md-menu-item href="http://www.lintongqx.com/">
+        <span>返回首页</span>
+    </a>
+  </md-menu>
+</md-toolbar>
+<router-outlet></router-outlet>

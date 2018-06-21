@@ -1,0 +1,61 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.publicSentiment">
+                {{"publicsentiment"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"socialpublic"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="publicCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-inline">
+                    <div class="form-group">
+                        <input date-range-picker class="form-control date-picker" type="text" 
+                        ng-model="eventRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" ng-click="search()">
+                            <i class="fa fa-search"></i>{{"query"|translate}}
+                        </button>
+                    </div>
+                </form>
+                <br />
+            <table class="table table-hover mb-mails" datatable="ng">
+                <thead>
+                    <tr>
+                        <th>{{"time"|translate}}</th>
+                        <th>{{"title"|translate}}</th>
+                        <th style="width: 30px">{{"operation"|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>
+                            {{item.create_time|date:"yyyy/MM/dd"}}
+                        </td>
+                        <td>
+                            <div class="mb-mail-meta">
+                                <div class="pull-left">
+                                    <div class="mb-mail-subject"><a ng-href="{{item.source}}" target="view_window">{{item.title}}</a></div>
+                                    <div class="mb-mail-from"></div>
+                                </div>
+                                <div ng-bind-html="item.abstracts | limitTo:100" class="mb-mail-preview"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <a type="button" class="btn btn-sm btn-info" title={{"startemergency"|translate}} ng-click="send(item)">
+                                <i class="fa icon-phone"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

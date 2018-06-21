@@ -1,0 +1,80 @@
+<header>
+  <div class="logo box">
+    <div class="houtai right">
+      <ul>
+        <li><a routerLink='/backstage/login'>气象工作站登陆</a></li>
+        <li><a href=''>气象数据查询</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav id="nav" class="box">
+    <ul>
+      <li class="liback"><a routerLink="/">网站首页</a></li>
+      <li class="liback"><a href="">单位概括</a></li>
+      <li class="liback"><a href="">新闻中心</a></li>
+      <li class="liback"><a href="">实时监测</a></li>
+      <li class="liback"><a href="">预报预警</a></li>
+      <li class="liback"><a href="">服务产品</a></li>
+      <li class="liback"><a href="">农情与气象</a></li>
+      <li class="liback"><a href="">气象工作站</a></li>
+      <li class="liback"><a href="">政策法规</a></li>
+      <li><a href="http://120.26.44.171:8888/home/index.php">互动平台</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="box" style="background:url(../assets/images/duanlin_bg.jpg);height:31px;line-height:31px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="130" style="background:url(../assets/images/icon1.gif) no-repeat 20px center;text-indent:50px;font-weight:bolder;color:#515151;font-size:12px">
+          <a href="#">短时临近：</a>
+        </td>
+        <td style="color:red">
+          <div style="width:860px;height:31px;padding:0px;">
+            <marquee direction="left" behavior="scroll" scrollamount="3" scrolldelay="0" loop="-1" width="860" height="21">
+              天气预报：预计今天白天多云，今天晚上晴间多云，-1-8度；明天晴间多云。（临潼区气象台2月3日07时发布）
+            </marquee>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="banner box"><img src="../assets/images/banner.jpg"></div>
+<!-- Routed views go here -->
+<router-outlet></router-outlet>
+<div class="blank"></div>
+<div class="box">
+  <div class="links">
+    <p>相关链接:</p>
+    <ul>
+      <li><a href="http://www.cma.gov.cn/" target="_blank">中国气象局</a></li>
+      <li><a href="http://www.sxmb.gov.cn/index.php" target="_blank">陕西省气象局</a></li>
+      <li><a href="http://www.xaweather.com/" target="_blank">西安市气象局</a></li>
+      <li><a href="http://www.lintong.gov.cn/" target="_blank">临潼区门户网站</a></li>
+      <li><a href="http://10.172.97.90/v2/" target="_blank">西安市二期平台</a></li>
+      <li><a href="http://lintong.sxny.gov.cn/templet/lintong/" target="_blank">临潼区农业信息网</a></li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <div class="footnav">
+    <ul>
+      <li class="liback"><a routerLink="/">网站首页</a></li>
+      <li class="liback"><a href="">单位概括</a></li>
+      <li class="liback"><a href="">新闻中心</a></li>
+      <li class="liback"><a href="">实时监测</a></li>
+      <li class="liback"><a href="">预报预警</a></li>
+      <li class="liback"><a href="">服务产品</a></li>
+      <li class="liback"><a href="">农情与气象</a></li>
+      <li class="liback"><a href="">气象工作站</a></li>
+      <li class="liback"><a href="">政策法规</a></li>
+      <li><a href="http://120.26.44.171:8888/home/index.php">互动平台</a></li>
+    </ul>
+  </div>
+  <div class="copyright">
+    <p>客户服务热线：029-6583145 客服邮箱：service@weather.com.cn</p>
+    <p>Copyright 临潼气象局网 All Rights Reserved (2008-2017) 版权所有 复制必究</p>
+    <p>֣郑重声明：临潼气象局网版权所有，未经书面授权禁止使用 陕ICP证010385号</p>
+  </div>
+</footer>

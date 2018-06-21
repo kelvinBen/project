@@ -1,0 +1,83 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"rolemgr"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="rolemgrControl">
+    <div class="panel panel-primary" style="margin-bottom: 0px;">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{"rolemgr"|translate}}</h3>
+      </div>
+      <div class="panel-body">
+          <div class="row-fluid">
+              <button type="button" class="btn btn-primary" style="margin-bottom: 20px;" ng-click="add()">
+                  <i class="fa fa-plus-square"></i>{{"addrole"|translate}}
+              </button>
+          </div>
+          <div class="row-fluid">
+              <table class="table table-bordered table-hover table-striped table-condensed">
+                  <thead>
+                  <tr>
+                      <th class="text-center">{{"num"|translate}}</th>
+                      <th class="text-center">{{"role"|translate}}</th>
+                      <th class="text-center">{{"jurisdictions"|translate}}</th>
+                      <th class="text-center">{{"operation"|translate}}</th>
+                  </tr>
+                  </thead>
+                  <tbody class="text-center">
+                  <tr ng-repeat="r in roles">
+                      <td>{{$index+1}}</td>
+                      <td>{{r.role.role_name}}</td>
+                      <td>
+                          {{r.actions}}
+                      </td>
+                      <td>
+                          <a href="javascript:;" class="btn btn-primary btn-sm" title='{{"edit"|translate}}' ng-click="edit(r.role)">
+                              <em class="fa fa-edit"></em>
+                          </a>
+                          <a href="javascript:;" class="btn btn-danger btn-sm" ng-click="delete(r.role.role_id)" title={{"singledelete"|translate}}>
+                          <em class="fa fa-trash-o"></em>
+                          </a>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+
+    <script type="text/ng-template" id="roleTemp.html">
+        <form class="form-validate form-horizontal" name="groupForm" ng-submit="submitForm()" method="post" novalidate>
+            <div class="panel panel-primary" style="margin-bottom: 0px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{dlgTitle | translate}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                      <label for="name">{{"rolenamechinese"|translate}}：</label>
+                      <input type="text" class="form-control" name="name" required="" ng-model="vm.role_name">
+                      <span ng-show="checkValue('name')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="nameen">{{"rolenameenglish"|translate}}：</label>
+                      <input type="text" class="form-control" name="nameen" ng-model="vm.role_name_en">
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <button type="button" class="btn btn-default" ng-click="close()">
+                        {{'cancel' | translate}}
+                    </button>
+                    <button type="sumbit" class="btn btn-primary">
+                        {{'submit' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </script>
+</div>

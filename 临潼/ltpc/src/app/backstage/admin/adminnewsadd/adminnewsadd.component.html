@@ -1,0 +1,71 @@
+<div class="nav">
+  <span style="padding-left:7px;">首页</span>
+  <span>/</span>
+  <span>内容管理</span>
+  <span>/</span>
+  <span>{{flag?'添加':'编辑'}}</span>
+</div>
+<div class="row" style="width:90%;margin:2% 5%;">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 6px; font-weight:normal;">标题：</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+          <input type="text" class="form-control" [(ngModel)]='vm.Title' required />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px; font-weight:normal;">作者：</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <input type="text" style="margin-top: 20px;"  class="form-control" [(ngModel)]='vm.Author' required />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px; font-weight:normal;">日期：</label>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <input style="margin-top: 20px;" type="datetime-local" class="form-control" [(ngModel)]='vm.Time' />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px; font-weight:normal;">类别：</label>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <select style="margin-top: 20px;" class="form-control" [(ngModel)]='vm.BigClassID' (change)='getSubCateList()'>
+            <option *ngFor='let c of cates' [value]='c.Id'>{{c.BigClassName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px; font-weight:normal;">子类别：</label>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <select style="margin-top: 20px;" class="form-control" [(ngModel)]='vm.SmallClassID'>
+            <option *ngFor='let s of subCates' [value]='s.Id'>{{s.SmallClassName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="vm.SmallClassID == 1">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px; font-weight:normal;">图片：</label>
+        <div class="col-sm-6 col-md-6 col-lg-6" style="padding-top:20px;">
+          <p-fileUpload name="uploadfiles" url="/dbapi/admin/upload" auto="true" (onUpload)="onUpload($event)" (onError)="onError($event)"></p-fileUpload>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="vm.SmallClassID == 1">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px; font-weight:normal;">图片预览：</label>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <img src="../../../../assets/Upload/{{vm.Pic}}" width="150px" height="150px;" style="margin-top: 20px;">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px; font-weight:normal;">内容：</label>
+        <div class="col-sm-9 col-md-9 col-lg-9" style="margin-top:20px;">
+          <p-editor [(ngModel)]="vm.Context" [style]="{'height':'250px'}"></p-editor>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-8 col-md-8 col-lg-8 col-md-offset-4 col-lg-offset-4" style="margin-top: 15px;">
+          <button type="button" class="mb-sm btn btn-danger" (click)="submitNews()">提交</button>
+          <button type="button" class="mb-sm btn btn-info" (click)="cancel()">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

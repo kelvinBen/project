@@ -1,0 +1,174 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"orgmgr"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid"  ng-controller="organiztionController">
+    <div class="row-fluid">
+        <div class="col-sm-3">
+            <div class="row">
+                <a class="btn btn-primary btn-sm" href="javascript:;" ng-click="addorganiztion()">
+                    <em class="fa fa-plus-square"></em>{{"add"|translate}}
+                </a>
+                <a class="btn btn-primary btn-sm" href="javascript:;" ng-click="editorganiztion()">
+                    <em class="fa fa-edit"></em> {{"edit"|translate}}
+                </a>
+                <a class="btn btn-primary btn-sm" href="javascript:;" ng-click="deleteconfirm()">
+                    <em class="fa fa-trash-o"></em>{{"delete"|translate}}
+                </a>
+            </div>
+            <div class="row">
+                <abn-tree tree-data="treeDatas" tree-control="group_tree" initial-selection="{{selGroup}}"
+                          on-select="my_tree_handler(branch)" style="margin-top: 20px;">
+                </abn-tree>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{cur_organiztion.organiztion_name }}</div>
+                <div class="panel-body" style="height:100%;overflow:auto">
+                    <!-- <div class="row" ng-show="false">
+                        <div class="col-lg-10" style="text-align:center;margin: 20px;">
+                            <input id="com_name" type="text" class="input-text" readonly="readonly"
+                                   style=" font-weight: bold; width: 30%; line-height: 35px; height: 35px; font-size: 20px; text-align: center; border:1px solid #a4bfd7;color:#fff;  border-radius:4px; outline:none;background-color:#a4bfd7; color:#fff;letter-spacing:2px;"
+                                   value="" placeholder="国际公司" ng-model="insName"/>
+                        </div>
+                    </div> -->
+                    <div class="row form-group">
+                        <div class="col-sm-2" style="text-align:right;">
+                            <label>{{"introduction"|translate}}：</label>
+                        </div>
+                        <div class="col-lg-10" style="text-align:left;">
+                            <textarea id="com_info" rows="10" ng-model="cur_organiztion.intro" class="form-control" readonly=""
+                                      placeholder='{{"introduction"|translate}}'></textarea>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-2" style="text-align:right;">
+                            <label>{{"fax"|translate}}：</label>
+                        </div>
+                        <div class="col-sm-10" style="text-align:left;">
+                            <input ng-model="cur_organiztion.faxes" id="com_faxes" type="text"  class="form-control" readonly
+                                   placeholder="{{'fax'|translate}}"/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-2" style="text-align:right;">
+                            <label>{{"adds"|translate}}：</label>
+                        </div>
+                        <div class="col-sm-10" style="text-align:left;">
+                            <input ng-model="cur_organiztion.address" id="com_address" type="text"  class="form-control" readonly
+                                   placeholder='{{"adds"|translate}}'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{"maillist"|translate}} -- {{cur_organiztion.organiztion_name}}</div>
+                <div class="panel-body">
+                    <div class="cl pd-5 bg-1 bk-gray">
+                        <a class="btn btn-primary radius" href="javascript:;" ng-click="setUsers()">
+                            <em class="fa icon-user"></em> {{"add"|translate}}
+                        </a>
+                    </div>
+                    <table class="table table-border table-bordered table-hover table-striped table-condensed"
+                           style="border-collapse:collapse; margin-top: 20px;">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;">{{"num"|translate}}</th>
+                            <th style="text-align: center;">{{"staffname"|translate}}</th>
+                            <th style="text-align: center;">{{"Occupation"|translate}}</th>
+                            <th style="text-align: center;">{{"telephone"|translate}}</th>
+                            <th style="text-align: center;">{{"mobilephone"|translate}}</th>
+                            <!-- <th style="text-align: center;width:10%">{{"mailbox"|translate}}</th> -->
+                            <th style="text-align: center;width:100px;">{{"operation"|translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        <tr ng-repeat="u in users">
+                            <td>{{$index+1}}</td>
+                            <td>{{u.real_name}}</td>
+                            <td>{{u.career}}</td>
+                            <td>{{u.telephone}}</td>
+                            <td>{{u.phone}}</td>
+                            <!-- <td>{{u.email}}</td> -->
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" title='{{"top"|translate}}' ng-click="sort(u.user_id, 1)" ng-hide="{{$first}}">
+                                    <em class="fa fa-arrow-up"></em>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" title='{{"down"|translate}}' ng-click="sort(u.user_id, 0)" ng-hide="{{$last}}">
+                                    <em class="fa fa-arrow-down"></em>
+                                </button>
+                                <!-- <a href="javascript:;" title={{"top"|translate}} ng-click="sort(u.user_id, 1)"
+                                   ng-hide="{{$first}}">
+                                    <em class="fa fa-arrow-up"></em>
+                                </a>
+                                <a href="javascript:;" title={{"down"|translate}} ng-click="sort(u.user_id, 0)"
+                                   ng-hide="{{$last}}">
+                                    <em class="fa fa-arrow-down"></em>
+                                </a> -->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="addUsers">
+        <div class="panel panel-primary" style="margin-bottom:0px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{"setorgmember"|translate}} -- {{cur_organiztion.organiztion_name}}</h3>
+            </div>
+            <div class="panel-body">
+                <table datatable="ng" class="table table-bordered table-hover table-striped table-condensed" style="border-collapse:collapse;">
+                    <thead>
+                        <tr class="text-center">
+                            <th>
+                                <div class="checkbox c-checkbox needsclick">
+                                    <label class="needsclick">
+                                        <input type="checkbox" class="needsclick" ng-click="selAllFun()"/>
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th>{{"usernames"|translate}}</th>
+                            <th>{{"phones"|translate}}</th>
+                            <th>{{"email"|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in allUsers" class="text-center">
+                            <td>
+                                <div class="checkbox c-checkbox needsclick">
+                                    <label class="needsclick">
+                                        <input type="checkbox" class="needsclick" ng-model="row.checked"/>
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>{{row.real_name}}</td>
+                            <td>{{row.phone}}</td>
+                            <td>{{row.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-default" ng-click="close()">
+                    {{"cancel"|translate}}
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="set()">
+                    {{"sure"|translate}}
+                </button>
+            </div>
+        </div>
+    </script>
+</div>

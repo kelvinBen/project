@@ -1,0 +1,71 @@
+<div class="row" ng-controller="eventinfoexaddCtrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <button type="button"  class="btn btn-info" ng-click="cancel()">返回</button>
+        <button type="button"  class="btn btn-success">保存</button>
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">事故简报（ECS-A 任务及详细描述）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" >
+                    <table class="table  table-bordered table-hover">
+                        <tbody >
+                        <tr style="text-align: center">
+                            <td>事故名称:</td>
+                            <td><input type="text" style="border: 0;"></td>
+                            <td>事故时间:</td>
+                            <td><input type="text" style="border: 0;"></td>
+                            <td colspan="2">作业周期：
+                                <input type="date" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
+                                <input type="date" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">任务</td>
+                            <td colspan="2" style="text-align: center">描述</td>
+                            <td colspan="2" style="text-align: center">注意事项</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">编制：</td>
+                            <td colspan="5">
+                                <span >姓名：<input type="text" style="border:0;"></span>
+                                <span>岗位/职位：<input type="text" style="border:0;"></span>
+                                <span>签名：<input type="text" style="border:0;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">{{"ecs"|translate}} 201-4 资源总结，第4页</td>
+                            <td colspan="5" style="text-align: right;">日期/时间：<input type="text" style="border:0;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

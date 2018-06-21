@@ -1,0 +1,216 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"globalressystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"statisticsquery"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" >
+    <div class="row" style="min-height: 600px;">
+        <div class="col-lg-12 col-md-12 col-sm-12" style="background-color: white; border-radius: 10px;">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <span class="col-lg-3" style="padding: 0px; margin: 0px;"> {{"reporttype"|translate}}：</span>
+                    <span class="col-lg-9" style="padding: 0px; margin: 0px;">
+                        <select name="account" class="form-control">
+                             <option>应急工作季度报表</option>
+                             <option>应急工作总结报表</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <span class="col-lg-3" style="padding: 0px; margin: 0px;"> {{"inunitname"|translate}}：</span>
+                    <span class="col-lg-9" style="padding: 0px; margin: 0px;">
+                         <select name="account" class="form-control">
+                             <option>应急管理委员会</option>
+                             <option>应急协调办公室</option>
+                             <option>公共关系与法律支持组</option>
+                             <option>后勤支持组</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <span class="col-lg-3" style="padding: 0px; margin: 0px;"> {{"orgattribute"|translate}}：</span>
+                    <span class="col-lg-9" style="padding: 0px; margin: 0px;">
+                          <select name="account" class="form-control">
+                             <option>外部应急物资</option>
+                             <option>应急队伍</option>
+                             <option>应急物资</option>
+                             <option>应急机构</option>
+                         </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-lg-10">
+                    <button class="btn btn-danger" >{{"singledelete"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'edit'|translate}}</button>
+                    <button class="btn btn-info" >{{"print"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'import'|translate}}</button>
+                </div>
+                <div class="col-lg-2 text-right">
+                    <button class="btn btn-danger" ng-click="cancel()">{{"add"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'export'|translate}}</button>
+                </div>
+            </div>
+            <div class="panel panel-default"style="margin-top: 5px;" >
+                <div class="panel-heading">
+                    <span>应急机构普查表</span>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center" style="margin-top: 10px;">
+                            <thead>
+                            <tr style="vertical-align: middle;">
+                                <td  rowspan="2" >{{"num"|translate}}</td>
+                                <td  rowspan="2" >{{"emergencyorgname"|translate}}</td>
+                                <td rowspan="2" >{{"unitattribute"|translate}}</td>
+                                <td rowspan="2" >{{"peoplenum"|translate}}</td>
+                                <td rowspan="2" >{{"writenum"|translate}}</td>
+                                <td rowspan="2" >{{"settime"|translate}}</td>
+                                <td rowspan="2" >{{"inunitname"|translate}}</td>
+                                <td colspan="3">{{"keypersonphone"|translate}}</td>
+                            </tr>
+                            <tr>
+
+                                <td>{{"staffname"|translate}}</td>
+                                <td>{{"officephone"|translate}}</td>
+                                <td>{{"mobilephone"|translate}}</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>中国海洋石油国际有限公司应急管理委员会</td>
+                                <td>企业</td>
+                                <td>11</td>
+                                <td>11</td>
+                                <td>2013/3/16</td>
+                                <td>有限国际公司（本级）</td>
+                                <td>陈明</td>
+                                <td>010-84526676</td>
+                                <td>13212385748</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>东南亚公司应急管理委员会</td>
+                                <td>企业</td>
+                                <td>11</td>
+                                <td>11</td>
+                                <td>2013/3/16</td>
+                                <td>东南亚公司SES（印尼）</td>
+                                <td>刘松</td>
+                                <td>010-88548676</td>
+                                <td>13125840378</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>中海油伊拉克有限公司</td>
+                                <td>企业</td>
+                                <td>135</td>
+                                <td>135</td>
+                                <td>2013/3/16</td>
+                                <td>伊拉克公司（伊拉克）</td>
+                                <td>段成刚</td>
+                                <td>010-88882351</td>
+                                <td>18526613245</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>应急管理委员会</td>
+                                <td>企业</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>2014/6/18</td>
+                                <td>伊拉克公司（伊拉克）</td>
+                                <td>段成刚</td>
+                                <td>010-88882351</td>
+                                <td>18526613245</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>应急办公室</td>
+                                <td>企业</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>2014/4/18</td>
+                                <td>伊拉克公司（伊拉克）</td>
+                                <td>彭英伟</td>
+                                <td>010-84526676</td>
+                                <td>13212385748</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>危机公关组</td>
+                                <td>企业</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>2013/3/16</td>
+                                <td>伊拉克公司（伊拉克）</td>
+                                <td>刘鹏飞</td>
+                                <td>010-84265666</td>
+                                <td>13215252636</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>应急保障组</td>
+                                <td>企业</td>
+                                <td>11</td>
+                                <td>11</td>
+                                <td>2013/3/16</td>
+                                <td>伊拉克公司（伊拉克）</td>
+                                <td>严文芳</td>
+                                <td>010-84526676</td>
+                                <td>18859623115</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>中海油乌干达有限公司应急管理委员会</td>
+                                <td>企业</td>
+                                <td>17</td>
+                                <td>146</td>
+                                <td>2013/3/16</td>
+                                <td>乌干达公司（乌干达）</td>
+                                <td>陈明</td>
+                                <td>010-84526676</td>
+                                <td>13212385748</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>中国海洋石油国际有限公司应急管理委员会</td>
+                                <td>企业</td>
+                                <td>11</td>
+                                <td>11</td>
+                                <td>2013/3/16</td>
+                                <td>有限国际公司（本级）</td>
+                                <td>陈明</td>
+                                <td>010-84526676</td>
+                                <td>13212385748</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>应急办公室</td>
+                                <td>企业</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>2014/4/18</td>
+                                <td>伊拉克公司（伊拉克）</td>
+                                <td>彭英伟</td>
+                                <td>010-84526676</td>
+                                <td>13212385748</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                            <button type="button" class="mb-sm btn btn-danger" >{{"print"|translate}}</button>
+                            <button type="button" class="mb-sm btn btn-info">{{"export"|translate}}</button>
+                            <button type="button" class="mb-sm btn btn-info" >{{"cancel"|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

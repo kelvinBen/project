@@ -1,0 +1,94 @@
+<ol class="breadcrumb" style="margin-top: -20px; margin-left: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+    <li class="active">{{"emergencyprimarytable"|translate}}</li>
+</ol>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="primarytableCtrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="text-align: center;">{{"emergencyprimarytable"|translate}}<em class="icon icon-microphone"></em></div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-striped table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"accidentname"|translate}}:</td>
+                            <td><input type="text" style="border: 0;width: 100%" ng-model="vm_event.name"></td>
+                            <td>{{"accidenttime"|translate}}:</td>
+                            <td><input type="datetime-local" style="border: none; width:100%;" ng-model="dt"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"accidentaddress"|translate}}:</td>
+                            <td><input type="text" style="border: 0;width: 100%" ng-model="vm.data.locate"></td>
+                            <td>{{"accidentnature"|translate}}:</td>
+                            <td ><input type="text" style="border: 0;" ng-model="vm.type"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"longitude"|translate}}:</td>
+                            <td><input type="text" style="border: 0;width: 100%" ng-model="vm.data.lon"></td>
+                            <td>{{"latitude"|translate}}:</td>
+                            <td ><input type="text" style="border: 0;" ng-model="vm.data.lat"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"nearcountry"|translate}}:</td>
+                            <td>									<select name="select" required="" ng-model="vm.data.country" class="form-control" ng-options="t.name for t in countries" ng-change="filtercity()">
+                            </select></td>
+                            <td>{{"nearcity"|translate}}:</td>
+                            <td ><select name="select" required="" ng-model="vm.data.city" class="form-control" ng-options="t.name for t in cities" ng-change="changecity()">
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"  style="vertical-align: middle;" >{{"accidentdes"|translate}}</td>
+                        </tr>
+                        <tr style="height:90px;">
+                            <td colspan='4';><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.describe"></td>
+                        </tr>
+                        <tr style="height:60px;">
+                            <td>{{"InjuredPersonnel"|translate}}：</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.casualties"></td>
+                        </tr>
+                        <tr style="height:60px;">
+                            <td>{{"environmentalpollute"|translate}}：</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.pollution"></td>
+                        </tr>
+                        <tr style="height:60px;">
+                            <td>{{"property"|translate}}：</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.loss"></td>
+                        </tr>
+                        <tr style="height:60px;">
+                            <td>{{"surround"|translate}}：</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.affect"></td>
+                        </tr>
+                        <tr style="height:60px;">
+                            <td>{{"weathersituation"|translate}}：</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.weather"></td>
+                        </tr>
+                        <tr style="height:60px;">
+                            <td>{{"preliminary"|translate}}：</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.next"></td>
+                        </tr>
+                        <tr>
+                            <td colspan='4';>{{"speaker"|translate}}：</td>
+                        </tr>
+                        <tr>
+                            <td colspan='4';>
+                                <ul style="list-style: none;">
+                                    <li>{{"staffname"|translate}}：<input type="text" style="border: 0;" ng-model="vm.data.user.name"></li>
+                                    <li style="margin-top: 10px;">{{"dep"|translate}}：<input type="text" style="border: 0;" ng-model="vm.data.user.organiztion"></li>
+                                    <li style="margin-top: 10px;">{{"personpost"|translate}}：<input type="text" style="border: 0;" ng-model="vm.data.user.role"></li>
+                                    <li style="margin-top: 10px;">{{"telephones"|translate}}：<input type="text" style="border: 0;" ng-model="vm.data.user.phone"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

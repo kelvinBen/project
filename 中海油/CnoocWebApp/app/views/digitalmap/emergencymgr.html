@@ -1,0 +1,92 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.projectmanage">{{'digitalmap'|translate}}</a>
+        </li>
+        <li>
+            <span>{{"EmergencyResourcesMgr"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="EmergencyResourcesCtl">
+    <div class="cl pd-5 bg-1 bk-gray" style="margin-bottom: 5px;">
+        <span class="l">
+                <a href="javascript:;" class="btn btn-danger radius" ng-click="deletesomeconfirm()">
+                    <em class="fa fa-trash-o"></em>{{'delete'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" ng-click="add();">
+                    <em class="fa fa-plus"></em>{{'add'|translate}}
+                </a>
+            </span>
+        <!--<span class="r">
+                <a href="javascript:;" class="btn btn-success radius" onclick="window.print()">
+                   <i class="fa fa-print"></i>{{'print'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="utility_export()" ng-hide="true">
+                     {{'export'|translate}}
+                </a>
+            </span>-->
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" style="padding-left: 15px;">
+            <h4>
+                {{'EmergencyResourcesMgr'|translate}}
+            </h4>
+        </div>
+        <div class="panel-body">
+            <table class="table table-border table-bordered table-hover table-bg" datatable="ng">
+                <thead>
+                    <tr class="text-c">
+                        <th style="width:25px;">
+                            <div class="checkbox c-checkbox">
+                                <label style="font-weight:bold">
+                                    <input type="checkbox" ng-model="select_all"   ng-change="selectall()" />
+                                    <span class="fa fa-check"></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th style="text-align: left;">{{"num"|translate}}</th>
+                        <th style="text-align: left;">{{"organization"|translate}}</th>
+                        <th style="text-align: left;">{{"positioninfo"|translate}}</th>
+                        <th style="text-align: left;">{{"emergencyresourcescate"|translate}}</th>
+                        <th style="text-align: left;">{{"resourcetype"|translate}}</th>
+                        <th style="text-align: left;">{{"format"|translate}}</th>
+                        <th style="text-align: left;">{{"quantity"|translate}}</th>
+                        <th style="text-align: left;width:100px">{{"operation"|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="u in sources" class="text-c">
+                        <td class="text-center">
+                            <div class="checkbox c-checkbox">
+                                <label style="font-weight:bold">
+                               <input type="checkbox" ng-model="u.selected" />
+                               <span class="fa fa-check"></span>
+                           </label>
+                            </div>
+                            <!-- <input type="checkbox" ng-checked="u.checked" ng-model="u.checked"> -->
+                        </td>
+                        <td>{{$index+1}}</td>
+                        <td>{{u.org}}</td>
+                        <td>{{u.positionName}}</td>
+                        <td>{{u.category}}</td>
+                        <td>{{u.model}}</td>
+                        <td>{{u.spec}}</td>
+                        <td>{{u.num}}</td>
+                        <td>
+
+                            <button type="button" class="btn btn-primary btn-sm" title="{{'edit'| translate}}" ng-click="edit(u)">
+                           <i class="fa fa-edit"></i>
+                       </button>
+                            <button type="button" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}" ng-click="delete(u.id)">
+                           <i class="fa fa-trash-o"></i>
+                       </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

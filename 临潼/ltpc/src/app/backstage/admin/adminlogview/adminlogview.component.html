@@ -1,0 +1,63 @@
+<div class="nav">
+    <span style="padding-left:7px;">首页</span>
+    <span>/</span>
+    <span>审核</span>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 6px; font-weight:normal;">标题：</label>
+            <div class="col-sm-10 col-md-10 col-lg-10" style="margin-top:5px;">
+                {{view.Title}}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 20px; font-weight:normal;">日期：</label>
+            <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top:20px;">
+                {{view.Time | date:'yyyy-MM-dd'}}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top:20px; font-weight:normal;">分类：</label>
+            <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top:20px;">
+                {{getSubCateName(view.SmallClassID)}}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 20px; font-weight:normal;">作者：</label>
+            <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top:20px;">
+                {{view.Author}}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 20px; font-weight:normal;">编辑：</label>
+            <div class="col-sm-6 col-md-6 col-lg-6" style="margin-top:20px;">
+                {{statusStr(view.Status)}}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 20px; font-weight:normal;">内容：</label>
+            <div class="col-sm-10 col-md-10 col-lg-10" style="margin-top:20px;" [innerHTML]="view.Context">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 20px; font-weight:normal;">审核：</label>
+            <div class="col-sm-10 col-md-10 col-lg-10" style="margin-top:20px;">
+                <p-radioButton name="group1" value="1" label="审核通过" [(ngModel)]="view.Status"></p-radioButton>
+                <p-radioButton name="group1" value="2" label="审核失败" [(ngModel)]="view.Status"></p-radioButton>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="view.Status == 2">
+            <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 20px; font-weight:normal;">审核失败原因：</label>
+            <div class="col-sm-10 col-md-10 col-lg-10" style="margin-top:20px;">
+                <textarea pInputTextarea [(ngModel)]="view.Res" style="width:100%"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-md-offset-4 col-lg-offset-4" style="margin-top: 15px;">
+                <button type="button" class="mb-sm btn btn-danger" (click)="submitStatus()">提交</button>
+                <button type="button" class="mb-sm btn btn-info" (click)="cancel()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

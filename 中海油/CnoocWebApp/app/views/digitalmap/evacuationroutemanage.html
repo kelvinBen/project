@@ -1,0 +1,43 @@
+﻿<!--<header class="navbar-wrapper">-->
+    <!--<nav class="breadcrumb" style="padding:0px;margin:0px;">-->
+        <!--<i class="Hui-iconfont">&#xe67f;</i><a href="@Url.Action(" LocateSearch")">电子地图</a>-->
+        <!--<span class="c-gray en">&gt;</span> 撤离路线管理-->
+    <!--</nav>-->
+<!--</header>-->
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a  ui-sref="app.projectmanage">{{'digitalmap'|translate}}</a>
+        </li>
+        <li>
+            <span>{{"route"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<!--<div id="measurementDiv" style="position: absolute;top: 0px;bottom: 0px;left: 360px;margin-top: 60px;z-index:116;"></div>-->
+<div class="page-container" ng-controller="evacuationrouteCtrl">
+    <div class="row">
+        <div class="col-lg-2" style="background-color:#ffffff;">
+            <div class="panel-primary">
+                <div class="panel-heading">{{"orginstitution"|translate}}</div>
+                <div class="panel-body">
+                    <abn-tree tree-data="treeDatas" tree-control="group_tree" expand-level="2">
+                    </abn-tree>
+                </div>
+            </div>
+            <div class="panel-primary">
+                <div class="panel-heading">{{"measuretool"|translate}}</div>
+                <div class="panel-body">
+                    <div id="measurementDiv"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <esri-map zoom="4" basemap="streets" id="allmap">
+                <button type="button" class="btn btn-primary" ng-click="starteditroute()">{{"editroute"|translate}}</button>
+
+            </esri-map>
+        </div>
+    </div>
+</div>

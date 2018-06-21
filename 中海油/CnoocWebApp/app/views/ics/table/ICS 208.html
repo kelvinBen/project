@@ -1,0 +1,368 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"safeyplan"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" ng-controller="ics208Ctl" style="margin: 10px; overflow: hidden;">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: left;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;"> ECS 208（{{"safeyplan"|translate}}） </div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" style="overflow: hidden; padding: 5px;">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td style="text-align: center;">{{"incidentname"|translate}}</td>
+                            <td><input  type="text" style="border: 0;width: 100%;height: 100%;"ng-model="event.name"></td>
+                            <td style="text-align: center;">{{"incidentnumber"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td style="text-align: center;">{{"operationalperiod"|translate}}</td>
+                            <td style="text-align: center;">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;" ng-model="starttime">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;" ng-model="endtime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: left;">{{"applicablesite"|translate}}：<input type="text" style="border: 0;width:70%;height: 100%;" ng-model="vm.data.applyto"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: left;">{{"product"|translate}}：<input type="text" style="border: 0;width: 70%;height: 100%;" ng-model="vm.data.product"> （{{"datasheet"|translate}}）</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">{{"sitefeatures"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <ul style="list-style: none;">
+                                    <li style="margin: 10px;"><input type="radio" value="sea" name="radio" ng-model="vm.data.radio"> {{"sea"|translate}}</li>
+                                    <li>{{"installationame"|translate}}：<input type="text" style="border: 0;"></li>
+                                </ul>
+                            </td>
+                            <td colspan="2">
+                                <ul style="list-style: none;">
+                                    <li style="margin: 10px;"><input type="radio" value="land" name="radio" ng-model="vm.data.radio"> {{"land"|translate}}</li>
+                                    <li>{{"installationame"|translate}}：<input type="text" style="border: 0;" ng-model="vm.data.landcontent"></li>
+                                </ul>
+                            </td>
+                            <td colspan="2">
+                                <ul style="list-style: none;">
+                                    <li style="margin: 10px;"><input type="radio" value="other" name="radio" ng-model="vm.data.radio"> {{"other"|translate}}  <input type="text" style="border: 0;margin-left: 10px;" ng-model="vm.data.othercontent"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="group in vm.data.groups">
+                            <td  colspan="2" style="vertical-align: middle;text-align: center;">{{group.name}}</td>
+                            <td colspan="6">
+                                <span ng-repeat="item in group.items">
+                                <input type="checkbox"  style="margin: 10px;" ng-model="item.check"> {{item.name}}
+                                </span>
+                            </td>
+                        </tr>
+                        <!--<tr>-->
+                            <!--<td rowspan="3" colspan="2" style="vertical-align: middle;text-align: center;">{{"water"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.ocean"> {{"ocean"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.gulf"> {{"gulf"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.rivers"> {{"river"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.stream"> {{"stream"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.canal">{{"canal"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.wetland">{{"wetland"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.coastline">{{"coastline"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.waterother">{{"other"|translate}}  <input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.muddy">{{"muddy"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.sandy"> {{"sandy"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.water.rock">{{"rock"|translate}}</td>-->
+                            <!--<td></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td rowspan="2" colspan="2" style="vertical-align: middle;text-align: center;">{{"land"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.land.mountain">  {{"mountain"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.land.hill"> {{"hill"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.land.shrub"> {{"shrub"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.land.forest"> {{"forest"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.land.grassland"> {{"grassland"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.land.landother"> {{"other"|translate}} <input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                            <!--<td></td>-->
+                            <!--<td></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td rowspan="2" colspan="2" style="vertical-align: middle;text-align: center;">{{"purposes"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;"ng-model="model.featuresCheckbox.purpose.public">  {{"public"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.purpose.government"> {{"government"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.purpose.residence"> {{"residence"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.purpose.business">  {{"business"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.purpose.entertainment">  {{"entertainment"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.purpose.industry">  {{"industry"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.purpose.farmland"> {{"farmland"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.purpose.purposeother">{{"other"|translate}}<input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td rowspan="3" colspan="2" style="vertical-align: middle;text-align: center;">{{"climate"|translate}}</td>-->
+                            <!--<td> {{"watertemp"|translate}}<input type="text"  style="margin: 10px;border: 0;width: 50%;border-bottom: 1px solid black" ng-model="model.featuresCheckbox.climate.watertemp">°F </td>-->
+                            <!--<td> {{"airtemp"|translate}}<input type="text"  style="margin: 10px; border: 0; width:50%;border-bottom: 1px solid black" ng-model="model.featuresCheckbox.climate.airtemp">°F </td>-->
+                            <!--<td> {{"windspeeds"|translate}}<input type="text"  style="margin: 10px;border: 0; width:30%; border-bottom: 1px solid black" ng-model="model.featuresCheckbox.climate.windspeed"> mph </td>-->
+                            <!--<td> {{"winddirection"|translate}}<input type="text"  style="margin: 10px; border:  0; width: 50%; border-bottom: 1px solid black" ng-model="model.featuresCheckbox.climate.winddirection">（{{"from"|translate}}）</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.climate.rain">{{"rain"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.climate.snow">{{"snow"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.climate.ice">{{"ice"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.climate.fog"> {{"fog"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="5"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.climate.climateother">  {{"other"|translate}} <input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td rowspan="9" colspan="2" style="vertical-align: middle;text-align: center;">{{"sitehazard"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.ship">  {{"ships"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.fire"> {{"fire"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.pump">  {{"pump"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.chemistry">{{"chemistry"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.hightemp">{{"hightemp"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.slide">{{"slide"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.lowtemp"> {{"lowtem"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.helicoper">{{"heilcoper"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.steam">{{"steam"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.limitspace">{{"limitspace"|translate}} </td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.crane">{{"crane"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.excavating">{{"excavating"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.drumhanding">{{"drumhanding"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.motor">{{"motor"|translate}}	</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.ultravioletrays">{{"ultravioletrays"|translate}} </td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.equipment">{{"equipment"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.noise">{{"noise"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.visibility">{{"visibility"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.electrical"> {{"electrical"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.aerialwork">{{"aerialwork"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.weather">{{"aweather"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.tired">{{"tired"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.botany">{{"botany"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.closewater">{{"closewater"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.sitehazardother">{{"other"|translate}}<input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.sitehazardother">{{"other"|translate}}<input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.featuresCheckbox.sitehazard.sitehazardother">{{"other"|translate}}<input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td rowspan="2" colspan="2" style="vertical-align:middle;text-align: center;">{{"gasmonitoring"|translate}}</td>-->
+                            <!--<td> {{"lel"|translate}}<input type="text"  style="margin: 10px;border: 0;border-bottom: 1px solid black" ng-model="model.featuresCheckbox.gasMonitoring.lel"> </td>-->
+                            <!--<td>  {{"oxygen"|translate}}<input type="text"  style="margin: 10px;border: 0;border-bottom: 1px solid black"  ng-model="model.featuresCheckbox.gasMonitoring.oxygen"> </td>-->
+                            <!--<td> {{"benzene"|translate}}<input type="text"  style="margin: 10px;border: 0;border-bottom: 1px solid black"  ng-model="model.featuresCheckbox.gasMonitoring.benzene"> </td>-->
+                            <!--<td> {{"ppm"|translate}}<input type="text"  style="margin: 10px;border: 0;border-bottom: 1px solid black"  ng-model="model.featuresCheckbox.gasMonitoring.ppm"> </td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td> {{"other"|translate}}<input type="text"  style="margin: 10px;border: 0;border-bottom: 1px solid black" ng-model="model.featuresCheckbox.gas.gasother"> </td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="6" style="text-align: center;">{{"controlmeasures"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td rowspan="2" colspan="2" style="vertical-align: middle;text-align: center;"  >{{"engineeringcontrol"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.engine.release">  {{"release"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;"  ng-model="model.controlMeasure.engine.closevalve"> {{"closevalve"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;"  ng-model="model.controlMeasure.engine.shutdown"> {{"shutdown"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;"  ng-model="model.controlMeasure.engine.protect">  {{"protect"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;"  ng-model="model.controlMeasure.engine.lock">{{"lock"|translate}} </td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;"  ng-model="model.controlMeasure.engine.engineother"> {{"other"|translate}}<input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td rowspan="3" colspan="2" style="vertical-align: middle;text-align: center;">{{"labor"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.pvc">  {{"pvc"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.pe"> {{"pe"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.mask"> {{"mask"|translate}}<input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.rubbergloves"> {{"rubbergloves"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.pvcgloves">{{"pvcgloves"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.eyeprotection">{{"eyeprotection"|translate}}  <input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.rubbershoes"> {{"rubbershoes"|translate}}</td>-->
+                            <!--<td><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.safehat"> {{"safehat"|translate}}</td>-->
+                            <!--<td colspan="2"><input type="checkbox"  style="margin: 10px;" ng-model="model.controlMeasure.labor.laborother">  {{"other"|translate}} <input type="text" style="border: 0;margin-left: 10px;"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="6" style="text-align: center;">{{"workplan"|translate}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="6" style="height: 80px;"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.workplan"></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="6" style="text-align: center;">{{"train"|translate}}</td>-->
+                        <!--</tr>-->
+                        <tr>
+                            <td colspan="6">
+                                <ul style="list-style: none;">
+                                    <li>{{"trainlist"|translate}}：</li>
+                                    <li style="height: 80px;"><input type="text" style="border:0;width: 100%;height: 100%; " ng-model="vm.data.train"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">{{"organizations"|translate}}</td>
+                        </tr>
+                        <tr style="font-weight: bold">
+                            <td colspan="1" style="width:35%">{{"organizations"|translate}}</td>
+                            <td colspan="1" style="width:20%">{{"post"|translate}}</td>
+                            <td colspan="1" style="width:20%">{{"staffname"|translate}}</td>
+                            <td colspan="2" style="text-align: center;">{{"phonetalk"|translate}}</td>
+                            <td style="width:25%">{{"operation"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.org">
+                            <td>
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.institution" e-name="institution" e-form="rowform" >{{ user.institution }}</span>
+                            </td>
+                            <td>
+                                <!-- editable status (select-local)-->
+                                <span editable-text="user.name" e-name="name"   e-form="rowform">{{ user.name }}</span>
+                            </td>
+                            <td>
+                                <!-- editable status (select-local)-->
+                                <span editable-text="user.post" e-name="post"   e-form="rowform">{{ user.post }}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.phone" e-name="phone"  e-form="rowform">{{ user.phone }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="float: left;"><button ng-click="addUser()" class="btn btn-default">Add row</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">{{"emeplan"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><input type="checkbox"  style="margin: 10px;" ng-model="vm.data.alarmcheck">  {{"alarmcheck"|translate}} ： <input type="text" style="border: 0;margin-left: 10px;" ng-model="vm.data.alarmcontent"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><input type="checkbox"  style="margin: 10px;" ng-model="vm.data.evacheck">{{"evacheck"|translate}}：<input type="text" style="border: 0;margin-left: 10px;" ng-model="vm.data.evacontent"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><input type="checkbox"  style="margin: 10px;" ng-model="vm.data.aidcheck">{{"aidcheck"|translate}}：<input type="text" style="border: 0;margin-left: 10px;" ng-model="vm.data.aidcontent"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="6" colspan="2" style="vertical-align: middle;text-align: center;">{{"notity"|translate}}</td>
+                            <td colspan="2" style="text-align: center;">{{"place"|translate}}</td>
+                            <td colspan="2" style="text-align: center;">{{"phone"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{"hospital"|translate}}：</td>
+                            <td><input type="text" style="border:0;width: 100%;height: 100%; " ng-model="vm.data.hplace"></td>
+                            <td colspan="2"><input type="text" style="border:0;width: 100%;height: 100%; " ng-model="vm.data.htelephone"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"ambulance"|translate}}：</td>
+                            <td><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.amplace"></td>
+                            <td colspan="2"><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.amtelephone"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"flightambulance"|translate}}：</td>
+                            <td><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.fliplace"></td>
+                            <td colspan="2"><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.flitelephone"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"firecontrol"|translate}}：</td>
+                            <td><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.firecontrol"></td>
+                            <td colspan="2"><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.firetelephone"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"police"|translate}}：</td>
+                            <td><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.policeplace" ></td>
+                            <td colspan="2"><input type="text" style="border:0;width: 100%;height: 100%; "  ng-model="vm.data.policetelephone"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">{{"beforeintroduction"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" >{{"diss"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"  style="height: 80px;"><input type="text" style="border:0;width: 100%;height: 100%; " ng-model="vm.data.discussharm"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <ul style="list-style: none;">
+                                    <li>{{"othertheme"|translate}}：</li>
+                                    <li style="height: 80px;"><input type="text" style="border:0;width: 100%;height: 100%; " ng-model="vm.data.theme"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{"writegroup"|translate}}</td>
+                            <td>{{"preparedby"|translate}}：{{"staffname"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esName"></td>
+                            <td>{{"positiontitle"|translate}}：</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esPost"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;text-align: center;" colspan="4">{{"ecs"|translate}} 208 {{"safeyplan"|translate}}</td>
+                            <td style="line-height: 60px;text-align: center;" colspan="1">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='1'><input type="date" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esDate"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-lg-offset-5 col-md-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">提交</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

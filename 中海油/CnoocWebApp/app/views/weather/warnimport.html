@@ -1,0 +1,74 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"disasterweathersys"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"warninfoquery"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="warnimportCtrl">
+    <div class="cl pd-5 bg-1 bk-gray" style="margin-bottom: 5px;">
+            <span class="l" ng-hide="true">
+                <a href="javascript:;" class="btn btn-danger radius" ng-click="deletesome()">
+                    {{"delete"|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" ng-click="addDisaster();">
+                   {{"addwarninfo"|translate}}
+                </a>
+            </span>
+            <span class="r">
+                <a href="javascript:;" class="btn btn-danger radius" onclick="window.print()">
+                    {{"print"|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="utility_export()" ng-hide="true">
+                    {{"export"|translate}}
+                </a>
+            </span>
+    </div>
+   <div class="panel panel-default">
+       <div class="panel-heading" style="padding-left: 15px;">
+           <h4>
+               {{'warninfo'|translate}}
+           </h4>
+       </div>
+       <div class="panel-body">
+           <table class="table table-border table-bordered table-hover table-bg" datatable="ng">
+               <thead>
+               <tr class="text-c">
+                   <th style="text-align: left;width: 5%">{{"num"|translate}}</th>
+                   <th style="text-align: left;width: 20%">{{"area"|translate}}</th>
+                   <th style="text-align: left;width: 10%">{{"date"|translate}}</th>
+                   <th style="text-align: left;width: 10%">{{"warntype"|translate}}</th>
+                   <th style="text-align: left;width: 10%">{{"warnlevel"|translate}}</th>
+                   <th style="text-align: left;width: 30%">{{"resourcefrom"|translate}}</th>
+                   <th style="text-align: left;width: 15%">{{"operation"|translate}}</th>
+               </tr>
+               </thead>
+               <tbody id="tabBody">
+               <tr ng-repeat="cur in warns" class="text-c">
+                   <td>{{$index+1}}</td>
+                   <td style="text-align:left;"><img src={{cur.icon}}>{{cur.city}}</td>
+                   <td>{{cur.time|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                   <td>{{cur.type}}</td>
+                   <td>{{cur.level}}</td>
+                   <td><a href={{cur.source}} target="_blank">{{cur.source}}</a></td>
+                   <td>
+                       <!--<a href="javascript:;" ng-click="postwarn(cur.warn_id)" title={{"releasewarn"|translate}}>-->
+                           <!--<em class="fa fa-send"></em>-->
+                       <!--</a>-->
+                       <button type="button" class="btn btn-success btn-sm" title="{{'singledelete'|translate}}"  ng-click="postwarn(cur.warn_id)">
+                           <i class="fa fa-send"></i>
+                       </button>
+                   </td>
+               </tr>
+               </tbody>
+           </table>
+       </div>
+   </div>
+</div>
+
+
+

@@ -1,0 +1,130 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"demobilization"|translate}}</li>
+    </ol>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics221Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS {{"demobilization"|translate}}</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" >
+                    <table class="table  table-bordered table-hover">
+                        <tbody >
+                        <tr>
+                            <td>{{"accidentname"|translate}}</td>
+                            <td colspan="1";><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td colspan="1";><input type="text" style="border: 0;width: 100%;height: 100%;" ></td>
+                            <td>{{"operationalperiod"|translate}}</td>
+                            <td colspan="2";>
+                                <input type="date" style="border: 0;width: 45%;height: 100%;" ng-model="starttime">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;" ng-model="endtime">
+                            </td>
+                        </tr>
+                        <!--<tr style="text-align: center">-->
+                            <!--<td>事故名称:</td>-->
+                            <!--<td><input type="text" style="border: 0;"></td>-->
+                            <!--<td>事故时间:</td>-->
+                            <!--<td><input type="text" style="border: 0;"></td>-->
+                            <!--<td colspan="3">作业周期：-->
+                                <!--<input type="date" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> - -->
+                                <!--<input type="date" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <tr style="text-align: center">
+                            <td>{{"personnel"|translate}}</td>
+                            <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.travelperson"></td>
+                        </tr>
+                        <tr style="text-align: center">
+                            <td>{{"releasedtime"|translate}}</td>
+                            <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.traveltime"></td>
+                        </tr>
+                        <tr style="text-align: center;background: #efefef;">
+                            <td colspan="7">{{"signoff"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center">{{"resourcetype"|translate}}</td>
+                            <td style="text-align: center">{{"description"|translate}}</td>
+                            <td style="text-align: center">{{"supplier"|translate}}</td>
+                            <td style="text-align: center">{{"quantity"|translate}}</td>
+                            <td style="text-align: center">{{"size"|translate}}</td>
+                            <td style="text-align: center">{{"releasedept"|translate}}</td>
+                            <td>{{"operation"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resources">
+                            <td>
+                                <span editable-text="user.resourcemodel" e-name="resourcemodel" e-form="rowform" >{{ user.resourcemodel  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.description" e-name="description"   e-form="rowform">{{ user.description }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.supplier" e-name="supplier"  e-form="rowform">{{ user.supplier }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.count" e-name="count"  e-form="rowform">{{ user.count }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.size" e-name="size"  e-form="rowform">{{ user.size }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.department"  e-name="department"  e-form="rowform">{{ user.department }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="float: left;"><button ng-click="addUser()" class="btn btn-default">{{"add"|translate}}</button></td>
+                        </tr>
+                        <tr style="text-align: center">
+                            <td colspan="7">{{"remarks"|translate}}</td>
+                        </tr>
+                        <tr style="text-align: center;height:100px;">
+                            <td colspan="7"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.note"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"preparename"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esName"></td>
+                            <td>{{"prepareposition"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esPost"></td>
+                            <td>{{"preparesign"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} {{"demobilization"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="1">{{"datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='2';><input type="date" style="border: 0;" ng-model="vm.data.esDate"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 " style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}
+                    </button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <a ui-sref="app.dayReports">
+                {{"daywarnreport"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"releaseday"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="addDayController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"releaseday"|translate}}
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid">
+                <div class="col-xs-8">
+                    <img src="app/img/title.png" width="400" />
+                </div>
+                <div class="col-xs-4 text-right">
+                    <div>
+                        <input class="btn btn-primary radius" type="button" value="{{'publish'|translate}}" ng-click="ok()"> &nbsp;&nbsp;
+                        <input type="submit" class="btn btn-danger" value="{{'cancel'|translate}}" ng-click="close()" />
+                    </div>
+                    <p class="input-group" ng-controller="DatepickerCtrl as dpick">
+                        <input type="text" name="eventDate" required="" uib-datepicker-popup="{{dpick.format}}" ng-model="reportModels.time" is-open="dpick.opened" uib-datepicker-options="dpick.dateOptions" close-text="Close" class="form-control"
+                        />
+                        <span class="input-group-btn">
+                            <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                <em class="fa fa-calendar"></em>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <table style="width:100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td colspan="5">
+                        <div style="font-size:24px;background:#D4570E;margin-top: 2px;color:white; float: left; width:100%;padding:3px;">
+                            {{"importantfocus"|translate}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="55%">
+                        <div style="display:inline-block;width:100%;padding:0px;background-color:#888F35;color:white;">
+
+                            <select class="form-control" style="width:200px;" ng-model="countryid" ng-options="d.country_id as d.name for d in country" ng-change="countryChange()" ng-disabled="org_country==false"></select>
+
+                        </div>
+                    </td>
+                    <td width="15%">
+                        <div style="display:inline-block;width:100%;padding:8px;background-color:#1E347B;color:white;text-align:center;height:34px;">{{"emergencystatus"|translate}}:</div>
+                    </td>
+                    <td width="15%">
+                        <select class="form-control" ng-options="a.id as a.level for a in levelType" ng-model="select.level"></select>
+                    </td>
+                    <td colspan="2">
+                        <div style="display:inline-block;width:100%;padding:8px;background-color:#DDD;color:black;text-align:center;height:34px;">{{"eventnature"|translate}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div style=" width:100%;background:#F2F2F2;color:#DE982D;padding:5px;">{{"socialrisk"|translate}}</div>
+                    </td>
+                </tr>
+                <tr ng-repeat="e in select.events">
+                    <td colspan="3">
+                        <textarea class="form-control" rows="1" ng-model="e.title"></textarea>
+                    </td>
+                    <td>
+                        <select ng-options="a.id as a.value for a in eventType" class="form-control" ng-model="e.type"></select>
+                    </td>
+                    <td class="text-center">
+                        <a href="javascript:;" class="btn btn-primary btn-xs" title="Delete" ng-click="removeEvent($index)">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="text-right">
+                    <td colspan="5">
+                        <a href="javascript:;" title="{{'add'|translate}}" ng-click="addEvent()" class="btn btn-primary" style="margin-top:10px;">
+                            <i class="fa fa-plus"></i>{{"add"|translate}}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div style="margin:20px"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div style=" width:100%;background:#F2F2F2;color:#DE982D;padding:5px;">{{"project"|translate}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <textarea class="form-control" style="width:100%;text-align:left" rows="5" ng-model="select.influence"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div style="margin:20px"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div style=" width:100%;background:#F2F2F2;color:#DE982D;padding:5px;">{{"measure"|translate}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <textarea class="form-control" style="width:100%;text-align:left" rows="5" ng-model="select.measures"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script type="text/ng-template">
+
+    </script>
+</div>

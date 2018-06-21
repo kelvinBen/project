@@ -1,0 +1,74 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"incidentreport"|translate}} </li>
+    </ol>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <button type="button"  class="btn btn-info">{{"close"|translate}}</button>
+        <button type="button"  class="btn btn-success" ng-click="saves()">{{"save"|translate}}</button>
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">{{"incidentreport"|translate}} </div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"department"|translate}}：</td>
+                            <td colspan="2";><input  type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"connect"|translate}}：</td>
+                            <td colspan="2";><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="padding-left: 50px;">{{"incidentplace"|translate}}：</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="1" style="padding-left: 50px;">{{"incidenttime"}}：</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="height: 80px;">{{"briefdes"|translate}}：<input type="text" style="border:none; width:80%; height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"incidentpersonnel"|translate}}：<input type="text" style="width: 30%; border:0;"></td>
+                            <td>{{"injurenum"|translate}}：<input type="text" style="width: 30%;border:0;"></td>
+                            <td>{{"deathnum"|translate}}：<input type="text" style="width: 30%;border:0;"></td>
+                            <td colspan="3">{{"description"|translate}}：</td>
+                        </tr>
+                        <tr>
+                            <td>{{"iraqcompany"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"contractor"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="height: 80px;">{{"impact"|translate}}：<input type="text" style="border:none; width:90%; height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="height: 80px;">{{"external"|translate}}：<input type="text" style="border:none; width:90%; height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="height: 80px;">{{"mediareport"|translate}}：<input type="text" style="border:none; width:90%; height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="height: 80px;">{{"chargeor"|translate}}：<input type="text" style="border:none; width:90%; height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="height: 80px;">{{"assistance"|translate}}：<input type="text" style="border:none; width:88%; height: 100%;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"inspection"|translate}} </li>
+    </ol>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="IraqcarlistCtrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <button type="button"  class="btn btn-info">{{"close"|translate}}</button>
+        <button type="button"  class="btn btn-success" ng-click="saves()">{{"save"|translate}}</button>
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">{{"inspection"|translate}} </div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover text-center">
+                        <tbody>
+                        <tr>
+                            <td colspan="1">{{"projectitem"|translate}}</td>
+                            <td colspan="6">{{"standard"|translate}}</td>
+                            <td colspan="1">{{"edit"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in tableCotent">
+                            <td>
+                                <span editable-text="user.project" e-name="project" e-form="rowform" >{{ user.project  }}</span>
+                            </td>
+                            <td colspan="6">
+                                <!-- editable status (select-local)-->
+                                <span editable-text="user.standard" e-name="standard"   e-form="rowform">{{ user.standard }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tr>
+                            <td colspan="7" style="float: left;border: 0;">
+                                <button ng-click="addUser()" class="btn btn-default">{{"add"|translate}}</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

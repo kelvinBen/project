@@ -1,0 +1,23 @@
+﻿
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{'digitalmap'| translate}}</a>
+        </li>
+        <li>
+            <span>{{"vehicleshipinfo"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="CarSearchMapCtrl">
+<esri-map zoom="4" basemap="streets" id="allmap">
+    <div class="legend" style="float:left;z-index:100;position:absolute;padding-top:800px; margin-top: -130px;" id="worker_legend">
+        <img src="app/img/woker_legend.png"/>
+    </div>
+    <div class="legend" style="float:left;z-index:100;position:absolute;padding-top:10px;padding-left: 80px">
+        <button ng-click="changemap('1')">{{"satellite"|translate}}</button>
+        <button ng-click="changemap('0')">{{"map"|translate}}</button>
+    </div>
+</esri-map>
+</div>

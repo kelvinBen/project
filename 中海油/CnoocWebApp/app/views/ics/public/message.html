@@ -1,0 +1,74 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"messgr"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="socialmessageCtrl">
+    <button type="button" class="btn btn-info"  style="margin-top: 5px;margin-left: 5px;" ng-click="add()" ng-show="false">{{"add"|translate}}</button>
+    <button type="button" class="btn btn-danger"  style="margin-top: 5px;margin-left: 5px;" ng-show="false">{{"singledelete"|translate}}</button>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="panel panel-default" style="margin-top: 15px;">
+                <div class="panel-heading">
+                    <span>{{"messlist"|translate}}</span>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th style="text-align: left;width:15%">{{"sitename"|translate}}</th>
+                                <th style="text-align: left;width:15%">{{"adds"|translate}}</th>
+                                <th style="text-align: left;width:10%">{{"sitetype"|translate}}</th>
+                                <th style="text-align: left;width:10%">{{"keywords"|translate}}</th>
+                                <th style="text-align: left;width:10%">{{"updatetime"|translate}}</th>
+                                <th style="text-align: left;width:10%">{{"deep"|translate}}</th>
+                                <th style="text-align: left;width:10%">{{"first"|translate}}</th>
+                                <th style="text-align: left;width:10%">{{"operation"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr ng-repeat="rr in items">
+                                <td>{{rr.name}}</td>
+                                <td>{{rr.address}}</td>
+                                <td>{{rr.type}}</td>
+                                <td><span editable-text="rr.keywords" e-name="goal" e-form="rowform"> {{ rr.keywords}}</span></td>
+                                <td>{{rr.updatetime}}</td>
+                                <td>{{rr.depth}}</td>
+                                <td>{{rr.level}}</td>
+                                <td style="white-space: nowrap">
+                                    <!-- form-->
+                                    <form editable-form="" name="rowform"
+                                          ng-show="rowform.$visible"
+                                          class="form-buttons form-inline" onaftersave="saveTable()">
+                                        <button type="submit" ng-disabled="rowform.$waiting" title="Save"
+                                                class="btn btn-sm btn-info">
+                                            <em class="fa fa-save"></em>
+                                        </button>
+                                        <button type="button" ng-disabled="rowform.$waiting"
+                                                ng-click="rowform.$cancel()" title="Cancel"
+                                                class="btn btn-sm btn-default">
+                                            <em class="fa fa-times"></em>
+                                        </button>
+                                    </form>
+                                    <div ng-show="!rowform.$visible" class="buttons">
+                                        <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                            <em class="fa fa-pencil"></em>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

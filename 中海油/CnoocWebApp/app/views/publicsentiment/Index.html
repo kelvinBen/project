@@ -1,0 +1,355 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"publicsentiment"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="indexCtrl">
+    <div class="row">
+        <div class="col-lg-4 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-primary">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                        <em class="icon-cloud-upload fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{security_total}}</div>
+                        <div class="text-uppercase">{{"security"|translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-purple">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+                        <em class="icon-globe fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{weather_total}}</div>
+                        <div class="text-uppercase">{{"weather"|translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <!-- START widget-->
+            <div class="panel widget bg-green">
+                <div class="row row-table">
+                    <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                        <em class="icon-bubbles fa-3x"></em>
+                    </div>
+                    <div class="col-xs-8 pv-lg">
+                        <div class="h2 mt0">{{emergency_total}}</div>
+                        <div class="text-uppercase">{{"emergency"|translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!--大按钮-->
+        <div class="col-lg-4" ng-show="false">
+            <div class="action-nav-normal">
+                <!-- 写信息&&信息审核 -->
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-sm-6 action-nav-button">
+                        <a  title={{"writeMessage"|translate}}>
+                        <img class="imgIcon" alt="" src="app/img/u140.png">
+                        <span>{{"writeMessage"|translate}}</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 action-nav-button">
+                        <a  title={{"checkmessage"|translate}}>
+                        <img class="imgIcon" alt="" src="app/img/u142.png">
+                        <span>{{"checkmessage"|translate}}</span>
+                        </a> <span class="label label-black">0</span>
+                    </div>
+                </div>
+                <!-- 收件箱&&发件箱 -->
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-sm-6 action-nav-button">
+                        <a  title={{"inbox"|translate}}>
+                        <img class="imgIcon" alt="" src="app/img/u136.png">
+                        <span>{{"inbox"|translate}}</span>
+                        <span class="triangle-button green"><span class="inner">{{inboxcount}}</span></span>
+                        </a>
+                    </div>
+
+                    <div class="col-sm-6 action-nav-button">
+                        <a  title={{"outbox"|translate}}>
+                        <img class="imgIcon" alt="" src="app/img/u138.png">
+                        <span>{{"outbox"|translate}}</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- 通讯录&&组织架构 -->
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-sm-6 action-nav-button">
+                        <a  title={{"maillist"|translate}}>
+                        <img class="imgIcon" alt="" src="app/img/u144.png">
+                        <span>{{"maillist"|translate}}</span>
+                        </a>
+                    </div>
+
+                    <div class="col-sm-6 action-nav-button">
+                        <a  title={{"org"|translate}}>
+                        <img class="imgIcon" alt="" src="app/img/u146.png">
+                        <span>{{"org"|translate}}</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 舆情图表 -->
+        <div class="col-lg-12">
+            <div class="box">
+                <!-- ----------------按舆情类型-------------------- -->
+                <div class="box-content padded tab-content">
+                    <highchart id="chart1" config="chartConfig" series="chart.series"
+                               style="min-width:100%;min-height:350px;"></highchart>
+                    <!-- ----------------按舆情数量-------------------- -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 信心审核 && 舆情分类 -->
+    <div class="row mt-lg">
+        <div class="col-lg-6">
+            <div class="panel panel-transparent">
+                <uib-tabset justified="true" class="bg-white p0">
+                    <uib-tab>
+                        <uib-tab-heading>
+                            <em class="fa fa-clock-o fa-fw"></em>{{"security"|translate}}
+                        </uib-tab-heading>
+                        <div>
+                            <!-- START list group-->
+                            <table class="table table-hover mb-mails">
+                                <tbody>
+                                <tr ng-repeat="item in pub_list ">
+                                    <td>
+                                        <img ng-src="http://p3.pstatp.com/list/45900110a50b789438f" alt="Mail Avatar"
+                                             class="mb-mail-avatar pull-left"/>
+                                        <div class="mb-mail-date pull-right">
+                                            {{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                                        </div>
+                                        <div class="mb-mail-meta">
+                                            <div class="pull-left">
+                                                <div class="mb-mail-subject">{{item.title| limitTo:20}}</div>
+                                                <div class="mb-mail-from"></div>
+                                            </div>
+                                            <div ng-bind-html="item.content | limitTo:50" class="mb-mail-preview"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- END list group-->
+                            <div class="panel-footer text-right"><a ui-sref="app.security" class="btn btn-default btn-sm">{{"more"|translate}}  </a>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab>
+                        <uib-tab-heading>
+                            <em class="fa fa-money fa-fw"></em>{{"weather"|translate}}
+                        </uib-tab-heading>
+                        <div>
+                            <!-- START table responsive-->
+                            <table class="table table-hover mb-mails">
+                                <tbody>
+                                <tr ng-repeat="item in disaster_list ">
+                                    <td>
+                                        <img ng-src="http://p3.pstatp.com/list/45900110a50b789438f" alt="Mail Avatar"
+                                             class="mb-mail-avatar pull-left"/>
+                                        <div class="mb-mail-date pull-right">
+                                            {{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                                        </div>
+                                        <div class="mb-mail-meta">
+                                            <div class="pull-left">
+                                                <div class="mb-mail-subject">{{item.title}}</div>
+                                                <div class="mb-mail-from"></div>
+                                            </div>
+                                            <div ng-bind-html="item.content | limitTo:50" class="mb-mail-preview"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- END table responsive-->
+                            <div class="panel-footer text-right"><a ui-sref="app.disaster" class="btn btn-default btn-sm">{{"更多"|T}} </a>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab>
+                        <uib-tab-heading>
+                            <em class="fa fa-money fa-fw"></em>{{"emergency"|translate}}
+                        </uib-tab-heading>
+                        <div>
+                            <!-- START table responsive-->
+                            <table class="table table-hover mb-mails">
+                                <tbody>
+                                <tr ng-repeat="item in disaster_list ">
+                                    <td>
+                                        <img ng-src="http://p3.pstatp.com/list/45900110a50b789438f" alt="Mail Avatar"
+                                             class="mb-mail-avatar pull-left"/>
+                                        <div class="mb-mail-date pull-right">
+                                            {{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                                        </div>
+                                        <div class="mb-mail-meta">
+                                            <div class="pull-left">
+                                                <div class="mb-mail-subject">{{item.title}}</div>
+                                                <div class="mb-mail-from"></div>
+                                            </div>
+                                            <div ng-bind-html="item.content | limitTo:50" class="mb-mail-preview"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- END table responsive-->
+                            <div class="panel-footer text-right"><a ui-sref="app.emergency" class="btn btn-default btn-sm">{{"more"|translate}} </a>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+            <div class="box" ng-show="false">
+                <div class="box-header">
+                    <div class="title">@Html.GetLangbyKey("pub_typeName")</div>
+                    <div class="box-header">
+                        <ul class="nav nav-tabs nav-tabs-left ul_pub">
+                            <li class={{active_tab[0]}} id="li_security">
+                                <a data-toggle="tab" ng-click="ngActive(0)">
+                                        <span>
+                                            @Html.GetLangbyKey("security")
+                                        </span>
+                                </a>
+                            </li>
+                            <li id="li_disaster" class={{active_tab[1]}}>
+                                <a data-toggle="tab" ng-click="ngActive(1)">
+                                        <span>
+                                            @Html.GetLangbyKey("disaster")
+                                        </span>
+                                </a>
+                            </li>
+                            <li id="li_emergency" class={{active_tab[2]}}>
+                                <a data-toggle="tab" ng-click="ngActive(2)">
+                                        <span>
+                                            @Html.GetLangbyKey("emergency")
+                                        </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-content tabContent_pub">
+                    <div class="box-section news with-icons" ng-repeat="item in pub_list" ng-show="activeindex==0">
+                        <div class="avatar white">
+                            <img alt="" src="http://p3.pstatp.com/list/45900110a50b789438f">
+                        </div>
+                        <div class="news-time">
+                            {{"date"|translate}}：{{item.event_date.substring(0,4)}}-{{item.event_date.substring(4,6)}}-{{item.event_date.substring(6,8)}}
+                            <br>
+                            <a href="#" ng-click="writemessage(item)">
+                                <img alt="" src="app/img/sendMsg.png">
+                            </a>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-title">
+                                <a class="abstracts" ng-click="ngshowlayer(item.source)">{{item.title}}</a>
+                            </div>
+                            <div class="news-text">
+                                <a class="abstracts">{{item.content|limitTo:20}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-section news with-icons" ng-repeat="item in disaster_list" ng-show="activeindex==1">
+                        <div class="avatar white">
+                            <img alt="" src="http://p3.pstatp.com/list/45900110a50b789438f">
+                        </div>
+                        <div class="news-time">
+                            {{"date"|translate}}：{{item.time|date:'yyyy-MM-dd'}}
+                            <br>
+                            <a href="#">
+                                <img alt="" src="app/img/sendMsg.png">
+                            </a>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-title">
+                                <a class="abstracts" ng-click="ngshowlayer(item.source)">{{item.title}}</a>
+                            </div>
+                            <div class="news-text">
+                                <a class="abstracts">{{item.content|limitTo:20}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: right; margin: 10px;">
+                    <a href="@Url.Action(" PubType", new { id = "security" })" id="pubTypeMore" style="color: blue;
+                    text-decoration: underline;">
+                    @Html.GetLangbyKey("more")&gt;&gt;
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <!-- 信息审核 -->
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="title">
+                        {{"infoaudit"|translate}}
+                    </div>
+                    <!-- <button type="button" class="btn btn-blue size-MINI"
+                    style="margin-top: 7px;">批量审核</button> -->
+                </div>
+
+                <div class="panel-body" style="padding: 10px;">
+                    <!------------------------ 信息审核列表开始 ----------------------------------->
+                    <table id="table" class="table table-hover mb-mails">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;width:10%">{{"num"|translate}}</th>
+                            <th style="text-align: center;width:15%">{{"Sender"|translate}}</th>
+                            <th style="text-align: center;width:15%">{{"Addressee"|translate}}</th>
+                            <th style="text-align: center;width:20%">{{"messagetype"|translate}}</th>
+                            <th style="text-align: center;width:30%">{{"theme"|translate}}</th>
+                            <th style="text-align: center;width:10%">{{"operation"|translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in messages">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.sender_name}}</td>
+                            <td>{{item.receiver|limitTo:4}}</td>
+                            <td>{{getCate(item.category_type)}}</td>
+                            <td>{{item.title}}</td>
+                            <td>
+                                <input class="btn btn-primary radius size-MINI" type="button"
+                                       value={{"detail"|translate}}
+                                ng-click="viewdetail(item.website_message_id)" />
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="panel-footer text-right">
+                        <a ui-sref="app.examMessage" class="btn btn-default btn-sm">{{"more"|translate}} </a>
+                    </div>
+                    <!------------------------ 信息审核列表结束 ----------------------------------->
+                </div>
+            </div>
+        </div>
+        <!-- 舆情类型列表 -->
+        <input id="flag_selected" name="id" type="hidden" value="">
+    </div>
+</div>
+<!--_footer 作为公共模版分离出去-->

@@ -1,0 +1,674 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.eventindex">{{"emergencymanagement"|translate}}</a></li>
+    <li class="active">{{"alarm"|translate}}</li>
+</ol>
+<div class="container-fluid" ng-controller="alarmCtrl">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{"eventcalled"|translate}}</div>
+                    <div class="panel-body">
+                        <form form-wizard="" action="/" method="POST" steps="6">
+                            <div class="form-wizard wizard-vertical">
+                                <!-- START wizard steps indicator-->
+                                <ol class="" style="width: 15%">
+                                    <li ng-class="{'active':wizard.active(1)}" ng-click="wizard.go(1)">
+                                        <h4 class="mb0">{{"eventbasic"|translate}}</h4>
+                                    </li>
+                                    <li ng-class="{'active':wizard.active(2)}" ng-click="wizard.go(2)">
+                                        <h4 class="mb0">{{"icsweather"|translate}}</h4>
+                                    </li>
+                                    <li ng-class="{'active':wizard.active(3)}" ng-click="wizard.go(3)">
+                                        <h4 class="mb0">{{"icsaccident"|translate}}</h4>
+                                    </li>
+                                    <li ng-class="{'active':wizard.active(4)}" ng-click="wizard.go(4)">
+                                        <h4 class="mb0">{{"icsaction"|translate}}</h4>
+                                    </li>
+                                    <li ng-class="{'active':wizard.active(5)}" ng-click="wizard.go(5)">
+                                        <h4 class="mb0">{{"icsemergency"|translate}}</h4>
+                                    </li>
+                                    <li ng-class="{'active':wizard.active(6)}" ng-click="wizard.go(6)">
+                                        <h4 class="mb0">{{"icsresource"|translate}}</h4>
+                                    </li>
+                                </ol>
+                               <div style="width:83%;">
+                                   <div ng-show="wizard.active(1)">
+                                       <fieldset>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 6px;">{{"eventname"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <input type="text" class="form-control" ng-model="vm.name" />
+                                               </div>
+                                               <label class="col-sm-1 col-md-1 col-lg-1 control-label" style="text-align: right; margin-top: 6px;">{{"eventtime"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <input type="date" class="form-control" ng-model="vm.name" />
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top: 27px;">
+                                               <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top: 6px;">{{"createform"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <select name="account" class="form-control" >
+                                                       <option>{{"templateone"|translate}}</option>
+                                                       <option>{{"templatetwo"|translate}}</option>
+                                                       <option>{{"templatethree"|translate}}</option>
+                                                   </select>
+                                                   <br/>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top: 6px;">{{"eventtype"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <select name="account" class="form-control">
+                                                       <option>{{"publichealth"|translate}}</option>
+                                                       <option>{{"eventalarm"|translate}}</option>
+                                                       <option>{{"threat"|translate}}</option>
+                                                   </select>
+                                                   <br/>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top: 6px;">{{"eventclass"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <select name="account" class="form-control" >
+                                                       <option>{{"typeone"|translate}}</option>
+                                                       <option>{{"typetwo"|translate}}</option>
+                                                   </select>
+                                                   <br/>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top:6px;">{{"assettype"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <select name="account" class="form-control" >
+                                                       <option>{{"cash"|translate}}</option>
+                                                       <option>{{"current"|translate}}</option>
+                                                       <option>{{"longterm"|translate}}</option>
+                                                   </select>
+                                                   <br/>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 6px;">{{"assert"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <input type="text" class="form-control" ng-model="vm.name" />
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-sm-2 control-label" style="text-align: right; margin-top: 35px;">{{"timezone"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <select name="account" class="form-control"  style="margin-top: 27px;">
+                                                       <option>{{"easteight"|translate}}</option>
+                                                       <option>{{"eastseven"|translate}}</option>
+                                                       <option>{{"eastsix"|translate}}</option>
+                                                   </select>
+                                                   <br/>
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 6px;">{{"incidentplace"|translate}}：</label>
+                                               <div class="col-sm-4 col-md-4 col-lg-4">
+                                                   <input type="text" class="form-control" ng-model="vm.name" />
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 35px;">{{"eventdescription"|translate}}：</label>
+                                               <div class="col-sm-5 col-md-5 col-lg-5">
+                                                   <input type="textarea" class="form-control" ng-model="vm.name" style="margin-top: 27px;" />
+                                               </div>
+                                           </div>
+                                       </fieldset>
+                                       <ul class="pager">
+                                           <li class="next"><a ng-click="wizard.go(2)">Next <span>&rarr;</span></a>
+                                           </li>
+                                       </ul>
+                                   </div>
+                                   <div ng-show="wizard.active(2)">
+                                       <fieldset>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                                   <div class="panel panel-default">
+                                                       <div class="panel-heading" style="text-align: center;">{{"briefweather"|translate}}</div>
+                                                       <div class="panel-body">
+                                                           <!-- START table-responsive-->
+                                                           <div class="table-responsive">
+                                                               <table class="table  table-striped table-bordered table-hover">
+                                                                   <tbody>
+                                                                   <tr style="text-align: center">
+                                                                       <td>{{"incidentname"|translate}}:</td>
+                                                                       <td><input type="text" style="border: 0;"></td>
+                                                                       <td>{{"accidenttime"|translate}}:</td>
+                                                                       <td><input type="text" style="border: 0;"></td>
+                                                                       <td colspan="2">{{"operationalperiod"|translate}}：
+                                                                           <input type="date" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
+                                                                           <input type="date" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr style="text-align: center">
+                                                                       <td>{{"weathers"|translate}}</td>
+                                                                       <td colspan="5"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="vertical-align: middle;text-align: center;">{{"now"|translate}}</td>
+                                                                       <td colspan="5">
+                                                                           <ul style="list-style: none;">
+                                                                               <li>{{"windspeed"|translate}}：<input type="text" style="border:0;">
+                                                                                   <span style="margin-left: 20%;">{{"airtemmax"|translate}}：<input type="text" style="border:0;"></span>
+                                                                               </li>
+                                                                               <li style="margin-top:10px;">{{"waveheight"|translate}}：<input type="text" style="border:0;">
+                                                                                   <span style="margin-left: 20%;">{{"currentspeed"|translate}}：<input type="text" style="border:0;"></span>
+                                                                               </li>
+                                                                               <li style="margin-top:10px;">{{"watertem"|translate}}：<input type="text" style="border:0;">
+                                                                                   <span style="margin-left: 23%;">{{"note"|translate}}：<input type="text" style="border:0;"></span>
+                                                                               </li>
+                                                                           </ul>
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td rowspan="3"  style="vertical-align: middle;text-align: center;">{{"forecast"|translate}}</td>
+                                                                       <td></td>
+                                                                       <td>{{"24hour"|translate}}</td>
+                                                                       <td>{{"36hour"|translate}}</td>
+                                                                       <td>{{"48hour"|translate}}</td>
+                                                                       <td>{{"72hour"|translate}}</td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td colspan="5">
+                                                                           <ul style="list-style: none;">
+                                                                               <li>{{"windspeed"|translate}}：<input type="text" style="border:0;"></li>
+                                                                               <li style="margin-top:10px;">{{"airtemmax"|translate}}：<input type="text" style="border:0;"></li>
+                                                                               <li style="margin-top:10px;">{{"waveheight"|translate}}：<input type="text" style="border:0;"></li>
+                                                                               <li style="margin-top:10px;">{{"currentspeed"|translate}}：<input type="text" style="border:0;"></li>
+                                                                               <li style="margin-top:10px;">{{"watertem"|translate}}：<input type="text" style="border:0;"></li>
+                                                                           </ul>
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="text-align: center;">{{"currentvisibility"|translate}}</td>
+                                                                       <td><input type="text" style="border:0;"></td>
+                                                                       <td></td>
+                                                                       <td style="text-align: center;">{{"forecastvisibility"|translate}}</td>
+                                                                       <td><input type="text" style="border:0;"></td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="vertical-align: middle;text-align: center;">{{"todaytide"|translate}}</td>
+                                                                       <td colspan="5">
+                                                                           <ul style="list-style: none;">
+                                                                               <li>{{"Location"|translate}}</li>
+                                                                               <li style="margin-top:10px;">{{"highs"|translate}}：<input type="text" style="border:0;">
+                                                                                   <span style="margin-left: 25%;">{{"lows"|translate}}：<input type="text" style="border:0;"></span>
+                                                                               </li>
+                                                                           </ul>
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="vertical-align: middle;text-align: center;">{{"tomorrowtide"|translate}}</td>
+                                                                       <td colspan="5">
+                                                                           <ul style="list-style: none;">
+                                                                               <li>{{"Location"|translate}}</li>
+                                                                               <li style="margin-top:10px;">{{"highs"|translate}}：<input type="text" style="border:0;">
+                                                                                   <span style="margin-left: 25%;">{{"lows"|translate}}：<input type="text" style="border:0;"></span>
+                                                                               </li>
+                                                                           </ul>
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="vertical-align: middle;text-align: center;">{{"today"|translate}}</td>
+                                                                       <td colspan="5">
+                                                                           <ul style="list-style: none;">
+                                                                               <li style="margin-top:10px;">{{"sunrise"|translate}}：<input type="text" style="border:0;">
+                                                                                   <span style="margin-left: 24%;">{{"sundown"|translate}}：<input type="text" style="border:0;"></span>
+                                                                               </li>
+                                                                           </ul>
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="vertical-align: middle;text-align: center;">{{"tomorrow"|translate}}</td>
+                                                                       <td colspan="5">
+                                                                           <ul style="list-style: none;">
+                                                                               <li style="margin-top:10px;">{{"sunrise"|translate}}：<input type="text" style="border:0;">
+                                                                                   <span style="margin-left: 24%;">{{"sundown"|translate}}：<input type="text" style="border:0;"></span>
+                                                                               </li>
+                                                                           </ul>
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="text-align: center;">{{"preparedby"|translate}}：</td>
+                                                                       <td colspan="5">
+                                                                           <span style="margin-left:38px;">{{"staffname"|translate}}：<input type="text" style="border:0;"></span>
+                                                                           <span>{{"prepareposition"|translate}}：<input type="text" style="border:0;"></span>
+                                                                           <span>{{"preparesign"|translate}}：<input type="text" style="border:0;"></span>
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="text-align: center;">{{"weathersix"|translate}}</td>
+                                                                       <td colspan="5" style="text-align: right;">{{"Datetime"|translate}}：<input type="text" style="border:0;"></td>
+                                                                   </tr>
+                                                                   </tbody>
+                                                               </table>
+                                                           </div>
+                                                           <!-- END table-responsive-->
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                       </fieldset>
+                                       <ul class="pager">
+                                           <li class="previous">
+                                               <a ng-click="wizard.go(1)">
+                                                   <span>&larr; Previous</span>
+                                               </a>
+                                           </li>
+                                           <li class="next"><a ng-click="wizard.go(3)">Next <span>&rarr;</span></a>
+                                           </li>
+                                       </ul>
+                                   </div>
+                                   <div ng-show="wizard.active(3)">
+                                     <filedset>
+                                         <div class="col-sm-12 col-md-12 col-lg-12">
+                                             <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+                                                     <div class="panel-heading" style="text-align: center;">{{"briefchart"|translate}}</div>
+                                                     <div class="panel-body">
+                                                         <!-- START table-responsive-->
+                                                         <div class="table-responsive">
+                                                             <table class="table  table-bordered table-hover">
+                                                                 <tbody>
+                                                                 <tr>
+                                                                     <td>{{"accidentname"|translate}}</td>
+                                                                     <td colspan="1";><input  type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                     <td>{{"incidentnumber"|translate}}</td>
+                                                                     <td colspan="1";><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                     <td>{{"operationalperiod"|translate}}</td>
+                                                                     <td colspan="2";>
+                                                                         <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                                                         <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                                                     </td>
+                                                                 </tr>
+                                                                 <tr style="height: 200px;">
+                                                                     <td colspan="8"  rowspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" placeholder="地图/草图（包括草图，能反映作业整体区域、事故现场/区域、受影响和受威胁的区域及飞行勘查的结果、轨迹、受影响的海岸线或其它能描述当时状况和资源分配的图形）"></td>
+                                                                 </tr>
+                                                                 <tr></tr>
+                                                                 <tr  style="height: 120px;">
+                                                                     <td colspan="8" rowspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" placeholder="情况总结和健康安全简报(为事故简报或指令传达)：识别健康安全隐患并制定必要的应对措施（消除危害、配备劳保用品、危害警示）来保护应急反应人员不受这些危害的影响。"></td>
+                                                                 </tr>
+                                                                 <tr></tr>
+                                                                 <tr>
+                                                                     <td>{{"preparename"|translate}}</td>
+                                                                     <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                     <td>{{"prepareposition"|translate}}</td>
+                                                                     <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                     <td>{{"preparesign"|translate}}</td>
+                                                                     <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                     <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                                                                 </tr>
+                                                                 <tr style="height: 60px;">
+                                                                     <td style="line-height: 60px;" colspan="4">{{"incidentchart"|translate}}</td>
+                                                                     <td style="line-height: 60px;" colspan="1">{{"datetime"|translate}}</td>
+                                                                     <td style="line-height: 60px;" colspan='2';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                 </tr>
+                                                                 </tbody>
+                                                             </table>
+                                                         </div>
+                                                         <!-- END table-responsive-->
+                                                     </div>
+                                                 </div>
+                                         </div>
+                                     </filedset>
+                                       <ul class="pager">
+                                           <li class="previous">
+                                               <a ng-click="wizard.go(2)">
+                                                   <span>&larr; Previous</span>
+                                               </a>
+                                           </li>
+                                           <li class="next"><a ng-click="wizard.go(4)">Next <span>&rarr;</span></a>
+                                           </li>
+                                       </ul>
+                                   </div>
+                                   <div ng-show="wizard.active(4)">
+                                      <fieldset>
+                                          <div class="col-sm-12 col-md-12 col-lg-12">
+                                              <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+                                                  <div class="panel-heading" style="text-align: center;">{{"briefaction"|translate}}</div>
+                                                  <div class="panel-body">
+                                                      <!-- START table-responsive-->
+                                                      <div class="table-responsive">
+                                                          <table class="table  table-bordered table-hover">
+                                                              <tbody>
+                                                              <tr>
+                                                                  <td>{{"accidentname"|translate}}</td>
+                                                                  <td colspan="1";><input  type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td>{{"incidentnumber"|translate}}</td>
+                                                                  <td colspan="1";><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td>{{"operationalperiod"|translate}}</td>
+                                                                  <td colspan="2";>
+                                                                      <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                                                      <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                                                  </td>
+                                                              </tr>
+                                                              <tr style="height:80px;">
+                                                                  <td colspan="1" style="line-height: 80px;">{{"currentplan"|translate}}</td>
+                                                                  <td colspan="6"  style="line-height: 80px;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="7">{{"Currenttactics"|translate}}</td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="1">{{"time"|translate}}</td>
+                                                                  <td colspan="6">{{"action"|translate}}</td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td colspan="6"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td>{{"preparename"|translate}}</td>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td>{{"prepareposition"|translate}}</td>
+                                                                  <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td>{{"preparesign"|translate}}</td>
+                                                                  <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                                                              </tr>
+                                                              <tr style="height: 60px;">
+                                                                  <td style="line-height: 60px;" colspan="4">{{"currentactiontwo"|translate}}</td>
+                                                                  <td style="line-height: 60px;" colspan="1">{{"datetime"|translate}}</td>
+                                                                  <td style="line-height: 60px;" colspan='2';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              </tbody>
+                                                          </table>
+                                                      </div>
+                                                      <!-- END table-responsive-->
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </fieldset>
+                                       <ul class="pager">
+                                           <li class="previous">
+                                               <a  ng-click="wizard.go(3)">
+                                                   <span>&larr; Previous</span>
+                                               </a>
+                                           </li>
+                                           <li class="next"><a ng-click="wizard.go(5)">Next <span>&rarr;</span></a>
+                                       </li>
+                                       </ul>
+                                   </div>
+                                   <div ng-show="wizard.active(5)">
+                                       <fieldset>
+                                           <div class="col-sm-12 col-md-12 col-lg-12">
+                                               <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+                                                   <div class="panel-heading" style="text-align: center;">{{"briefemergency"|translate}}</div>
+                                                   <div class="panel-body">
+                                                       <!-- START table-responsive-->
+                                                       <div class="table-responsive">
+                                                           <table class="table  table-bordered table-hover">
+                                                               <tbody>
+                                                               <tr>
+                                                                   <td>{{"accidentname"|translate}}</td>
+                                                                   <td colspan="1";><input  type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td>{{"incidentnumber"|translate}}</td>
+                                                                   <td colspan="1";><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td>{{"operationalperiod"|translate}}</td>
+                                                                   <td colspan="2";>
+                                                                       <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                                                       <input type="date" style="border: 0;width: 45%;height: 100%;">
+                                                                   </td>
+                                                               </tr>
+                                                               <tr style="height:80px;">
+                                                                   <td colspan="1" style="line-height: 80px;">{{"currentplan"|translate}}</td>
+                                                                   <td colspan="6"  style="line-height: 80px;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td colspan="7">{{"orgplan"|translate}}</td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td colspan="2">{{"ICSRoleName"|translate}}</td>
+                                                                   <td colspan="2">{{"roleduty"|translate}}</td>
+                                                                   <td colspan="2">{{"Associationform"|translate}}</td>
+                                                                   <td colspan="1">{{"Associateduser"|translate}}</td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td>{{"preparename"|translate}}</td>
+                                                                   <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td>{{"prepareposition"|translate}}</td>
+                                                                   <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <td>{{"preparesign"|translate}}</td>
+                                                                   <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                   <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                                                               </tr>
+                                                               <tr style="height: 60px;">
+                                                                   <td style="line-height: 60px;" colspan="4">{{"organizationthree"|translate}}</td>
+                                                                   <td style="line-height: 60px;" colspan="1">{{"datetime"|translate}}</td>
+                                                                   <td style="line-height: 60px;" colspan='2';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                               </tr>
+                                                               </tbody>
+                                                           </table>
+                                                       </div>
+                                                       <!-- END table-responsive-->
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </fieldset>
+                                       <ul class="pager">
+                                           <li class="previous">
+                                               <a ng-click="wizard.go(4)">
+                                                   <span>&larr; Previous</span>
+                                               </a>
+                                           </li>
+                                           <li class="next"><a ng-click="wizard.go(6)">Next <span>&rarr;</span></a>
+                                       </li>
+                                       </ul>
+                                   </div>
+                                   <div ng-show="wizard.active(6)">
+                                      <filedset>
+                                          <div class="col-sm-12 col-md-12 col-lg-12">
+                                              <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+                                                  <div class="panel-heading" style="text-align: center;">{{"briefresource"|translate}}</div>
+                                                  <div class="panel-body">
+                                                      <!-- START table-responsive-->
+                                                      <div class="table-responsive" >
+                                                          <table class="table  table-bordered table-hover">
+                                                              <tbody >
+                                                              <tr style="text-align: center">
+                                                                  <td>{{"accidentname"|translate}}:</td>
+                                                                  <td><input type="text" style="border: 0;"></td>
+                                                                  <td>{{"accidenttime"|translate}}:</td>
+                                                                  <td><input type="text" style="border: 0;"></td>
+                                                                  <td colspan="4">{{"operationalperiod"|translate}}：
+                                                                      <input type="date" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
+                                                                      <input type="date" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
+                                                                  </td>
+                                                              </tr>
+                                                              <tr style="text-align: center">
+                                                                  <td>{{"Resourcessummary"|translate}}</td>
+                                                                  <td colspan="4"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td style="text-align: center">{{"ResourceIdentifierQuantity"|translate}}</td>
+                                                                  <td style="text-align: center">{{"Vendor"|translate}}</td>
+                                                                  <td style="text-align: center">{{"DateTimeOrdered"|translate}}</td>
+                                                                  <td style="text-align: center">{{"ETA"|translate}}</td>
+                                                                  <td style="text-align: center">{{"Arrived"|translate}}</td>
+                                                                  <td style="text-align: center">{{"Location"|translate}}</td>
+                                                                  <td style="text-align: center">{{"Assignment"|translate}}</td>
+                                                                  <td style="text-align: center">{{"status"|translate}}</td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                                  <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td style="text-align: center;">{{"preparedby"|translate}}：</td>
+                                                                  <td colspan="7">
+                                                                      <span >{{"staffname"|translate}}：<input type="text" style="border:0;"></span>
+                                                                      <span>{{"prepareposition"|translate}}：<input type="text" style="border:0;"></span>
+                                                                      <span>{{"preparesign"|translate}}：<input type="text" style="border:0;"></span>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td style="text-align: center;">{{"resourcefour"|translate}}</td>
+                                                                  <td colspan="7" style="text-align: right;">{{"Datetime"|translate}}：<input type="text" style="border:0;"></td>
+                                                              </tr>
+                                                              </tbody>
+                                                          </table>
+                                                      </div>
+                                                      <!-- END table-responsive-->
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </filedset>
+                                       <ul class="pager">
+                                           <li class="previous">
+                                               <a ng-click="wizard.go(5)">
+                                                   <span>&larr; Previous</span>
+                                               </a>
+                                           </li>
+                                           <li class="next" style="margin-right:10px;">
+                                               <a>
+                                                   <span>{{"save"|translate}}</span>
+                                               </a>
+                                           </li>
+                                       </ul>
+                                   </div>
+                               </div>
+                                <!-- END Wizard Step inputs -->
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<ul class="breadcrumb">
+  <li>用户管理</li>
+  <li class="active">内容列表</li>
+</ul>
+<div layout="column">
+  <div layout="row" class="pad">
+    <md-select placeholder="大分类" required style="width:180px;" [(ngModel)]="selBig" (change)="querySmallClass()">
+      <md-option *ngFor="let b of bigClasses" [value]="b.Id">
+        {{b.BigClassName}}
+      </md-option>
+    </md-select>
+    <md-select placeholder="小分类" required class="pad-left" style="width:180px;" [(ngModel)]="selSmall" (change)="query()">
+      <md-option *ngFor="let s of smallClasses" [value]="s.Id">
+        {{s.SmallClassName}}
+      </md-option>
+    </md-select>
+  </div>
+  <div class="pad" flex>
+    <a md-raised-button color='primary' routerLink='/admin/content/add'>增加</a>
+  </div>
+  <md-card flex>
+    <ngx-datatable class="material" [rows]="news" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+      [limit]="10">
+      <ngx-datatable-column prop="SmallClassID" name="类别">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          {{getSmallName(value)}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Pic" name="缩略图" *ngIf="selSmall==1">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template width="60px;">
+          <img src="http://www.lintongqx.com/upload/{{value}}" width="32" height="32">
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="Title" name="标题"></ngx-datatable-column>
+      <ngx-datatable-column prop="Author" name="作者"></ngx-datatable-column>
+      <ngx-datatable-column prop="Time" name="时间"></ngx-datatable-column>
+      <ngx-datatable-column prop="Id" name="操作">
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          <a md-mini-fab color="primary" mdTooltip="查看详情" routerLink='/admin/content/1/view/{{value}}'>
+            <md-icon>search</md-icon>
+          </a>
+          <a md-mini-fab color="primary" mdTooltip="编辑" routerLink='/admin/content/edit/{{value}}'>
+            <md-icon>edit</md-icon>
+          </a>
+          <a md-mini-fab color="warn" mdTooltip="删除" (click)="delete(value)">
+            <md-icon>delete</md-icon>
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </md-card>
+</div>

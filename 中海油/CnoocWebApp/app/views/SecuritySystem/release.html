@@ -1,0 +1,265 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <a ui-sref="app.instantMsg">
+                {{"intimemess"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"release"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="releaseController">
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"release"|translate}}
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="checkbox c-checkbox">
+                        <label style="font-weight:bold">
+                            <input type="checkbox" ng-model="gradeCheck" ng-checked="true" name="oktype" />
+                            <span class="fa fa-check"></span>{{"releasewarn"|translate}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="checkbox c-checkbox">
+                        <label style="font-weight:bold">
+                            <input type="checkbox" ng-model="emergencyCheck" ng-checked="true" name="oktype" />
+                            <span class="fa fa-check"></span>{{"releaseemergency"|translate}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <label><span style="color:red">*</span>{{"country"|translate}}：</label>
+                    <select class="select form-control " ng-model="selCountry" name="countryId" ng-options="d.country_id as d.name for d in countryList" ng-change="countryChange()" required></select>
+                </div>
+                <div class="col-xs-6" ng-controller="DatepickerCtrl as dpick">
+                    <label><span style="color:red">*</span> {{"date"|translate}}：
+                    </label>
+                    <p class="input-group">
+                        <input type="text" name="eventDate" uib-datepicker-popup="{{dpick.format}}" ng-model="setTime.time" is-open="dpick.opened" ng-change="dateChange()" uib-datepicker-options="dpick.dateOptions" close-text="Close" class="form-control" required/>
+                        <span class="input-group-btn">
+                          <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                              <em class="fa fa-calendar"></em>
+                          </button>
+                      </span>
+                    </p>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <label>{{"warnlist"|translate}}：</label>
+                    <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse">
+                        <tr class="text-center">
+                            <td>
+                                {{"date"|translate}}
+                            </td>
+                            <td>
+                                {{"country"|translate}}
+                            </td>
+                            <td>
+                                {{"limitdate"|translate}}
+                            </td>
+                            <td>
+                                {{"eventwarn"|translate}}
+                            </td>
+                            <td>
+                                {{"resourcefrom"|translate}}
+                            </td>
+                        </tr>
+                        <tr class="text-center" ng-repeat="e in events">
+                            <td>
+                                {{e.event_date | dateFormatter}}
+                            </td>
+                            <td>
+                                {{countryName(e.country_id)}}
+                            </td>
+                            <td>
+                                {{e.expirytime | dateFormatter}}
+                            </td>
+                            <td>
+                                {{e.content | limitTo: 20}}
+                            </td>
+                            <td>
+                                <a href="{{e.source}}" target="_blank">
+                                    {{e.source | limitTo: 20}}
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default" ng-show="gradeCheck">
+                <div class="panel-heading">
+                    {{"releasewarn"|translate}}
+                </div>
+                <div class="panel-body">
+                    <form method="post" name="eventForm" novalidate="novalidate" class="form-validate form-horizontal">
+                        <fieldset>
+                            <div class="row form-group">
+                                <div class="col-xs-6">
+                                    <label>{{"recommend"|translate}}：</label>
+                                    <div style="margin: 5px;">
+                                    </div>
+                                    <span class="label label-info" style="padding: 5px;">
+                                        {{"warnindex"|translate}}：{{dwli}}，{{"recommendwarn"|translate}}：{{gradeLevel(dwli)}}
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="row form-group">
+                                <div class="col-xs-6">
+                                    <label><span style="color:red">*</span>{{"warnlevel"|translate}}：</label>
+                                    <select class="select form-control" name="level" ng-model="gradeModel.grade" ng-options="d.id as d.name for d in statusList" required="" ng-change="gradeComboxChange()">
+                                    </select>
+                                    <span ng-show="validateInput('level', 'required')" class="text-danger">
+                                      {{"required"|translate}}
+                                  </span>
+                                </div>
+                                <div class="col-xs-6" ng-controller="DatepickerCtrl as dpick">
+                                    <label><span style="color:red">*</span> {{"valid"|translate}}：
+                                    </label>
+                                    <p class="input-group">
+                                        <input type="text" name="gradeValidityDate" uib-datepicker-popup="{{dpick.format}}" ng-model="setTime.gradeValidity" is-open="dpick.opened" min-date="setTime.time" uib-datepicker-options="dpick.dateOptions" close-text="Close" class="form-control" required/>
+                                        <span class="input-group-btn">
+                                        <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                            <em class="fa fa-calendar"></em>
+                                        </button>
+                                      </span>
+                                    </p>
+                                    <span ng-show="validateInput('gradeValidityDate', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <label>{{"instruction"|translate}}：</label>
+                                    <textarea name="gradenote" ng-model="gradeModel.grade_note" rows="2" cols="40" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="row form-group">
+                                <div class="col-xs-4">
+                                    <label>{{"nationcompanyaction"|translate}}：</label>
+                                    <textarea name="emergencyInter" ng-model="gradeModel.international" rows="6" cols="40" class="form-control"></textarea>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>{{"overseaorgaction"|translate}}：</label>
+                                    <textarea name="emergencyOver" ng-model="gradeModel.overseas" rows="6" cols="40" class="form-control"></textarea>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>{{"staffaction"|translate}}：</label>
+                                    <textarea name="emergencyEmp" ng-model="gradeModel.employee" rows="6" cols="40" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default" ng-show="emergencyCheck">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{"releaseemergency"|translate}}</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="post" name="emergencyForm" novalidate="novalidate" class="form-validate form-horizontal">
+                        <fieldset>
+                            <div class="row form-group">
+                                <div class="col-xs-6">
+                                    <label><span style="color:red">*</span>{{"emergencylevel"|translate}}：</label>
+                                    <select class="select form-control" name="status" ng-model="emergencyModel.emergency" ng-options="d.id as d.name for d in emergencyList" required="" ng-change="emergencyComboxChange()">
+                                    </select>
+                                    <span ng-show="validateInputEx('status', 'required')" class="text-danger">
+                                      {{"required"|translate}}
+                                  </span>
+                                </div>
+                                <div class="col-xs-6" ng-controller="DatepickerCtrl as dpick">
+                                    <label><span style="color:red">*</span> {{"valid"|translate}}：
+                                    </label>
+                                    <p class="input-group">
+                                        <input type="text" name="emergencyValidityDate" uib-datepicker-popup="{{dpick.format}}" min-date="setTime.time" ng-model="setTime.emergencyValidity" is-open="dpick.opened" uib-datepicker-options="dpick.dateOptions" close-text="Close" class="form-control"
+                                            required/>
+                                        <span class="input-group-btn">
+                                        <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                            <em class="fa fa-calendar"></em>
+                                        </button>
+                                      </span>
+                                    </p>
+                                    <span ng-show="validateInputEx('emergencyValidityDate', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="row form-group">
+                                <div class="col-xs-6">
+                                    <label>{{"derailinfo"|translate}}：</label>
+                                    <textarea name="emergencyNote" ng-model="emergencyModel.emergency_note" rows="4" cols="40" class="form-control"></textarea>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>{{"warnaction"|translate}}：</label>
+                                    <textarea name="gradeaction" ng-model="emergencyModel.emergency_action" rows="4" cols="40" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <label>
+                        <div class="checkbox c-checkbox">
+                            <label style="font-weight:bold">
+                                <input type="checkbox" ng-model="okBtnType" ng-checked="true" name="oktype" />
+                                <span class="fa fa-check"></span>{{"releasesend"|translate}}
+                            </label>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="row form-group" ng-show="okBtnType">
+                <div class="col-xs-6">
+                    <label>{{"messagetemplate"|translate}}：</label>
+                    <select class="select form-control" ng-model="formdata.type" ng-change="changetype()">
+                        <option value="0" selected>{{"warnnationcompany"|translate}}</option>
+                        <option value="1">{{"warnoverseascompany"|translate}}</option>
+                    </select>
+                </div>
+                <div class="col-xs-6" ng-show="formdata.type==1">
+                    <label>{{"warnoverseasinstitution"|translate}}：</label>
+                    <select class="select form-control" ng-model="org_select"
+                    ng-options="org.organiztion_name for org in orgs" ng-change="changeCompanySel()"></select>
+                </div>
+            </div>
+            <div style="margin: 10px;">
+            </div>
+            <div class="row form-group" ng-show="okBtnType">
+                <div class="col-xs-12">
+                    <textarea name="levelNote" ng-model="formdata.content" rows="6" cols="40" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-12 text-center">
+                    <input type="button" class="btn btn-default" ng-click="cancel()" value="{{'cancel'|translate}}" />
+                    <input type="submit" ng-hide="okBtnType" class="btn btn-primary" ng-click="ok()" value="{{'publish'|translate}}" />
+                    <input type="submit" ng-show="okBtnType" class="btn btn-primary" ng-click="ok()" value="{{'releasesend'|translate}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

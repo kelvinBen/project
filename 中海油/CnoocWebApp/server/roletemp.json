@@ -1,0 +1,202 @@
+[{
+    "type": "summary",
+    "name": "事件简介",
+    "checked": false
+}, {
+    "type": "meeting",
+    "name": "会议通知",
+    "checked": false
+}, {
+    "type": "basic",
+    "name": "基本情况",
+    "checked": false
+}, {
+    "type": "task",
+    "name": "任务",
+    "checked": false
+}, {
+    "type": "action",
+    "name": "行动",
+    "checked": false
+}, {
+    "type": "plan",
+    "name": "计划",
+    "checked": false,
+    "tables": [{
+        "table": "ECS 205(通讯计划)",
+        "url": "ICS205",
+        "type": "ics205",
+        "checked": false
+    }, {
+        "table": "ECS 206(医疗计划)",
+        "url": "ICS206",
+        "type": "ics206",
+        "checked": false
+    }, {
+        "table": "ECS 208(安全计划)",
+        "url": "ICS208",
+        "type": "ics208",
+        "checked": false
+    }]
+}, {
+    "type": "submitactions",
+    "name": "提交行动总结",
+    "checked": false
+}, {
+    "type": "log",
+    "name": "日志",
+    "checked": false,
+    "tables": [{
+        "table": "ECS 214(小组日志)",
+        "url": "ICS214",
+        "type": "ics214",
+        "checked": false
+    }, {
+        "table": "ECS 214A(个人日志)",
+        "url": "ICS214A",
+        "type": "ics214a",
+        "checked": false
+    }]
+}, {
+    "type": "guide",
+    "name": "行动指南",
+    "checked": false,
+    "guide": [{
+        "name": "启动应急，召开首次会议",
+        "type": "start",
+        "checked": false
+    }, {
+        "name": "初步形势判断",
+        "type": "prejudge",
+        "checked": false
+    }, {
+        "name": "形势判断",
+        "type": "judge",
+        "checked": false
+    }, {
+        "name": "ECS230(会议记录)",
+        "type": "meeting",
+        "checked": false
+    }, {
+        "name": "ECS202(响应目标)",
+        "type": "ics202",
+        "checked": false
+    }, {
+        "name": "ECS234(任务表)",
+        "type": "ics234",
+        "checked": false
+    }, {
+        "name": "ECS 204(分配行动)",
+        "type": "ics204",
+        "checked": false
+    }, {
+        "name": "ECS 201-2(总结当前行动)",
+        "type": "ics2012",
+        "checked": false
+    },
+        {
+            "name": "设置应急状态综述",
+            "type": "publicInfo",
+            "checked": false
+        }, {
+        "name": "相关表格",
+        "type": "othertables",
+        "checked": false,
+        "tables": [{
+            "name": "ECS201-1(事故图)",
+            "url": "app.ics2011",
+            "type": "ics2011",
+            "checked": false
+        }, {
+            "name": "ECS201-3(应急组织架构图)",
+            "url": "app.ics2013",
+            "type": "ics2013",
+            "checked": false
+        }, {
+            "name": "ECS201-4(资源状况总结)",
+            "url": "app.ics2014",
+            "type": "ics2014",
+            "checked": false
+        }, {
+            "name": "ECS201-5(人员状况)",
+            "url": "app.ics2015",
+            "type": "ics2015",
+            "checked": false
+        }, {
+            "name": "ECS201-6(天气)",
+            "url": "app.ics2016",
+            "type": "ics2016",
+            "checked": false
+        }, {
+            "name": "ECS201-7(对外联络)",
+            "url": "app.ics2017",
+            "type": "ics2017",
+            "checked": false
+        },  {
+            "name": "ECS203(组织分工图)",
+            "url": "app.ics203",
+            "type": "ics203",
+            "checked": false
+        },{
+            "name": "ECS205(通讯计划)",
+            "url": "app.ics205",
+            "type": "ics205",
+            "checked": false
+        }, {
+            "name": "ECS206(医疗计划)",
+            "url": "app.ics206",
+            "type": "ics206",
+            "checked": false
+        }, {
+            "name": "ECS208(安全计划)",
+            "url": "app.ics208",
+            "type": "ics208",
+            "checked": false
+        },{
+            "name": "ECS209(事故状态总结)",
+            "url": "app.ics209",
+            "type": "ics209",
+            "checked": false
+        }, {
+            "name": "ECS210(资源状态总结)",
+            "url": "app.ics210",
+            "type": "ics210",
+            "checked": false
+        }, {
+            "name": "ECS211(事故入场清单)",
+            "url": "app.ics211",
+            "type": "ics211",
+            "checked": false
+        }, {
+            "name": "ECS 214（小组日志）",
+            "url": "app.ics214",
+            "type": "ics214",
+            "checked": false
+        },{
+            "name": "ECS214(个人日志)",
+            "url": "app.ics214A",
+            "type": "ics214A",
+            "checked": false
+        }, {
+            "name": "ECS215(作业计划工作表)",
+            "url": "app.ics215",
+            "type": "ics215",
+            "checked": false
+        }, {
+            "name": "ECS220(飞行作业总结工作表)",
+            "url": "app.ics220",
+            "type": "ics220",
+            "checked": false
+        }, {
+            "name": "ECS221(复员退场)",
+            "url": "app.ics221",
+            "type": "ics221",
+            "checked": false
+        }, {
+            "name": "ECS232(处于风险的周边区域状况)",
+            "url": "app.ics232",
+            "type": "ics232",
+            "checked": false
+        }]
+    }]
+}]

@@ -1,0 +1,51 @@
+<div class="container-fluid" ng-controller="medialistCtrl">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <button type="button"  class="btn btn-danger" ng-click="add()">添加</button>
+            <div class="panel panel-default" style="margin-top: 10px;">
+                <div class="panel-heading">
+                    <span>日常例会列表</span>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th  style="width:10%;text-align: center;">时间</th>
+                                <th  style="width:5%;text-align: center;">地点</th>
+                                <th  style="width:5%;text-align: center;">发言人</th>
+                                <th  style="width:15%;text-align: center;">发言内容</th>
+                                <th  style="width:10%;text-align: center;">信息流节奏控制</th>
+                                <th  style="width:15%;text-align: center;">澄清事实的主要媒体</th>
+                                <th  style="width:10%;text-align: center;">相关联系人</th>
+                                <th style="width: 10%;text-align: center;">联系方式</th>
+                                <th style="width: 15%;text-align: center;">应急事件对外沟通方式</th>
+                                <th style="width: 5%;text-align: center;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: center;">
+                            <tr ng-repeat="rr in items">
+                                <td>{{rr.time}}</td>
+                                <td>{{rr.address}}</td>
+                                <td>{{rr.name}}</td>
+                                <td>{{rr.content}}</td>
+                                <td>{{rr.info}}</td>
+                                <td>{{rr.media}}</td>
+                                <td>{{rr.people}}</td>
+                                <td>{{rr.phone}}</td>
+                                <td>{{rr.method}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-info" ng-click="view()" title="查看详情">
+                                        <em class="fa fa-eye"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

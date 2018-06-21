@@ -1,0 +1,107 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"grouplog"|translate}}</li>
+    </ol>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics214Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS {{"grouplog"|translate}}</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>事故名称</td>
+                            <td colspan="1";><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td>事故编号</td>
+                            <td colspan="1";><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>作业周期</td>
+                            <td colspan="2";>
+                                <input type="date" style="border: 0;width: 45%;height: 100%;"  ng-model="starttime">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;"  ng-model="endtime">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="padding-left: 50px;">小组名称/设计者</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.groupname"></td>
+                            <td colspan="1" style="padding-left: 50px;">小组领导（姓名和岗位）</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.groupleader"></td>
+
+                        </tr>
+                        <tr style="background: #efefef;">
+                            <td colspan="7">人员值班安排表</td>
+                        </tr>
+                        <tr style="font-weight: bold">
+                            <td colspan="2" style="width:35%">姓名</td>
+                            <td colspan="2" style="width:20%">事故指挥系统中的岗位</td>
+                            <td colspan="2" style="width:20%">总部</td>
+                            <td style="width:25%">编辑</td>
+                        </tr>
+                        <!--<table class="table table-bordered table-hover bg-white">-->
+                        <tr ng-repeat="user in vm.data.resources">
+                            <td colspan="2">
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.name" e-name="name" e-form="rowform" >{{ user.name  }}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable status (select-local)-->
+                                <span editable-text="user.post" e-name="post"   e-form="rowform">{{ user.post }}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.department" e-name="department"  e-form="rowform">{{ user.department }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!--</table>-->
+                        <tr>
+                            <td colspan="7" style="float: left;"><button ng-click="addUser()" class="btn btn-default">添加</button></td>
+                        </tr>
+                        <tr>
+                            <td>编制姓名</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esName"></td>
+                            <td>编制岗位/职位</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esPost"></td>
+                            <td>签名</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.sign"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td colspan="4">{{"ecs"|translate}} 214 小组记录</td>
+                            <td colspan="1">时间/日期</td>
+                            <td colspan='2';><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.time"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 " style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}
+                    </button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

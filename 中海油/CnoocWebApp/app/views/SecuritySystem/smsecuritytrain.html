@@ -1,0 +1,57 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"trainrequest"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="curseControll">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+          {{"trainrequest"|translate}}
+      </div>
+      <div class="panel-body">
+          <div class="row-fluid">
+              <div class="col-xs-6 form-group" style="padding-left: 0px;">
+                  <select class="select form-control" ng-model="person" ng-options="a.person_id as a.name for a in persons">
+                  </select>
+              </div>
+          </div>
+          <div style="margin:10px;">
+          </div>
+          <table class="table table-border table-bordered table-hover table-bg table-striped" style="border-collapse:collapse">
+              <thead>
+                  <tr class="text-center" >
+                      <th>
+                          {{"num"|translate}}
+                      </th>
+                      <th>
+                          {{"classname"|translate}}
+                      </th>
+                      <th>
+                          {{"Required"|translate}}
+                      </th>
+                  </tr>
+              </thead>
+              <tr ng-repeat="c in selUserCurses" class="text-center">
+                  <td>
+                      {{$index + 1}}
+                  </td>
+                  <td>
+                      {{ curseName(c.course_id) }}
+                  </td>
+                  <td>
+                      <span class="label radius label-primary" ng-show="c.select_type==1">{{"Require"|translate}}</span>
+                      <span class="label radius label-success" ng-show="c.select_type==0">{{"Elective"|translate}}</span>
+                  </td>
+              </tr>
+          </table>
+      </div>
+    </div>
+</div>

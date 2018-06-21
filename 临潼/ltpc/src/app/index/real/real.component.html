@@ -1,0 +1,25 @@
+<div class="box" style="margin-top:12px;">
+  <div class="listPic">
+    <img src="../../assets/images/pic1.png" alt="">
+    <img src="../../assets/images/pic2.png" alt="">
+    <img src="../../assets/images/pic3.png" alt="">
+  </div>
+  <div id="wrap">
+    <div id="tit">
+      <div class="stationname">{{categoryName}}</div>
+      <ul>
+        <li *ngFor='let a of subCates'>
+          <a (click)="onItemClick(a)">
+            {{a.SmallClassName}}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="con" style="height: 800px;">
+        <div class="nav">首页 > <span style="color:red;">{{categoryName}}</span></div>
+        <app-map [type]=-1 [showLayer]=1></app-map>
+      </div>
+    </div>
+  </div>
+</div>

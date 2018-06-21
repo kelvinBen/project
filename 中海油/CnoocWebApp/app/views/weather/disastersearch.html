@@ -1,0 +1,86 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>灾害天气系统</a>
+        </li>
+        <li>
+            <span>灾害信息查询</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="disastersearchCtrl">
+    <div class="row">
+        <div class="col-lg-3">
+            日期范围：
+            <div class="form-group">
+                <input date-range-picker id="daterange1" name="daterange1" class="form-control date-picker" type="text"
+                       ng-model="date" required/>
+            </div>
+        </div>
+        <div class="col-lg-1 text-r mt-10">
+            地区：
+        </div>
+
+        <div class="col-lg-1  select-box">
+            <select ng-options="t.name for t in countries" ng-model="country_select" ng-change="filtercities()"
+                    class="select size-M"></select>
+        </div>
+        <div class="col-lg-1  select-box">
+            <select ng-options="t.name for t in cities" ng-model="city_select" class="select size-M"></select>
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-success" ng-click="search()">
+                {{'查询'|T}}
+            </button>
+        </div>
+        <div class="cl pd-5 bg-1 bk-gray">
+                <span class="r">
+                    <a href="javascript:;" class="btn btn-danger radius" onclick="window.print()">
+                       {{'打印'|T}}
+                    </a>
+                    <a class="btn btn-primary radius" href="javascript:;" onclick="utility_export()" ng-hide="true">
+                        {{'导出'|T}}
+                    </a>
+                </span>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-border table-bordered table-hover table-bg" datatable="ng">
+            <thead>
+            <tr>
+                <th scope="col" colspan="9">灾害信息</th>
+            </tr>
+            <tr class="text-c">
+                <th style="text-align: center;width:5%">序号</th>
+                <th style="text-align: center;width:10%">地区</th>
+                <th style="text-align: center;width:10%">日期</th>
+                <th style="text-align: center;width:5%">自然灾害类型</th>
+                <th style="text-align: center;width:5%">影响范围</th>
+                <th style="text-align: center;width:5%">严重程度</th>
+                <th style="text-align: center;width:20%">灾害详情</th>
+                <th style="text-align: center;width:20%">来源</th>
+                <th style="text-align: center;width:5%">操作</th>
+            </tr>
+            </thead>
+            <tbody id="tabBody">
+            <tr ng-repeat="cur in disaster" class="text-c">
+                <td>{{$index+1}}</td>
+                <td>{{getCityName(cur.country_id,cur.city_id)}}</td>
+                <td>{{cur.time|date:'yyyy-MM-dd'}}</td>
+                <td>{{cur.type}}</td>
+                <td>{{cur.incidence}}</td>
+                <td>{{cur.severity}}</td>
+                <td>{{cur.content|limitTo:80}}</td>
+                <td><a href={{cur.source}} target="_blank">{{cur.source}}</a></td>
+                <td>
+                    <a href="javascript:;" ng-click="postdisaster(cur.id)" title="发布预警">
+                        <i class="Hui-iconfont">&#xe63b;</i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

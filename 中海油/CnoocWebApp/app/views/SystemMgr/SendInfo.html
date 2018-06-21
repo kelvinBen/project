@@ -1,0 +1,352 @@
+﻿@{
+    Layout = null;
+    string lang = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower();
+}
+@using MvcWebSite
+@model int
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <title>Security System</title>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Content/lib/html5.js"></script>
+    <script type="text/javascript" src="~/Content/lib/respond.min.js"></script>
+    <script type="text/javascript" src="~/Content/lib/PIE-2.0beta1/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/Hui-iconfont/1.0.7/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/icheck/icheck.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/skin/blue/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/style.css" />
+    <link href="~/Content/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/h-ui/css/subStyle.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+
+</head>
+<body ng-app="inputApp">
+    <nav class="breadcrumb" style="padding:0px 20px;">
+        <i class="Hui-iconfont">&#xe67f;</i>
+        <a href="#">
+            @Html.GetLangbyKey("systemmanagement")
+        </a>
+        <span class="c-gray en">&gt;</span>
+        <a href="@Url.Action("CollectionInfoMgr")">
+            @Html.GetLangbyKey("collectioninfomgr")
+        </a>
+        <span class="c-gray en">&gt;</span>
+        <a href="#">
+            <span class="title">@Html.GetLangbyKey("eventsent")</span>
+        </a>
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" ng-href="javascript:location.replace(location.href);" title="@Html.GetLangbyKey(" refresh")">
+            <i class="Hui-iconfont">&#xe68f;</i>
+        </a>
+    </nav>
+
+    <div class="page-container" ng-controller="inputController">
+        <div class="border box">
+            <div class="box-header">
+                    <span class="title">@Html.GetLangbyKey("eventsent")</span>
+            </div>
+            <div class="box-content ">
+                <div class="padded">
+                    <div class="row ">
+                        <div class="span6 form-group">
+                            <label for="time">@Html.GetLangbyKey("selectdate")：</label>
+                            <input date-range-picker class="form-control date-picker" id="time" type="text" ng-model="event.event_date" options="{format: 'YYYY-MM-DD',singleDatePicker:true}" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6 form-group">
+                            <label for="country">@Html.GetLangbyKey("country")：</label>
+                            @if (lang == "zh-cn")
+                            {
+                                <select class="select form-control " ng-model="event.country_id" ng-options="d.country_id as d.name for d in country" style="width:80%;"></select>
+                            }
+                            else
+                            {
+                                <select class="select form-control " ng-model="event.country_id" ng-options="d.country_id as d.name_en for d in country" style="width:80%;"></select>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6 form-group">
+                            <label>@Html.GetLangbyKey("eventproperties")：</label>
+                            <div class="input-group" style="width:80%">
+                                <input type="text" class="form-control" ng-model="event.eventproperties" ng-change="eventTypeInput()">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:5px;">@Html.GetLangbyKey("eventproperties") <span class="caret"></span></button>
+                                    <ul class="dropdown-menu  pull-right">
+                                        <li ng-repeat="e in eventType">
+                                            <a href="javascript:;" ng-click="eventTypeChange(e.id,e.value)">{{e.value}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 form-group">
+                            <label>@Html.GetLangbyKey("Scopeofinfluence")：</label>
+                            <div class="input-group" style="width:80%">
+                                <input type="text" class="form-control" ng-model="event.effectarea">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:5px;">@Html.GetLangbyKey("Scopeofinfluence") <span class="caret"></span></button>
+                                    <ul class="dropdown-menu  pull-right">
+                                        <li ng-repeat="e in scopeType">
+                                            <a href="javascript:;" ng-click="scopeTypeChange(e.value)">{{e.value}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6 form-group">
+                            <label>@Html.GetLangbyKey("Consequenceseverity")：</label>
+                            <div class="input-group" style="width:80%">
+                                <input type="text" class="form-control" ng-model="event.severity">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:5px;">@Html.GetLangbyKey("Consequenceseverity") <span class="caret"></span></button>
+                                    <ul class="dropdown-menu  pull-right">
+                                        <li ng-repeat="e in conseType">
+                                            <a href="javascript:;" ng-click="conseTypeChange(e.value)">{{e.value}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 form-group">
+                            <label>@Html.GetLangbyKey("pertinence")：</label>
+                            <div class="input-group" style="width:80%">
+                                <input type="text" class="form-control" ng-model="event.pertinenct">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:5px;">@Html.GetLangbyKey("pertinence") <span class="caret"></span></button>
+                                    <ul class="dropdown-menu  pull-right">
+                                        <li ng-repeat="e in pertinenceType">
+                                            <a href="javascript:;" ng-click="pertinenceTypeChange(e.value)">{{e.value}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="showOfficial">
+                        <div class="span6 form-group">
+                            <label>@Html.GetLangbyKey("firstlevel")：</label>
+                            <div class="input-group" style="width:80%">
+                                <input type="text" class="form-control" ng-model="event.firstlevel">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:5px;">@Html.GetLangbyKey("firstlevel") <span class="caret"></span></button>
+                                    <ul class="dropdown-menu  pull-right">
+                                        <li ng-repeat="e in officialType">
+                                            <a href="javascript:;" ng-click="officialTypeChange(e.id, e.value)">{{e.value}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 form-group">
+                            <label>@Html.GetLangbyKey("secondlevel")：</label>
+                            <div class="input-group" style="width:80%">
+                                <input type="text" class="form-control" ng-model="event.secondlevel">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="margin-top:5px;">@Html.GetLangbyKey("secondlevel") <span class="caret"></span></button>
+                                    <ul class="dropdown-menu  pull-right">
+                                        <li ng-repeat="e in secondType">
+                                            <a href="javascript:;" ng-click="secondTypeChange(e.value)">{{e.value}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label for="source">@Html.GetLangbyKey("title")：</label>
+                        <input type="text" class="form-control" id="source" ng-model="event.title" />
+                    </div>
+                    <div class="row form-group">
+                        <label for="source">@Html.GetLangbyKey("source")：</label>
+                        <input type="text" class="form-control" id="source" ng-model="event.source" readonly="readonly"/>
+                    </div>
+                    <div class="row form-group">
+                        <label for="content">@Html.GetLangbyKey("eventandwarning")：</label>
+                        <textarea class="form-control" id="content" rows="10" ng-model="event.content"></textarea>
+                    </div>
+                    <div class="row form-group" style="padding-top: 20px;text-align:center">
+                        <input type="submit" class="btn btn-default" value="@Html.GetLangbyKey("cancel")" ng-click="close()" />
+                        <input type="submit" class="btn btn-primary" value="@Html.GetLangbyKey("eventsent")" ng-click="ok()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Content/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/h-ui/js/H-ui.js"></script>
+    <script type="text/javascript" src="~/Content/h-ui/js/H-ui.admin.js"></script>
+    <script src="~/Content/lib/layer/2.1/layer.js" type="text/javascript"></script>
+    <script src="~/Content/lib/layer/2.1/extend/layer.ext.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/Content/angular-1.2.29/angular.min.js"></script>
+    <script type="text/javascript" src="~/Content/bower_components/Smart-Table-master/dist/smart-table.min.js"></script>
+    <script type="text/javascript" src="~/Content/bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="~/Content/bower_components/angular-daterangepicker/angular-daterangepicker.js"></script>
+    <script type="text/javascript" src="~/Content/bower_components/angular-combo-box-0.6.0/dist/angular-combo-box.min.js"></script>
+    <script type="text/javascript" src="~/Script/service/SecuritySystem.js"></script>
+    <script type="text/javascript" src="~/Script/service/service.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('inputApp', ['cnooc_service.SecuritySystem', 'cnooc_service', 'smart-table', 'daterangepicker', 'ngComboBox']);
+        app.controller('inputController', function ($scope, SecuritySystem, countryrisk, RiskSetting, Events) {
+            $scope.event = {};
+            Events.getdetail('@Model').then(function (dt) {
+                $scope.event = dt;
+                $scope.event.event_date = moment($scope.event.event_date, "YYYYMMDD");
+            });
+            $scope.event.event_date = moment();
+            $scope.eventType = [{ id: '@Html.GetLangbyKey("warninginfo")', value: '@Html.GetLangbyKey("warninginfo")' },
+                { id: '@Html.GetLangbyKey("militaryconflict")', value: '@Html.GetLangbyKey("militaryconflict")' },
+                { id: '@Html.GetLangbyKey("terroristattack")', value: '@Html.GetLangbyKey("terroristattack")' },
+                { id: '@Html.GetLangbyKey("PublicHealth")', value: '@Html.GetLangbyKey("PublicHealth")' },
+                { id: '@Html.GetLangbyKey("other")', value: '@Html.GetLangbyKey("other")' }
+            ];//事件性质
+            $scope.eventTypeChange = function (id, name) {
+                $scope.event.eventproperties = name;
+            };
+            $scope.scopeType = [];//影响范围
+            $scope.conseType = [];//后果严重程度
+            $scope.pertinenceType = [];//针对性
+            $scope.localType = [];//地方政府预警
+            $scope.chineseType = [];//中国政府预警
+            $scope.thirdType = [];//第三方预警
+            $scope.officialType = [];//官方预警
+            $scope.secondType = [];
+            $scope.showOfficial = false;
+            RiskSetting.get().then(function (data) {
+                angular.forEach(data, function (item, i) {
+                    if (item.type_index == 0)//事件性质
+                        $scope.eventType.push({ id: item.index_id, value: '@lang' == 'zh-cn' ? item.name : item.name_en });
+                    if (item.type_index == 1)//影响范围
+                        $scope.scopeType.push({ id: item.index_id, value: '@lang' == 'zh-cn' ? item.name : item.name_en });
+                    if (item.type_index == 2)//后果严重程度
+                        $scope.conseType.push({ id: item.index_id, value: '@lang' == 'zh-cn' ? item.name : item.name_en });
+                    if (item.type_index == 3)//针对性
+                        $scope.pertinenceType.push({ id: item.index_id, value: '@lang' == 'zh-cn' ? item.name : item.name_en });
+                    if (item.type_index == 4) {//地方政府预警{
+                        $scope.localType.push({ id: item.index_id, value: '@lang' == 'zh-cn' ? item.name : item.name_en });
+                        initOfficialType(item);
+                    }
+                    if (item.type_index == 5) {//中国政府预警
+                        $scope.chineseType.push({ id: item.index_id, value: '@lang' == 'zh-cn' ? item.name : item.name_en });
+                        initOfficialType(item);
+                    }
+                    if (item.type_index == 6) {//第三方预警
+                        $scope.thirdType.push({ id: item.index_id, value: '@lang' == 'zh-cn' ? item.name : item.name_en });
+                        initOfficialType(item);
+                    }
+                });
+            });
+            var initOfficialType = function (item) {
+                if ($scope.officialType.length == 0)
+                    $scope.officialType.push({ id: item.type_index, value: '@lang' == 'zh-cn' ? item.type : item.type_en });
+                else {
+                    var bAdd = true;
+                    $.each($scope.officialType, function (j, obj) {
+                        if (obj.id == item.type_index) {
+                            bAdd = false; return false;
+                        }
+                    });
+                    if (bAdd)
+                        $scope.officialType.push({ id: item.type_index, value: '@lang' == 'zh-cn' ? item.type : item.type_en });
+                }
+            };
+            $scope.eventTypeChange = function (id, name) {
+                $scope.event.eventproperties = name;
+                $scope.showOfficial = id == 9;
+            };
+            $scope.eventTypeInput = function () { $scope.showOfficial = false; };
+            $scope.scopeTypeChange = function (name) { $scope.event.effectarea = name; };
+            $scope.conseTypeChange = function (name) { $scope.event.severity = name; };
+            $scope.pertinenceTypeChange = function (name) { $scope.event.pertinenct = name; };
+            $scope.officialTypeChange = function (id, name) {
+                $scope.secondType = [];
+                if (id == 4)
+                    $scope.secondType = $scope.localType;
+                else if (id == 5)
+                    $scope.secondType = $scope.chineseType;
+                else if (id == 6)
+                    $scope.secondType = $scope.thirdType;
+                $scope.event.firstlevel = name;
+            };
+            $scope.$watch('event.firstlevel', function (newValue, oldValue) { $scope.event.secondlevel = ''; });
+            $scope.secondTypeChange = function (name) { $scope.event.secondlevel = name; };
+
+            countryrisk.get().then(function (data) {
+                $scope.country = data;
+                if ($scope.bAdd)
+                    $scope.event.country_id = data[0].country_id;
+            });
+            $scope.close = function (type) {
+                window.location.href = "@Url.Action("CollectionInfoMgr")";
+            };
+            $scope.ok = function () {
+                if ($scope.checkDatas() == false) return;
+                $scope.event.event_date = $scope.event.event_date.format('YYYYMMDD');
+                $scope.event.secondlevel = $scope.secondTypeValue;
+                //将当前爬虫信息设置为已发送状态
+                $scope.event.status = 1;
+                Events.update($scope.event.event_id, $scope.event).then(function (dt) {
+                    var obj = $scope.event;
+                    obj.type = 1;
+                    obj.status = 0;
+                    obj.source_id = obj.event_id;
+                    Events.add(obj).then(function (dt) { $scope.close(); }, function (st) { layer.msg("Send Failed!"); });                    
+                }, function (status) { layer.msg("Send Failed!");});
+            };
+
+            $scope.checkDatas = function () {
+                if ($scope.event.event_date == null) {
+                    layer.msg("Invalid Event Date", { icon: 2 });
+                    return false;
+                }
+                if ($scope.event.country_id == null || $scope.event.country_id == "") {
+                    layer.msg("Invalid Event Content", { icon: 2 });
+                    return false;
+                }
+                if ($scope.event.source==null || $scope.event.source == "") {
+                    layer.msg("Invalid Event Source", { icon: 2 });
+                    return false;
+                }
+                if ($scope.event.eventproperties == null || $scope.event.eventproperties == "") {
+                    layer.msg("Invalid Nature of the event", { icon: 2 });
+                    return false;
+                }
+                if ($scope.event.effectarea == null || $scope.event.effectarea == "") {
+                    layer.msg("Invalid Scope of influence", { icon: 2 });
+                    return false;
+                }
+                if ($scope.event.severity == null || $scope.event.severity == "") {
+                    layer.msg("Invalid Consequences severity", { icon: 2 });
+                    return false;
+                }
+                if ($scope.event.pertinenct == null || $scope.event.pertinenct == "") {
+                    layer.msg("Invalid Pertinence", { icon: 2 });
+                    return false;
+                }
+
+                return true;
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<div class="loginWraper" ng-controller="loginController">
+   <div id="loginform" class="loginBox">
+      <form name="loginForm" class="form form-horizontal" ng-submit="userLogin(event)" method="post">
+      <div class="form-group">
+         <label class="control-label col-xs-3" for="UserName">
+            <i class="icon-user fa-lg"></i>
+         </label>
+         <div class="col-xs-8">
+            <input type="text" class="input-text form-control" id="UserName" name="UserName" ng-model="loginModel.name" />
+         </div>
+      </div>
+      <div class="form-group" style="margin-top: 30px;">
+         <label class="control-label col-xs-3" for="Pwd">
+            <i class="icon-lock fa-lg"></i>
+         </label>
+         <div class="col-xs-8">
+            <input type="password" class="input-text form-control" id="Pwd" name="Pwd" ng-model="loginModel.pwd"/>
+         </div>
+      </div>
+      <div class="form-group" style="margin-top: 30px;">
+         <div class="col-xs-8 col-xs-offset-3">
+            <input name="" type="submit" class="btn btn-success radius size-L" value='{{"login" | translate}}'>
+            <input name="" type="reset" class="btn btn-default radius size-L" value='{{"reset" | translate}}'>
+         </div>
+      </div>
+      </form>
+   </div>
+</div>
+<div class="footer"><span>&copy; {{app.year}} - {{ app.name | translate }}</span></div>

@@ -1,0 +1,162 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"homepage"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"hazardsource"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"hazardrisk"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"CheckTrack"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="CheckTrackCtrl as tree">
+    <div class="row-fluid">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="well wd-wide">
+                <span ng-if="tree.doing_async">...loading...</span>
+                <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div style="margin-top: 10px;">
+                <input class="form-control"   placeholder="在以下信息中搜索">
+            </div>
+            <div class="panel panel-primary" style="margin-top: 5px;">
+                <div class="panel-body" style="height:100%;overflow:auto">
+                    <div class="form-inline">
+                        <a class="btn btn-success radius" href="javascript:;" title="{{'edit'|translate}}">
+                            <em class="fa fa-edit"></em>{{"edit"|translate}}
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger radius">
+                            <em class="fa fa-trash-o"></em>{{"singledelete"|translate}}
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger radius" onclick="window.print()">
+                            <em class="fa fa-print"></em>{{"print"|translate}}
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <em class="fa fa-hand-o-right"></em>{{"export"|translate}}
+                        </button>
+                        <button type="submit" class="btn btn-success" style="margin-left: 59%;">
+                            <em class="fa fa-plus"></em> {{"new"|translate}}
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <em class="fa fa-hand-o-left"></em>{{"import"|translate}}
+                        </button>
+                    </div>
+                    <div class="table-responsive" style="text-align: center;margin-top: 5px;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th style="text-align: center;"><input type="checkbox"></th>
+                                <th style="text-align: center;">{{"num"|translate}}</th>
+                                <th style="text-align: center;">{{"Inspection"|translate}}</th>
+                                <th style="text-align: center;">{{"Inspectionname"|translate}}</th>
+                                <th style="text-align: center;">{{"Inspectiontime"|translate}}</th>
+                                <th style="text-align: center;">{{"foundnum"|translate}}</th>
+                                <th style="text-align: center;">{{"solvenum"|translate}}</th>
+                                <th style="text-align: center;">{{"issuelist"|translate}}</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>应急管理委员会</td>
+                                <td>飞机坠海</td>
+                                <td>2016-02-14</td>
+                                <td>22</td>
+                                <td>22</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>2</td>
+                                <td>应急协调办公室</td>
+                                <td>伊拉克应急撤离行动</td>
+                                <td>2016-03-10</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>3</td>
+                                <td>后勤支持组</td>
+                                <td>米桑油田撤离</td>
+                                <td>2016-03-18</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>4</td>
+                                <td>危机公关组</td>
+                                <td>伊拉克溢油</td>
+                                <td>2016-04-22</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>5</td>
+                                <td>法律支持组</td>
+                                <td>伊拉克测试</td>
+                                <td>2016-07-21</td>
+                                <td>12</td>
+                                <td>12</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>6</td>
+                                <td>公共关系及法律支持组组</td>
+                                <td>国际公司伊拉克测试</td>
+                                <td>2016-05-17</td>
+                                <td>16</td>
+                                <td>15</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>7</td>
+                                <td>资源协调支持组</td>
+                                <td>伊拉克资源调配</td>
+                                <td>2016-07-12</td>
+                                <td>16</td>
+                                <td>15</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>8</td>
+                                <td>财务及保险支持组</td>
+                                <td>财务</td>
+                                <td>2016-04-21</td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>9</td>
+                                <td>后勤支持组</td>
+                                <td>应急撤离</td>
+                                <td>2016-05-23</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

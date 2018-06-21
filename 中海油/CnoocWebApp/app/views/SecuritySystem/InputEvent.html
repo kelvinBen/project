@@ -1,0 +1,157 @@
+<h3>
+    <ul class="breadcrumb"  ng-controller="addInfoController">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li >
+            <a ui-sref="app.informationinput">
+                {{"ininfo"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span ng-show="id==null">{{"add"|translate}}</span>
+            <span ng-show="id!=null && type == null">{{"edit"|translate}}</span>
+            <span ng-show="id!=null && type != null">
+                <span class="title">{{"Input"|translate}}</span>
+            </span>
+        </li>
+    </ul>
+</h3>
+
+<div class="panel panel-primary" ng-controller="addInfoController">
+    <div class="panel-heading">
+        <span ng-show="id==null">{{"add"|translate}}</span>
+        <span ng-show="id!=null && type == null">{{"edit"|translate}}</span>
+        <span ng-show="id!=null && type != null"><span class="title">{{"Input"|translate}}</span></span>
+    </div>
+    <div class="panel-body">
+        <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true,'time-out': 2000}">
+        </toaster-container>
+        <form method="post" name="eventForm" novalidate="novalidate" ng-submit="formSumbit(event)" class="form-validate form-horizontal">
+            <fieldset ng-show="type!=null && existID!=null">
+                <legend style="color:red;font-size:20px;">
+                    {{"inforecord"|translate}}
+                </legend>
+            </fieldset>  
+            <fieldset>
+                 <div class="row form-group">
+                    <div class="col-xs-12">
+                        <label for="title">{{"title"|translate}}：</label>
+                        <input type="text" id="title" name="title" class="form-control" ng-model="event.title" onabort="title" />
+                    </div>
+                </div>
+            </fieldset>          
+            <fieldset>
+                <div class="row form-group">
+                    <div class="col-xs-12">
+                        <label for="content">
+                            <span style="color:red">*</span> {{"eventwarn"|translate}}：
+                        </label>
+                        <textarea class="form-control" rows="6" ng-model="event.content" id="content" name="content" required></textarea>
+                        <span ng-show="validateInput('content', 'required')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row form-group">
+                    <div class="col-xs-3" ng-controller="DatepickerCtrl as dpick">
+                        <label><span style="color:red">*</span> {{"date"|translate}}：
+                        </label>
+                        <p class="input-group">
+                            <input type="text" name="eventDate" required="" uib-datepicker-popup="{{dpick.format}}" ng-model="event.event_date" is-open="dpick.opened" ng-change="eventDateChange()" uib-datepicker-options="dpick.dateOptions" close-text="Close" class="form-control"
+                            />
+                            <span class="input-group-btn">
+                                <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                    <em class="fa fa-calendar"></em>
+                                </button>
+                            </span>
+                        </p>
+                        <span ng-show="validateInput('eventDate', 'required')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                     <div class="col-xs-3" ng-controller="DatepickerCtrl as dpick">
+                        <label><span style="color:red">*</span>{{"valid"|translate}}：</label>
+                        <p class="input-group">
+                            <input type="text" name="expiryTime" required="" uib-datepicker-popup="{{dpick.format}}"
+                            ng-model="event.expirytime" is-open="dpick.opened"
+                            uib-datepicker-options="dpick.dateOptions" min-date="event.event_date" close-text="Close"
+                            class="form-control" />
+                            <span class="input-group-btn">
+                                <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                    <em class="fa fa-calendar"></em>
+                                </button>
+                            </span>
+                        </p>
+                        <span ng-show="validateInput('expiryTime', 'required')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                    <div class="col-xs-3">
+                        <label><span style="color:red">*</span>{{"country"|translate}}：</label>
+                        <select class="select form-control " ng-model="event.country_id" name="countryId" ng-options="d.country_id as d.name for d in country" required></select>
+                        <span ng-show="validateInput('countryId', 'required')" class="text-danger">
+                            {{"required"|translate}}
+                        </span>
+                    </div>
+                   <div class="col-xs-3">
+                        <label><span style="color:red">*</span> {{"eventnature"|translate}}：
+                        </label>
+                        <select class="form-control" ng-model="event.eventproperties" name="eventType" ng-options="a.id as a.value for a in eventType" required></select>
+                        <span ng-show="validateInput('eventType', 'required')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row form-group">
+                    
+                    <div class="col-xs-3">
+                        <label><span style="color:red">*</span>{{"influence"|translate}}：</label>
+                        <select class="form-control" ng-model="event.effectarea" name="scopeType" ng-options="a.id as a.value for a in scopeType" required></select>
+                        <span ng-show="validateInput('scopeType', 'required')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                    
+                    <div class="col-xs-3">
+                        <label><span style="color:red">*</span>{{"result"|translate}}：</label>
+                        <select class="form-control" ng-model="event.severity" name="conseType" ng-options="a.id as a.value for a in  conseType" required></select>
+                        <span ng-show="validateInput('conseType', 'required')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                     <div class="col-xs-3">
+                        <label><span style="color:red">*</span>{{"targeted"|translate}}：</label>
+                        <select class="form-control" ng-model="event.pertinenct" name="pertinenceType" ng-options="a.id as a.value for a in  pertinenceType" required></select>
+                        <span ng-show="validateInput('pertinenceType', 'required')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                    <div class="col-xs-3">
+                        <label>{{"officialwarningone"|translate}}：</label>
+                        <select class="form-control" ng-model="event.firstlevel" name="officialType" ng-options="a.id as a.value for a in  officialType" ng-change="officialTypeChange()"></select>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row form-group">                    
+                    <div class="col-xs-3">
+                        <label>{{"officialwarningtwo"|translate}}：</label>
+                        <select class="form-control" ng-model="event.secondlevel" name="secondType" ng-options="a.id as a.value for a in  secondType"></select>
+                    </div>
+                    <div class="col-xs-9">
+                        <label for="source">{{"resourcefrom"|translate}}：</label>
+                        <input type="text" id="source" name="source" class="form-control" ng-model="event.source" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row form-group">
+                    <div class="col-xs-12" style="text-align:center">
+                        <input type="button" class="btn btn-danger" value="{{'cancel'|translate}}" ng-click="close()" /> &nbsp;&nbsp;
+                        <input type="reset" class="btn btn-danger" value="{{'reset'|translate}}" /> &nbsp;&nbsp;
+                        <input type="submit" class="btn btn-primary" value="{{'sure'|translate}}" /> &nbsp;&nbsp;
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <script type="text/ng-template" id="loading.html">
+        <div class="container-fluid">
+            {{"processing"|translate}}
+        </div>
+    </script>
+</div>

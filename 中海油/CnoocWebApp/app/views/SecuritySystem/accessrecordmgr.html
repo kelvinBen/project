@@ -1,0 +1,74 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"visitrecordmgr"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="accessRecordMgrController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"> {{"visitrecordmgr"|translate}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid">
+                <button type="button" class="btn btn-primary" ng-click="add()">
+                    <i class="fa fa-plus"></i>{{"add"|translate}}
+                </button>
+            </div>
+            <div style="margin:10px">
+            </div>
+            <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" datatable="ng">
+                <thead>
+                    <tr>
+                        <th>
+                            {{"num"|translate}}
+                        </th>
+                        <th>
+                            {{"country"|translate}}
+                        </th>
+                        <th>
+                            {{"visitdate"|translate}}
+                        </th>
+                        <th>
+                            {{"backtime"|translate}}
+                        </th>
+                        <th>
+                            {{"operation"|translate}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" ng-repeat="r in records">
+                        <td>
+                            {{$index+1}}
+                        </td>
+                        <td>
+                            {{getCountryName(r.country_id)}}
+                        </td>
+                        <td>
+                            {{r.record_time | dateFormatter}}
+                        </td>
+                        <td>
+                            {{r.end_time | dateFormatter}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="edit(r)">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <!-- <button type="button" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                            </button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

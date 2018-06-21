@@ -1,0 +1,112 @@
+<h3  ng-controller="summaryinfoCtrl as tree">
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"homepage"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"hazardsource"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"SummaryInfo"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="summaryinfoCtrl as tree">
+    <div class="row-fluid">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="well wd-wide">
+                <span ng-if="tree.doing_async">...loading...</span>
+                <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-primary">
+                <div class="panel-body" style="height:100%;overflow:auto">
+                    <div class="table-responsive" style="text-align: center;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="4">{{"perils"|translate}}</td>
+                                    <td>隐患数量1850条</td>
+                                    <td>一般隐患数量1850条</td>
+                                    <td>重大隐患数量0条</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">总公司所属单位管控数量0条</td>
+                                </tr>
+                                <tr>
+                                    <td>风险数量0条</td>
+                                    <td>重大风险数量0条</td>
+                                    <td>总公司管控数量0条</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">所属单位管控数量0条</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">{{"chemicals"|translate}}</td>
+                                    <td>一级重大危险源0处</td>
+                                    <td>二级重大危险源0处</td>
+                                    <td>三级重大危险源0处</td>
+                                </tr>
+                                <tr>
+                                    <td>四级重大危险源0处</td>
+                                    <td>未分级 重大危险源0处</td>
+                                    <td>合计0处</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">{{"dangerfacilities"|translate}}</td>
+                                    <td>贮罐区1家1处</td>
+                                    <td>库区0家0处</td>
+                                    <td>生成场所0家0处</td>
+                                </tr>
+                                <tr>
+                                    <td>压力管道0家0处</td>
+                                    <td>锅炉0家0处</td>
+                                    <td>压力容器0家0处</td>
+                                </tr>
+                                <tr>
+                                    <td>金属地下矿山0家0处</td>
+                                    <td>煤矿0家0处</td>
+                                    <td>尾矿库0家0处</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">{{"Offshore"|translate}}</td>
+                                    <td>生成平台0处</td>
+                                    <td>FPSO 0艘</td>
+                                    <td>钻井0处</td>
+                                </tr>
+                                <tr>
+                                    <td>海洋工程船舶0艘</td>
+                                    <td>邮轮化学品船舶0艘</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>{{"dangerprocess"|translate}}</td>
+                                    <td>0家0类</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">{{"source"|translate}}</td>
+                                    <td>1类0处</td>
+                                    <td>2类0处</td>
+                                    <td>3类0处</td>
+                                </tr>
+                                <tr>
+                                    <td>4类0处</td>
+                                    <td>5类0处</td>
+                                    <td>其他0处</td>
+                                </tr>
+                                <tr>
+                                    <td>{{"responseplan"|translate}}</td>
+                                    <td>总公司0个</td>
+                                    <td>二级单位0个</td>
+                                    <td>三级及三级以下单位0个</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"accidententry"|translate}}</li>
+    </ol>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics211Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;"> ECS {{"accidententry"|translate}} </div>
+            <div class="panel-body">
+                <div class="table-responsive" >
+                    <table class="table  table-bordered table-hover">
+                        <tr>
+                            <td  style="vertical-align: middle;">{{"accidentname"|translate}}：</td>
+                            <td ><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td   style="vertical-align: middle;">{{"incidentnumber"|translate}}：</td>
+                            <td ><input type="text" style="border: 0;width: 100%;height: 100%;" ></td>
+                            <td  style="vertical-align: middle;">{{"operationalperiod"|translate}}：</td>
+                            <td ><input type="date" style="border: 0;width: 100%;height: 100%;" ng-model="starttime"></td>
+                            <td ><input type="date" style="border: 0;width: 100%;height: 100%;" ng-model="endtime"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"> {{"entryaddress"|translate}}：</td>
+                            <td rowspan="2" style="vertical-align: middle;">{{"startdate"|translate}}</td>
+                            <td rowspan="2"><input type="date" style="border: 0;width: 100%;height: 100%;" ng-model="entstarttime"></td>
+                            <td rowspan="2"><input type="date" style="border: 0;width: 100%;height: 100%;" ng-model="entendtime"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.inPlace.base" />{{"base"|translate}}</label>
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.inPlace.area"/>{{"transit"|translate}}</label>
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.inPlace.direct" />{{"commandpost"|translate}}</label>
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.inPlace.helicopter" />{{"helipads"|translate}}</label>
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.inPlace.other"/>{{"other"|translate}}</label>
+                            </td>
+                        </tr>
+                        </table>
+                    <table class="table  table-bordered table-hover">
+                        <tr style="background: #efefef;">
+                            <td colspan="18">{{"registration"|translate}}：</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">{{"singleresource"|translate}}:</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"application"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"entrytime"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"leadername"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"totalnumber"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"connectinfo"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"family"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"startadderss"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"travel"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"task"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"qualification"|translate}}：</td>
+                            <td rowspan="2" colspan="1" style="vertical-align: middle;">{{"data"|translate}}：</td>
+                            <td rowspan="2"> {{"edit"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"organsupply"|translate}}：</td>
+                            <td colspan="1">{{"category"|translate}}：</td>
+                            <td colspan="1">{{"species"|translate}}：</td>
+                            <td colspan="1">{{"model"|translate}}：</td>
+                            <td colspan="1">{{"resourcename"|translate}}：</td>
+                            <td colspan="1">{{"team"|translate}}：</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resources">
+                            <td>
+                                <span editable-text="user.institution" e-name="institution" e-form="rowform" >{{ user.institution  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.classes" e-name="classes"   e-form="rowform">{{ user.classes }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.type" e-name="type"  e-form="rowform">{{ user.type }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.model" e-name="model"  e-form="rowform">{{ user.model }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.resourcename" e-name="resourcename"  e-form="rowform">{{ user.resourcename }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.team" e-name="team"  e-form="rowform">{{ user.team }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.application" e-name="application" e-form="rowform" >{{ user.application  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.inputdate" e-type="date" e-name="inputdate"   e-form="rowform">{{ user.inputdate }}</span>
+                                <span editable-text="user.inputtime" e-type="time" e-name="inputtime"   e-form="rowform">{{ user.inputtime }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.leadername" e-name="leadername"  e-form="rowform">{{ user.leadername }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.totalpeople" e-name="totalpeople"  e-form="rowform">{{ user.totalpeople }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.information" e-name="information"  e-form="rowform">{{ user.information }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.organization" e-name="organization"  e-form="rowform">{{ user.organization }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.place" e-name="place"  e-form="rowform">{{ user.place }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.travel" e-name="travel"  e-form="rowform">{{ user.travel }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.task" e-name="task"  e-form="rowform">{{ user.task }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.others" e-name="others"  e-form="rowform">{{ user.others }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.data" e-name="data"  e-form="rowform">{{ user.data }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="float: left;"><button ng-click="addUser()" class="btn btn-default">{{"add"|translate}}</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">{{"preparename"|translate}}</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esName"></td>
+                            <td colspan="3">{{"prepareposition"|translate}}</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esPost"></td>
+                            <td colspan="3">{{"preparesign"|translate}}</td>
+                            <td colspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="7">{{"ecs"|translate}} {{"accidententry"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="3">{{"datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='8';><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.time"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 " style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}
+                    </button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

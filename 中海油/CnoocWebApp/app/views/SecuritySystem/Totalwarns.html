@@ -1,0 +1,133 @@
+<h3>
+    <ol class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li >
+            <a ui-sref="app.sstotalwarns">{{"warnanalysis"|translate}}
+            </a>
+        </li>
+        <li class="active">{{"overseasinfoall"|translate}}</li>
+    </ol>
+</h3>
+<div class="container-fluid" ng-controller="totalAnalysisController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{"eventtables"|translate}}</div>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped table-hover">
+                <tr class="text-center">
+                    <td>Total</td>
+                    <td>{{"January"|translate}}</td>
+                    <td>{{"February"|translate}}</td>
+                    <td>{{"March"|translate}}</td>
+                    <td>{{"April"|translate}}</td>
+                    <td>{{"May"|translate}}</td>
+                    <td>{{"June"|translate}}</td>
+                    <td>{{"July"|translate}}</td>
+                    <td>{{"August"|translate}}</td>
+                    <td>{{"September"|translate}}</td>
+                    <td>{{"October"|translate}}</td>
+                    <td>{{"November"|translate}}</td>
+                    <td>{{"December"|translate}}</td>
+                </tr>
+                <tr class="text-center">
+                    <td>
+                        <a ng-click="showtotalList()">{{Events.length}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(1)">{{MonthCount('01')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(2)">{{MonthCount('02')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(3)">{{MonthCount('03')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(4)">{{MonthCount('04')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(5)">{{MonthCount('05')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(6)">{{MonthCount('06')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(7)">{{MonthCount('07')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(8)">{{MonthCount('08')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(9)">{{MonthCount('09')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(10)">{{MonthCount('10')}}</a>
+                    </td>
+                    <td>
+                        <a ng-click="showSecurityList(11)">{{MonthCount('11')}}</a>
+                    </td>
+                    <td>
+                        <a  ng-click="showSecurityList(12)">{{MonthCount('12')}}</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{"piechart"|translate}}</div>
+        <div class="panel-body">
+            <form class="form-inline" style="text-align: center;">
+                <div class="form-group">
+                    <input date-range-picker class="form-control date-picker" type="text" ng-model="dateRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success form-control" ng-click="search()">
+                        <i class="fa fa-search"></i> {{"query"|translate}}
+                    </button>
+                </div>
+            </form>
+            <div class="row-fluid">
+                <highchart config="chartConfig" style="width:98%;min-height:400px;"></highchart>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12">
+                    {{"todaymap"|translate}}:
+                    <a title="{{'warnextreme'|translate}}">
+                        <img src="app/img/g1.png" width="20" alt="{{'onewarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnhigh'|translate}}">
+                        <img src="app/img/g2.png" width="20" alt="{{'twowarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnmiddle'|translate}}">
+                        <img src="app/img/g3.png" width="20" alt="{{'threewarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnlow'|translate}}">
+                        <img src="app/img/g4.png" width="20" alt="{{'fourwarnlevel'|translate}}" />
+                    </a>
+                    <a title="{{'warnno'|translate}}">
+                        <img src="app/img/g5.png" width="20" alt="{{'fivewarnlevel'|translate}}" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="padding:0px;">
+            <div class="row">
+                <div class="col-xs-9" style="padding-right: 0px;">
+                    <iframe src="app/views/SecuritySystem/gradeMap.html" width="100%"
+                    frameborder="0" height="600"></iframe>
+                </div>
+                <div class="col-xs-3 text-center" style="padding-left: 0px;">
+                    <div ng-include="'app/views/SecuritySystem/riskandgradetable.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

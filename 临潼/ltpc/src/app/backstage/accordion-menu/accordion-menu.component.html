@@ -1,0 +1,24 @@
+<div id="jquery-accordion-menu" class="jquery-accordion-menu white">
+  <ul id="demo-list">
+    <li *ngFor="let d of mDatas" (click)='onMenuClick(d)' [class.active]='d==seletItem'>
+      <a [class.submenu-indicator-minus]="d.child && d.child.length > 0 && d==seletItem" routerLink="{{d.routerLink}}">
+        <i class="fa fa-database" aria-hidden="true"></i>{{d.name}}
+        <span class="submenu-indicator" *ngIf="d.child && d.child.length > 0">+</span>
+      </a>
+      <ul *ngIf="d.child && d.child.length > 0" class="submenu" [style.display]="d==seletItem ? 'block':'none'">
+        <li *ngFor="let subD of d.child" (click)='onSubMenuClic(subD)'>
+          <a [class.submenu-indicator-minus]="subD.child && subD.child.length > 0 && subSelectItem==subD">
+            <i class="fa fa-angle-left"></i>{{subD.name}}
+            <span class="submenu-indicator" *ngIf="subD.child && subD.child.length > 0">+</span>
+          </a>
+          <ul *ngIf="subD.child && subD.child.length > 0" class="submenu" [style.display]="subSelectItem==subD ? 'block':'none'">
+            <li *ngFor="let child of subD.child">
+              <a>
+              <i class="fa fa-angle-left"></i>{{child.name}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

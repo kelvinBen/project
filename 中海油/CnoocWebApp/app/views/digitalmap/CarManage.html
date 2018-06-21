@@ -1,0 +1,107 @@
+﻿<h3>
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a ui-sref="app.projectmanage">{{'digitalmap'|translate}}</a>
+            </li>
+            <li>
+                <span>{{'carmanagement'|translate}}</span>
+            </li>
+        </ul>
+    </h3>
+    <div class="page-container" ng-controller="carmanageCtrl">
+        <div class="cl pd-5 bg-1 bk-gray" style="margin-bottom: 5px;">
+            <span class="l">
+                <a href="javascript:;" class="btn btn-danger radius" ng-click="deletesomeconfirm()">
+                    <em class="fa fa-trash-o"></em> {{'delete'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" ng-click="addtransport();">
+                  <em class="fa fa-plus"></em>{{'add'|translate}}
+                </a>
+            </span>
+            <span class="r">
+                <a href="javascript:;" class="btn btn-success radius" onclick="window.print()">
+                   <i class="fa fa-print"></i>{{'print'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="utility_export()" ng-hide="true">
+                    <em class="fa fa-file-excel-o"></em>{{'export'|translate}}
+                </a>
+            </span>
+        </div>
+        <div  class="panel panel-default">
+            <div class="panel-heading" style="padding-left: 15px;">
+                <h4>
+                    {{'Vehicleinfo'|translate}}
+                </h4>
+            </div>
+         <div class="panel-body">
+             <table class="table table-border table-bordered table-hover table-bg" datatable="ng">
+                 <thead>
+                 <tr class="text-c">
+                     <!--<th style="width: 5%">-->
+                         <!--<input type="checkbox" value="" name="" ng-model="select_all" ng-change="selectall()">-->
+                     <!--</th>-->
+                     <th style="width:25px;">
+                         <div class="checkbox c-checkbox">
+                             <label style="font-weight:bold">
+                                 <input type="checkbox" ng-model="select_all"   ng-change="selectall()" />
+                                 <span class="fa fa-check"></span>
+                             </label>
+                         </div>
+                         <!-- <input type="checkbox" ng-click="checkAllSelected()"> -->
+                     </th>
+                     <th style="text-align: center;">{{"num"|translate}}</th>
+                     <th style="text-align: center;">{{"carname"|translate}}</th>
+                     <th style="text-align: center;">{{"cartype"|translate}}</th>
+                     <th style="text-align: center;">{{"status"|translate}}</th>
+                     <th style="text-align: center;">{{"updatetime"|translate}}</th>
+                     <th style="text-align: center;">{{"longitude"|translate}}</th>
+                     <th style="text-align: center;">{{"latitude"|translate}}</th>
+                     <th style="text-align: center;">{{"thecompany"|translate}}</th>
+                     <th style="text-align: center; width: 15%">{{"operation"|translate}}</th>
+                 </tr>
+                 </thead>
+                 <tbody id="tabBody">
+                 <tr ng-repeat="cur in transports" class="text-c">
+                     <!--<th class="td1">-->
+                         <!--<input type="checkbox" ng-model="cur.selected">-->
+                     <!--</th>-->
+                     <td class="text-center">
+                         <div class="checkbox c-checkbox">
+                             <label style="font-weight:bold">
+                                 <input type="checkbox" ng-model="cur.selected" />
+                                 <span class="fa fa-check"></span>
+                             </label>
+                         </div>
+                         <!-- <input type="checkbox" ng-checked="u.checked" ng-model="u.checked"> -->
+                     </td>
+                     <td>{{$index+1}}</td>
+                     <td>{{cur.name}}</td>
+                     <td>{{cur.type}}</td>
+                     <td>{{cur.status}}</td>
+                     <td>{{cur.update_time|date:'yyyy-MM-dd'}}</td>
+                     <td>{{cur.lon}}</td>
+                     <td>{{cur.lat}}</td>
+                     <td>{{GetCompanyName(cur.organiztion_id)}}</td>
+                     <td>
+                         <!--<a href="javascript:;" title="{{'edit'|translate}}" ng-click="edit(cur)">-->
+                             <!--<em class="fa fa-edit"></em>-->
+                         <!--</a>-->
+                         <!--<a href="javascript:;" title="{{'delete'|translate}}" ng-click="deleteconfirm(cur.transport_id)">-->
+                             <!--<em class="fa fa-trash-o"></em>-->
+                         <!--</a>-->
+
+                         <button type="button" class="btn btn-primary btn-sm" title="{{'edit'| translate}}"  ng-click="edit(cur)">
+                             <i class="fa fa-edit"></i>
+                         </button>
+                         <button type="button" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}" ng-click="deleteconfirm(cur.transport_id)">
+                             <i class="fa fa-trash-o"></i>
+                         </button>
+
+                     </td>
+                 </tr>
+                 </tbody>
+             </table>
+         </div>
+        </div>
+    </div>

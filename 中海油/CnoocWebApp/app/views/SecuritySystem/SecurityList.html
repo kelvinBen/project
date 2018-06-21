@@ -1,0 +1,112 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li >
+            <a ui-sref="app.sstotalwarns">{{"warnanalysis"|translate}}
+            </a>
+        </li>
+        <li class="activate">{{"warnlist"|translate}}</li>
+    </ul>
+</h3>
+<style media="screen">
+    .table> thead> tr> th {
+        padding: 0px;
+        line-height: 24px;
+        font-size: 12px;
+        font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, "WenQuanYi Micro Hei", Verdana, sans-serif, "\5B8B\4F53";
+        color: #ffffff;
+        background: #660000;
+        text-align: center;
+    }
+
+    .table> tbody> tr> td {
+        padding: 0px;
+        line-height: 20px;
+        font-size: 10px;
+        font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, "WenQuanYi Micro Hei", Verdana, sans-serif, "\5B8B\4F53";
+    }
+</style>
+<div class="container-fluid" ng-controller="SecurityListController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"warnlist"|translate}}
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered" datatable='ng'>
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="width:100px;color:#000000;background:#ffffff">{{"date"|translate}}</th>
+                        <th rowspan="2" style="width:200px;color:#000000;background:#ffffff" ng-repeat-start="col in cols">{{"eventwarn"|translate}}{{col}}</th>
+                        <th rowspan="2" style="width:200px;color:#000000;background:#ffffff" ng-repeat-end="col in cols">{{"resourcefrom"|translate}}</th>
+                        <th rowspan="2" style="width:200px;color:#000000;background:#ffffff">{{"eventnature"|translate}}</th>
+                        <th rowspan="2" style="width:200px;color:#000000;background:#ffffff">{{"eventInfluence"|translate}}</th>
+                        <th rowspan="2" style="width:200px;color:#000000;background:#ffffff">{{"eventseriousrange"|translate}}</th>
+                        <th rowspan="2" style="width:200px;color:#000000;background:#ffffff">{{"eventspecific"|translate}}</th>
+                        <th colspan="2" style="width:auto;color:#000000;background:#ffffff">{{"warninfo"|translate}}</th>
+                    </tr>
+                    <tr>
+                        <th style="width:200px;color:#000000;background:#ffffff">{{"oneclass"|translate}}</th>
+                        <th style="width:200px;color:#000000;background:#ffffff">{{"twoclass"|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in events">
+                        <td>{{item.event_date}}</td>
+                        <td ng-repeat-start="ev in item.events">
+                            {{ev.content | limitTo: 20}}
+                        </td>
+                        <td style="color:blue" ng-repeat-end="ev in item.events">
+                            {{ev.source | limitTo: 20}}
+                        </td>
+                        <td>{{item.eventproperties}}</td>
+                        <td>{{item.effectarea}}</td>
+                        <td>{{item.severity}}</td>
+                        <td>{{item.pertinenct}}</td>
+                        <td>{{item.firstlevel}}</td>
+                        <td>{{item.secondlevel}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <table style="border-collapse:collapse" datatable="ng">
+                <thead class="text-c">
+                    <tr>
+                        <th rowspan="2">日期</th>
+                        <th rowspan="2" ng-repeat-start="col in cols">事件及预警{{col}}</th>
+                        <th rowspan="2" ng-repeat-end="col in cols">来源</th>
+                        <th rowspan="2">事件性质</th>
+                        <th rowspan="2">事件影响范围</th>
+                        <th rowspan="2">事件严重程度</th>
+                        <th rowspan="2">事件针对性</th>
+                        <th colspan="2">官方预警</th>
+                    </tr>
+                    <tr>
+                        <th>一级预警</th>
+                        <th>二级预警</th>
+                    </tr>
+                </thead>
+                <tbody class="text-c">
+                    <tr ng-repeat="item in events">
+                        <td>{{item.event_date}}</td>
+                        <td ng-repeat-start="ev in item.events">
+                            {{ev.content | limitTo: 20}}
+                        </td>
+                        <td style="color:blue" ng-repeat-end="ev in item.events">
+                            {{ev.source | limitTo: 20}}
+                        </td>
+                        <td>{{item.eventproperties}}</td>
+                        <td>{{item.effectarea}}</td>
+                        <td>{{item.severity}}</td>
+                        <td>{{item.pertinenct}}</td>
+                        <td>{{item.firstlevel}}</td>
+                        <td>{{item.secondlevel}}</td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+    </div>
+</div>

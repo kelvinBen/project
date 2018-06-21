@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Angular Esri Quick Start</title>
+    <link rel="stylesheet" href="../../../arcgis4/esri/css/main.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style type="text/css">
+        html,
+        body,
+        container-fluid,
+        .row,
+        .col-xs-9,
+        .esri-view {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body ng-controller="MapController">
+    <!-- <div> -->
+    <div class="row">
+        <!-- <div class="col-xs-9"> -->
+        <esri-map-view map="map" view-options="{extent:{xmin:-180,ymin:-50,xmax:180,ymax:90}}">
+        </esri-map-view>
+    </div>
+    <!-- </div> -->
+    <script src="../../../bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="../../../arcgis4/init.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../bower_components/angular/angular.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../bower_components/angular-esri-map/dist/angular-esri-map.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/SecuritySystem.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/service.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        angular.module('esri-map-example', ['esri.map', 'cnooc_service.SecuritySystem', 'cnooc_service'])
+            .service('world', ['$q', '$http', function($q, $http) {
+                return {
+                    get: function() {
+                        var deferred = $q.defer();
+                        $http({
+                            method: 'GET',
+                            url: '../../../server/world.json'
+                        }).success(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function(data, status, headers, config) {
+                            deferred.reject(status);
+                        });
+                        return deferred.promise;
+                    }
+                }
+            }])
+            .controller('MapController', function($scope, esriLoader, world, countryrisk, RiskSetting, SecuritySystem) {
+                $scope.riskColors = ['#ff0000', '#FF6600', '#FFFF00', '#0000FF'];
+                $scope.map = null;
+                $scope.countryList = null;
+                $scope.warningList = null;
+                $scope.worldJson = null;
+                countryrisk.get().then(function(data) { //国家列表
+                    $scope.countryList = data;
+                });
+                SecuritySystem.GetWaring().then(function(w) { //预警等级
+                    $scope.warningList = w;
+                });
+                world.get().then(function(d) { //世界国家地图
+                    $scope.worldJson = d;
+                });
+                $scope.$watchGroup(['countryList', 'warningList', 'worldJson'], function(newVal, oldVal) { //监视当数据都已经获取到的时候创建Map
+                    if (newVal[1] && newVal[2]) $scope.createMap();
+                });
+                $scope.createMap = function() { //create map
+                    esriLoader.require(['esri/views/MapView', 'esri/Map', 'esri/Graphic', 'esri/geometry/Point', 'esri/symbols/PictureMarkerSymbol', 'esri/symbols/TextSymbol',
+                            'esri/symbols/SimpleFillSymbol', 'esri/layers/GraphicsLayer', 'esri/geometry/Polygon'
+                        ],
+                        function(MapView, Map, Graphic, Point, PictureMarkerSymbol, TextSymbol, SimpleFillSymbol, GraphicsLayer, Polygon) {
+                            $scope.map = new Map({
+                                logo: false
+                            });
+                            var fillSymbol = new SimpleFillSymbol({
+                                color: [187, 190, 198, 0.8],
+                                outline: { // autocasts as new SimpleLineSymbol()
+                                    color: [255, 255, 255, 0.5],
+                                    width: 1
+                                }
+                            });
+                            var polygons = $scope.createWorld(fillSymbol, Polygon, Graphic);
+                            var layer = new GraphicsLayer({
+                                graphics: polygons
+                            });
+                            $scope.map.add(layer);
+                            var pointMarks = $scope.createGradeMark(PictureMarkerSymbol, TextSymbol, Point, Graphic);
+                            var markLayer = new GraphicsLayer({
+                                graphics: pointMarks
+                            });
+
+                            $scope.map.add(markLayer);
+                        });
+                };
+                $scope.createGradeMark = function(PictureMarkerSymbol, TextSymbol, Point, Graphic) {
+                    var pic1 = new PictureMarkerSymbol({
+                        url: "../../img/g1.png",
+                        height: 10,
+                        width: 10
+                    });
+                    var pic2 = new PictureMarkerSymbol({
+                        url: "../../img/g2.png",
+                        height: 10,
+                        width: 10
+                    });
+                    var pic3 = new PictureMarkerSymbol({
+                        url: "../../img/g3.png",
+                        height: 10,
+                        width: 10
+                    });
+                    var pic4 = new PictureMarkerSymbol({
+                        url: "../../img/g4.png",
+                        height: 10,
+                        width: 10
+                    });
+                    var pic5 = new PictureMarkerSymbol({
+                        url: "../../img/g5.png",
+                        height: 10,
+                        width: 10
+                    });
+                    var ary = [];
+                    angular.forEach($scope.warningList, function(item) {
+                        var sym = null;
+                        if (item.grade == 1) sym = pic1;
+                        else if (item.grade == 2) sym = pic2;
+                        else if (item.grade == 3) sym = pic3;
+                        else if (item.grade == 4) sym = pic4;
+                        else if (item.grade == 5) sym = pic5;
+                        var p = new Point({
+                            longitude: parseFloat(item.lon),
+                            latitude: parseFloat(item.lat)
+                        });
+                        var pointGraphic = new Graphic({
+                            geometry: p,
+                            symbol: sym
+                        });
+
+                        var txtGraphic = new Graphic({
+                            geometry: p,
+                            symbol: new TextSymbol({
+                                color: "#1a1616",
+                                haloColor: "black",
+                                haloSize: "1px",
+                                text: item.name,
+                                xoffset: 0,
+                                yoffset: 10,
+                                font: { // autocast as esri/symbols/Font
+                                    size: 8,
+                                    family: "sans-serif",
+                                    weight: "bolder"
+                                }
+                            })
+                        });
+                        ary.push(pointGraphic);
+                        ary.push(txtGraphic);
+                    });
+
+                    return ary;
+                };
+                $scope.createWorld = function(fillSymbol, Polygon, Graphic) {
+                    var ary = [];
+                    var data = $scope.worldJson;
+                    angular.forEach(data.features, function(item, i) { //country polygon
+                        var p = new Polygon();
+                        var n = item.properties.childNum;
+                        if (n > 1) {
+                            var coordinates = item.geometry.coordinates;
+                            angular.forEach(coordinates, function(coord) {
+                                if (coord.length != 1) {
+                                    p.addRing(coord);
+                                } else {
+                                    p.addRing(coord[0]);
+                                }
+                            })
+                        } else {
+                            p.addRing(item.geometry.coordinates[0]);
+                        }
+                        var polygonGraphic = new Graphic({
+                            popupTemplate: null,
+                            geometry: p,
+                            symbol: fillSymbol
+                        });
+                        ary.push(polygonGraphic);
+                    });
+                    return ary;
+                };
+
+            });
+    </script>
+</body>
+
+</html>

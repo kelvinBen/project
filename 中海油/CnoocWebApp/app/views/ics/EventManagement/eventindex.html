@@ -1,0 +1,1578 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"eventstatus"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<style media="screen">
+    .panel-group{margin-bottom: 0px;}
+</style>
+<div class="row" ng-controller="systemindexCtrl" ng-init="load()">
+    <!--<div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+          <div class="col-xs-3">
+              <select class="form-control" ng-model="curOrg" ng-change="changeorg()" ng-options="t.name for t in orgs">
+              </select>
+          </div>
+          <div class="col-xs-3">
+              <select class="form-control" ng-model="curUser" ng-change="changeRoleEx()" ng-options="t.role for t in curOrg.users">
+              </select>
+          </div>
+        </div>
+    </div>-->
+    <!--<div class="col-sm-12">
+        <div class="col-xs-3">
+            <select class="form-control"></select>
+        </div>
+    </div>-->
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <!-- <div class="panel panel-default">
+            <div class="panel-body"> -->
+        <!--<div class="form-group col-sm-3" ng-show="curevent.step==1">-->
+        <!--<img src="img/workflow_step1.png" usemap="#phly">-->
+        <!--</div>-->
+        <!--<div class="form-group col-sm-3" ng-show="curevent.step==2">-->
+        <!--<img src="img/workflow_step2.png" usemap="#phly">-->
+        <!--</div>-->
+        <!--<div class="form-group col-sm-3" ng-show="curevent.step==3">-->
+        <!--<img src="img/workflow_step3.png" usemap="#phly">-->
+        <!--</div>-->
+        <!--<div class="form-group col-sm-3" ng-show="curevent.step==4">-->
+        <!--<img src="img/workflow_step4.png" usemap="#phly">-->
+        <!--</div>-->
+        <!--<div class="form-group col-sm-3" ng-show="curevent.step==5">-->
+        <!--<img src="img/workflow_step5.png" usemap="#phly">-->
+        <!--</div>-->
+        <!--<div class="form-group col-sm-3" ng-show="curevent.step==6">-->
+        <!--<img src="img/workflow_step6.png" usemap="#phly">-->
+        <!--</div>-->
+        <!--<div class="form-group col-sm-3" ng-show="curevent.step==14">-->
+        <!--<img src="img/workflow_step14.png" usemap="#phly">-->
+        <!--</div>-->
+        <div class="form-group col-sm-3" style="padding: 2px" id="sidebar">
+            <div class="form-group " ng-show="false">
+                <button type="button" class="btn btn-sm btn-danger" ng-click="$state.go('app.ics_eventtypeselect')">{{"primaryevent"|translate}}
+                </button>
+
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">{{"currentevent"|translate}}</div>
+                </div>
+                <div class="panel-body">
+                    <div class="row" style=" margin-left: 6px;">
+                        <button type="button" ng-hide="showPrimaryEvent" class="btn btn-sm btn-danger" ng-click="$state.go('app.ics_eventtypeselect')">{{"primaryevent"|translate}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-success" title={{"notice"|translate}} ng-click="$state.go('app.ics_webmessage')">
+                            {{"notice"|translate}}
+                        </button>
+                    </div>
+                    <div class="row mt-sm">
+                        <select class="form-control" ng-model="curevent" ng-options="t.name for t in events" ng-change="changeevent()">
+                        </select>
+                    </div>
+
+                    <div class="row" style="padding: 8px 10px;">
+                        <label>{{"currentstage"|translate}}</label>
+                    </div>
+                    <div class="row">
+                        <select class="form-control" ng-model="curperiod" ng-options="(t.name+'('+t.starttime+'-'+t.endtime+')')  for t in periods" ng-change="changeperiod()">
+                        </select>
+                    </div>
+                    <div class="row mt-sm" style="margin-left: 6px;">
+                        <button type="button" class="btn btn-sm btn-success" ng-click="$state.go('app.ics_addperiod')">{{"createnewstage"|translate}}
+                        </button>
+                    </div>
+                    <!-- <p style="text-align:center" ng-show="curevent.level==1">
+                                <strong>预警级别:I级</strong>
+                                <br/>
+                                <img src="app/img/jibie1.png">
+                            </p>
+                            <p style="text-align:center" ng-show="curevent.level==2">
+                                <strong>预警级别:II级</strong><br/>
+                                <img src="app/img/jibie2.png" >
+                            </p>
+                            <p style="text-align:center" ng-show="curevent.level==3">
+                                <strong>预警级别:III级</strong><br/>
+                                <img src="app/img/jibie3.png" >
+                            </p>
+                            <p style="text-align:center" ng-show="curevent.level==4">
+                                <strong>预警级别:IV级</strong><br/>
+                                <img src="app/img/jibie4.png" >
+                            </p> -->
+                    <p style="text-align:center"><img src="app/img/grade1.png" ng-show="curevent.grade==1"></p>
+                    <p style="text-align:center"><img src="app/img/grade2.png" ng-show="curevent.grade==2"></p>
+                    <p style="text-align:center"><img src="app/img/grade3.png" ng-show="curevent.grade==3"></p>
+                    <img usemap="#phly" ng-src="{{workflowurl}}" width="100%" id="workflowimg">
+                    <div class="form-group mt-lg" ng-show="false">
+                        <button type="button" class="btn btn-sm btn-success" title={{"primaryjudge"|translate}} ng-click="$state.go('app.ics_prejudgment')">
+                            {{"primaryjudge"|translate}}
+                        </button>
+                    </div>
+                    <div class="form-group mt-lg" ng-show="false">
+                        <button type="button" class="btn btn-sm btn-success" title={{"primarymeet"|translate}} ng-click="$state.go('app.ics_firstmeeting')">
+                            {{"startemergency"|translate}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-success" title={{"emergencyrelease"|translate}} ng-click="$state.go('app.ics_relieve')">
+                            {{"emergencyrelease"|translate}}
+                        </button>
+                    </div>
+                    <div class="form-group mt-lg" ng-show="false">
+                        <button type="button" class="btn btn-sm btn-success" title={{"judge"|translate}} ng-click="$state.go('app.ics_judgment')">
+                            {{"judge"|translate}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-success" title={{"holdemergencymeet"|translate}} ng-click="$state.go('app.ics_judgment')">
+                            {{"holdemergencymeet"|translate}}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- <div class="form-group mg-lg" ng-show="false">
+                <button type="button" class="btn btn-sm btn-success" title="通知" ng-click="$state.go('app.ics_webmessage')">
+                    通知
+                </button>
+            </div> -->
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                  {{"pflowchart"|translate}}
+              </div>
+              <div class="panel-body">
+                  <img src="./app/img/1.png" style="width:100%" />
+              </div>
+            </div>
+        </div>
+        <map name="phly">
+            <area id="venus1" coords="{{corrds[0]}}" alt={{"alarm"|translate}} ng-click="changestep('1')" />
+            <area id="venus2" coords="{{corrds[1]}}" alt={{"primaryjudge"|translate}} ng-click="changestep('2')" />
+            <area id="venus3" coords="{{corrds[2]}}" alt={{"primarymeet"|translate}} ng-click="changestep('3')" />
+            <area id="venus4" coords="{{corrds[3]}}" alt={{"judge"|translate}} ng-click="changestep('4')" />
+            <area id="venus5" coords="{{corrds[4]}}" alt={{"processmeet"|translate}} ng-click="changestep('5')" />
+            <area id="venus6" coords="{{corrds[5]}}" alt={{"judge"|translate}} ng-click="changestep('6')" />
+            <area id="venus7" coords="{{corrds[6]}}" alt={{"expandresponse"|translate}} ng-click="changestep('7')" />
+            <area id="venus8" coords="{{corrds[7]}}" alt={{"emergencyrelease"|translate}} ng-click="changestep('8')" />
+        </map>
+        <div class="form-group col-sm-9" style="padding: 2px" id="content">
+            <div class="form-group col-sm-6" style="padding: 20px;padding-top: 0px" ng-show="false">
+                <div class="row">
+                    <label>{{"currentevent"|translate}}</label>
+                </div>
+                <div class="row">
+                    <select class="form-control" ng-model="curevent" ng-options="t.name for t in events" ng-change="changeevent()">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-sm-6" style="padding: 20px;padding-top: 0px" ng-show="false">
+                <div class="row">
+                    <label>{{"currentstage"|translate}}</label>
+                </div>
+                <div class="row">
+                    <select class="form-control" ng-model="curperiod" ng-options="(t.name+'('+t.starttime+'-'+t.endtime+')')  for t in periods" ng-change="changeperiod()">
+                    </select>
+                </div>
+                <div class="row mt-sm">
+                    <button type="button" class="btn btn-sm btn-success" ng-click="$state.go('app.ics_addperiod')">{{"createnewstage"|translate}}
+                    </button>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary" style="margin: 0px">
+                        <div class="panel-heading">
+                            <div class="panel-title">{{"eventintroduction"|translate}}</div>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                <strong>{{"eventdescription"|translate}}：</strong> {{primarytable.data.describe}}
+                            </p>
+                            <p>
+                                <strong>{{"currentstatus"|translate}}：</strong> {{nextaction}}
+                            </p>
+                            <div class="row mt-sm">
+                                <!--<button type="button" class="btn btn-sm btn-success" ng-click="$state.go('app.ics_eventtablelist')">{{"viewallrecord"|translate}}
+                                </button>-->
+                                <button type="button" class="btn btn-sm btn-success" ng-click="vieweventmap()">{{"vieweventmap"|translate}}
+                                </button>
+                                <button type="button" class="btn btn-sm btn-success" ng-click="$state.go('app.ics_actionduty')" ng-show="bShowActionDuty">{{"viewactionduty"|translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status3.isFirstOpen" is-disabled="status3.isFirstDisabled">
+                            <uib-accordion-heading>{{"publicinfo"|translate}}</uib-accordion-heading>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="border: solid;">
+                                    <thead>
+                                        <tr class="text-center" style="background-color: #1f4e78;color: white">
+                                            <td>
+                                                {{"publicinfo"|translate}}
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="a in publicInfoList">
+                                            <td>
+                                                <div ng-bind-html="a.content">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-12">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status1.isFirstOpen" is-disabled="status1.isFirstDisabled">
+                            <uib-accordion-heading>{{"duty"|translate}}({{curRole.rolename}})</uib-accordion-heading>
+                            <div class="panel panel-defalut" style="margin: 0px">
+                                <!--<div class="panel-heading">-->
+                                <!--<div class="panel-title">职责({{curUser.role}})</div>-->
+                                <!--</div>-->
+                                <div class="panel-body">
+                                    <div ng-bind-html="curRole.duty">
+                                    </div>
+                                </div>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
+            </div>
+            <div class="row form-group" >
+                <div class="col-sm-12">
+                    <uib-accordion close-others="oneAtATime">
+                        <uib-accordion-group is-open="status2.isFirstOpen" is-disabled="status2.isFirstDisabled">
+                            <uib-accordion-heading>{{"checklist"|translate}}</uib-accordion-heading>
+                            <div ng-show="curUser.roleid=='1'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="7">{{"mainaction"|translate}}</td>
+                                                <td>{{"leadinternational"|translate}};</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"asconductor"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"holdmeeting"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"approvaldecide"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"startend"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"decidereport"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"sendpersonnel"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="3">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='2'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="2">{{"mainaction"|translate}}</td>
+                                                <td>{{"assistwork"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"assumeduty"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='3'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="3">{{"mainaction"|translate}}</td>
+                                                <td>{{"finishwork"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"movejob"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"orgworks"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='4'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="7">{{"mainaction"|translate}}</td>
+                                                <td>{{"developadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"comminstruction"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"adjustmentstaff"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"reportinfo"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"accidentcomm"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    {{"commchannel"|translate}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"coordinateresource"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='5'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="6">{{"mainaction"|translate}}</td>
+                                                <td>{{"responsibility"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"keepclear"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"processrecord"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"plantrain"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"commandcentre"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"accidentinvestigation"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='6'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="5">{{"mainaction"|translate}}</td>
+                                                <td>{{"handelphone"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"reporttimes"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"dorecord"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"knowsituation"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"daysmanagement"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='11'||curUser.roleid=='12'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="8">{{"mainaction"|translate}}</td>
+                                                <td>{{"provideadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"pubinfoadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"approvalnews"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"correctguidance"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"publishmess"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"proposeascheme"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"societyadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"diplomaticmatters"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='7'||curUser.roleid=='8'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="9">{{"mainaction"|translate}}</td>
+                                                <td>{{"emergencydecision"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"aboutadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"goods"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"commgoods"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"moveplan"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"reportexpert"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"outarea"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"movecash"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"orderstaff"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='9'||curUser.roleid=='10'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="6">{{"mainaction"|translate}}</td>
+                                                <td>{{"provideadvice"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"startsystem"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"keeponline"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"responselabor"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"responseprotect"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"beijingdep"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.roleid=='13'||curUser.roleid=='14'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="7">{{"mainaction"|translate}}</td>
+                                                <td>{{"provideadvice"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"carrycash"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"carrycost"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"analysisstrategy"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensurerange"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"sendnotice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"dealaffair"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                    <div id="action" class="panel panel-info" style="margin: 0px" ng-show="false">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                {{"checklist"|translate}}
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div ng-show="curUser.role=='1'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="7">{{"mainaction"|translate}}</td>
+                                                <td>{{"leadinternational"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"asconductor"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"holdmeeting"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"approvaldecide"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"startend"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"decidereport"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"sendpersonnel"|translate}}。</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="3">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='2'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="2">{{"mainaction"|translate}}</td>
+                                                <td>{{"assistwork"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>在主任外出时承担主任职责。</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='3'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="3">{{"mainaction"|translate}}</td>
+                                                <td>{{"finishwork"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"movejob"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"orgworks"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='4'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="7">{{"mainaction"|translate}}</td>
+                                                <td>{{"developadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"comminstruction"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"adjustmentstaff"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"reportinfo"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"accidentcomm"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    {{"commchannel"|translate}}；
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"coordinateresource"|translate}}。</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='5'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="6">{{"mainaction"|translate}}</td>
+                                                <td>{{"responsibility"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"alldaywork"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"processrecord"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"plantrain"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"commandcentre"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"accidentinvestigation"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"mediaprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='6'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="5">{{"mainaction"|translate}}</td>
+                                                <td>{{"handelphone"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"reporttimes"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"dorecord"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"knowsituation"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"daysmanagement"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='11'||curUser.role=='12'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="8">{{"mainaction"|translate}}</td>
+                                                <td>{{"provideadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"pubinfoadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"approvalnews"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"correctguidance"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"publishmess"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"proposeascheme"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"societyadvice"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"diplomaticmatters"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='7'||curUser.role=='8'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="9">{{"mainaction"|translate}}</td>
+                                                <td>{{"emergencydecision"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"aboutadvice"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"goods"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"commgoods"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"moveplan"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"reportexpert"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"outarea"|translate}};</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"movecash"|translate}};</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"orderstaff"|translate}}。</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='9'||curUser.role=='10'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="6">{{"mainaction"|translate}}</td>
+                                                <td>{{"provideadvice"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"startsystem"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"keeponline"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"responselabor"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"responseprotect"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"beijingdep"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="curUser.role=='13'||curUser.role=='14'">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" style="border: solid;">
+                                        <thead>
+                                            <tr style="background-color: #1f4e78;color: white">
+                                                <td style="width:20%;">{{"emergencyduty"|translate}}</td>
+                                                <td style="width:80%;">{{curUser.role}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="7">{{"mainaction"|translate}}</td>
+                                                <td>{{"provideadvice"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"carrycash"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"carrycost"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"analysisstrategy"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensurerange"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"sendnotice"|translate}}；</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"dealaffair"|translate}}。</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5">{{"referenceprogram"|translate}}</td>
+                                                <td>{{"alarmprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"emegorgprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"interprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"ensureprogram"|translate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{"recoveryprogram"|translate}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group" ng-show="showpanel('meeting')&&meeting.meetingtime">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary" style="margin: 0px">
+                        <div class="panel-heading">
+                            <div class="panel-title">{{"meetnotice"|translate}}</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td style="text-align: left;">{{"meetname"|translate}}</td>
+                                            <td style="text-align: left;">{{"time"|translate}}</td>
+                                            <td style="text-align: left;">{{"place"|translate}}</td>
+                                            <td style="text-align: left;">{{"issue"|translate}}</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align: left;">{{meeting.meetingname}}</td>
+                                            <td style="text-align: left;">{{meeting.meetingtime}}</td>
+                                            <td style="text-align: left;">{{meeting.locate}}</td>
+                                            <td style="text-align: left;">{{meeting.topic}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group" ng-show="guides.length>0">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary" style="margin: 0px">
+                        <div class="panel-heading">
+                            <div class="panel-title">{{"actionguide"|translate}}</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <td style="text-align: left;width: 10%;">{{"num"|translate}}</td>
+                                            <td style="text-align: left;width: 70%;">{{"singleaction"|translate}}</td>
+                                            <td style="text-align: left;width: 10%;">{{"status"|translate}}</td>
+                                            <td style="text-align: left;width: 10%;">{{"operation"|translate}}</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in guides">
+                                            <td style="text-align: left;">{{$index+1}}</td>
+                                            <td style="text-align: left;">{{item.name}}</td>
+                                            <td style="text-align: left;">{{item.status}}</td>
+                                            <td style="text-align: left;" ng-if="item.type=='prejudge'">
+                                                <button type="button" class="btn btn-sm btn-success" title={{"primaryjudge"|translate}} ng-click="$state.go('app.ics_prejudgment')">
+                                                    {{"primaryjudge"|translate}}
+                                                </button>
+                                            </td>
+                                            <td style="text-align: left;" ng-if="item.type=='start'">
+                                                <button type="button" class="btn btn-sm btn-success" title={{"startemergency"|translate}} ng-click="$state.go('app.ics_firstmeeting')">
+                                                    {{"startemergency"|translate}}
+                                                </button>
+                                            </td>
+                                            <td style="text-align: left;" ng-if="item.type=='judge'">
+                                                <button type="button" class="btn btn-sm btn-success" title=  {{"judge"|translate}} ng-click="$state.go('app.ics_judgment')">
+                                                    {{"judge"|translate}}
+                                                </button>
+                                            </td>
+                                            <td style="text-align: left;" ng-if="item.type=='meeting'">
+                                                <button type="button" class="btn btn-sm btn-success" title= {{"meetrecord"|translate}} ng-click="$state.go('app.ics230')">
+                                                    {{"meetrecord"|translate}}
+                                                </button>
+                                            </td>
+                                            <td style="text-align: left;" ng-if="item.type=='ics202'">
+                                                <button type="button" class="btn btn-sm btn-success" title= {{"resopnseaim"|translate}} ng-click="$state.go('app.ics202')">
+                                                    {{"resopnseaim"|translate}}
+                                                </button>
+                                            </td>
+                                            <td style="text-align: left;" ng-if="item.type=='ics234'">
+                                                <button type="button" class="btn btn-sm btn-success" title= {{"tasklist"|translate}} ng-click="$state.go('app.ics234')">
+                                                    {{"tasklist"|translate}}
+                                                </button>
+                                            </td>
+                                            <td style="text-align: left;" ng-if="item.type=='ics2012'">
+                                                <button type="button" class="btn btn-sm btn-success" title={{"actionsummery"|translate}} ng-click="$state.go('app.ics2012')">
+                                                    {{"actionsummery"|translate}}
+                                                </button>
+                                            </td>
+                                            <td style="text-align: left;" ng-if="item.type=='ics204'">
+                                                <button type="button" class="btn btn-sm btn-success" title= {{"allocationaction"|translate}} ng-click="$state.go('app.ics204')">
+                                                    {{"allocationaction"|translate}}
+                                                </button>
+                                            </td>
+                                            <td class="text-center" ng-if="item.type=='publicInfo'">
+                                                <button type="button" class="btn btn-sm btn-success" title= {{"setbrowsing"|translate}} ng-click="setPublicInfos()">
+                                                    {{"setbrowsing"|translate}}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" ng-show="guidetables.length>0">
+                                <p>{{"abouttable"|translate}}:</p>
+                                <span ng-repeat="item in guidetables">
+                                            <!-- <a ui-sref={{item.url}}>{{item.name}}</a>; -->
+                                            <!-- <a ng-href="{{$state.href(item.url, {data: curperiod})}}" title="{{item.name}}">{{item.name}}</a> -->
+                                    <button type="button" class="btn btn-info" ng-click="othertable(item.url)">
+                                        {{item.name}}
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group" ng-show="showpanel('task')">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary" style="margin: 0px">
+                        <div class="panel-heading">
+                            <div class="panel-title">{{"singletask"|translate}}</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive" ng-show="showpanel('tasktable')">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left;">{{"formname"|translate}}</th>
+                                            <th style="text-align: left;">{{"updatedate"|translate}}</th>
+                                            <th style="text-align: left;">{{"submitter"|translate}}</th>
+                                            <th style="text-align: left;">{{"operation"|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in tablestatus| filter:{type: 'task'}">
+                                            <td style="text-align: left;">{{item.name}}</td>
+                                            <td style="text-align: left;">{{item.updatetime}}</td>
+                                            <td style="text-align: left;">{{item.user}}</td>
+                                            <td style="text-align: left;">
+                                                <a href="javascript:;" title="{{'更新'|T}}" ng-click="edittable(item)">
+                                                    <em class="fa fa-edit"></em>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive mt-lg">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 15%;">{{"aim"|translate}}</th>
+                                            <th style="width: 15%;">{{"singlestrategy"|translate}}</th>
+                                            <th style="width: 20%;">{{"taskname"|translate}}</th>
+                                            <th style="width: 20%;">{{"takeaction"|translate}}</th>
+                                            <th style="width: 10%;">{{"currentstatus"|translate}}</th>
+                                            <th style="width: 10%;">{{"charge"|translate}}</th>
+                                            <th style="width: 10%;">{{"eventstarttime"|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in event_goals">
+                                            <td style="text-align: left;">{{item.goal}}</td>
+                                            <td style="text-align: left;">{{item.strategy}}</td>
+                                            <td style="text-align: left;">{{item.name}}</td>
+                                            <td style="text-align: left;">{{item.action}}</td>
+                                            <td style="text-align: left;">{{item.status}}</td>
+                                            <td style="text-align: left;">{{item.username}}</td>
+                                            <td style="text-align: left;">{{item.starttime}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group" ng-show="false">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary" style="margin: 0px">
+                        <div class="panel-heading">
+                            <div class="panel-title">{{"singleaction"|translate}}</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row" style="padding: 10px" ng-repeat="item in actioncontent">
+                                <p><strong>{{item.data.taskname}}</strong></p>
+                                <p><strong>{{"workarrangement"|translate}}</strong></p>
+                                <span ng-bind-html="item.data.workarrangement"></span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordereds">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left;">{{"formname"|translate}}</th>
+                                            <th style="text-align: left;">{{"submitter"|translate}}</th>
+                                            <th style="text-align: left;">{{"updatedate"|translate}}</th>
+                                            <th style="text-align: left;">{{"operation"|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in groupworks">
+                                            <td style="text-align: left;">{{item.name}}</td>
+                                            <td style="text-align: left;">{{getRole(item.role)}}</td>
+                                            <td style="text-align: left;">{{item.time}}</td>
+                                            <td style="text-align: left;">
+                                                <a href="javascript:;" title="{{'singleupdate'|translate}}" ng-click="edittable(item)">
+                                                    <em class="fa fa-edit"></em>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group" ng-show="showpanel('basic')">
+                <div class="col-sm-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">{{"basicsituation"|translate}}</div>
+                        <div class="panel-body">
+                            <!--<ul style="font-family: '微软雅黑'; font-size: 13px; list-style: circle;">-->
+                            <!--<li ng-repeat="aa in items" style="padding: 5px;">{{aa.todo}}</li>-->
+                            <!--</ul>-->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left;">{{"formname"|translate}}</th>
+                                            <th style="text-align: left;">{{"submitter"|translate}}</th>
+                                            <th style="text-align: left;">{{"updatedate"|translate}}</th>
+                                            <th style="text-align: left;">{{"operation"|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in tablestatus| filter:{type: 'information'}">
+                                            <td style="text-align: left;">{{item.name}}</td>
+                                            <td style="text-align: left;">{{item.updatetime}}</td>
+                                            <td style="text-align: left;">{{item.user}}</td>
+                                            <td style="text-align: left;">
+                                                <a href="javascript:;" title="{{'singleupdate'|translate|T}}" ng-click="edittable(item)">
+                                                    <em class="fa fa-edit"></em>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" ng-show="showpanel('log')">
+                        <div class="panel-heading">
+                            <div class="panel-title">{{"singlelog"|translate}}</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left;">{{"formname"|translate}}</th>
+                                            <th style="text-align: left;">{{"submitter"|translate}}</th>
+                                            <th style="text-align: left;">{{"updatedate"|translate}}</th>
+                                            <th style="text-align: left;">{{"operation"|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in tablestatus| filter:{type: 'log'}">
+                                            <td style="text-align: left;">{{item.name}}</td>
+                                            <td style="text-align: left;">{{item.updatetime}}</td>
+                                            <td style="text-align: left;">{{item.user}}</td>
+                                            <td style="text-align: left;">
+                                                <a href="javascript:;" title="{{'singleupdate'|translate}}" ng-click="edittable(item)">
+                                                    <em class="fa fa-edit"></em>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" ng-show="showpanel('plan')">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">{{"singleplan"|translate}}</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left;">{{"formname"|translate}}</th>
+                                            <th style="text-align: left;">{{"submitter"|translate}}</th>
+                                            <th style="text-align: left;">{{"updatedate"|translate}}</th>
+                                            <th style="text-align: left;">{{"operation"|translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in tablestatus| filter:{type: 'plan'}">
+                                            <td style="text-align: left;">{{item.name}}</td>
+                                            <td style="text-align: left;">{{item.updatetime}}</td>
+                                            <td style="text-align: left;">{{item.user}}</td>
+                                            <td style="text-align: left;">
+                                                <a href="javascript:;" title="{{'singleupdate'|translate}}" ng-click="edittable(item)">
+                                                    <em class="fa fa-edit"></em>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar-resizer"
+             resizer="vertical"
+             resizer-width="6"
+             resizer-left="#sidebar"
+             resizer-right="#content"
+             resizer-max="400">
+        </div>
+        <!--<div id="sidebar-resizer" resizer="vertical" resizer-width="6" resizer-left="#sidebar" resizer-right="#content" resizer-max="400">-->
+        <!--</div>-->
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"collectinfo"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="colInofCtrl">
+    <div class="row">
+        <div class="col-sm-3">
+            <input date-range-picker class="form-control date-picker" type="text" ng-model="date" options="{format: 'YYYY-MM-DD'}" required/>
+        </div>
+        <div class="col-sm-2">
+            <select class="select form-control " ng-model="selCountry" ng-options="d.country_id as d.name for d in country"></select>
+        </div>
+        <div class="col-sm-2">
+            <select class="select form-control" ng-model="eventStatus" ng-options="d.id as d.label for d in statusList"></select>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-success" ng-click="search()">{{'query'|translate}}
+          </button>
+        </div>
+    </div>
+    <div style="margin: 10px;">
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="javascript:;" ng-click="deletes()" class="btn btn-danger radius">
+                <em class="fa fa-trash-o"></em>{{'delete'|translate}}
+            </a>
+            <a class="btn btn-primary radius" href="javascript:;" ng-click="batchsend()">
+                <em class="fa fa-plus"></em>{{'sends'|translate}}
+            </a>
+        </div>
+    </div>
+    <div style="margin: 10px;">
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" datatable="ng" dt-instance="dtInstance" dt-options="dtOptions">
+                        <thead>
+                        <tr class="text-center">
+                            <th>
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="checkAll" ng-checked="checkAll"  ng-change="checkAllSelected()" />
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th style="width:30px;">{{'num'|translate}}</th>
+                            <th style="width:50px;">{{'date'|translate}}</th>
+                            <th>{{'title'|translate}}</th>
+                            <th>{{'timewarn'|translate}}</th>
+                            <!--<th>{{'resourcefrom'|translate}}</th>-->
+                            <th>{{'status'|translate}}</th>
+                            <th style="width:100px;">{{'operation'|translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="u in infos">
+                            <td class="text-center">
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="u.checked" ng-checked="u.checked" />
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                                <!-- <input type="checkbox" ng-checked="u.checked" ng-model="u.checked"> -->
+                            </td>
+                            <td class="text-center">{{$index + 1}}</td>
+                            <td>{{u.event_date | dateFormatter}}</td>
+                            <td>{{u.title}}</td>
+                            <!--<td>{{u.content | limitTo:100}}</td>-->
+                            <td><a ng-href="{{u.source}}" target="_blank">{{u.content | limitTo:100}}</a></td>
+                            <td>
+                                <span class="label label-primary radius" ng-show="u.status==0">{{'notsend'|translate}}</span>
+                                <span class="label label-danger radius" ng-show="u.status==1">{{'send'|translate}}</span>
+                            </td>
+                            <td class="text-center">
+                                <a href="javascript:;" class="btn btn-primary btn-sm" title="{{'sending'|translate}}" ng-show="u.status==0" ng-click="reaudit(u.event_id)">
+                                    <em class="fa fa-send"></em>
+                                </a>
+                                <a href="javascript:;" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}" ng-click="delete(u.event_id)">
+                                    <em class="fa fa-trash-o"></em>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,226 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"eventorganization"|translate}}</li>
+    </ol>
+</h3>
+<div class="container-fluid" ng-controller="eventorganizationCtl">
+    <div class="row-fluid">
+        <div class="col-xs-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{"organizationlist"|translate}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row-fluid form-group">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="addOrg()">
+                            <i class="fa fa-plus"></i>{{'add' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="editOrg()">
+                            <i class="fa fa-edit"></i>{{'edit' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" ng-click="deleteOrg()">
+                            <i class="fa fa-trash"></i>{{'singledelete' | translate}}
+                        </button>
+                    </div>
+                    <div class="row-fluid form-group">
+                        <abn-tree tree-data="treeDatas" tree-control="group_tree" on-select="my_tree_handler(branch)">
+                        </abn-tree>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{"organizationmember"|translate}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <button type="button" class="btn btn-primary" ng-click="addOrgUser()">
+                                <i class="fa fa-plus"></i>{{"membersetting"|translate}}
+                            </button>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <button type="button" class="btn btn-primary" ng-click="saveUser()">
+                                <i class="fa fa-save"></i>{{"save"|translate}}
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover table-striped">
+                        <tr class="text-center">
+                            <td>
+                                {{"names"|translate}}
+                            </td>
+                            <td>
+                                {{"phone"|translate}}
+                            </td>
+                            <td>
+                                {{"staffpost"|translate}}
+                            </td>
+                            <td>
+                                {{"operation"|translate}}
+                            </td>
+                        </tr>
+                        <tr ng-repeat="user in selOrgUsers" class="text-center">
+                            <td>
+                                {{user.real_name}}
+                            </td>
+                            <td>
+                                {{user.phone}}
+                            </td>
+                            <td>
+                                <span editable-select="user.roleid" e-name="status" e-form="rowform" e-ng-options="s.roleid as s.rolename for s in showRoleList">{{ showRole(user.roleid) }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="{{'edit'|translate}}" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="{{'singledelete' | translate}}" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" title="{{'top'|translate}}" ng-click="sort(0, $index)" ng-hide="$index==0">
+                                        <i class="fa fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" title="{{'down'|translate}}" ng-click="sort(1, $index)" ng-hide="$index == (selOrgUsers.length-1)">
+                                        <i class="fa fa-arrow-down"></i>
+                                    </button>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="addUsers">
+        <div class="panel panel-primary" style="margin-bottom:0px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{"membersetting"|translate}}</h3>
+            </div>
+            <div class="panel-body">
+                <table datatable="ng" class="table table-bordered table-hover table-striped table-condensed" style="border-collapse:collapse;">
+                    <thead>
+                        <tr class="text-center">
+                            <th>
+                                <div class="checkbox c-checkbox needsclick">
+                                    <label class="needsclick">
+                                        <input type="checkbox" class="needsclick" ng-model="selAll" ng-click="selAllFun()"/>
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th>{{"usernames"|translate}}</th>
+                            <th>{{"phones"|translate}}</th>
+                            <th>{{"settingemail"|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in allUsers" class="text-center">
+                            <td>
+                                <div class="checkbox c-checkbox needsclick">
+                                    <label class="needsclick">
+                                        <input type="checkbox" class="needsclick" ng-model="row.checked"/>
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>{{row.real_name}}</td>
+                            <td>{{row.phone}}</td>
+                            <td>{{row.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-default" ng-click="close()">
+                    {{"cancel"|translate}}
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="set()">
+                    {{"sure"|translate}}
+                </button>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="orgOperator">
+        <div class="panel panel-primary" style="margin-bottom: 0px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{orgOperatorTitle}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-show="true">
+                  <label>{{"companyagency"|translate}}：</label>
+                </div>
+                <div class="form-group" ng-show="true">
+                    <select class="select form-control" ng-model="type" ng-change="loadCompanyOrgList()">
+                        <option value="c435509cf11c6abd">{{"youxian"|translate}}</option>
+                        <option value="81940c2be8212921">{{"nationcompany"|translate}}</option>
+                        <option value="6212c89274b7c9ad">{{"haiwai"|translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group" ng-show="false">
+                    <select class="select form-control" ng-show="false" ng-model="overCompany" ng-options="a.organiztion_id as a.organiztion_name for a in overCompanyList" ng-change="loadEventOrgs(overCompany)">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">{{"belongorganization"|translate}}：</label>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" placeholder="" ng-model="selParent.organization" readonly="">
+                    </div>
+                    <div class="col-xs-3 text-right">
+                        <button type="button" class="btn btn-primary" ng-click="selectParent()">
+                            {{"choice"|translate}}
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">{{"emergencyname"|translate}}：</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="组织机构名称" ng-model="name">
+                </div>
+                <div class="row form-group text-center">
+                    <button type="button" class="btn btn-default" ng-click="closeDialog()">
+                        {{"cancel"|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="add()">
+                        {{"sure"|translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="parentOrgTree">
+        <div class="panel panel-primary" style="margin-bottom: 0px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{"father"|translate}}</h3>
+            </div>
+            <div class="panel-body">
+                <abn-tree tree-data="selTreeDatas" on-select="selectParent(branch)">
+                </abn-tree>
+            </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-default" ng-click="cancel()">
+                    {{"cancel"|translate}}
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="ok()">
+                    {{"sure"|translate}}
+                </button>
+            </div>
+        </div>
+    </script>
+</div>

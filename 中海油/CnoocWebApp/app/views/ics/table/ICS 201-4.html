@@ -1,0 +1,138 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"Resourcessummary"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px;overflow: hidden;" ng-controller="ics2014Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS 201-4 （{{"Resourcessummary"|translate}}）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" >
+                    <table class="table  table-bordered table-hover">
+                        <tbody >
+                        <tr>
+                            <td colspan="2">{{"incidentname"|translate}}</td>
+                            <td colspan="2"><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td colspan="2">{{"incidentnumber"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2">{{"operationalperiod"|translate}}</td>
+                            <td colspan="4">
+                                {{"datefrom"|translate}}：
+                                <input type="datetime-local" style="border: 0;width: 35%;height: 95%;" ng-model="starttime" >
+                                {{"dateto"|translate}}：
+                                <input type="datetime-local" style="border: 0;width:35%;height: 95%;" ng-model="endtime" >
+                            </td>
+                        </tr>
+                        <tr style="text-align: center">
+                            <td colspan="2">{{"Resourcessummary"|translate}}</td>
+                            <td colspan="10"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.sumResource"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">{{"ResourceIdentifierQuantity"|translate}}</td>
+                            <td colspan="2" style="text-align: center">{{"Vendor"|translate}}</td>
+                            <td style="text-align: center">{{"DateTimeOrdered"|translate}}</td>
+                            <td style="text-align: center">{{"ETA"|translate}}</td>
+                            <td style="text-align: center">{{"Arrived"|translate}}</td>
+                            <td style="text-align: center">{{"Location"|translate}}</td>
+                            <td style="text-align: center">{{"Assignment"|translate}}</td>
+                            <td colspan="2" style="text-align: center">{{"status"|translate}}</td>
+                            <td colspan="1">{{"operation"|translate}}</td>
+                        </tr>
+                        <!--<table class="table table-bordered table-hover bg-white">-->
+                        <tr ng-repeat="user in vm.data.resources">
+                            <td colspan="2">
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.resource" e-name="resource" e-form="rowform" >{{ user.resource  }}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable status (select-local)-->
+                                <span editable-text="user.offer" e-name="offer"   e-form="rowform">{{ user.offer }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-datetime-local="user.applytime" e-name="applytime"  e-form="rowform">{{ user.applytime }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-datetime-local="user.arrivetime" e-name="arrivetime"  e-form="rowform">{{ user.arrivetime }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.arrive" e-name="arrive"  e-form="rowform">{{ user.arrive }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.position" e-name="position"  e-form="rowform">{{ user.position }}</span>
+                            </td>
+                            <td>
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.task" e-name="task"  e-form="rowform">{{ user.task }}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.condition" e-name="condition"  e-form="rowform">{{ user.condition }}</span>
+                            </td>
+                            <td style="white-space: nowrap" colspan="1">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!--</table>-->
+                        <tr>
+                            <td colspan="12" style="float: left;border: 0;">
+                                <button ng-click="addUser()" class="btn btn-default">{{"addline"|translate}}</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esName"></td>
+                            <td colspan="2" style="text-align: center;">{{"positiontitle"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esPost"></td>
+                            <td colspan="2" style="text-align: center;">{{"Signature"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esSign"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;text-align: center;" colspan="4">{{"ecs"|translate}} 201-4 {{"Resourcessummary"|translate}}</td>
+                            <td style="line-height: 60px;text-align: center;" colspan="4">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='4'><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.esDate"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">提交</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

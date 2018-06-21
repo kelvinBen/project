@@ -1,0 +1,60 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"primaryevent"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="eventtypeselectCtrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="text-align: center;">{{"emergencyprimarytable"|translate}}</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: right; margin-top: 6px;">{{'thecompany'|translate}}</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" ng-model="curOrg" ng-options="t.organization for t in orgs">
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: right; margin-top: 6px;">{{'eventtype'|translate}}</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" ng-model="type">
+                                <option value="0">
+                                    {{"emergevent"|translate}}
+                                </option>
+                                <option value="1">
+                                    {{"abnormaevent"|translate}}
+                                </option>
+                                <option value="2">
+                                    {{"nationalevacuation"|translate}}
+                                </option>
+                                <option value="3">
+                                    {{"earthquake"|translate}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

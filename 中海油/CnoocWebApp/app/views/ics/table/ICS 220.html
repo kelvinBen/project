@@ -1,0 +1,175 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"filght"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics220Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS 220（{{"flight"|translate}}）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"incidentname"|translate}}</td>
+                            <td colspan="1";><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td colspan="1";><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2">{{"operationalperiod"|translate}}</td>
+                            <td colspan="2">
+                                {{"datefrom"|translate}}：
+                                <input type="date" style="border: 0;width: 35%;height: 95%;" ng-model="starttime" >
+                                {{"dateto"|translate}}：
+                                <input type="date" style="border: 0;width:35%;height: 95%;" ng-model="endtime" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{"companyposition"|translate}}</td>
+                            <td>{{"staffname"|translate}}</td>
+                            <td>{{"airtoair"|translate}}</td>
+                            <td>{{"airtoground"|translate}}</td>
+                            <td colspan="3">{{"phone"|translate}}</td>
+                            <td>{{"operation"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resources1">
+                            <td>
+                                <span editable-text="user.position" e-name="position"   e-form="rowform">{{ user.position }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.name" e-name="name"  e-form="rowform">{{ user.name }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.airtoair" e-name="airtoair" e-form="rowform" >{{ user.airtoair  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.airtoload" e-name="airtoload" e-form="rowform" >{{ user.airtoload  }}</span>
+                            </td>
+                            <td colspan="3">
+                                <span editable-text="user.telephone" e-name="telephone" e-form="rowform" >{{ user.telephone  }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!--</table>-->
+                        <tr>
+                            <td colspan="8" style="float: left;"><button ng-click="addUser()" class="btn btn-default">{{"add"|translate}}</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">{{"palnflight"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{"aircrafttype"|translate}}</td>
+                            <td>{{"operationbase"|translate}}</td>
+                            <td>{{"aircraftcompany"|translate}}</td>
+                            <td>{{"passengercapacity"|translate}}</td>
+                            <td>{{"purpose"|translate}}</td>
+                            <td>{{"etd"|translate}}</td>
+                            <td>{{"eta"|translate}}</td>
+                            <td>{{"operation"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resources2">
+                            <td>
+                                <span editable-text="user.aircraft" e-name="aircraft" e-form="rowform1" >{{ user.aircraft  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.base" e-name="base"   e-form="rowform1">{{ user.base }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.aircraftcompany" e-name="aircraftcompany"  e-form="rowform1">{{ user.aircraftcompany }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.passenger" e-name="passenger" e-form="rowform1" >{{ user.passenger  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.aim" e-name="aim" e-form="rowform1" >{{ user.aim  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.predictstart" e-name="predictstart" e-form="rowform1" >{{ user.predictstart  }}</span>
+                            </td>
+                            <td>
+                                <span editable-text="user.predictend" e-name="predictend" e-form="rowform1" >{{ user.predictend  }}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform1" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform1.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform1.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform1.$waiting" ng-click="rowform1.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform1.$visible" class="buttons">
+                                    <button ng-click="rowform1.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser1($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="float: left;"><button ng-click="addUser1()" class="btn btn-default">{{"add"|translate}}</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">{{"notes"|translate}}</td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td colspan="8" style="line-height: 60px;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"positiontitle"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td colspan="2">{{"Signature"|translate}}</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 220 {{"flight"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="2">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='2';><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+                <div class="col-sm-12 col-md-12 col-lg-12 " style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}
+                    </button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

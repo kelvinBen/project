@@ -1,0 +1,120 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"Genericadvicemgr"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="adviceMgrController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{"Genericadvicemgr"|translate}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-9">
+                    <button type="button" class="btn btn-primary" ng-click="addNode()">
+                        <i class="fa fa-plus-square-o"></i>{{"addNode"|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="editNode()">
+                        <i class="fa fa-edit"></i>{{"editNode"|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="deleteNode()">
+                        <i class="fa fa-times-circle-o"></i>{{"deleteNode"|translate}}
+                    </button>
+                </div>
+                <div class="col-xs-3" style="text-align: right">
+                    <button type="button" class="btn btn-primary" ng-show="false">
+                        <i class="fa fa-search"></i>{{"preview"|translate}}
+                    </button>
+                </div>
+            </div>
+            <div style="margin: 20px">
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <abn-tree tree-data="adviseTree" tree-control="treeCtl" on-select="treeClick(branch)" expand-level="2" initial-selection=""></abn-tree>
+                </div>
+                <div class="col-xs-9">
+                    <div text-angular="" ng-model="content.content" name="wysiswyg-editor" class="btn-group-small"></div>
+                    <div style="margin: 20px">
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" ng-click="saveContent()">
+                            <i class="fa fa-save"></i>{{"save"|translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="addDlg">
+    <form class="form-horizontal form-validate" novalidate="novalidate" method="post" name="addNodeForm" ng-submit="addNode()">
+        <div class="panel panel-primary" style="margin-bottom: 0px;">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{'addNode'|translate}}</h3>
+          </div>
+          <div class="panel-body">
+              <fieldset>
+                  <div class="form-group">
+                    <label>{{"sectionname"|translate}}:</label>
+                    <input type="text" class="form-control" placeholder="{{'sectionname'|translate}}" name="name" ng-model="addName">
+                    <span ng-show="validateInput('eventDate', 'required')" class="text-danger">{{"required"|translate}}</span>
+                  </div>
+              </fieldset>
+              <fieldset>
+                  <div class="form-group">
+                    <label for="">{{"dadsection"|translate}}:</label>
+                    <select class="form-control" ng-options="a as a.advice_name for a in parent" ng-model="selParent">
+                    </select>
+                  </div>
+              </fieldset>
+          </div>
+          <div class="panel-footer text-center">
+              <button type="button" class="btn btn-default" ng-click="close()">
+                  {{'cancel'|translate}}
+              </button>
+              <button type="submit" class="btn btn-primary">
+                  {{'submit'|translate}}
+              </button>
+          </div>
+        </div>
+
+        <!-- <fieldset>
+            <div class="form-group">
+              <button type="button" class="btn btn-default" ng-click="close()">
+                  {{'cancel' | translate}}
+              </button>
+              <button type="submit" class="btn btn-primary">
+                  {{'submit'|translate}}
+              </button>
+            </div>
+        </fieldset> -->
+    </form>
+</script>
+<!-- <div class="container-fluid">
+  <form class="form-horizontal form-validate" novalidate="novalidate" method="post" name="addNodeForm">
+      <fieldset>
+          <div class="form-group">
+            <label>章节名称:</label>
+            <input type="text" class="form-control" placeholder="章节名称" name="name">
+            <span ng-show="validateInput('eventDate', 'required')" class="text-danger">{{"required"|translate}}</span>
+          </div>
+      </fieldset>
+      <fieldset>
+          <div class="form-group">
+            <label for="">父章节:</label>
+            <select class="form-group select" name="parent">
+            </select>
+          </div>
+      </fieldset>
+  </form>
+</div> -->

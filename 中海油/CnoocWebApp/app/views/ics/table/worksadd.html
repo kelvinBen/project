@@ -1,0 +1,134 @@
+<div class="row"  ng-controller="worksaddCtrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <button type="button"  class="btn btn-info" ng-click="cancel()">返回</button>
+        <button type="button"  class="btn btn-success" ng-click="submit()">保存</button>
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">作业计划表（ECS 215）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" >
+                    <table class="table  table-bordered table-hover">
+                        <tr >
+                            <td style="text-align: center">事故名称:</td>
+                            <td><input type="text" ng-model="vm.eventname" style="border: 0;"></td>
+                            <td style="text-align: center">事故时间:</td>
+                            <td><input type="text" ng-model="vm.time" style="border: 0;"></td>
+                            <td colspan="9">作业周期：
+                                <input type="date" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
+                                <input type="date" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center">分部</td>
+                            <td style="text-align: center">队、组或其它</td>
+                            <td style="text-align: center">工作任务及特别指令</td>
+                            <td colspan="5"  style="text-align: center">资源</td>
+                            <td style="text-align: center">管理岗位</td>
+                            <td style="text-align: center">特殊设备及供给</td>
+                            <td style="text-align: center">报到的地点</td>
+                            <td style="text-align: center">要求到达时间</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"  style="vertical-align: middle;text-align: center;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"  style="vertical-align: middle;text-align: center;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"  style="vertical-align: middle;text-align: center;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>要求</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>现有</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>缺口</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"  style="vertical-align: middle;text-align: center;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"  style="vertical-align: middle;text-align: center;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"  style="vertical-align: middle;text-align: center;"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>要求</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="3"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>现有</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>缺口</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"  style="vertical-align: middle;text-align: center;">ICS 215 作业计划表
+                            <td>要求资源合计</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td rowspan="4" colspan="4">
+                                <ul style="list-style: none;float: left;">
+                                    <li>编制：</li>
+                                    <li style="margin-top:10px;">姓名：<input type="text" style="border: 0;border-bottom: dotted;"></li>
+                                    <li style="margin-top:10px;">岗位/职位：<input type="text" style="border: 0;border-bottom: dotted;"></li>
+                                    <li style="margin-top:10px;">签名：<input type="text" style="border: 0;border-bottom: dotted;"></li>
+                                    <li style="margin-top:10px;">日期/时间：<input type="text" style="border: 0;border-bottom: dotted;"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>现有资源合计</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        <tr>
+                            <td>缺口资源合计</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

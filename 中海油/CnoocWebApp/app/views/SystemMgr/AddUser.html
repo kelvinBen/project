@@ -1,0 +1,83 @@
+
+<h3 ng-controller="AddUserCtrl">
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li>
+            <a ui-sref='app.userManage'>
+                <span>{{"usermgr"|translate}}</span>
+            </a>
+        </li>
+        <li  class="active">
+            <span>{{ title | translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="AddUserCtrl" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form name="formValidate" ng-submit="submitForm()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <fieldset class="b0">
+                            <legend>{{ title | translate}}</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'usernames'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="name" required="" ng-model="vm.real_name" class="form-control" />
+                                    <span ng-show="validateInput('name')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset ng-hide="isedit">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'password'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="password" name="pwd" required="" ng-model="vm.passwd" class="form-control" />
+                                    <span ng-show="validateInput('pwd')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'email'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="email" required="" ng-model="vm.email" class="form-control" />
+                                    <span ng-show="validateInput('email')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'telephone'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="telephone" required="" ng-model="vm.telephone" class="form-control" />
+                                    <span ng-show="validateInput('telephone')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'phone'|translate}}</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="phone" required="" ng-model="vm.phone" class="form-control" />
+                                    <span ng-show="validateInput('phone')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="panel-footer text-center">
+                        <button class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                        <button type="submit" class="btn btn-info">{{'submit'|translate}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

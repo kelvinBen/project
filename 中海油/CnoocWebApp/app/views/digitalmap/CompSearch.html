@@ -1,0 +1,74 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{'digitalmap'| translate}}</a>
+        </li>
+        <li>
+            <span>{{"comprehensive"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div ng-controller="compCtrl" class="container-fluid" id="mainDiv">
+    <div class="row">
+        <div class="col-lg-2">
+            <form>
+                <fieldset>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{"company"|translate}}</label>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" ng-model="country_select" ng-options="t.organiztion_name for t in countries|filter:{parent_id:2016011802}"
+                            style="border-radius:4px;" ng-change="country_change()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{"resourcestype"|translate}}</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" id="ckUtility" checked="checked" ng-click="changelayer($event,'utility')">
+                                <span class="fa fa-check"></span>{{"equipmentinfo"|translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" id="ckTransport" checked="checked" ng-click="changelayer($event,'transport')">
+                                <span class="fa fa-check"></span>{{"vehicleship"|translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" id="ckTransport" checked="checked" ng-click="changelayer($event,'position')">
+                                <span class="fa fa-check"></span>{{"Importantposition"| translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" id="ckEmergency" checked="checked" ng-click="changelayer($event,'emergency')">
+                                <span class="fa fa-check"></span>{{"emergencyresources"| translate}}
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-lg-10" style="height:100%">
+            <esri-map zoom="4" basemap="streets" id="allmap">
+                <div class="legend" style="float:left;z-index:100;position:absolute;padding-top:800px;" id="worker_legend">
+                    <img src="app/img/woker_legend.png" />
+                </div>
+                <div class="legend" style="float:left;z-index:100;position:absolute;padding-top:10px;padding-left: 80px">
+                    <button ng-click="changemap('1')">{{"satellite"|translate}}</button>
+                    <button ng-click="changemap('0')">{{"map"|translate}}</button>
+                </div>
+            </esri-map>
+        </div>
+    </div>
+</div>

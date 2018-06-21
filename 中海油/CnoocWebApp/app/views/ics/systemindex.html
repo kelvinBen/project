@@ -1,0 +1,52 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"warnmap"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<style media="screen">
+    .label-red {
+        background-color: #ff0101;
+    }
+
+    .label-red[href]:hover,
+    .label-red[href]:focus {
+        background-color: #ff0101;
+    }
+</style>
+<div class="container-fluid" ng-controller="icsindexCtrl" id="mainDiv">
+    <div class="panel panel-primary" style="margin-bottom: 0px;">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12 text-left">
+                    <span>{{"emergencystatus"|translate}}（{{"legend"|translate}}）:</span>
+                    <a title='三级应急反应(有限公司级)'>
+                        <img src="app/img/m1.png" width="20" alt={{"firstwarning"|translate}} />
+                    </a>
+                    <a title='二级应急反应(国际公司级)'>
+                        <img src="app/img/m2.png" width="20" alt={{"twowarning"|translate}} />
+                    </a>
+                    <a title='一级应急反应(现场级)'>
+                        <img src="app/img/m3.png" width="20" alt={{"threewarning"|translate}} />
+                    </a>
+                    <!-- <a title={{"fourwarning"|translate}}>
+                        <img src="app/img/jibie4.png" width="20" alt={{"fourwarning"|translate}} />
+                    </a>
+                    <a title={{"fivewarning"|translate}}>
+                        <img src="app/img/jibie5.png" width="20" alt={{"fivewarning"|translate}} />
+                    </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" style="padding: 0px;">
+            <iframe src="app/views/ics/map.html" width="100%" frameborder="0" id="mapFrame" ></iframe>
+        </div>
+    </div>
+</div>

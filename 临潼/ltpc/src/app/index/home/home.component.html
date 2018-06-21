@@ -1,0 +1,137 @@
+<div class="box">
+  <div class="news left">
+    <div class="newsCenter" style="background:#bbd7ef;">
+      <h2><span class="more"><a routerLink='/list/1' style="text-decoration:none;">更多..</a></span> &nbsp;&nbsp;新闻中心</h2>
+      <div class="pic_news">
+        <carousel>
+          <slide *ngFor='let picnew of picNews'>
+            <img src="../../assets/Upload/{{picnew.pic}}" alt="First slide" width="100%" height="240">
+            <div class="carousel-caption" style="margin-bottom:-10px;">
+              <p>{{picnew.title}}</p>
+              <a routerLink='/detail/{{picnew.Id}}'></a>
+            </div>
+          </slide>
+        </carousel>
+      </div>
+      <div class="right c_n_top">
+        <ul>
+          <li *ngFor="let item of items; let i = index">
+            <a routerLink='/detail/{{item.id}}' *ngIf='i==0'>
+              {{item.title.substring(0,20)}}
+            </a>
+            <a routerLink='/detail/{{item.id}}' *ngIf='i!=0'>
+              {{item.title.substring(0,30)}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="zhishu" style="height:323px;">
+      <h3>精细化预报</h3>
+      <div style="width:100%;" id="jxyb">
+        <p-chart type="line" [data]="data" height='100px' color='blue'></p-chart>
+      </div>
+    </div>
+    <div class="zhishu">
+      <a routerLink="../warn" style="text-decoration:none;cursor: pointer;">
+        <h3>临潼七日预报</h3>
+        <span>更多 ..</span>
+      </a>
+      <app-weather></app-weather>
+    </div>
+    <div class="zhishu" style="height: 800px;">
+      <a routerLink="/list/7" style="text-decoration:none;cursor: pointer;">
+        <h3>实况监测</h3>
+        <span>更多 ..</span>
+      </a>
+      <app-map [type]=1 [showLayer]=1></app-map>
+    </div>
+  </div>
+  <div class="center_news">
+    <div class="warnInfo">
+      <h3>
+        <span>
+          <a routerLink='/list/4' class="more" style="text-decoration:none;">更多..</a>
+        </span> 预警信息
+      </h3>
+      <div id="alert_now_content">
+        <table cellspacing="0" cellpadding="0" width="100%">
+          <tbody *ngFor="let w of warn">
+            <tr>
+              <td colspan="1" rowspan="1" valign="top" align="center" height="65" width="80">
+                <img height="65" width="80" src="../../assets/images/EarlyWarning/{{w.Img}}.jpg" id="current_img">
+              </td>
+              <td colspan="1" rowspan="1" valign="top" align="left">
+                <div id="alert_now_title_content" *ngIf='w.Flag == 1'>
+                  {{w.Content}}
+                </div>
+                <div id="alert_now_title_content" *ngIf='w.Flag == 0'>
+                  <s>{{w.Content}}</s>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="1" colspan="2">
+                <p class="fy">
+                  防御指南
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="1" class="fycontent" colspan="2">
+                <div id="waringInfo" [innerHTML]="w.Info" *ngIf='w.Flag == 1'>
+                </div>
+                <s *ngIf='w.Flag == 0'>
+                  <div id="waringInfo" [innerHTML]="w.Info">
+                </div>
+                </s>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="warnInfo" style="height:448px;">
+      <h3><span><a routerLink='/list/3' class="more" style="text-decoration:none;">更多..</a></span>卫星云图 / 雷达图</h3>
+      <div>
+        <img src="../../assets/images/fy2.JPG" style="width:100%;height:200px;">
+        <img src="../../assets/images/doppler.GIF" style="width:100%;height:200px;">
+      </div>
+    </div>
+    <div class="product">
+      <h3><span><a routerLink='/list/5'  class="more" style="text-decoration:none;">更多..</a></span>防灾减灾与气象服务</h3>
+      <ul id="fz">
+        <li *ngFor="let product of products">
+          <a routerLink='/detail/{{product.id}}'>
+              {{product.title}}
+           </a>
+        </li>
+      </ul>
+    </div>
+    <div class="product">
+      <h3><span><a routerLink='/list/6' class="more" style="text-decoration:none;">更多..</a></span>农业气象科普</h3>
+      <ul id="kp">
+        <li *ngFor="let n of nongqing">
+          <a routerLink='/detail/{{n.id}}'>
+              {{n.title}}
+            </a>
+        </li>
+      </ul>
+    </div>
+    <div class="product">
+      <h3><span><a routerLink='/list/7'  class="more" style="text-decoration:none;">更多..</a></span>法律法规</h3>
+      <ul id="fg">
+        <li *ngFor="let s of special">
+          <a routerLink='/detail/{{s.id}}'>
+            {{s.title}}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="product" style="height: 297px">
+      <h3>互动交流</h3>
+      <iframe frameborder="0" scrolling="no" src="http://show.v.t.qq.com/index.php?c=show&a=index&n=lintongqixiang&w=366&h=120&fl=1&l=4&o=21&co=0"
+        width="100%" height="245"></iframe>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"overseaadvicemgr"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="countryAdviceMgrController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"overseaadvicemgr"|translate}}
+        </div>
+        <div class="panel-body">
+            <div class="row-fluid">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <select class="select form-control" name="country" style="width: 210px;" ng-options="a.country_id as a.name for a in countryList" ng-model="selCountry" ng-change="coungryChange()">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="select form-control" name="type" style="width: 210px" ng-options="a.id as a.name for a in typeList" ng-model="typeSel" ng-click="coungryChange()">
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div style="margin: 10px">
+            </div>
+            <div class="row-fluid mt10" ng-switch="typeSel">
+                <div ng-switch-when="0">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                          {{"risk"|translate}}
+                      </div>
+                      <div class="panel-body">
+                          <div class="row-fluid">
+                              <span class="label label-success" >{{model.advice_file}}</span>
+                              <form class="form-horizontal" name="uploadForm" ng-submit="upload()" method="post" style="margin-top: 10px;">
+                                  <div class="form-group col-xs-8">
+                                      <input filestyle="" type="file" data-button-text='选择' data-class-button="btn btn-default" data-classinput="form-control"
+                                        nv-file-select="" uploader="uploaderCtl" class="form-control" style="width:100%"/>
+                                  </div>
+                                  <div class="form-group col-xs-4">
+                                      <button type="sumbit" class="btn btn-primary">
+                                          {{"upload"|translate}}
+                                      </button>
+                                      <button type="button" class="btn btn-success">
+                                          {{"reset"|translate}}
+                                      </button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                          {{"safe"|translate}}
+                      </div>
+                      <div class="panel-body">
+                          <div text-angular="" ng-model="model.advice_content" name="wysiswyg-editor1" class="btn-group-small"></div>
+                          <div style="margin: 10px">
+                          </div>
+                          <div class="row-fluid" style="text-align: center;" ng-click="saveType1()">
+                              <button type="button" class="btn btn-primary">
+                                <i class="fa fa-save"></i>{{"save"|translate}}
+                              </button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div ng-switch-when="1">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                          {{"guide"|translate}}
+                      </div>
+                      <div class="panel-body">
+                          <div text-angular="" ng-model="model.advice_content" name="wysiswyg-editor2" class="btn-group-small"></div>
+                          <div style="margin: 10px">
+                          </div>
+                          <div class="row-fluid" style="text-align: center;">
+                              <button type="button" class="btn btn-primary" ng-click="saveType1()">
+                                <i class="fa fa-save"></i>{{"save"|translate}}
+                              </button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div ng-switch-when="2">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                          {{"resource"|translate}}
+                      </div>
+                      <div class="panel-body">
+                          <div text-angular="" ng-model="model.advice_content" name="wysiswyg-editor3" class="btn-group-small"></div>
+                          <div style="margin: 10px">
+                          </div>
+                          <div class="row-fluid" style="text-align: center;">
+                              <button type="button" class="btn btn-primary" ng-click="saveType1()">
+                                <i class="fa fa-save"></i>{{"save"|translate}}
+                              </button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div ng-switch-when="3">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                          {{"contact"|translate}}
+                      </div>
+                      <div class="panel-body">
+                          <div text-angular="" ng-model="model.advice_content" name="wysiswyg-editor4" class="btn-group-small"></div>
+                          <div style="margin: 10px">
+                          </div>
+                          <div class="row-fluid" style="text-align: center;">
+                              <button type="button" class="btn btn-primary" ng-click="saveType1()">
+                                <i class="fa fa-save"></i>{{"save"|translate}}
+                              </button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div ng-switch-when="4">
+                    <div class="panel panel-success">
+                      <div class="panel-heading">
+                           {{"visit"|translate}}
+                      </div>
+                      <div class="panel-body">
+                          <div text-angular="" ng-model="model.advice_content" name="wysiswyg-editor6" class="btn-group-small"></div>
+                          <div style="margin: 10px">
+                          </div>
+                          <div class="row-fluid" style="text-align: center;">
+                              <button type="button" class="btn btn-primary" ng-click="saveType1()">
+                                <i class="fa fa-save"></i>{{"save"|translate}}
+                              </button>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

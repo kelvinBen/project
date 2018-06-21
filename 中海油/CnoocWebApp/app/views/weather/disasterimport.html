@@ -1,0 +1,131 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"disasterweathersys"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"disasterinfo"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" ng-controller="disasterimportCtrl">
+    <div class="row" style="margin-bottom: 5px;">
+        <form class="form-inline">
+        <div class="form-group">
+            <a href="javascript:;" class="btn btn-danger radius" ng-click="deletesomeconfirm()">
+                <em class="fa fa-trash-o"></em>{{'delete'|translate}}
+            </a>
+            <a class="btn btn-primary radius" href="javascript:;" ng-click="addDisaster();">
+                <em class="fa fa-plus-square"></em>{{'adddisasterinfo'|translate}}
+            </a>
+            <a href="javascript:;" class="btn btn-danger radius" onclick="window.print()">
+                <i class="fa fa-print"></i>{{'print'|translate}}
+            </a>
+        </div>
+        <div class="form-group">
+            <label>{{"daterange"|translate}}：</label>
+            <input date-range-picker id="daterange1" name="daterange1" class="form-control date-picker"
+                   type="text"
+                   ng-model="date" required/>
+        </div>
+        <div class="form-group">
+            <label>{{"disarea"|translate}}：</label>
+            <select ng-options="t.name for t in countries" ng-model="country_select" ng-change="filtercities()"
+                    class="form-control select size-M">
+            </select>
+            <select ng-options="t.name for t in cities" ng-model="city_select" class="form-control select size-M"></select>
+        </div>
+        <div class="form-group">
+            <button class="form-control btn btn-success" ng-click="search()">
+                {{'query'|translate}}
+            </button>
+        </div>
+    </form>
+    </div>
+    <div class="row">
+        <!--<div class="box-content tabContent_pub" style="padding-top:10px">-->
+          <div class="panel panel-default">
+              <div class="panel-heading" style="padding-left: 15px;">
+                  <h4>
+                      {{'disinfomgr'|translate}}
+                  </h4>
+              </div>
+              <div class="panel-body">
+                  <table class="table table-border table-bordered table-hover table-bg" datatable="ng" >
+                      <thead>
+                      <tr class="text-c">
+                          <!--<th style="text-align: center;width:5%">-->
+                              <!--<input type="checkbox" value="" name="" ng-model="select_all" ng-change="selectall()">-->
+                          <!--</th>-->
+                          <th style="width:25px;">
+                              <div class="checkbox c-checkbox">
+                                  <label style="font-weight:bold">
+                                      <input type="checkbox" ng-model="select_all"   ng-change="selectall()" />
+                                      <span class="fa fa-check"></span>
+                                  </label>
+                              </div>
+                              <!-- <input type="checkbox" ng-click="checkAllSelected()"> -->
+                          </th>
+                          <th style="text-align: left;"> {{'num'|translate}}</th>
+                          <th style="text-align: left;"> {{'area'|translate}}</th>
+                          <th style="text-align: left;"> {{'date'|translate}}</th>
+                          <th style="text-align: left;"> {{'type'|translate}}</th>
+                          <th style="text-align: left;"> {{'Influencerange'|translate}}</th>
+                          <th style="text-align: left;">{{"resourcefrom"|translate}}</th>
+                          <th style="text-align: left;width:17%">{{"operation"|translate}}</th>
+                      </tr>
+                      </thead>
+                      <tbody id="tabBody">
+                      <tr ng-repeat="cur in disaster" class="text-c">
+                          <!--<th class="td1">-->
+                              <!--<input type="checkbox" ng-model="cur.selected">-->
+                          <!--</th>-->
+                          <td class="text-center">
+                              <div class="checkbox c-checkbox">
+                                  <label style="font-weight:bold">
+                                      <input type="checkbox" ng-model="cur.selected" />
+                                      <span class="fa fa-check"></span>
+                                  </label>
+                              </div>
+                              <!-- <input type="checkbox" ng-checked="u.checked" ng-model="u.checked"> -->
+                          </td>
+                          <td>{{$index+1}}</td>
+                          <td>{{getCityName(cur.country_id,cur.city_id)}}</td>
+                          <td>{{cur.time|date:'yyyy-MM-dd'}}</td>
+                          <td>{{cur.type}}</td>
+                          <td>{{cur.content|limitTo:60}}</td>
+                          <td><a href={{cur.source}} target="_blank">{{cur.source}}</a></td>
+                          <td>
+                              <!--<a href="javascript:;" ng-click="postdisaster(cur.id)" title="{{'releasewarn'|translate}}">-->
+                                  <!--<em class="fa fa-send fa-2x"></em>-->
+                              <!--</a>-->
+                              <!--<a href="javascript:;" ng-click="editDisaster(cur)" title="{{'edit'|translate}}">-->
+                                  <!--<em class="fa fa-edit fa-2x"></em>-->
+                              <!--</a>-->
+                              <!--<a href="javascript:;" ng-click="deleteconfirm(cur.id)" title="{{'singledelete'|translate}}">-->
+                                  <!--<em class="fa fa-trash-o fa-2x"></em>-->
+                              <!--</a>-->
+                              <button type="button" class="btn btn-success btn-sm" title="{{'edit'| translate}}" ng-click="postdisaster(cur.id)">
+                                  <i class="fa fa-send"></i>
+                              </button>
+                              <button type="button" class="btn btn-primary btn-sm" title="{{'edit'| translate}}" ng-click="editDisaster(cur)">
+                                  <i class="fa fa-edit"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}"ng-click="deleteconfirm(cur.id)">
+                                  <i class="fa fa-trash-o"></i>
+                              </button>
+
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+        </div>
+    <!--</div>-->
+</div>
+
+
+
+

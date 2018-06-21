@@ -1,0 +1,101 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <a ui-sref="app.accessrecordmgr">
+                {{"visitrecordmgr"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"addhighrecord"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="addAccessRecordsController">
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true,'time-out': 2000}">
+    </toaster-container>
+    <div class="row-fluid">
+        <form method="post" name="addForm" novalidate="novalidate"
+        ng-submit="formSumbit(event)" class="form-validate form-horizontal">
+            <fieldset>
+                <div class="row form-group">
+                    <div class="col-xs-6">
+                        <label><span style="color:red">*</span>{{"country"|translate}}：</label>
+                        <select class="select form-control " ng-model="record.country_id"
+                        name="countryId" ng-options="d.country_id as d.name for d in countryList" required></select>
+                        <span ng-show="validateInput('countryId')" class="text-danger">
+                            {{"required"|translate}}
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row form-group">
+                    <div class="col-xs-6" ng-controller="DatepickerCtrl as dpick">
+                        <label><span style="color:red">*</span> {{"visitdate"|translate}}：
+                        </label>
+                        <p class="input-group">
+                            <input type="text" name="stime" required=""
+                            uib-datepicker-popup="{{dpick.format}}"
+                            ng-model="record.record_time" is-open="dpick.opened"
+                            uib-datepicker-options="dpick.dateOptions"
+                            close-text="Close" class="form-control"/>
+                            <span class="input-group-btn">
+                                <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                    <em class="fa fa-calendar"></em>
+                                </button>
+                            </span>
+                        </p>
+                        <span ng-show="validateInput('stime')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                    <div class="col-xs-6" ng-controller="DatepickerCtrl as dpick">
+                        <label><span style="color:red">*</span> {{"dateto"|translate}}：
+                        </label>
+                        <p class="input-group">
+                            <input type="text" name="etime"
+                            required="" uib-datepicker-popup="{{dpick.format}}"
+                            ng-model="record.end_time" is-open="dpick.opened"
+                            uib-datepicker-options="dpick.dateOptions"
+                            close-text="Close" class="form-control"/>
+                            <span class="input-group-btn">
+                                <button type="button" ng-click="dpick.open($event)" class="btn btn-default">
+                                    <em class="fa fa-calendar"></em>
+                                </button>
+                            </span>
+                        </p>
+                        <span ng-show="validateInput('etime')" class="text-danger">{{"required"|translate}}</span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row form-group">
+                    <div class="col-xs-12">
+                        <label>{{"visitrecord"|translate}}：</label>
+                        <div text-angular="" ng-model="record.record_content"
+                        name="wysiswyg-editor" class="btn-group-small"></div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row form-group">
+                    <div class="col-xs-12 text-center">
+                        <button type="button" class="btn btn-default" ng-click="cancel()">
+                            {{"cancel"|translate}}
+                        </button>
+                        <!-- <button type="reset" class="btn btn-info">
+                            重置
+                        </button> -->
+                        <button type="submit" class="btn btn-primary">
+                            {{"sure"|translate}}
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

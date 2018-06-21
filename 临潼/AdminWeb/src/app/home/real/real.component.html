@@ -1,0 +1,33 @@
+<div class="box" style="margin-top:12px;">
+  <div class="listPic">
+    <img src="../../assets/images/pic1.png">
+    <img src="../../assets/images/pic2.png">
+    <img src="../../assets/images/pic3.png">
+  </div>
+  <div id="wrap">
+    <div id="tit">
+      <div class="stationname">{{bigClass.BigClassName}}</div>
+      <ul>
+        <li *ngFor='let a of smallClasses'>
+          <a (click)="routerFun(a.Id)">{{a.SmallClassName}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="con">
+        <div class="nav" *ngIf="smallClass">首页 >
+          <span style="color:red;">{{smallClass.SmallClassName}}</span>
+        </div>
+        <div style="width:100%;height:700px;" *ngIf="layerId < 5">
+          <app-map [type]=1 [showLayer]='layerId'></app-map>
+        </div>
+        <div style="width:100%;height:700px;" *ngIf="layerId===5">
+          <img [src]="cloudSrc" style="width:100%;">
+        </div>
+        <div style="width:100%;height:700px;" *ngIf="layerId===6">
+          <iframe src="http://10.172.99.100:8383/news.html" frameborder="0" width="100%" height="700px"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

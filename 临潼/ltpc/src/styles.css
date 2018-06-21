@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+html, body{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: #25AAE1;
+}
+.wrapper {
+    position: fixed;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
+    flex-direction: column;
+    -ms-flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.header-wrapper{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -ms-flex-direction: row;
+    align-items: center;
+    padding: 0 16px;
+    background: #3c8dbc;
+    color: rgba(255,255,255,.87);
+    white-space: nowrap;
+    min-height: 64px;
+}
+
+.header-title{
+    padding-left: 16px;
+    flex: 1 1 auto;
+}
+
+
+.header-log{            
+    font-size: 20px;
+    font-weight: 500;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.body-wrapper{
+    flex: 1;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
+    flex-direction: row;
+    -ms-flex-direction: row;
+}
+
+.pane-wrapper{
+    width: 300px;
+    border-right: 1px solid silver;
+    background: #333;
+}
+
+.canvas-wrapper{
+    flex: 1;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
+    flex-direction: column;
+    -ms-flex-direction: column;
+    position: relative;
+    overflow: auto;
+}
+
+.foot-wrapper{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
+    flex-direction: row;
+    -ms-flex-direction: row;
+    min-height: 30px;
+    align-items: center;
+    padding: 0 16px;
+    background: #333;
+    color: rgba(255,255,255,.87);
+    padding-left:300px; 
+}
+
+.foot-wrapper-left{
+    flex: 1 1 auto;
+}
+
+.breadcrumb {
+  padding: 8px 15px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}

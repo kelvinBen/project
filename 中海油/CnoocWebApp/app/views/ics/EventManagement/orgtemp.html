@@ -1,0 +1,18 @@
+<div ng-if="k=='TOPNODE'" class="tag">
+    <span class="caption">
+      <p class="capName">{{node.name}}</p>
+      <p class="capDesg">{{node.desg}}</p>
+    </span>
+</div>
+<div ng-if="node.type =='user'" class="tag">
+    <span class="caption">
+      <p class="capName">{{node.name}}</p>
+      <p class="capDesg">{{node.desg}}</p>
+    </span>
+</div>
+<div ng-if="node.type == 'department'" class="tag">
+    {{node.name}}
+</div>
+<ul ng-if="node.nodes">
+    <li ng-repeat="(k,node) in node.nodes" ng-include="'app/views/ics/EventManagement/orgtemp.html'"></li>
+</ul>

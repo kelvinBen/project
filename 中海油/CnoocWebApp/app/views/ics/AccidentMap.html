@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Angular Esri Quick Start</title>
+    <!-- <link rel="stylesheet" href="http://120.26.44.171:5557/esri/css/main.css"> -->
+    <!-- <link rel="stylesheet" href="http://120.26.44.171:5555/esri/css/esri.css" media="screen" title="no title" charset="utf-8"> -->
+    <link rel="stylesheet" href="../../../bower_components/fontawesome/css/font-awesome.min.css" media="screen" title="no title"
+        charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../../arcgis317/esri/css/esri.css" />
+    <link rel="stylesheet" href="../../../arcgis317/dijit/themes/nihilo/nihilo.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../../css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../../css/app.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../../../bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" media="screen"
+        title="no title" charset="utf-8">
+    <!-- <link rel="stylesheet" href="../../../bower_components/datatables/media/css/jquery.dataTables.css" media="screen" title="no title" charset="utf-8"> -->
+    <style type="text/css">
+        html,
+        body,
+        .row,
+        #map {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+
+
+        .toolContent {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+    </style>
+</head>
+
+<body ng-controller="MapController" class="nihilo">
+    <div class="row">
+        <esri-map id="map" map-options="mapOptions.options" load="onMapLoad">
+        </esri-map>
+        <div class="toolContent">
+            <div class="row form-group">
+                <uib-accordion close-others="oneAtATime">
+                    <uib-accordion-group is-open="status1.isFirstOpen" is-disabled="status1.isFirstDisabled">
+                        <uib-accordion-heading>操作面板</uib-accordion-heading>
+                    </uib-accordion-group>
+                </uib-accordion>
+                <div class="panel panel-primary" style="margin-top: -50px;" ng-show="status1.isFirstOpen">
+                    <!--<div class="panel-heading">-->
+                    <!--<h3 class="panel-title">操作面板</h3>-->
+                    <!--</div>-->
+                    <div class="panel-body" style="padding: 10px;">
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="radio-inline c-radio">
+                                    <input id="inlineradio1" type="radio" name="i-radio" ng-model="type" value="0" checked="checked"/>
+                                    <span class="fa fa-circle"></span>几何图形</label>
+                                <label class="radio-inline c-radio">
+                                    <input id="inlineradio2" type="radio" name="i-radio" ng-model="type" value="1"/>
+                                    <span class="fa fa-circle"></span>文字</label>
+                                <label class="radio-inline c-radio">
+                                    <input id="inlineradio2" type="radio" name="i-radio" ng-model="type" value="2"/>
+                                    <span class="fa fa-circle"></span>图片</label>
+                                <label class="radio-inline c-radio">
+                                    <input id="inlineradio2" type="radio" name="i-radio" ng-model="type" value="3"/>
+                                    <span class="fa fa-circle"></span>位置</label>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" ng-show="type==0" style="margin-top: 10px; margin-bottom: 0px;">
+                            <div class="panel-body" style="padding: 10px;">
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-default" ng-click="click('LINE')" title="直线">
+                                        <img src="../../img/icon/line.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="click('POLYLINE')" title="多段线">
+                                        <img src="../../img/icon/polyline.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="click('POLYGON')" title="多边形">
+                                        <img src="../../img/icon/polygon.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="click('ARROW')" title="箭头">
+                                        <img src="../../img/icon/arrow.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="click('CIRCLE')" title="圆">
+                                        <img src="../../img/icon/circle.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="click('ELLIPSE')" title="椭圆">
+                                        <img src="../../img/icon/ellipse.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="click('EXTENT')" title="长方形">
+                                        <img src="../../img/icon/rectangle.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-click="click('TRIANGLE')" title="三角形">
+                                        <img src="../../img/icon/triangle.png" style="width: 12px; height: 12px;" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" ng-show="type==1" style="margin-top: 10px; margin-bottom: 0px;">
+                            <div class="panel-body" style="padding: 5px;">
+                                <div class="row form-group">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">颜色</label>
+                                    </div>
+                                    <div class="col-sm-4 text-left">
+                                        <input type="Color" class="form-control" ng-model="textColor">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">大小</label>
+                                    </div>
+                                    <div class="col-sm-9 text-left">
+                                        <slider ng-model="textSize" min="10" max="30" step="1" orientation="horizontal" class="bs-slider slider-horizontal" style="width:90%;margin-top:6px;"></slider>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">内容</label>
+                                    </div>
+                                    <div class="col-sm-9 text-left">
+                                        <input type="text" class="form-control" ng-model="textContent">
+                                    </div>
+                                </div>
+                                <div class="form-group row text-center">
+                                    <button type="button" class="btn btn-primary" style="margin-top: 10px;" ng-click="drawText()">
+                                        点击地图绘制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" ng-show="type==2" style="margin-top: 10px; margin-bottom: 0px;">
+                            <div class="panel-body">
+                                <div class="row form-group">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">宽度</label>
+                                    </div>
+                                    <div class="col-sm-9 text-left">
+                                        <input type="number" class="form-control" ng-model="imgWidth" min=10>
+                                    </div>
+                                </div>
+                                <div style="margin:10px;">
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">高度</label>
+                                    </div>
+                                    <div class="col-sm-9 text-left">
+                                        <input type="number" class="form-control" ng-model="imgHeight" min=10>
+                                    </div>
+                                </div>
+                                <div style="margin:10px;">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">图片</label>
+                                    </div>
+                                    <div class="col-sm-9 text-left">
+                                        <select class="form-control" ng-model="imgUrl" ng-options="a.name for a in imgList">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="margin:10px;">
+                                </div>
+                                <div class="row">
+                                    <div style="padding:0px;height:150px;border:1px solid #a8a5a5;" class="text-center">
+                                        <img ng-src="{{imgUrl.url}}" style="max-width: 200px;max-height:148px;" />
+                                    </div>
+                                </div>
+                                <div style="margin:10px;">
+                                </div>
+                                <div class="form-group row text-center">
+                                    <button type="button" class="btn btn-primary" ng-click="drawImg()">
+                                        点击地图绘制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default" ng-show="type==3" style="margin-top: 10px; margin-bottom: 0px;">
+                            <div class="panel-body">
+                                <div class="row form-group">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">经度</label>
+                                    </div>
+                                    <div class="col-sm-9 text-left">
+                                        <input type="text" class="form-control" ng-model="longitude" />
+                                    </div>
+                                </div>
+                                <div style="margin:10px;">
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-sm-3 text-right">
+                                        <label style="margin-top: 8px;">纬度</label>
+                                    </div>
+                                    <div class="col-sm-9 text-left">
+                                        <input type="text" class="form-control" ng-model="latitude" />
+                                    </div>
+                                </div>
+                                <div style="margin:10px;">
+                                </div>
+                                <div class="form-group row text-center">
+                                    <button type="button" class="btn btn-primary" ng-click="locateTo()">
+                                        定位到
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../bower_components/layer/layer.js"></script>
+    <script src="../../../bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../arcgis317/init.js"></script>
+    <script src="../../../bower_components/angular/angular.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../../bower_components/angular-bootstrap-slider/slider.js" charset="utf-8"></script>
+    <script src="../../../bower_components/angular-esri-map-v1.1.6/dist/angular-esri-map.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/SecuritySystem.js" charset="utf-8" type="text/javascript"></script>
+    <script src="../../js/Service/service.js" charset="utf-8"></script>
+    <script src="../../js/Service/eventservices.js" charset="utf-8"></script>
+    <!-- <script src="../../../bower_components/DataTables-1.10.7/media/js/jquery.dataTables.js" charset="utf-8"></script> -->
+    <script type="text/javascript">
+        angular.module('esri-map-example', ['ui.bootstrap', 'esri.map', 'cnooc_service.SecuritySystem', 'cnooc_service', 'ics_service.event', 'ui.bootstrap-slider'])
+            .controller('MapController', function ($scope, $location, esriLoader, countryrisk, SecuritySystem, eventservice, eventtables, eventmark, icsdb) {
+                var searchObj = $location.search();
+                $scope.show = false;
+                $scope.status1 = { isFirstOpen: true };
+                if (searchObj.type && searchObj.type == 0) $scope.show = true;
+                $scope.eventid = localStorage.eventid;
+                $scope.periodid = localStorage.periodid;
+                $scope.geometryAry = [];
+                $scope.type = 0;
+                $scope.textColor = '#000000';
+                eventmark.get().then(function (data) {
+                    $scope.imgList = data;
+                    if (data.length && data.length > 0) $scope.imgUrl = data[0];
+                });
+                $scope.imgHeight = 50;
+                $scope.imgWidth = 50;
+                $scope.flag = 0;
+                $scope.longitude = 10;
+                $scope.latitude = 10;
+                $scope.mapOptions = {
+                    options: {
+                        basemap: 'topo',
+                        center: {
+                            lon: -31.036,
+                            lat: 42.747
+                        },
+                        zoom: 10,
+                        displayGraphicsOnPan: true,
+                        sliderStyle: 'small',
+                        logo: false
+                    }
+                };
+                $scope.Point = null;
+                $scope.map = null;
+                $scope.vm = {
+                    eventid: localStorage.eventid,
+                    periodid: localStorage.periodid,
+                    data: []
+                };
+                $scope.onMapLoad = function (mapCtl) {
+                    $scope.map = mapCtl;
+                    icsdb.getdetail('eventtempdata', '?eventid=' + $scope.eventid + '&periodid=' + $scope.periodid).then(function (data) {
+
+                        if (data && data.length && data.length > 0) {
+                            $scope.vm = data[0];
+                            $scope.createMap($scope.vm.extent);
+                        } else {
+                            icsdb.add('eventtempdata', $scope.vm).then(function (dt) {
+                                $scope.vm = dt;
+                                $scope.createMap(null);
+                            });
+                        }
+
+                    });
+                };
+                $scope.click = function (type) {
+                    $scope.flag = 0;
+                    $scope.toolbar.activate($scope.mapModel.Draw[type]);
+                };
+                $scope.drawImg = function () {
+                    $scope.flag = 1;
+                    $scope.toolbar.activate($scope.mapModel.Draw['POINT']);
+                };
+                $scope.locateTo = function () {
+                    var pt = new $scope.Point($scope.longitude, $scope.latitude);
+                    $scope.map.centerAndZoom(pt, 3);
+                    //$scope.map.
+                };
+                $scope.drawText = function () {
+                    if (!$scope.textContent) {
+                        layer.alert('文字内容不能为空', {
+                            icon: 2
+                        });
+                        return;
+                    };
+                    $scope.flag = 2;
+                    $scope.toolbar.activate($scope.mapModel.Draw['POINT']);
+                };
+                $scope.postChange = function () {
+                    $scope.vm.data = [];
+                    angular.forEach($scope.map.graphics.graphics, function (item) {
+                        // $scope.geometryAry.push(angular.toJson(item.toJson()));
+                        $scope.vm.data.push(angular.toJson(item.toJson()));
+                    });
+                    $scope.vm.extent = $scope.map.extent.toJson();
+                    icsdb.update('eventtempdata', $scope.vm.id, $scope.vm);
+                };
+                $scope.createMap = function (ext) {
+                    esriLoader.require(["esri/map", "esri/geometry/Point", "esri/geometry/Polygon", "esri/dijit/Scalebar",
+                        "esri/toolbars/draw", "esri/toolbars/edit", 'esri/symbols/PictureMarkerSymbol', 'esri/Color',
+                        "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", 'esri/symbols/TextSymbol', 'esri/symbols/Font',
+                        "esri/symbols/SimpleFillSymbol", "esri/SpatialReference",
+                        "esri/graphic", "esri/geometry/jsonUtils", 'dojo/_base/event',
+                        "esri/Color", "dojo/parser", "esri/geometry/Extent",
+                        "dijit/Menu", "dijit/MenuItem", "dijit/MenuSeparator",
+                        "dijit/form/Button", "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+                        "dojo/domReady!"
+                    ],
+                        function (Map, Point, Polygon, Scalebar, Draw, Edit, PictureMarkerSymbol, Color,
+                            SimpleMarkerSymbol, SimpleLineSymbol, TextSymbol, Font,
+                            SimpleFillSymbol, SpatialReference, Graphic, geometryJsonUtils, event,
+                            Color, parser, Extent, Menu, MenuItem, MenuSeparator) {
+                            $scope.mapModel = {
+                                Draw: Draw,
+                                Edit: Edit,
+                                Point: Point,
+                                Menu: Menu,
+                                MenuItem: MenuItem,
+                                MenuSeparator: MenuSeparator
+                            };
+                            $scope.Point = Point;
+                            
+                            if (ext){
+                                var extent = new Extent(parseFloat(ext.xmin), parseFloat(ext.ymin), parseFloat(ext.xmax), parseFloat(ext.ymax), new SpatialReference({
+                                    wkid: 102100
+                                }));
+                                $scope.map.setExtent(extent);
+                            }else{
+                                var extent = new Extent(-1708928, -7234550, 22750920, 701086, new SpatialReference({
+                                    wkid: 102100
+                                }));
+                                $scope.map.setExtent(extent);
+                            }
+                            var scalebar = new Scalebar({
+                                map: $scope.map,
+                                scalebarUnit: "dual"
+                            });
+                            angular.forEach($scope.vm.data, function (item) {
+                                var g = new Graphic(angular.fromJson(item));
+                                $scope.map.graphics.add(g);
+                            });
+                            $scope.editToolbar = new Edit($scope.map);
+                            $scope.editToolbar.on("graphic-move-stop", function (evt, info) {
+                                $scope.postChange();
+                            });
+                            $scope.editToolbar.on("rotate-stop", function (evt) {
+                                $scope.postChange();
+                            });
+                            $scope.editToolbar.on("scale-stop", function (evt) {
+                                $scope.postChange();
+                            });
+                            $scope.toolbar = new Draw($scope.map);
+                            $scope.toolbar.on("draw-end", function (evt) {
+                                var symbol;
+                                $scope.toolbar.deactivate();
+                                $scope.map.showZoomSlider();
+                                switch (evt.geometry.type) {
+                                    case "point":
+                                        {
+                                            if ($scope.flag == 0) {
+                                                symbol = new SimpleMarkerSymbol();
+                                            } else if ($scope.flag == 1) {
+                                                var img = $scope.imgUrl.url;
+                                                symbol = new PictureMarkerSymbol(img, $scope.imgWidth, $scope.imgHeight);
+                                            } else if ($scope.flag == 2) {
+                                                var size = $scope.textSize + 'pt';
+                                                symbol = new TextSymbol($scope.textContent).setColor(
+                                                    Color.fromHex($scope.textColor)).setAlign(Font.ALIGN_START).setFont(
+                                                    new Font(size).setWeight(Font.WEIGHT_BOLD));
+                                            }
+                                        }
+                                        break;
+                                    case "multipoint":
+                                        symbol = new SimpleMarkerSymbol();
+                                        break;
+                                    case "polyline":
+                                        symbol = new SimpleLineSymbol();
+                                        break;
+                                    default:
+                                        symbol = new SimpleFillSymbol();
+                                        break;
+                                }
+                                var graphic = new Graphic(evt.geometry, symbol);
+                                // var sJson = JSON.stringify(graphic.toJson());
+                                $scope.map.graphics.add(graphic);
+                                $scope.postChange();
+                            });
+
+                            $scope.createGraphicsMenu();
+                        });
+                };
+
+                $scope.createGraphicsMenu = function () {
+                    // Creates right-click context menu for GRAPHICS
+                    $scope.ctxMenuForGraphics = new $scope.mapModel.Menu({});
+
+                    // $scope.ctxMenuForGraphics.addChild(new $scope.mapModel.MenuItem({
+                    //     label: "Edit",
+                    //     onClick: function() {
+                    //         if (selected.symbol.declaredClass === 'esri.symbol.TextSymbol') {
+                    //             $scope.editToolbar.activate($scope.mapModel.Edit.EDIT_TEXT, selected);
+                    //         } else {
+                    //             if (selected.geometry.type !== "point") {
+                    //                 $scope.editToolbar.activate($scope.mapModel.Edit.EDIT_VERTICES, selected);
+                    //             } else {
+                    //                 alert("Not implemented");
+                    //             }
+                    //
+                    //         }
+                    //     }
+                    // }));
+
+                    $scope.ctxMenuForGraphics.addChild(new $scope.mapModel.MenuItem({
+                        label: "Move",
+                        onClick: function () {
+                            $scope.editToolbar.activate($scope.mapModel.Edit.MOVE, selected);
+                        }
+                    }));
+
+                    $scope.ctxMenuForGraphics.addChild(new $scope.mapModel.MenuItem({
+                        label: "Rotate/Scale",
+                        onClick: function () {
+                            if (selected.geometry.type !== "point") {
+                                $scope.editToolbar.activate($scope.mapModel.Edit.ROTATE | $scope.mapModel.Edit.SCALE, selected);
+                            } else {
+                                layer.alert('错误的编辑对象', {
+                                    icon: 2
+                                });
+                            }
+                        }
+                    }));
+
+                    $scope.ctxMenuForGraphics.addChild(new $scope.mapModel.MenuSeparator());
+                    $scope.ctxMenuForGraphics.addChild(new $scope.mapModel.MenuItem({
+                        label: "Delete",
+                        onClick: function () {
+                            $scope.map.graphics.remove(selected);
+                            $scope.postChange();
+                        }
+                    }));
+
+                    $scope.ctxMenuForGraphics.startup();
+                    $scope.map.graphics.on("mouse-over", function (evt) {
+                        selected = evt.graphic;
+                        $scope.ctxMenuForGraphics.bindDomNode(evt.graphic.getDojoShape().getNode());
+                    });
+
+                    $scope.map.graphics.on("mouse-out", function (evt) {
+                        $scope.ctxMenuForGraphics.unBindDomNode(evt.graphic.getDojoShape().getNode());
+                    });
+                };
+            });
+    </script>
+</body>
+
+</html>

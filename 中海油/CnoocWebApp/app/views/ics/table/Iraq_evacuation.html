@@ -1,0 +1,133 @@
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a  ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"evacuation"|translate}}</li>
+    </ol>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <button type="button"  class="btn btn-info">{{"close"|translate}}</button>
+        <button type="button"  class="btn btn-success" ng-click="saves()">{{"save"|translate}}</button>
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">{{"evacuation"|translate}} </div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="border-top:1px solid #efefef; border-bottom: 1px solid #efefef;line-height:50px;">
+                        <span class="col-sm-6 col-md-6 col-lg-6">{{"necessary"|translate}}</span>
+                        <span class="col-sm-6 col-md-6 col-lg-6">{{"recommended"|translate}}</span>
+                    </div>
+                    <div class="row col-sm-12 col-md-12 col-lg-12">
+                        <div class="col-sm-6 col-md-6 col-lg-6 text-left" style="border-right: 1px solid #efefef;">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"carrypassport"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"copypassport"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"enough"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"dollor"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"addressbook"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"bag"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"medicine"|translate}}</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 text-left">
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"scanning"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"notebook"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"toilet"|translate}}</label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span>{{"clothes"|translate}} </label>
+                            </div>
+                            <div class="checkbox c-checkbox needsclick">
+                                <label class="needsclick">
+                                    <input type="checkbox" value="" class="needsclick" />
+                                    <span class="fa fa-check"></span> {{"personnelitem"|translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-sm-12 col-md-12 col-lg-12" style="border-top:1px solid #efefef;border-bottom: 1px solid #efefef; line-height: 50px;">
+                    <span class="col-sm-6 col-md-6 col-lg-6">{{"camp"|translate}}</span>
+                    <span class="col-sm-6 col-md-6 col-lg-6">{{"weight"|translate}}</span>
+                </div>
+                <div class="row col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-sm-6 col-md-6 col-lg-6 text-left" style="border-right: 1px solid #efefef;">
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" value="" class="needsclick" />
+                                <span class="fa fa-check"></span>{{"food"|translate}}</label>
+                        </div>
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" value="" class="needsclick" />
+                                <span class="fa fa-check"></span>{{"garbagebag"|translate}}</label>
+                        </div>
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" value="" class="needsclick" />
+                                <span class="fa fa-check"></span>{{"closepower"|translate}} </label>
+                        </div>
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" value="" class="needsclick" />
+                                <span class="fa fa-check"></span>{{"door"|translate}}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 text-left">
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" value="" class="needsclick" />
+                                <span class="fa fa-check"></span>{{"handbag"|translate}}</label>
+                        </div>
+                        <div class="checkbox c-checkbox needsclick">
+                            <label class="needsclick">
+                                <input type="checkbox" value="" class="needsclick" />
+                                <span class="fa fa-check"></span>{{"baggage"|translate}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

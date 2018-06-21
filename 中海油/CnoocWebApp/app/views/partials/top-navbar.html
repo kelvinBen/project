@@ -1,0 +1,78 @@
+<!-- START Top Navbar-->
+<nav role="navigation" class="navbar topnavbar" ng-controller="TopnavbarController">
+    <!-- START navbar header-->
+    <div class="navbar-header">
+        <a ng-href="#/app/securitysystem" class="navbar-brand" style="width: 400px;margin-top: -6px;">
+            <div class="brand-logo">
+                <img ng-src="{{imgUrl}}" alt="App Logo" class="img-responsive" />
+            </div>
+            <div class="brand-logo-collapsed">
+                <img ng-src="{{imgUrl}}" alt="App Logo" class="img-responsive" />
+            </div>
+        </a>
+    </div>
+    <!-- END navbar header-->
+    <!-- START Nav wrapper-->
+    <div class="nav-wrapper">
+        <!-- START Left navbar-->
+        <ul class="nav navbar-nav">
+            <li>
+                <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                <a href="" trigger-resize="" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" class="hidden-xs">
+                    <em class="fa fa-navicon"></em>
+                </a>
+                <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                <a href="" ng-click="app.asideToggled = !app.asideToggled" class="visible-xs sidebar-toggle">
+                    <em class="fa fa-navicon"></em>
+                </a>
+            </li>
+        </ul>
+        <!-- END Left navbar-->
+        <!-- START Right Navbar-->
+        <ul class="nav navbar-nav navbar-right">
+            <!-- Search icon-->
+            <li uib-dropdown="" class="dropdown dropdown-list">
+                <a uib-dropdown-toggle="">
+                    <i class="fa fa-user"></i>
+                    {{userName}}
+                    <!-- <div class="label label-danger">11</div> -->
+                </a>
+                <ul class="dropdown-menu animated flipInX" style="min-width: 100px;">
+                    <li>
+                        <div class="list-group">
+                            <a href="" class="list-group-item" ng-click="logout()">
+                                <small>{{'Loginout' | translate}}</small>
+                            </a>
+                            <a href="" class="list-group-item" ng-click="set()">
+                                <small>{{'personalcenter'|translate}}</small>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a ng-click="setLan('zh')">
+               {{'zh'|translate}}
+            </a>
+            </li>
+            <li>
+                <a ng-click="setLan('en')">
+               {{'en'|translate}}
+            </a>
+            </li>
+            <!-- END Offsidebar menu-->
+        </ul>
+        <!-- END Right Navbar-->
+    </div>
+    <!-- END Nav wrapper-->
+    <!-- START Search form-->
+    <form role="search" action="search.html" class="navbar-form">
+        <div class="form-group has-feedback">
+            <input type="text" placeholder="{{ 'topbar.search.PLACEHOLDER' | translate }}" class="form-control" />
+            <div search-dismiss="search-dismiss" class="fa fa-times form-control-feedback"></div>
+        </div>
+        <button type="submit" class="hidden btn btn-default">Submit</button>
+    </form>
+    <!-- END Search form-->
+</nav>
+<!-- END Top Navbar-->

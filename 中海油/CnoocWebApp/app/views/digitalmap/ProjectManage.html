@@ -1,0 +1,114 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.projectmanage">{{'digitalmap'|translate}}</a>
+        </li>
+        <li>
+            <span>{{'projectinfomanage'|translate}}</span>
+        </li>
+    </ul>
+</h3>
+    <div class="container-fluid"  ng-controller="ProjectManageCtrl">
+        <div class="cl pd-5 bg-1 bk-gray" style="margin-bottom: 5px;">
+            <span class="l">
+                <a href="javascript:;" class="btn btn-danger radius" ng-click="deletesomeconfirm()">
+                      <em class="fa fa-trash-o"></em>{{'delete'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" ng-click="addproject();">
+                    <em class="fa fa-plus"></em>{{'add'|translate}}
+                </a>
+            </span>
+            <span class="r">
+                <a href="javascript:;" class="btn btn-success radius" onclick="window.print()">
+                   <i class="fa fa-print"></i>{{'print'|translate}}
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="utility_export()" ng-hide="true">
+                     {{'export'|translate}}
+                </a>
+            </span>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" style="padding-left: 15px;">
+                <h4>
+                    {{'projectinfomanage'|translate}}
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <table datatable="ng" class="table table-bordered table-striped table-hover ng-isolate-scope">
+                        <thead>
+                        <tr>
+                            <!--<th style="width: 5%;">-->
+                                <!--<input type="checkbox" ng-model="select_all" ng-change="selectall()">-->
+                            <!--</th>-->
+                        <tr class="text-c">
+                            <th style="width:25px;">
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="select_all"   ng-change="selectall()" />
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                                <!-- <input type="checkbox" ng-click="checkAllSelected()"> -->
+                            </th>
+                            <th style="text-align: center;width: 5%;">{{'num'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'projectname'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'settime'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'address'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'step'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'count'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'facilitiesnum'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'organization'|translate}}</th>
+                            <th style="text-align: center;width: 10%;">{{'position'|translate}}</th>
+                            <th style="text-align: center;width: 20%;">{{'operation'|translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="cur in projects">
+                            <!--<th>-->
+                                <!--<input type="checkbox" ng-model="cur.selected">-->
+                            <!--</th>-->
+                            <td class="text-center">
+                                <div class="checkbox c-checkbox">
+                                    <label style="font-weight:bold">
+                                        <input type="checkbox" ng-model="cur.selected" />
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                                <!-- <input type="checkbox" ng-checked="u.checked" ng-model="u.checked"> -->
+                            </td>
+                            <td>{{$index+1}}</td>
+                            <td>{{cur.name}}</td>
+                            <td>{{cur.create_time|date:'yyyy-MM-dd'}}</td>
+                            <td>{{cur.locate}}</td>
+                            <td>{{cur.stage}}</td>
+                            <td>{{cur.plate_num}}</td>
+                            <td>{{cur.utility_num}}</td>
+                            <td>{{getCompanyName(cur.organiztion_id)}}</td>
+                            <td>{{cur.lon}},{{cur.lat}}</td>
+                            <td >
+                                <!--<a href="javascript:;" title="{{'edit'|translate}}" ng-click="edit(cur)">-->
+                                <!--<em class="fa fa-edit"></em>-->
+                            <!--</a>-->
+                            <!--<a href="javascript:;" title="{{'singledelete'|translate}}" ng-click="deleteconfirm(cur.project_id)">-->
+                            <!--<em class="fa fa-trash-o"></em>-->
+                        <!--</a>-->
+
+                                <button type="button" class="btn btn-primary btn-sm" title="{{'edit'| translate}}" ng-click="edit(cur)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" title="{{'singledelete'|translate}}" ng-click="deleteconfirm(cur.project_id)">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

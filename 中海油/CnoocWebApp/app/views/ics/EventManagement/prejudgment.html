@@ -1,0 +1,71 @@
+
+<h3>
+    <ol class="breadcrumb">
+        <li><a href="#">{{"homepage"|translate}}</a></li>
+        <li><a ui-sref="app.ics_eventindex">{{"emergencymanagement"|translate}}</a></li>
+        <li class="active">{{"preliminaryjudge"|translate}}</li>
+    </ol>
+</h3>
+<div ng-controller="prejudgmentCtrl" style="margin: 10px; overflow: hidden;" class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="myTabContent " style="margin-left: 10px;" >
+            <form name="formValidate" ng-submit="submit()" novalidate="" class="form-validate form-horizontal">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <!-- <div class="panel-heading text-center">
+                      国际公司初步形式判断
+                    </div> -->
+                    <div class="panel-body">
+                        <fieldset class="b0">
+                            <legend>{{title}}</legend>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">{{subTitle}}</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="vm.startevent">
+                                        <option value="1">
+                                            {{"meetstartup"|translate}}
+                                        </option>
+                                        <option value="0">
+                                            {{"nomeetstartup"|translate}}
+                                        </option>
+                                    </select>
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!-- <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{'预警等级'}}</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" ng-model="vm.level">
+                                        <option value="1">
+                                            I级
+                                        </option>
+                                        <option value="2">
+                                            II级
+                                        </option>
+                                        <option value="3">
+                                            III级
+                                        </option>
+                                        <option value="4">
+                                            IV级
+                                        </option>
+                                    </select>
+                                    <span ng-show="validateInput('sometext', 'required')" class="text-danger">{{"required"|translate}}</span>
+                                </div>
+                            </div>
+                        </fieldset> -->
+                    </div>
+                    <div class="panel-footer text-center">
+                        <input type="checkbox" ng-model="sendMsg">{{"reportnotice"|translate}}</input>
+                        <button type="submit" class="btn btn-danger">{{"submit"|translate}}</button>
+                        <button type="button" class="btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                    </div>
+                </div>
+                <!-- END panel-->
+            </form>
+        </div>
+    </div>
+</div>

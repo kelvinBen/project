@@ -1,0 +1,38 @@
+<ol class="breadcrumb" style="margin-left: -20px; margin-top: -20px;">
+    <li><a href="#">{{"homepage"|translate}}</a></li>
+    <li><a  ui-sref="app.eventindex">{{"eventmanagement"|translate}}</a></li>
+    <li class="active">{{"addperiod"|translate}}</li>
+</ol>
+<form action="" ng-controller="addperiodCtrl" style="margin: 10px; overflow: hidden;">
+    <div class="row" >
+        <div class="panel panel-default" style="margin: 0px 20px;">
+            <div class="panel-body">
+                <form role="form">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"periodname"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;"  type="text" class="form-control" ng-model="vm.name"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"eventstarttime"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;" type="datetime-local" class="form-control" ng-model="date1" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="col-sm-2 col-md-2 col-lg-2 control-label" style="text-align: right; margin-top: 27px;">{{"eventendtime"|translate}}：</label>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <input style="margin-top: 20px;" type="datetime-local" class="form-control" ng-model="date2" />
+                        </div>
+                    </div>
+                </form>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-4 col-lg-offset-4" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>

@@ -1,0 +1,205 @@
+﻿@using MvcWebSite
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Content/lib/html5.js"></script>
+    <script type="text/javascript" src="~/Content/lib/respond.min.js"></script>
+    <script type="text/javascript" src="~/Content/lib/PIE_IE678.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="~/Content/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/static/h-ui/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/Hui-iconfont/1.0.7/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/icheck/icheck.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/static/h-ui/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="~/Content/static/h-ui/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>用户列表</title>
+    <style type="text/css">
+        .check-box {
+            width: 74px;
+            height: 25px;
+        }
+
+        table {
+            font-weight: bold;
+            font-family: "微软雅黑";
+        }
+
+        th {
+            padding: 10px 0px;
+        }
+
+        td {
+            text-align: center;
+            border-width: 0px 1px 1px 0px;
+            padding: 10px 0px;
+            background-color: white;
+            border-bottom: 1px solid #e4e4e4;
+        }
+
+        .td1 {
+            width: 10%;
+        }
+
+        .td2 {
+            width: 15%;
+        }
+
+        .td3 {
+            width: 20%;
+        }
+
+        .td4 {
+            width: 10%;
+        }
+
+        .td5 {
+            width: 15%;
+        }
+
+        .td6 {
+            width: 15%;
+        }
+
+        .td7 {
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont">&#xe67f;</i><a href="@Url.Action("WeatherMap")">灾害天气系统</a>
+        <span class="c-gray en">&gt;</span> @Html.GetLangbyKey("userManage")
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="@Html.GetLangbyKey("Refresh")">
+            <i class="Hui-iconfont">&#xe68f;</i>
+        </a>
+    </nav>
+    <div class="page-container">
+        <div class="cl pd-5 bg-1 bk-gray">
+            <span class="l">
+                <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+                    <i class="Hui-iconfont">&#xe6e2;</i> @Html.GetLangbyKey("deleteSome")
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('@Html.GetLangbyKey("adduser")','@Url.Action("AddUtility")','800')">
+                    <i class="Hui-iconfont">&#xe600;</i> @Html.GetLangbyKey("adduser")
+                </a>
+            </span>
+            <span class="r">
+                <a href="javascript:;" class="btn btn-danger radius">
+                    <i class="Hui-iconfont">&#xe652;</i>打印
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('@Html.GetLangbyKey("adduser")','@Url.Action("AddUtility")','800')">
+                    <i class="Hui-iconfont">&#xe644;</i>导出
+                </a>
+            </span>
+            @*<span class="r">共有数据：<strong>54</strong> 条</span>*@
+        </div>
+        <table class="table table-border table-bordered table-hover table-bg">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="7">@Html.GetLangbyKey("userManage")</th>
+                </tr>
+                <tr class="text-c">
+                    <th class="td1">
+                        <input type="checkbox" value="" name="">
+                    </th>
+                    <th class="td2" style="text-align: center;">@Html.GetLangbyKey("username")</th>
+                    <th class="td3" style="text-align: center;">@Html.GetLangbyKey("email")</th>
+                    <th class="td4" style="text-align: center;">@Html.GetLangbyKey("status")</th>
+                    <th class="td5" style="text-align: center;">@Html.GetLangbyKey("department")</th>
+                    <th class="td6" style="text-align: center;">@Html.GetLangbyKey("career")</th>
+                    <th class="td7" style="text-align: center;">@Html.GetLangbyKey("operation")</th>
+                </tr>
+            </thead>
+            <tbody id="tabBody"></tbody>
+        </table>
+        <div class="contain" style="margin: 20px;">
+            <!-- #################### 分页  #################### -->
+            <div id="biuuu_city"></div>
+            <!-- #################### 分页结束  #################### -->
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Content/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/lib/layer/2.1/layer.js"></script>
+    <script type="text/javascript" src="~/Content/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="~/Content/static/h-ui/js/H-ui.js"></script>
+    <script type="text/javascript" src="~/Content/static/h-ui/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="~/Content/lib/laypage/laypage.js"></script>
+    <script type="text/javascript">
+        /*管理员-角色-添加*/
+        function admin_role_add(title, url, w, h)
+        {
+            layer_show(title, url, w, h);
+        }
+        /*管理员-角色-编辑*/
+        function admin_role_edit(title, url, id, w, h)
+        {
+            layer_show(title, url, w, h);
+        }
+        /*管理员-角色-删除*/
+        function admin_role_del(obj, id)
+        {
+            layer.confirm('角色删除须谨慎，确认要删除吗？', function (index)
+            {
+                //此处请求后台程序，下方是成功后的前台处理……
+
+
+                $(obj).parents("tr").remove();
+                layer.msg('已删除!', { icon: 1, time: 1000 });
+            });
+        }
+
+        var nums = 10; //每页出现的数量
+        var pages = 0; //得到总页数
+        var srcDt = null;
+        $(document).ready(function ()
+        {
+            $.getJSON('@Url.Action("GetUtilities")', function (data)
+            {
+                pages = Math.ceil(data.length / nums);
+                srcDt = data;
+                //调用分页
+                laypage({
+                    cont: 'biuuu_city',
+                    pages: pages,
+                    prev: '<',
+                    next: '>',
+                    first: 1,
+                    jump: function (obj, first)
+                    {
+                        var curr = obj.curr
+                        var str = '', last = curr * nums - 1;
+                        last = last >= data.length ? (data.length - 1) : last;
+                        for (var i = (curr * nums - nums) ; i <= last; i++)
+                        {
+                            var item = srcDt[i];
+                            str += '<tr id="tr' + item.user_id + '"><td class="td1" style="text-align: center;"><input id="' + item.user_id + '" type="checkbox" class="chk" /></td>';
+                            str += '<td class="td2" style="text-align: center;">' + item.name + '</td>';
+                            str += '<td class="td3" style="text-align: center;">' + item.create_time + '</td>';
+                            str += '<td class="td4" style="text-align: center;">' + item.oilwell_num + '</td>';
+                            str += '<td class="td5" style="text-align: center;">' + item.type + '</td>';
+                            str += '<td class="td6" style="text-align: center;">' + item.dailyoutput + '</td>';
+                            str += '<td class="td7" style="text-align: center;">';
+                            str += '<a class="btn_delete" href="#"><button class="btn btn-danger size-MINI"><i class="Hui-iconfont">&#xe6df;</i></button></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+                            str += '<a class="btn_delete" href="#"><button class="btn btn-danger size-MINI"><i class="Hui-iconfont">&#xe609;</i></button></a></td></tr>';
+                        }
+                        $('#tabBody').html(str);
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+</html>

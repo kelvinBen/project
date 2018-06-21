@@ -1,0 +1,133 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"homepage"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"hazardsource"|translate}}</span>
+        </li>
+        <li class="active">
+            <span>{{"DangerResourceMgr"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="DangerResourceMgrCtrl as tree">
+    <div class="row-fluid">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="well wd-wide">
+                <span ng-if="tree.doing_async">...loading...</span>
+                <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)" expand-level="2" initial-selection="Granny Smith"></abn-tree>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div style="margin-top: 10px;">
+                <input class="form-control"   placeholder="在以下信息中搜索">
+            </div>
+            <div class="panel panel-primary" style="margin-top: 5px;">
+                <div class="panel-body" style="height:100%;overflow:auto">
+                    <div class="form-inline">
+                        <a class="btn btn-success radius" href="javascript:;" title="{{'edit'|translate}}">
+                            <em class="fa fa-edit"></em>{{"edit"|translate}}
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger radius">
+                            <em class="fa fa-trash-o"></em>{{"singledelete"|translate}}
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger radius" onclick="window.print()">
+                            <em class="fa fa-print"></em>{{"print"|translate}}
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <em class="fa fa-hand-o-right"></em>{{"export"|translate}}
+                        </button>
+                        <button type="submit" class="btn btn-success" style="margin-left: 59%;">
+                            <em class="fa fa-plus"></em> {{"new"|translate}}
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <em class="fa fa-hand-o-left"></em>{{"import"|translate}}
+                        </button>
+                    </div>
+                    <div class="table-responsive" style="text-align: center;margin-top: 5px;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th style="text-align: center;"><input type="checkbox"></th>
+                                <th style="text-align: center;">{{"num"|translate}}</th>
+                                <th style="text-align: center;">{{"fillname"|translate}}</th>
+                                <th style="text-align: center;">{{"organizationcode"|translate}}</th>
+                                <th style="text-align: center;">{{"unitcharge"|translate}}</th>
+                                <th style="text-align: center;">{{"chargephone"|translate}}</th>
+                                <th style="text-align: center;">{{"detail"|translate}}</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>1</td>
+                                <td>有限公司（本级）</td>
+                                <td>27100001</td>
+                                <td>宫少波</td>
+                                <td>0086-13910856291</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>2</td>
+                                <td>有限公司（本级）</td>
+                                <td>27100001</td>
+                                <td>项 华</td>
+                                <td>0086-13902064879	</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>3</td>
+                                <td>有限公司（本级）</td>
+                                <td>27100001</td>
+                                <td>刘永杰</td>
+                                <td>0086-13603047299	</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>4</td>
+                                <td>有限公司（本级）</td>
+                                <td>27100001</td>
+                                <td>华成刚	</td>
+                                <td>0086-15901180912</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>5</td>
+                                <td>有限公司（本级）</td>
+                                <td>27100001</td>
+                                <td>凌福海</td>
+                                <td>0086-1353343662</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-success" title={{"detail"|translate}}>
+                                        <em class="fa icon-magnifier"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

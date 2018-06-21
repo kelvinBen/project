@@ -1,0 +1,70 @@
+.demo {
+    /* for IE10+ touch devices */
+    touch-action:none;
+}
+
+/** ELEMENTS **/
+.chart-demo .window {
+	/*border:0.1em dotted #d4e06b;*/
+	width:16em;
+    /*height:auto;*/
+	/*line-height:4em;*/
+}
+
+/** HOVER EFFECTS **/
+.chart-demo .window.jsplumb-source-hover, .chart-demo .window.jsplumb-target-hover {
+    border:1px solid orange;
+    color:orange;
+}
+
+/** ELEMENT POSITIONS **/
+#chartWindow1 { left:30em; top:1em;}
+#chartWindow2 { left:30em; top:12em;}
+#chartWindow3 { left:1em;top:24em;}
+#chartWindow4 { left:1em;top:36em;}
+#chartWindow5 { left:20em;top:24em;}
+#chartWindow6 { left:20em;top:36em;}
+#chartWindow7 { left:40em;top:24em;}
+#chartWindow8 { left:40em;top:36em;}
+#chartWindow9 { left:60em;top:24em;}
+#chartWindow10 { left:60em;top:36em;}
+
+
+.window {
+    position:absolute;
+    cursor:pointer;
+    z-index:24;
+    padding:0;
+    /*background-color:white;
+    border:1px solid #346789;
+    text-align:center;
+    z-index:24;
+    cursor:pointer;
+    box-shadow: 2px 2px 19px #aaa;
+    -o-box-shadow: 2px 2px 19px #aaa;
+    -webkit-box-shadow: 2px 2px 19px #aaa;
+    -moz-box-shadow: 2px 2px 19px #aaa;
+    -moz-border-radius:0.5em;
+    border-radius:0.5em;
+    position:absolute;
+    color:black;
+    padding:0;
+    width:80px;
+    height:100%;
+    line-height: 80px;
+    -webkit-transition: -webkit-box-shadow 0.15s ease-in;
+    -moz-transition: -moz-box-shadow 0.15s ease-in;
+    -o-transition: -o-box-shadow 0.15s ease-in;
+    transition: box-shadow 0.15s ease-in;*/
+}
+
+.window:hover {
+    /*border:1px solid #123456;
+    box-shadow: 2px 2px 19px #444;
+    -o-box-shadow: 2px 2px 19px #444;
+    -webkit-box-shadow: 2px 2px 19px #444;
+    -moz-box-shadow: 2px 2px 19px #fff;
+    opacity:0.9;*/
+}
+
+path, .jsplumb-endpoint { cursor:pointer; }

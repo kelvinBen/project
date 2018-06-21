@@ -1,0 +1,87 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"releaseandcompare"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="contrastMgrController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{"releaseandcompare"|translate}}
+        </div>
+        <div class="panel-body">
+            <form class="form-inline">
+                <div class="form-group">
+                    <select class="form-control select" name="ftype" ng-model="fileType" ng-options="a.country_id as a.name for a in countryList " style="width: 200px;"/>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input date-range-picker class="form-control date-picker" type="text" ng-model="dateRange" options="{format: 'YYYY-MM-DD'}" style="width:210px;" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" ng-click="searchHLevel()">
+                        <i class="fa fa-search"></i>{{"query"|translate}}
+                    </button>
+                </div>
+            </form>
+            <div style="margin:10px;">
+            </div>
+            <table class="table table-bordered table-striped table-hover" style="border-collapse:collapse" datatable="ng">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            {{"date"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"openwarning"|translate}}
+                        </th>
+                        <th class="text-center">
+                            DWLI
+                        </th>
+                        <th class="text-center">
+                            {{"commandwarning"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"sameornot"|translate}}
+                        </th>
+                        <th class="text-center">
+                            {{"warningsetnotice"|translate}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                                  <tr ng-repeat="u in histroy" class="text-center">
+                        <td>{{u.time | dateFormatter}}</td>
+                        <td>
+                            {{u.pGrade}}
+                        </td>
+                        <td>
+                            {{u.dwli.toFixed(2)}}
+                        </td>
+                        <td>
+                            {{u.rGrade}}
+                        </td>
+                        <td>
+                            <p class="label label-warning" ng-show="u.rGrade!=u.pGrade">
+                                {{"no"|translate}}
+                            </p>
+                            <p class="label label-success" ng-hide="u.rGrade!=u.pGrade">
+                                {{"yes"|translate}}
+                            </p>
+                        </td>
+                        <td>
+                            {{u.grade_node}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

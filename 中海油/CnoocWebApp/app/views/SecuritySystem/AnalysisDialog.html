@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <form name="analysisForm" method="post" ng-submit="" class="form-horizontal">
+        <fieldset>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <select class="select form-control " ng-model="type" name="type"
+                            ng-options="d.id as d.label for d in typeList" required></select>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset ng-show="type==2">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <select class="select form-control " ng-model="continent" name="continent" 
+                    ng-options="d.id as d.label for d in ngDialogData.continents" required></select>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset ng-show="type==2">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <select class="select form-control " ng-model="selCountry" name="selCountry"
+                            ng-options="d.country_id as d.name for d in showCountry" required></select>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="row form-group">
+                <div class="col-xs-12" style="text-align:center">
+                    <input type="submit" class="btn btn-primary" value="{{'sure'|translate}}" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+<div class="weather">
+  <div class="list_content" *ngFor="let f of forcastes">
+      <div class="content" style="margin-top: 15px;">
+          {{f.Date}}
+      </div>
+      <div class="content">
+          <div class="tqIcon {{f.Weather.WImage1}}"></div>
+      </div>
+      <div class="content" style="margin-top: 30px;">
+          <div class="tqIcon {{f.Weather.WImage2}}"></div>
+      </div>
+      <div class="content" style="margin-top: 20px;">
+          <p *ngIf="f.Weather.WName1 == f.Weather.WName2">{{f.Weather.WName1}}</p>
+          <p *ngIf="f.Weather.WName1 != f.Weather.WName2">{{f.Weather.WName1}}转{{f.Weather.WName2}}</p>
+      </div>
+      <div class="content">
+          {{f.Temp.MAX}}/{{f.Temp.Min}}℃
+      </div>
+      <div class="content">
+          {{f.Wind.WindD}}
+      </div>
+      <div class="content">
+          {{f.Wind.WindV}}
+      </div>
+  </div>
+</div>

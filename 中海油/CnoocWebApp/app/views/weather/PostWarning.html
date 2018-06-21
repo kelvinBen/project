@@ -1,0 +1,59 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>灾害天气系统</a>
+        </li>
+        <li>
+            <span>灾害信息录入</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" id="addDisaster" ng-controller="postwarningCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading">发送灾害天气预警</div>
+        <div class="panel-body">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>模板：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                        <span class="select-box inline">
+                            <select name="type_select" class="select" id="type_select" ng-model="formdata.type"
+                                    ng-change="changetype()">
+                                <option value="0" selected>灾害天气预警-国际公司</option>
+                                <option value="1">灾害天气预警-海外公司</option>
+                            </select>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl" ng-show="formdata.type=='1'">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>海外机构：</label>
+                <div class="formControls col-xs-8 col-sm-9" style="margin:5px 0px;">
+                        <span class=" select-box inline">
+                        <select name="type_select" class="select" id="type_select" ng-model="org_select"
+                                ng-change="changetype()" ng-options="org.organiztion_name for org in orgs"></select>
+                        </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>预警信息内容：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <textarea id="com_info" rows="20" cols="1"
+                              style="margin:5px 0px; width: 50%; border: 1px solid #a4bfd7;background-color: white; border-radius:4px;"
+                              placeholder="预警内容" ng-model="formdata.content"></textarea>
+                </div>
+            </div>
+
+
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                    <button class="btn btn-success radius" id="admin-role-save" name="admin-role-save"
+                            ng-click="sendmsg()"><i class="icon-ok"></i>发送
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

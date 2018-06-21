@@ -1,0 +1,53 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"securitysystem"|translate}}
+            </a>
+        </li>
+        <li class="active">
+            {{"warnanalysis"|translate}}
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="analysisController">
+    <script type="text/ng-template" id="typeDiaglogId">
+        <div class="container-fluid">
+            <div style="margin:20px;"></div>
+            <form name="analysisForm" method="post" class="form-horizontal">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <select class="select form-control " ng-model="type" name="type"
+                                    ng-options="d.id as d.label for d in typeList" required></select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset ng-show="type==2">
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <select class="select form-control " ng-model="continent" name="continent"
+                                    ng-options="d.id as d.label for d in continents" required></select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset ng-show="type==2">
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <select class="select form-control " ng-model="selCountry" name="selCountry"
+                                    ng-options="d.country_id as d.name for d in showCountry" required></select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin:0px;">
+                    <div class="row form-group">
+                        <div class="col-xs-12" style="text-align:center">
+                            <button class="btn btn-primary" ng-click="formSubmit()">{{"sure"|translate}}</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </script>
+</div>

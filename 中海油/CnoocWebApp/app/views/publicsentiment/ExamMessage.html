@@ -1,0 +1,83 @@
+﻿<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"publicsentiment"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"infoaudit"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container" style="background-color:#ffffff;" ng-controller="exammessageCtrl">
+    <div class="text-l">
+        {{"infotype"|translate}}：
+        <select class="select" style="width:200px;height:31px;border-radius:4px;" name="type" id="type"
+                ng-model="status_select" ng-change="status_change()">
+            <option value=0>{{"Auditing"|translate}}</option>
+            <option value=1>{{"Auditpass"|T}}</option>
+            <option value=2 selected="selected">{{"notpass"|translate}}</option>
+        </select>
+        <button class="btn btn-success" id="" name="" ng-click="filterData()" ng-hide="true">
+            {{"search"|translate}}
+        </button>
+    </div>
+    <table datatable="ng" class="table table-border table-bordered table-hover table-bg table-sort table-striped">
+        <thead>
+        <tr>
+            <th style="text-align: center;width:5%">{{"num"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"Sender"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"sendtype"|translate}}</th>
+            <th style="text-align: center;width:15%">{{"Addressee"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"theme"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"messagetype"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"limittime"|translate}}</th>
+            <th style="text-align: center;width:10%">{{"auditstatus"|translate}}</th>
+            <th style="text-align: center;width:20%">{{"operation"|translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-c" ng-repeat="u in filtermsgs">
+            <td>{{$index + 1}}</td>
+            <td>{{u.sender_name}}</td>
+            <td>{{getType(u.type)}}</td>
+            <td>{{u.receiver}}</td>
+            <td>{{u.title}}</td>
+            <td>{{getCate(u.category_type)}}</td>
+            <td>{{u.invalid_time|date:"yyyy-MM-dd"}}</td>
+            <td>{{getStatus(u.status)}}</td>
+            <td class="td-manage">
+                <input type="button" class="btn btn-primary" value='{{"pass"|translate}}' ng-show="u.status==0" ng-click="passmsg(u.website_message_id)" />
+                <input type="button" class="btn btn-danger" value='{{"refuse"|translate}}' ng-show="u.status==0" ng-click="unpassmsg(u.website_message_id)" />
+                <input type="button" class="btn btn-primary" value='{{"detail"|translate}}' ng-click="viewdetail(u.website_message_id)" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-container" id="addDiv" style="display:none;" ng-controller="exammessageCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-header">{{"enterreject"|translate}}</div>
+        <div class="panel-body">
+            <div class="row cl mt-20">
+                <label class="col-xs-2">
+                    <span class="c-red">*</span>
+                    {{"reason"|translate}}：
+                </label>
+                <div class="col-xs-9">
+                    <input type="text" class="input-text" ng-model="formdata.refuse_reason">
+                </div>
+            </div>
+            <div class="row cl text-c mt-20">
+                <input class="btn btn-primary radius" type="button" ng-click="sumbit()"
+                       value={{"submit"|translate}}>
+            </div>
+            <div class="row cl">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

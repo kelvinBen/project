@@ -1,0 +1,701 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.securitysystem">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"sumincident"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;"ng-controller="ics209Ctl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="text-align: center;margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;">ECS 209（{{"sumincident"|translate}}）</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>1.{{"incidentname"|translate}}</td>
+                            <td colspan="1"><input  type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td>2.{{"incidentnumber"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>3.{{"operationalperiod"|translate}}</td>
+                            <td colspan="2">
+                                <input type="date" style="border: 0;width: 45%;height: 100%;" ng-model="starttime" >
+                                <input type="date" style="border: 0;width: 45%;height: 100%;" ng-model="endtime" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4.{{"reportversion"|translate}}：</td>
+                            <td colspan="2">5.{{"incidentcommander"|translate}}：</td>
+                            <td colspan="2">6.{{"eventmgrorg"|translate}}：</td>
+                            <td colspan="2">7.{{"eventdate"|translate}}：</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form action="" method="get">
+                                    <label><input id="a1" type="radio" name="edition" value="option1" checked=""  ng-model="vm.data.radio" />{{"originaledition"|translate}}</label>
+                                    <label><input id="a2" type="radio" name="edition" value="option2"  ng-model="vm.data.radio" />{{"updateedition"|translate}}</label>
+                                    <label><input id="a3" type="radio" name="edition" value="option3"  ng-model="vm.data.radio" />{{"finaledition"|translate}}</label>
+                                </form>
+                            </td>
+                            <td rowspan="3" colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.direct"></td>
+                            <td rowspan="3" colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.managemeOrganization"></td>
+                            <td style="vertical-align: middle;">{{"date"|translate}}：</td>
+                            <td><input type="date" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.eventdata"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="vertical-align: middle;">{{"time"|translate}}：</td>
+                            <td><input type="time" style="border: 0;width: 100%;height: 100%;"  ng-model="ym.data.eventtime"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="vertical-align: middle;">{{"timezone"|translate}}：</td>
+                            <td>
+                                <form action="" method="get">
+                                    <select name="account" class="form-control" ng-model="vm.data.timearea">
+                                        <option>{{"eastdistrict"|translate}}</option>
+                                        <option>{{"easttwoarea"|translate}}</option>
+                                        <option>{{"eastthreearea"|translate}}</option>
+                                        <option>{{"eastfour"|translate}}</option>
+                                        <option>{{"eastfive"|translate}}</option>
+                                        <option>{{"eastsix"|translate}}</option>
+                                        <option>{{"eastseven"|translate}}</option>
+                                        <option>{{"easteight"|translate}}</option>
+                                        <option>{{"eastnine"|translate}}</option>
+                                        <option>{{"eastten"|translate}}</option>
+                                        <option>{{"easteleven"|translate}}</option>
+                                        <option>{{"eastwest"|translate}}</option>
+                                        <option>{{"westeleven"|translate}}</option>
+                                        <option>{{"westten"|translate}}</option>
+                                        <option>{{"westnine"|translate}}</option>
+                                        <option>{{"westeight"|translate}}</option>
+                                        <option>{{"westseven"|translate}}</option>
+                                        <option>{{"westsix"|translate}}</option>
+                                        <option>{{"westfive"|translate}}</option>
+                                        <option>{{"westfour"|translate}}</option>
+                                        <option>{{"westthree"|translate}}</option>
+                                        <option>{{"westtwo"|translate}}</option>
+                                        <option>{{"westone"|translate}}</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8.{{"currenteventarea"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"  ng-model="vm.data.involveArea"></td>
+                            <td>9.{{"incidenttype"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="model.eventType"></td>
+                            <td>10.{{"responselevel"|translate}}：</td>
+                            <td colspan="2"><input type="text" style="border: 0;width: 100%;height: 100%;"  ng-model="vm.data.responseLevel"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 批准和发送信息-->
+                <div style="text-align: left; padding: 10px 3px;"><b>11.{{"approvalinfo"|translate}}：</b></div>
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="4" style="background: #efefef;">{{"preparedby"|translate}}：</td>
+                            <td colspan="1" style="vertical-align: middle;">12.{{"submitdate"|translate}}：</td>
+                            <td colspan="2"> <input type="date" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.submitdata"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"blockname"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.printname"></td>
+                            <td>{{"icspost"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.icsposition"></td>
+                            <td style="vertical-align: middle;">{{"submittime"|translate}}：</td>
+                            <td><input type="time" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.submittime"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">{{"preparedby"|translate}}&nbsp;{{"date"|translate}}：</td>
+                            <td colspan="1"><input type="date" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.esdata"></td>
+                            <td colspan="1" style="vertical-align: middle;">{{"preparedby"|translate}}&nbsp;{{"time"|translate}}：</td>
+                            <td colspan="1"><input type="time" style="border: 0;width: 100%;height: 100%;"  ng-model="vm.data.estime"></td>
+                            <td colspan="1" style="vertical-align: middle;">{{"timezone"|translate}}：</td>
+                            <td colspan="2">
+                                <form action="" method="get" >
+                                    <select name="account" class="form-control" ng-model="vm.data.estimearea">
+                                        <option>{{"eastdistrict"|translate}}</option>
+                                        <option>{{"easttwoarea"|translate}}</option>
+                                        <option>{{"eastthreearea"|translate}}</option>
+                                        <option>{{"eastfour"|translate}}</option>
+                                        <option>{{"eastfive"|translate}}</option>
+                                        <option>{{"eastsix"|translate}}</option>
+                                        <option>{{"eastseven"|translate}}</option>
+                                        <option>{{"easteight"|translate}}</option>
+                                        <option>{{"eastnine"|translate}}</option>
+                                        <option>{{"eastten"|translate}}</option>
+                                        <option>{{"easteleven"|translate}}</option>
+                                        <option>{{"eastwest"|translate}}</option>
+                                        <option>{{"westeleven"|translate}}</option>
+                                        <option>{{"westten"|translate}}</option>
+                                        <option>{{"westnine"|translate}}</option>
+                                        <option>{{"westeight"|translate}}</option>
+                                        <option>{{"westseven"|translate}}</option>
+                                        <option>{{"westsix"|translate}}</option>
+                                        <option>{{"westfive"|translate}}</option>
+                                        <option>{{"westfour"|translate}}</option>
+                                        <option>{{"westthree"|translate}}</option>
+                                        <option>{{"westtwo"|translate}}</option>
+                                        <option>{{"westone"|translate}}</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="background: #efefef;">13.{{"approval"|translate}}：</td>
+                            <td colspan="1" style="vertical-align: middle;">{{"submitdate"|translate}}：</td>
+                            <td colspan="2"> <input type="date" style="border: 0;width:100%;height: 100%;"  ng-model="vm.data.approvedata"></td>
+                        </tr>
+                        <tr>
+                            <td>{{"blockname"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.approvename"></td>
+                            <td>{{"icspost"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"  ng-model="vm.data.approveics"></td>
+                            <td style="vertical-align: middle;">14.{{"sendplace"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.address"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--事故地点信息-->
+                <div style="text-align: left; padding: 10px 3px;"><b>{{"accidentinfo"|translate}}：</b></div>
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="1">15.{{"province"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;"  ng-model="vm.data.province"></td>
+                            <td colspan="1">16.{{"city"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.region"></td>
+                            <td colspan="1">17.{{"thecitys"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.city"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">18.{{"depother"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.institution"></td>
+                            <td colspan="1">19.{{"jurisdiction"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.managementpower"></td>
+                            <td colspan="1">20.{{"accidentmgr"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.managementaddress"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">21.{{"longitudetype"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.longitude"></td>
+                            <td colspan="1">22.{{"latitudetype"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.latitude"></td>
+                            <td colspan="1">22.{{"locationdescribe"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.description"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">23.{{"electronicspace"|translate}}：</td>
+                            <td colspan="5"><input type="text" style="border: 0;width:100%;height: 100%;"  ng-model="vm.data.spaceinfo"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--事故总结-->
+                <div style="text-align: left; padding: 10px 3px;"><b>{{"accidentsum"|translate}}：</b></div>
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="1">24.{{"reporttime"|translate}}：</td>
+                            <td colspan="5"><input type="text" style="border: 0;width:100%;height: 100%;"  ng-model="vm.data.significantevent"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">25.{{"involveharm"|translate}}：</td>
+                            <td colspan="5"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.danger"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="5">26.{{"lossassessment"|translate}}：
+                                <input type="text" style="border: 0;width:100%;height: 80%;" ng-model="vm.data.assessinfo">
+                            </td>
+                            <td colspan="1">A.{{"structuresummary"|translate}}</td>
+                            <td colspan="1">B.{{"threatenedquantity"|translate}}（{{"72hours"|translate}}）</td>
+                            <td colspan="1">C.{{"numberdamaged"|translate}}</td>
+                            <td colspan="1">D.{{"numberdestroyed"|translate}}</td>
+                        </tr>
+                        <tr>.
+                            <td colspan="1">E.{{"monomerhouse"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.residentthreatnum"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.residentdestorynum"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.residentreinnum"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">F.{{"nohouse"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.propertythreatnum"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.propertydestorynum"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.propertyreinnum"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"othersmall"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.othersthreatnum"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.othersdestorynum"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.othersreinnum"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--支持事故决策的额外信息-->
+                <div style="text-align: left; padding: 10px 3px;"><b>{{"supportinfo"|translate}}：</b></div>
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="3">*27.{{"publiccondition"|translate}}：</td>
+                            <td colspan="1">A.{{"thereport"|translate}}</td>
+                            <td colspan="1">B.{{"todaycount"|translate}}</td>
+                            <td colspan="3">*28.{{"emergencysum"|translate}}：</td>
+                            <td colspan="1">A.{{"thereport"|translate}}</td>
+                            <td colspan="1">B.{{"todaycount"|translate}}</td>
+                        </tr>
+                        <tr style="background: #efefef;">
+                            <td colspan="5">C.{{"normalpeople"|translate}}：</td>
+                            <td colspan="5">C.{{"emergencypeople"|translate}}：</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">D.{{"death"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.pdeathcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumdeath"></td>
+                            <td colspan="3">D.{{"death"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.edeathcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumdeath"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">E.{{"injuresick"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.pinjurecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psuminjure"></td>
+                            <td colspan="3">E.{{"injuresick"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.einjurecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esuminjure"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">F.{{"rescue"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.prescuecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumrescue"></td>
+                            <td colspan="3">F.{{"rescue"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.erescuecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumrescue"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">G.{{"missing"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.pmisscycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psummiss"></td>
+                            <td colspan="3">G.{{"missing"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.emisscycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esummiss"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">H.{{"leave"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.pleavecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumleave"></td>
+                            <td colspan="3">H.{{"leave"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.eleavecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumleave"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">I.{{"refuge"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psheltercycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumshelter"></td>
+                            <td colspan="3">I.{{"refuge"|translate}}</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esheltercycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumshelter"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">J.{{"temporary"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.ptemporarycycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumtemporary"></td>
+                            <td colspan="3">J.{{"temporary"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.etemporarycycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumtemporary"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">K.{{"mass"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.pcompletecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumcomplete"></td>
+                            <td colspan="3">K.{{"mass"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.ecompletecycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumcomplete"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">L.{{"immune"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.pneedcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumneed"></td>
+                            <td colspan="3">L.{{"immune"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.eneedcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumneed"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">M.{{"quarantine"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.pdepartcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumdepart"></td>
+                            <td colspan="3">M.{{"quarantine"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.edepartcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumdepart"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">N.{{"influencemass"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.peffectcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.psumeffect"></td>
+                            <td colspan="3">N.{{"influencemass"|translate}}：</td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.eeffectcycle"></td>
+                            <td colspan="1"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.esumeffect"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">29.{{"lifeexplain"|translate}}：</td>
+                            <td colspan="5">*30.{{"lifemgr"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" rowspan="7"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.description"></td>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.nothreaten" />A.{{"nothreaten"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.potentialthreaten" />B. {{"potentialthreaten"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.expandnotice"/>C.{{"expandnotice"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.complatenotice" />D.{{"complatenotice"|translate}} </label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.noimmediate" />E. {{"noimmediate"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.doplan"/>F. {{"doplan"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.planrefuge" />G. {{"planrefuge"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" rowspan="7">{{"weatherinfulence"|translate}}：<input type="text" style="border: 0;width:100%;height: 85%;" ng-model="vm.data.weatherinfulence"></td>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.doing"/>H.{{"doing"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value="" ng-model="vm.data.doingrefuge" />I.{{"doingrefuge"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.doingback" />J.{{"doingback"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.doingmass" />K.{{"doingmass"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.finalmass" />L.{{"finalmass"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value=""   ng-model="vm.data.quarantine"/>M.{{"quarantine"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <form action="" method="get">
+                                    <label><input name="" type="checkbox" value=""  ng-model="vm.data.mgrarea" />N.{{"mgrarea"|translate}}</label>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr style="background: #efefef;">
+                            <td colspan="10">32. {{"nextwork"|translate}}：</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"12hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.nextone"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"24hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.nexttwo"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"48hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.nextfour"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"72hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.nextseven"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"next72hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.nextother"></td>
+                        </tr>
+                        <tr style="height: 80px;">
+                            <td colspan="1" style="vertical-align: middle;">33.{{"strategictarget"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.aim"></td>
+                        </tr>
+                        <tr style="background: #efefef;">
+                            <td colspan="10">34. {{"riskinfo"|translate}}：</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"12hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.infoone"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"24hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.infotwo"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"48hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.infofour"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"72hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.infoseven"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"next72hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.infoother"></td>
+                        </tr>
+                        <tr style="background: #efefef;">
+                            <td colspan="10">35.{{"reachrequire"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"12hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.resourceone"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"24hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.resourcetwo"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"48hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.resourcefour"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"72hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.resourceseven"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">{{"next72hours"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.resourceother"></td>
+                        </tr>
+                        <tr style="background: #efefef;">
+                            <td colspan="10">36.{{"strategydiscussion"|translate}} ：</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">(1) {{"needresource"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.resourceneed"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">(2){{"accidenttarget"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.actionplan"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">(3){{"expectedresult"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.predict"></td>
+                        </tr>
+                        <tr style="height: 80px;">
+                            <td colspan="1" style="vertical-align: middle;">{{"explainproblem"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.problem"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">37.{{"nextactionplan"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.nextAction"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">38.{{"reflectarea"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.finalEvent"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">39.{{"eventfinaldate"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.predictDate"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">40.{{"importstartdate"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.predictStart"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">41.{{"stopcost"|translate}}</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.Cost"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">42.{{"finalcost"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.finalCost"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="vertical-align: middle;">43.{{"note"|translate}}：</td>
+                            <td colspan="9"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.Node"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--事故资源承诺总结-->
+                <div style="text-align: left; padding: 10px 3px;"><b>{{"promisesum"|translate}}：</b></div>
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="5" style="vertical-align: middle;">44. {{"organizationor"|translate}}：</td>
+                            <td colspan="20" style="vertical-align: middle;">45.{{"resourcecount"|translate}} ：</td>
+                            <td colspan="2"  style="vertical-align: middle;">46.{{"extrapeople"|translate}}：</td>
+                            <td colspan="2" style="vertical-align: middle;">47. {{"allpeople"|translate}}：</td>
+                            <td>{{"operation"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resource">
+                            <td colspan="5">
+                                <!-- editable username (text with validation)-->
+                                <span editable-text="user.institution" e-name="institution" e-form="rowform" >{{user.institution}}</span>
+                            </td>
+                            <td colspan="20">
+                                {{"resourcestype"|translate}}：<span editable-text="user.type" e-name="type"   e-form="rowform">{{user.type}}</span>
+                                {{"resourcescount"|translate}}：<span editable-text="user.count" e-name="count"   e-form="rowform">{{user.count}}</span>
+                                {{"peoplecount"|translate}}：<span editable-text="user.number" e-name="number"   e-form="rowform">{{user.number}}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.extrastaff" e-name="extrastaff"  e-form="rowform">{{user.extrastaff}}</span>
+                            </td>
+                            <td colspan="2">
+                                <!-- editable group (select-remote)-->
+                                <span editable-text="user.allstaff" e-name="allstaff"  e-form="rowform">{{user.allstaff}}</span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)" ng-show="rowform.$visible" shown="false" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="removeUser($index)" title="Delete" class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="float: left;"><button ng-click="addUser()" class="btn btn-default">{{"addline"|translate}}</button></td>
+                        </tr>
+                        <tr style="height: 80px;">
+                            <td colspan="10" style="vertical-align: middle;">49.{{"nolist"|translate}}：</td>
+                            <td colspan="20"><input type="text" style="border: 0;width:100%;height: 100%;" ng-model="vm.data.Organ"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                            <td colspan="5"><input type="text" style="border: 0;width: 100%;height: 100%;"  ng-model="vm.user"></td>
+                            <td colspan="5">{{"positiontitle"|translate}}</td>
+                            <td colspan="5"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.role"></td>
+                            <td colspan="2">{{"Signature"|translate}}</td>
+                            <td colspan="8"><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.user"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="15">{{"ecs"|translate}} 209 {{"sumincident"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="5">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='10';><input type="datetime-local" style="border: 0;width: 100%;height: 100%;" ng-model="dt"></td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12"style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

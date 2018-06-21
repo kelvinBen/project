@@ -1,0 +1,237 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"globalressystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"emergencyplan"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" ng-controller="allinformationCtrl as tree">
+    <div class="row" style="min-height: 600px;">
+        <div class="col-lg-12 col-md-12 col-sm-12" style="background-color: white; border-radius: 10px;">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <span class="col-lg-2" style="padding: 0px; margin: 0px;line-height: 30px;"> {{"manageunit"|translate}}：</span>
+                    <span class="col-lg-7 text-left" style="padding: 0px; margin: 0px; text-align: left;"><input type="text" class="form-control " /></span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <span class="col-lg-2" style="padding: 0px; margin: 0px; line-height: 30px;"> {{"thearea"|translate}}：</span>
+                    <span class="col-lg-7 text-left" style="padding: 0px; margin: 0px; "><input type="text" class="form-control " /></span>
+                </div>
+            </div>
+            <div class="row"  style="margin-top: 5px;">
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <span class="col-lg-2" style="padding: 0px; margin: 0px; line-height: 30px;"> {{"filltime"|translate}}：</span>
+                    <span class="col-lg-4" style="padding: 0px; margin: 0px;"><input type="date" class="form-control " /></span>
+                    <span class="col-lg-4" style="padding: 0px; margin-left:5px;"><input type="date" class="form-control " /></span>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <span class="col-lg-2" style="padding: 0px; margin: 0px; line-height: 30px;"> {{"fuzzyquery"|translate}}：</span>
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"><input type="text" class="form-control " /></span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <button class="btn btn-success" >{{"query"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'export'|translate}}Excel</button>
+                </div>
+            </div>
+            <div class="panel panel-default"style="margin-top: 5px;" >
+                <div class="panel-body">
+                    <div class="row"  style="margin-top: 5px;">
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-danger" ></button>
+                            <span style="padding: 0px; margin: 0px; line-height: 30px;">{{"cnoocexpatriates"|translate}}</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-warning" ></button>
+                            <span style="padding: 0px; margin: 0px; line-height: 30px;">{{"cnoocwork"|translate}}</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-success" ></button>
+                            <span style="padding: 0px; margin: 0px; line-height: 30px;">{{"accompany"|translate}}</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-info" ></button>
+                            <span style="padding: 0px; margin: 0px; line-height: 30px;">{{"vipvisit"|translate}}</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-primary" ></button>
+                            <span style="padding: 0px; margin: 0px; line-height: 30px;">{{"incontractor"|translate}}</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <button class="btn btn-default" style="border: 1px solid #000;"></button>
+                            <span style="padding: 0px; margin: 0px; line-height: 30px;">{{"localother"|translate}}</span>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{"num"|translate}}</th>
+                                <th>{{"managementunit"|translate}}</th>
+                                <th>{{"oceanproject"|translate}}</th>
+                                <th>{{"incountry"|translate}}</th>
+                                <th>{{"hostcity"|translate}}</th>
+                                <th> <button class="btn btn-danger" ></button></th>
+                                <th> <button class="btn btn-warning" ></button></th>
+                                <th> <button class="btn btn-success" ></button></th>
+                                <th> <button class="btn btn-info" ></button></th>
+                                <th> <button class="btn btn-primary" ></button></th>
+                                <th> <button class="btn btn-default"  style="border: 1px solid #000;"></button></th>
+                                <th>{{"filltime"|translate}}</th>
+                                <th>{{"fillperson"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>1</td>
+                                <td>有限国际公司</td>
+                                <td>GM130项目</td>
+                                <td>尼日利亚</td>
+                                <td>尼日利亚</td>
+                                <td>3人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>2014/02/10</td>
+                                <td>戴玖祥</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>2</td>
+                                <td>有限国际公司</td>
+                                <td>灾害气体项目</td>
+                                <td>美国</td>
+                                <td>休斯顿</td>
+                                <td>7人</td>
+                                <td>1人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>3人</td>
+                                <td>7人</td>
+                                <td>2013/01/23</td>
+                                <td>宋阳</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>3</td>
+                                <td>有限国际公司</td>
+                                <td>巴新项目组</td>
+                                <td>澳大利亚</td>
+                                <td>布里斯班</td>
+                                <td>5人</td>
+                                <td>1人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>3人</td>
+                                <td>2013/01/23</td>
+                                <td>罗嘉欣</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>4</td>
+                                <td>有限国际公司</td>
+                                <td>布里达斯公司</td>
+                                <td>阿根廷</td>
+                                <td>布宜诺斯艾利斯</td>
+                                <td>5人</td>
+                                <td>1人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>3人</td>
+                                <td>2013/01/23</td>
+                                <td>徐文</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>5</td>
+                                <td>有限国际公司</td>
+                                <td>GM130项目</td>
+                                <td>尼日利亚</td>
+                                <td>尼日利亚</td>
+                                <td>3人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>2014/02/10</td>
+                                <td>戴玖祥</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>6</td>
+                                <td>有限国际公司</td>
+                                <td>灾害气体项目</td>
+                                <td>美国</td>
+                                <td>休斯顿</td>
+                                <td>7人</td>
+                                <td>1人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>3人</td>
+                                <td>7人</td>
+                                <td>2013/01/23</td>
+                                <td>刘超</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>7</td>
+                                <td>有限国际公司</td>
+                                <td>巴新项目组</td>
+                                <td>澳大利亚</td>
+                                <td>布里斯班</td>
+                                <td>5人</td>
+                                <td>1人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>0人</td>
+                                <td>3人</td>
+                                <td>2013/01/23</td>
+                                <td>王欣</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

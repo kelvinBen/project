@@ -1,0 +1,172 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"globalressystem"|translate}}</a>
+        </li>
+        <li>
+            <span>{{"emergencyspecialist"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="page-container bg-fff" ng-controller="allinformationCtrl as tree">
+    <div class="row" style="min-height: 600px;">
+        <div class="col-lg-3" style="background-color: white; overflow: hidden;">
+            <div class="panel panel-primary" style="">
+                <div class="panel-heading">{{"orginstitution"|translate}}</div>
+                <div class="panel-body" style="overflow:hidden;">
+                    <span ng-if="tree.doing_async">...loading...</span>
+                    <abn-tree tree-data="tree.my_data" tree-control="tree.my_tree" on-select="tree.my_tree_handler(branch)"  initial-selection="Granny Smith"></abn-tree>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9" style="background-color: white; border-radius: 10px;">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;">{{"experttype"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;">
+                         <select name="account" class="form-control">
+                             <option>综合类</option>
+                             <option>煤矿类</option>
+                             <option>危化类</option>
+                             <option>烟花爆竹类</option>
+                             <option>非煤矿类</option>
+                             <option>冶金类</option>
+                             <option>石油开采类</option>
+                             <option>应急通讯信息类</option>
+                             <option>医疗类</option>
+                             <option>其他类</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"expertarea"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;">
+                        <select name="account" class="form-control">
+                             <option>工艺</option>
+                             <option>设备</option>
+                             <option>仪表</option>
+                             <option>电气</option>
+                             <option>环保</option>
+                             <option>消防</option>
+                             <option>职业卫生</option>
+                             <option>安保</option>
+                             <option>应急</option>
+                             <option>其他</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;">{{"expertlevel"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;">
+                          <select name="account" class="form-control">
+                             <option>国家级</option>
+                             <option>省级</option>
+                             <option>市级</option>
+                             <option>县级</option>
+                             <option>基层级</option>
+                             <option>企业级</option>
+                         </select>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"begoodat"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;">
+                         <select name="account" class="form-control">
+                             <option>一级事故</option>
+                             <option>二级事故</option>
+                             <option>三级事故</option>
+                             <option>四级事故</option>
+                         </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"staffname"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="text" class="form-control " /></span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"workunit"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="text" class="form-control " /></span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;"> {{"startupdate"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="date" class="form-control " /></span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <span class="col-lg-5" style="padding: 0px; margin: 0px;">{{"endupdate"|translate}}：</span>
+                    <span class="col-lg-7" style="padding: 0px; margin: 0px;"><input type="date" class="form-control " /></span>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-lg-10">
+                    <button class="btn btn-danger" >{{"singledelete"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'edit'|translate}}</button>
+                    <button class="btn btn-info" >{{"print"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'import'|translate}}</button>
+                </div>
+                <div class="col-lg-2 text-right">
+                    <button class="btn btn-danger" ng-click="cancel()">{{"add"|translate}}</button>
+                    <button type="submit" class="btn btn-info">{{'export'|translate}}</button>
+                </div>
+            </div>
+            <div class="panel panel-default"style="margin-top: 5px;" >
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center" style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{"num"|translate}}</th>
+                                <th>{{"staffname"|translate}}</th>
+                                <th>{{"experttype"|translate}}</th>
+                                <th>{{"expertarea"|translate}}</th>
+                                <th>{{"begoodat"|translate}}</th>
+                                <th>{{"officephone"|translate}}</th>
+                                <th>{{"mobilephone"|translate}}</th>
+                                <th>{{"workunit"|translate}}</th>
+                                <th>{{"updatetime"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody style="text-align: left;">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>1</td>
+                                <td>段天须</td>
+                                <td>综合类</td>
+                                <td>工艺</td>
+                                <td>二级事故</td>
+                                <td>010-88888888</td>
+                                <td>13385210374</td>
+                                <td>中海石油乌干达公司</td>
+                                <td>2015-10-24</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input  type="checkbox" style="margin-top:0px;">
+                                    </label>
+                                </td>
+                                <td>1</td>
+                                <td>段天须</td>
+                                <td>煤矿类</td>
+                                <td>仪表</td>
+                                <td>二级事故</td>
+                                <td>010-88881520</td>
+                                <td>13385225554</td>
+                                <td>中海石油乌干达公司</td>
+                                <td>2015-10-06</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

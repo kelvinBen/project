@@ -1,0 +1,82 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>系统管理</a>
+        </li>
+        <li>
+            <a ui-sref="app.ics_role">ICS角色列表</a>
+        </li>
+        <li class="active">
+            <span>ICS角色管理</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="icsroleeditControl">
+    <form method="post" name="roleForm" novalidate="novalidate" ng-submit="ok(event)" class="form-validate form-horizontal">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                {{title}}
+            </div>
+            <div class="panel-body">
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label for="rolename">
+                                <span style="color:red">*</span> 角色名称：
+                            </label>
+                            <input type="text" class="form-control" name="rolename" required ng-model="vm.rolename">
+                            <span ng-show="validateInput('rolename', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="company">
+                                <span style="color:red">*</span> 所属公司：
+                            </label>
+                            <select class="form-control" name="company" ng-model="vm.organizationid" required="" ng-options="a.id as a.organization for a in groupList" ng-change="loadEventOrgList()"></select>
+                            <span ng-show="validateInput('company', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <label for="organization">
+                                <span style="color:red">*</span> 所属组织机构：
+                            </label>
+                            <select class="form-control" name="organization" required="" ng-model="vm.organization" ng-options="a.id as a.organization for a in orgList"></select>
+                            <span ng-show="validateInput('organization', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="job">
+                                <span style="color:red">*</span> 职位：
+                            </label>
+                            <input type="text" class="form-control" name="job" required ng-model="vm.job">
+                            <span ng-show="validateInput('job', 'required')" class="text-danger">{{"required"|translate}}</span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <label>
+                                责任：
+                            </label>
+                            <div text-angular name="duty" class="btn-group-small" ng-model="vm.duty"></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-default" ng-click="cancel()">
+                    取消
+                </button>
+                <button type="reset" class="btn btn-danger">
+                    重置
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    确定
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

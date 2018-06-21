@@ -1,0 +1,85 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.ics_eventindex">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"accidentmap"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics2011Ctrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="text-align: center;">ECS 201-1（{{"accidentmap"|translate}}）<em class="icon icon-microphone"></em></div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive" style="overflow: hidden; padding:0px 5px;">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td>{{"incidentname"|translate}}</td>
+                                <td colspan="1">{{event.name}}</td>
+                                <td>{{"incidentnumber"|translate}}</td>
+                                <td colspan="1">
+                                    <input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.eventnum">
+                                </td>
+                                <td>{{"operationalperiod"|translate}}</td>
+                                <td colspan="2">
+                                    <input type="datetime-local" style="border: 0;width: 45%;height: 100%;" ng-model="starttime">
+                                    <input type="datetime-local" style="border: 0;width: 45%;height: 100%;" ng-model="endtime">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8" rowspan="2">
+                                    <!-- <input type="text" style="border: 0;width: 100%;height: 100%;" placeholder="地图/草图（包括草图，能反映作业整体区域、事故现场/区域、受影响和受威胁的区域及飞行勘查的结果、轨迹、受影响的海岸线或其它能描述当时状况和资源分配的图形）" ng-model="vm.data.map"> -->
+                                    <iframe src="app/views/ics/AccidentMap.html?type=0" width="100%" frameborder="0" height="500px"></iframe>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr style="height: 120px;">
+                                <td colspan="8" rowspan="2">
+                                    <input type="text" style="border: 0;width: 100%;height: 100%;" placeholder={{"shortnote"|translate}} ng-model="vm.data.summary">
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>{{"preparedby"|translate}}：{{"staffname"|translate}}</td>
+                                <td colspan="1">
+                                    <input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.user">
+                                </td>
+                                <td>{{"positiontitle"|translate}}</td>
+                                <td colspan="1">
+                                    <input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.role">
+                                </td>
+                                <td>{{"Signature"|translate}}</td>
+                                <td colspan="2">
+                                    <input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.data.sign">
+                                </td>
+                                <!--<td colspan='5'; style="vertical-align: middle;" ><input type="text" style="border: 0;width: 100%;height: 100%;"></td>-->
+                            </tr>
+                            <tr style="height: 60px;">
+                                <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 201-1 {{"accidentmap"|translate}}</td>
+                                <td style="line-height: 60px;" colspan="1">{{"Datetime"|translate}}</td>
+                                <td style="line-height: 60px;" colspan='2' ;>
+                                    <input type="text" style="border: 0;width: 100%;height: 100%;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

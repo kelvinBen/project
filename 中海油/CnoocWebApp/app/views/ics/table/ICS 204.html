@@ -1,0 +1,216 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a ui-sref="app.ics_eventindex">
+                {{"emergencysystem"|translate}}
+            </a>
+        </li>
+        <li>
+            <span>{{"eventmanagement"|translate}}</span>
+        </li>
+        <li>
+            <span>{{"taskallocation"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="row" style="margin: 10px; overflow: hidden;" ng-controller="ics204Ctrl">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default" style="margin-top: 10px;">
+            <div class="panel-heading" style="text-align: center;"> ECS 204（{{"taskallocation"|translate}}）<em class="icon icon-microphone"></em></div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{"incidentname"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="event.name"></td>
+                            <td>{{"incidentnumber"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;"></td>
+                            <td>{{"operationalperiod"|translate}}</td>
+                            <td colspan="3">
+                                <input type="datetime-local" style="border: 0;width: 45%;height: 100%;" ng-model="starttime">
+                                <input type="datetime-local" style="border: 0;width: 45%;height: 100%;" ng-model="endtime">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <ul style="list-style:none; text-align: left;">
+                                    <li>
+                                        <select ng-model="vm.data.curtask" ng-options="t.name for t in goals" ng-change="taskchange()"></select>
+                                    </li>
+                                    <li>
+                                        {{"workstaff"|translate}}：
+                                    <input type="text"
+                                           style="border:0;border-bottom: 1px solid black;width: 50%;"
+                                           ng-model="vm.data.taskname">
+
+                                    </li>
+                                    <li style="margin: 20px;">{{"staffname"|translate}}：
+                                        <span><select ng-model="vm.data.taskuser" ng-options="t.real_name for t in groupusers"></select></span></li>
+                                    <li style="margin: 0 20px">
+                                        {{"telephone"|translate}}：
+                                        <div style="margin: 20px 0 0 40px;">
+                                            <p>{{"ministeroperations"|translate}}：<input type="text" style="border:0;border-bottom: 1px solid black;width: 20%;" ng-model="vm.data.operationminister"></p>
+                                            <p>{{"branchdirector"|translate}}：<input type="text" style="border:0;border-bottom: 1px solid black;width: 21%;" ng-model="vm.data.operationinspector"></p>
+                                            <p>{{"teammate"|translate}}：<input type="text" style="border:0;border-bottom: 1px solid black;width: 21%;" ng-model="vm.data.operationgroup"></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td rowspan="1" colspan="2">
+                                <ul style="list-style: none;">
+                                    <li style="margin: 20px 10px 0 10px;">{{"branch"|translate}}：<input type="text" style="border: 0;" ng-model="vm.departbranch"></li>
+                                    <li style="margin: 10px;">{{"singleteam"|translate}}：<input type="text" style="border: 0;" ng-model="vm.departranks"></li>
+                                    <li>{{"singlegroup"|translate}}：<input type="text" style="border: 0;" ng-model="vm.departgroup"></li>
+                                    <li style="margin: 10px;">{{"middlearea"|translate}}：<input type="text" style="border: 0;" ng-model="vm.departmiddle"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align: center">{{"resourceallocation"|translate}}</th>
+                            <td rowspan="2" colspan="1" style="text-align: center;">{{"peoplenum"|translate}}</td>
+                            <td rowspan="2" colspan="1" style="text-align: center;">{{"contactinfo"|translate}}</td>
+                            <td rowspan="2" colspan="2" style="text-align: center;">{{"goplace"|translate}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;">{{"resourcenumber"|translate}}</td>
+                            <td colspan="2" style="text-align: center;">{{"leader"|translate}}</td>
+                        </tr>
+                        <tr ng-repeat="user in vm.data.resource">
+                            <td colspan="2">
+                                <span editable-text="user.id" e-name="goal" e-form="rowform" onbeforesave="table.checkName($data, user.id)">
+                                    {{ user.id }}
+                                </span>
+                            </td>
+                            <td colspan="2">
+                                <span editable-text="user.leader" e-name="goal" e-form="rowform" onbeforesave="table.checkName($data, user.id)">
+                                    {{ user.leader }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="user.people" e-name="goal" e-form="rowform" onbeforesave="table.checkName($data, user.id)">
+                                    {{ user.people }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="user.phone" e-name="goal" e-form="rowform" onbeforesave="table.checkName($data, user.id)">
+                                    {{ user.phone }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="user.locate" e-name="goal" e-form="rowform" onbeforesave="table.checkName($data, user.id)">
+                                    {{ user.locate }}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form-->
+                                <form editable-form="" name="rowform" onbeforesave="table.saveUser($data, user.id)"
+                                      ng-show="rowform.$visible" shown="table.inserted == user"
+                                      class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" title="Save"
+                                            class="btn btn-sm btn-info">
+                                        <em class="fa fa-save"></em>
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting"
+                                            ng-click="rowform.$cancel()" title="Cancel"
+                                            class="btn btn-sm btn-default">
+                                        <em class="fa fa-times"></em>
+                                    </button>
+                                </form>
+                                <div ng-show="!rowform.$visible" class="buttons">
+                                    <button ng-click="rowform.$show()" title="Edit" class="btn btn-sm btn-info">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button ng-click="table.removeUser($index)" title="Delete"
+                                            class="btn btn-sm btn-danger">
+                                        <em class="fa fa-trash"></em>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button ng-click="addresource()" class="btn btn-success" type="button">{{"addline"|translate}}</button>
+                    <table class="table  table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <td colspan="7" style="height: 180px;text-align: left;"> {{"workplan"|translate}}：
+                                <!--<input type="text"-->
+                                <!--style="border: 0;width: 100%;height: 90%;"-->
+                                <!--ng-model="vm.data.workarrangement" ng-show="false">-->
+                                <script type="text/ng-template" id="ng-wig/views/ng-wig.html">
+                                    <div class="ng-wig">
+                                        <div class="btn-group btn-group-sm">
+                                            <button type="button" title="Header" ng-click="execCommand('formatblock', '&lt;h1&gt;')" class="btn btn-sm btn-default"><em class="fa fa-header"></em>
+                                            </button>
+                                            <button type="button" title="Paragraph" ng-click="execCommand('formatblock', '&lt;p&gt;')" class="btn btn-sm btn-default"><em class="fa fa-paragraph"></em>
+                                            </button>
+                                            <button type="button" title="Unordered List" ng-click="execCommand('insertunorderedlist')" class="btn btn-sm btn-default"><em class="fa fa-list-ul"></em>
+                                            </button>
+                                            <button type="button" title="Ordered List" ng-click="execCommand('insertorderedlist')" class="btn btn-sm btn-default"><em class="fa fa-list-ol"></em>
+                                            </button>
+                                            <button type="button" title="Bold" ng-click="execCommand('bold')" class="btn btn-sm btn-default"><em class="fa fa-bold"></em>
+                                            </button>
+                                            <button type="button" title="Italic" ng-click="execCommand('italic')" class="btn btn-sm btn-default"><em class="fa fa-italic"></em>
+                                            </button>
+                                            <button type="button" title="link" ng-click="execCommand('createlink')" class="btn btn-sm btn-default"><em class="fa fa-link"></em>
+                                            </button>
+                                            <button type="button" title="Edit Html" ng-class="{ 'nw-button--active': editMode }" ng-click="toggleEditMode()" class="btn btn-sm btn-default"><em class="fa fa-pencil"></em></button>
+                                        </div>
+                                        <div class="nw-editor"><textarea ng-show="editMode" ng-model="content" class="nw-editor__src"> </textarea>
+                                            <iframe scrolling="{{ autoexpand ? 'no' : 'yes' }}" frameBorder="0" ng-hide="editMode" ng-model="content" ng-wig-editable="" class="nw-editor__res"></iframe>
+                                        </div>
+                                    </div>
+                                </script>
+                                <textarea ng-wig="vm.data.workarrangement"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="height: 150px;text-align: left;"> {{"specialrequire"|translate}}：<input type="text" style="border: 0;width: 100%;height: 90%;" ng-model="vm.data.specialrequirements">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <ul style="list-style:none; text-align: left;">
+                                    <li>{{"taskcommunication"|translate}}：</li>
+                                    <li style="margin: 20px;">{{"namepost"|translate}} ：<span><input type="text" style="border:0;border-bottom: 1px solid black;"></span>
+                                    </li>
+                                    <li style="margin: 0 20px">
+                                        {{"maincommunication"|translate}}：
+                                        <div style="margin: 20px 0 0 40px;">
+                                            <p><input type="text" style="border:0;border-bottom: 1px solid black;width: 20%;" ng-model="vm.data.communicationphone"></p>
+                                            <p><input type="text" style="border:0;border-bottom: 1px solid black;width: 21%;" ng-model="vm.data.communicationname"></p>
+                                            <p><input type="text" style="border:0;border-bottom: 1px solid black;width: 21%;" ng-model="vm.data.communicationcall"></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{"preparedby"|translate}}：{{"staffname"|translate}}：</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.user"></td>
+                            <td>{{"positiontitle"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.role"></td>
+                            <td>{{"Signature"|translate}}</td>
+                            <td><input type="text" style="border: 0;width: 100%;height: 100%;" ng-model="vm.user"></td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td style="line-height: 60px;" colspan="4">{{"ecs"|translate}} 204 {{"taskallocation"|translate}}</td>
+                            <td style="line-height: 60px;" colspan="1">{{"Datetime"|translate}}</td>
+                            <td style="line-height: 60px;" colspan='2' ;><input type="datetime-local" style="border: 0;width: 100%;height: 100%;" ng-model="dt"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-md-offset-5 col-lg-offset-5" style="margin-top: 15px;">
+                    <button type="button" class="mb-sm btn btn-danger" ng-click="submit()">{{"submit"|translate}}</button>
+                    <button type="button" class="mb-sm btn btn-info" ng-click="cancel()">{{"cancel"|translate}}</button>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+    </div>
+</div>

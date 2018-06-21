@@ -1,0 +1,115 @@
+<h3>
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a>{{"systemgr"|translate}}</a>
+        </li>
+        <li class="active">
+            <span>{{"userauthorization"|translate}}</span>
+        </li>
+    </ul>
+</h3>
+<div class="container-fluid" ng-controller="userauthorizationCtrl">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{"userauthorization"|translate}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <select class="form-control" ng-options="a.role_id as a.role_name for a in roleList" ng-model="selRole" >
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary" ng-click="search()">
+                        <em class="fa fa-search"></em>{{"search"|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="setUsers()">
+                        <em class="fa fa-plus"></em>{{"add"|translate}}
+                    </button>
+                </div>
+            </div>
+            <div class="panel panel-default" style="margin-bottom: 0px; margin-top: 20px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{"usermgr"|translate}}：</h3>
+                </div>
+                <div class="panel-body">
+                    <table datatable="ng" class="table table-bordered table-hover table-striped table-condensed" style="border-collapse:collapse;">
+                        <thead>
+                            <tr>
+                                <th width="40" class="text-center">{{"num"|translate}}</th>
+                                <th width="60" st-sort="real_name" class="text-center">{{"usernames"|translate}}</th>
+                                <th class="text-center">{{"email"|translate}}</th>
+                                <th class="text-center">{{"mobilephone"|translate}}</th>
+                                <th class="text-center">{{"telephone"|translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" ng-repeat="u in selUsers">
+                                <td>{{$index + 1}}</td>
+                                <td>{{u.real_name}}</td>
+                                <td>{{u.email}}</td>
+                                <td>{{u.phone}}</td>
+                                <td>{{u.telephone}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer text-center">
+            <button type="button" class="btn btn-primary" ng-click="save()">
+              {{'save' | translate}}
+          </button>
+        </div>
+    </div>
+    <script type="text/ng-template" id="addUsers">
+        <div class="panel panel-primary" style="margin-bottom:0px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{"setorgmember"|translate}} -- {{cur_organiztion.organiztion_name}}</h3>
+            </div>
+            <div class="panel-body">
+                <table datatable="ng" class="table table-bordered table-hover table-striped table-condensed" style="border-collapse:collapse;">
+                    <thead>
+                        <tr class="text-center">
+                            <th>
+                                <div class="checkbox c-checkbox needsclick">
+                                    <label class="needsclick">
+                                        <input type="checkbox" class="needsclick" ng-click="selAllFun()"/>
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th>{{"usernames"|translate}}</th>
+                            <th>{{"phones"|translate}}</th>
+                            <th>{{"email"|translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in allUsers" class="text-center">
+                            <td>
+                                <div class="checkbox c-checkbox needsclick">
+                                    <label class="needsclick">
+                                        <input type="checkbox" class="needsclick" ng-model="row.checked"/>
+                                        <span class="fa fa-check"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>{{row.real_name}}</td>
+                            <td>{{row.phone}}</td>
+                            <td>{{row.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-default" ng-click="close()">
+                    {{"cancel"|translate}}
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="set()">
+                    {{"sure"|translate}}
+                </button>
+            </div>
+        </div>
+    </script>
+</div>

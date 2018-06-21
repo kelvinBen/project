@@ -1,0 +1,269 @@
+﻿'use strict';
+
+var app = angular.module('cnooc_service.PublicSentiment', [], function ($httpProvider) {
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+    $httpProvider.defaults.transformRequest = [function (data) {
+        //    /**
+        //     * The workhorse; converts an object to x-www-form-urlencoded serialization.
+        //     * @param {Object} obj
+        //     * @return {String}
+        //     */
+        var param = function (obj) {
+            var query = '';
+            var name, value, fullSubName, subName, subValue, innerObj, i;
+
+            for (name in obj) {
+                value = obj[name];
+
+                if (value instanceof Array) {
+                    for (i = 0; i < value.length; ++i) {
+                        subValue = value[i];
+                        fullSubName = name + '[' + i + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                } else if (value instanceof Object) {
+                    for (subName in value) {
+                        subValue = value[subName];
+                        fullSubName = name + '[' + subName + ']';
+                        innerObj = {};
+                        innerObj[fullSubName] = subValue;
+                        query += param(innerObj) + '&';
+                    }
+                } else if (value !== undefined && value !== null) {
+                    query += encodeURIComponent(name) + '='
+                        + encodeURIComponent(value) + '&';
+                }
+            }
+
+            return query.length ? query.substr(0, query.length - 1) : query;
+        };
+
+        return angular.isObject(data) && String(data) !== '[object File]'
+            ? param(data)
+            : data;
+    }];
+});
+
+
+app.service('PublicSentiment', ['$q', '$http', function ($q, $http) {
+    var memURL = 'apis' + '/apiroot/ExPublicSentiment/';
+    //var memURL = 'apisapiroot/ExPublicSentiment/';
+    return {
+        GetEventStatics: function () {
+            var deferred = $q.defer();
+            var url = memURL+'GetEventStatics';
+            $http({
+                method: 'GET',
+                url: memURL
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        GetSecurityEvent: function (num) {
+            var deferred = $q.defer();
+            var url = memURL+'GetSecurityEvent' + '?num=' + num;
+            //var url = 'apis/apiroot/ExPublicSentiment/GetSecurityEvent' + '?num=' + num;
+            $http({
+                method: 'GET',
+                url: url
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        GetDisasterEvent: function (num) {
+            var deferred = $q.defer();
+            var url = memURL + 'GetDisasterEvent' + '?num=' + num;
+            $http({
+                method: 'GET',
+                url: url
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        }
+    }
+}]);
+
+app.service('SecurityEvent', ['$q', '$http', function ($q, $http) {
+    var memURL = 'apis' + '/api/Events/';
+    //var memURL = 'apisapi/Events';
+    return {
+        get: function () {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: memURL
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        }
+    }
+}]);
+
+
+app.service('Citydisaster', ['$q', '$http', function ($q, $http) {
+     var memURL = 'apis' + '/api/Citydisaster/';
+    //var memURL = 'apisapi/Citydisaster';
+    return {
+        get: function () {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: memURL
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        getdetail: function (id) {
+            var deferred = $q.defer();
+            var url = memURL + id;
+            $http({
+                method: 'GET',
+                url: url
+            }).success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        add: function (data) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: memURL,
+                data: data,
+            }).success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        delete: function (id) {
+            var deferred = $q.defer();
+            var url = memURL + id;
+            $http({
+                method: 'DELETE',
+                url: url,
+            }).success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        update: function (id, data) {
+            var deferred = $q.defer();
+            var url = memURL + "/"+id;
+            $http({
+                method: 'PUT',
+                url: url,
+                data: data
+            }).success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        }
+    }
+}]);
+
+app.service('Travelwarning', ['$q', '$http', function ($q, $http) {
+    var memURL = 'icsapi/travelwarning/';
+    return {
+        get: function () {
+            var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: memURL
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        getdetail: function (id) {
+            var deferred = $q.defer();
+            var url = memURL + id;
+            $http({
+                method: 'GET',
+                url: url
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        add: function (data) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: memURL,
+                data: data,
+            }).success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        delete: function (id) {
+            var deferred = $q.defer();
+            var url = memURL + id;
+            $http({
+                method: 'DELETE',
+                url: url,
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        },
+        update: function (id, data) {
+            var deferred = $q.defer();
+            var url = memURL + id;
+            $http({
+                method: 'PUT',
+                url: url,
+                data: data
+            }).success(function (data, status, headers, config) {
+                //console.log('getProvince===='+JSON.stringify(data));
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        }
+    }
+}]);
