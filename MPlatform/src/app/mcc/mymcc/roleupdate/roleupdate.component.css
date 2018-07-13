@@ -1,0 +1,57 @@
+:host{
+    width: calc(100% - 245px);
+    color:#1A3B67;
+    
+}
+:host p{
+   padding-left: 70px;
+}
+.header{
+    height: 50px;
+    line-height: 50px;
+    background: rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+:host nz-card p{
+    margin:24px 0;
+    font-weight: 600;
+    /* font-size: 16px; */
+}
+:host nz-card p span{
+    display: inline-block;
+    padding: 6px 18px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 2px;
+    font-weight: normal;
+    width: 100px;
+    text-align: center;
+}
+:host nz-card p strong{
+    font-weight: 600px;
+    color: red;
+    font-size: 16px;
+    margin-left:10px;
+    width: 100px;
+    text-align: center;
+}
+.active{
+  border:2px solid #1890ff !important;
+  color: #1890ff;
+
+}
+.submit{
+    padding-left: 148px !important;
+}
+.submit button{
+    width: 180px;
+    height: 38px;
+}
+.sign{
+    position: relative;
+    top: -22px;
+    padding-left: 145px !important;
+    font-size: 10px;
+    font-weight: normal !important;
+}

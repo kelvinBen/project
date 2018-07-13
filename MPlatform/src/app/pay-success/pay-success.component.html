@@ -1,0 +1,16 @@
+<div class="paybox" *ngIf="ok">
+    <img src="../../assets/images/success.jpg" alt="" style="height:100px;width:100px;vertical-align: middle;">
+    <span>恭喜你，购买成功！</span>
+    <p style="font-size: 16px;letter-spacing: 0.2em;">{{this.count}}秒后，页面自动退出……</p>
+    <p>
+        <button nz-button nzType="primary" nzGhost class="back" routerLink="/mcc/mymcc/myplatform">返回控制台</button>
+    </p>
+</div>
+<div class="paybox" *ngIf="!ok">
+    <img src="../../assets/images/错误.jpg" alt="" style="height:100px;width:100px;vertical-align: middle;">
+    <span>支付失败，请返回重新付款！</span>
+    <p style="font-size: 16px;letter-spacing: 0.2em;">{{this.count}}秒后，页面自动退出……</p>
+    <p>
+        <button nz-button nzType="primary" nzGhost class="back" routerLink="/mcc/mymcc/myplatform" (click)="goback()">返回</button>
+    </p>
+</div>

@@ -1,0 +1,38 @@
+:host{
+    /* position: relative; */
+}
+.header-line{
+    border-bottom: 1px solid #e8e8e8;
+    width: 100%;
+    position:fixed;
+    z-index: 999;
+    background: #fff;
+}
+:host .ant-menu-horizontal{
+border:none;
+}
+:host .ant-menu-horizontal li{
+    height: 70px;
+    line-height: 70px;
+}
+:host .title{
+    height: 70px;
+    line-height: 70px;
+    padding: 0 10px;
+    margin: 0;
+}
+:host .action{
+    height: 70px;
+    line-height: 70px;
+    margin: 0;
+}
+:host .action a{
+    display: inline-block;
+    padding-right:20px;
+    color: #7489A5;
+}
+.title span{
+    display:inline-block;
+    cursor: pointer;
+    color: #1890ff;
+}

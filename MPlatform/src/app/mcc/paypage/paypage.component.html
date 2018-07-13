@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>请选择付款方式</h1>
+  <p class="card">
+    <nz-radio-group [(ngModel)]="radioValue">
+      <label nz-radio  nzValue="A"></label>
+    </nz-radio-group>
+    <img src="../../../assets/images/alipay.png" alt="">
+    <span style="padding-left:20px">在线支付可使用支付宝及信用卡，实时开通服务</span>
+  </p>
+  <p class="card">
+    <nz-radio-group [(ngModel)]="radioValue">
+      <label nz-radio  nzValue="B"></label>
+    </nz-radio-group>
+    <img src="../../../assets/images/b2b.png" alt="">
+    <span style="padding-left:20px;line-height: 40px;">对公付款需要在对公转账后上传银行付款凭证或对账单，人工审核后，才能开通服务。 </span>
+  </p>
+  <h2 style="margin-bottom: 50px;">总金额：{{totalMoney}} 元</h2>
+  <button nz-button nzType="primary" style="width: 360px;" (click)="submit()">生成订单并支付</button>
+</div>

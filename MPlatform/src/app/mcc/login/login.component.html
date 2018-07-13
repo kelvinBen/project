@@ -1,0 +1,30 @@
+  <div class="container">
+    <h1>登 录</h1>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm(validateForm)">
+        <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="anticon anticon-mail">
+                <input type="text" nz-input formControlName="email" placeholder="输入邮箱地址!" id="email">
+              </nz-input-group>
+              <nz-form-explain *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">邮箱格式不正确!</nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password">
+          </nz-input-group>
+          <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">输入您的密码!</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <!-- <label nz-checkbox formControlName="remember">
+            <span>Remember me</span>
+          </label> -->
+          <a class="login-form-forgot" class="login-form-forgot" routerLink="/mcc/reset">忘记密码？</a>
+          <button nz-button class="login-form-button" [nzType]="'primary'" >登录</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>

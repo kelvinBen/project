@@ -1,0 +1,28 @@
+
+  <nz-layout class="layout" style="padding-top: 75px;min-height: calc(100% - 75px);" >
+    <nz-sider>
+      <ul nz-menu [nzTheme]="'dark'">
+        <li nz-menu-item routerLink='/mcc/mymcc/myplatform'>
+          我的控制台
+        </li>
+        <li nz-menu-item routerLink='/mcc/mymcc/data'>
+          <span title>
+            <span>我申请的数据</span>
+          </span>
+        </li>
+        <li nz-menu-item routerLink='/mcc/mymcc/record'>
+          <span title>
+            <span>购买记录</span>
+          </span>
+        </li>
+        <li nz-menu-item routerLink='/mcc/mymcc/account'>
+          <span title>
+            <span>账号信息</span>
+          </span>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-content style="padding: 10px">
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>

@@ -1,0 +1,27 @@
+.paybox{
+    text-align: center;
+    padding: 200px 0;
+    height: 100%;
+    width: 100%;
+    /* background: #eee; */
+}
+.paybox span{
+    font-size: 24px;
+    letter-spacing: 0.5em;
+    font-weight: 600;
+}
+.paybox p{
+    margin: 80px auto;
+}
+.back{
+height: 60px;
+width: 160px;
+font-size: 16px;
+letter-spacing: 0.3em;
+color:rgb(12, 202, 11);
+border-color: rgb(12, 202, 11);
+}
+.back:hover{
+color: green;
+border-color: green;
+}

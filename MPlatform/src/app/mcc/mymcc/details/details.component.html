@@ -1,0 +1,28 @@
+<div>
+  <h2 class="header">购买详情</h2>
+  <ul class="info1">
+    <li>订单号：
+      <span>{{this.orderNumber}}</span>
+    </li>
+    <li>支付状态：
+      <span class="label1">{{this.status}}</span>
+    </li>
+    <li>订单类型：
+      <span class="label2">{{this.type}}</span>
+    </li>
+    <li>下单时间：
+      <span>{{this.orderTime}}</span>
+    </li>
+  </ul>
+  <div class="info2">
+    <p>订单明细</p>
+    <ul class="detail">
+      <li *ngFor="let item of items">{{item.itemname}}&nbsp;: &nbsp;&nbsp; &nbsp;{{item.label}}</li>
+    </ul>
+    <span class="info3">服务期限 ：&nbsp;&nbsp; &nbsp;{{duration}}个月</span>
+    <span class="info3">访问量 ：&nbsp;&nbsp; &nbsp;{{visitNumber}}万/月</span>
+  </div>
+  <div class="info1">
+    <p>订单金额：{{totalMoney}} 元</p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+:host .container{
+    width: 80%;
+    margin: 0 auto;
+    padding-top:100px;
+    min-height: calc(100% - 75px);
+    position: relative;
+   }
+   .card{
+    background: #fff;
+    height: 140px;
+    line-height: 140px;
+    padding-left:30px;
+    border: 1px solid #ccc
+    ;margin: 50px;
+    border-radius: 10px
+   }
+   .card:hover{
+       background: #eee;
+   }

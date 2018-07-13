@@ -1,0 +1,11 @@
+<div class="container">
+  <div style="padding:200px 0" *ngIf="isEmail">
+    <p style="text-align: center;color:rgba(0, 0, 0, 0.65);;font-size: 16px;margin: 50px auto"><span style="color:#ce1b28;font-size:28px;line-height: 1.3;font-weight: 600;">极天下</span> 已收到账户更改信息，请激活以完成邮箱更改。</p>
+  <p style="text-align: center"><button nz-button nzType="primary" [nzSize]="large" (click)="enableEmail()">激活绑定邮箱</button></p> 
+  </div>
+  <div *ngIf="!isEmail" style="padding:200px 0">
+      <p style="text-align: center;color:rgba(0, 0, 0, 0.65);;font-size: 16px;margin: 50px auto"><span style="color:#ce1b28;font-size:28px;line-height: 1.3;font-weight: 600;">极天下</span> 感谢您使用我们的产品，一封找回密码邮件已经发送到您的邮箱</p>
+      <p class="email-active">请激活邮件的链接<span></span></p> 
+  </div>
+  
+</div>

@@ -1,0 +1,30 @@
+:host .container{
+    /* padding:100px; */
+    width: 80%;
+    margin:0 auto;
+    min-height: calc(100% - 75px);
+    position: relative;
+}
+.email-active{
+    position: relative;
+    margin: 30px auto;
+    height: 60px;
+    line-height: 60px;
+    max-width: 250px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background: #1890ff url(../../../assets/images/send-success.png) no-repeat 20px center;
+    background-size: 23px 16px;
+    padding-left: 50px;
+}
+ .email-active > span {
+    position: absolute;
+    right: -30px;
+    bottom: 0;
+    border-width: 30px 0 30px 30px;
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent transparent#1890ff;
+}

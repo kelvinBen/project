@@ -1,0 +1,51 @@
+<div style="width: 100%;position: relative;min-height:calc(100% - 36px);">
+  <div fxLayout="row" fxLayoutGap="60px" class="container">
+    <div fxFlex="70%">
+      <div>
+        <h2 class="title">请选择需要的数据</h2>
+        <ul>
+          <li *ngFor="let list of data" fxLayout="row" fxLayoutGap="20px" style="padding-top:10px">
+            <div style=" width: 30%;background: #f5f5f5">
+              <h3 class="bigtitle">{{list.title}}</h3>
+              <p class="smalltitle">{{list.value[0].description}}</p>
+            </div>
+            <div style="width:70%" class="menue" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+              <span [ngClass]="{'active':choice.isactive === true}" *ngFor="let choice of list.value" (click)="selectItem(choice)">{{choice.label}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- <div class="display:none">
+        <h2 class="title">选择访问量</h2>
+        <nz-row>
+          <nz-col nzSpan="19">
+            <nz-slider [nzMin]="100" [nzMax]="5000" [(ngModel)]="visitnumber" [nzStep]="100" style="height: 10px;" (ngModelChange)="changeFlow($event)"></nz-slider>
+          </nz-col>
+          <div nz-col nzSpan="1"></div>
+          <div nz-col nzSpan="4">
+            <nz-input-number style="width: 100%" [nzMin]="100" [nzMax]="5000" [nzStep]="100" [(ngModel)]="visitnumber" (ngModelChange)="changeFlow($event)"
+              [nzFormatter]="formatterDollar" [nzParser]="parserDollar">万</nz-input-number>
+          </div>
+        </nz-row>
+      </div>
+      <div class="display:none">
+        <h2 class="title">选择购买时常</h2>
+        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="timechoice" fxLayoutGap="10px">
+          <span *ngFor="let time of times" [ngClass]="{'active1':time.isactive === true}" (click)="selectTime(time)">{{time.label}}</span>
+        </div>
+      </div> -->
+    </div>
+    <div fxFlex="30%" class="charge">
+      <h2>费用预览</h2>
+      <h3 class="item-title">天气数据</h3>
+      <div class="item">
+        <p [ngStyle]="{'display':config.display === false?'none':'block'}" *ngFor="let config of configs">
+          <span>{{config.item}}：</span>
+          <span class="rightflaot">{{config.value}}</span>
+        </p>
+        <p>总价：{{totalMoney}} 元</p>
+      </div>
+      <button nz-button nzType="primary" [nzSize]="'large'" class="submit" (click)="submit()">确认购买</button>
+    </div>
+  </div>
+</div>

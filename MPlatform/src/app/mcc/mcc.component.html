@@ -1,0 +1,28 @@
+<div  class="header-line">
+  <div style="width: 80%;margin: auto" fxLayout="row">
+    <div style="padding-top:6px;">
+      <img src="../../assets/images/cropped-logo2.png" alt="">
+    </div>
+    <p class="title">
+      <span routerLink="/mcc/mymcc/myplatform">极天气控制台</span> 
+    </p>
+    <ul nz-menu [nzMode]="'horizontal'">
+      <!-- <li nz-menu-item routerLink="/mcc/doc"> 文档</li> -->
+      <li nz-menu-item ><a (click)="goHelp()">帮助</a></li>
+    </ul>
+    <span fxFlex="1 1 auto"></span>
+    <p class="action">
+      <a (click)="goMain()">返回极天气官网</a>
+      <span [hidden]="loggedIn">
+        <button nz-button nzType="primary" routerLink='/mcc/login'>登录</button>
+        <button nz-button nzType="default" routerLink='/mcc/reg'>注册</button>
+      </span>
+      <span [hidden]="!loggedIn">
+        <button nz-button nzType="default" (click)="loginOut()">退出</button>
+      </span>
+    </p>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+<p class="footer ">版权©2018 极天气。版权所有。陕ICP备14009998号</p>

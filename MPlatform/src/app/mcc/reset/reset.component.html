@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>重置密码</h1>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm(validateForm)">
+        <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="anticon anticon-lock">
+                <input type="password" nz-input formControlName="password" placeholder="设置您的密码!" id="password" (ngModelChange)="updateConfirmValidator()">
+              </nz-input-group>
+              <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">设置您的密码!</nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="anticon anticon-lock">
+                <input type="password" nz-input formControlName="checkPassword" placeholder="请再次输入密码!" id="checkPassword">
+              </nz-input-group>
+              <nz-form-explain *ngIf="validateForm.get('checkPassword').dirty && validateForm.get('checkPassword').errors">
+                  <ng-container *ngIf="validateForm.get('checkPassword').hasError('required')">
+                    请确认密码!
+                  </ng-container>
+                  <ng-container *ngIf="validateForm.get('checkPassword').hasError('confirm')">
+                    两次输入密码不一致!
+                  </ng-container>
+                </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button class="login-form-button" [nzType]="'primary'" >提交</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>

@@ -1,0 +1,22 @@
+:host .container{
+    /* padding:100px; */
+    width: 80%;
+    margin:0 auto;
+    height: calc(100% - 71px);
+    position: relative;
+}
+.container h1{
+  text-align: center;
+  height: 200px;
+  padding-top: 50px;
+  line-height: 200px;
+}
+.login-form{
+    width: 400px;
+    position: absolute;
+    top: 250px;
+    left: calc(50% - 200px)
+  }
+  .login-form-button {
+    width: 100%;
+  }

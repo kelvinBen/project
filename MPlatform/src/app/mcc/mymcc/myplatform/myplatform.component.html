@@ -1,0 +1,33 @@
+<p>
+  欢迎, <span style="color:#1890ff;cursor: pointer;" routerLink='/mcc/mymcc/account'>{{this.userName}}</span>
+  </p>
+<nz-card nzTitle="普通用户">
+  <p>
+    <span style="color:#1890ff;cursor: pointer;" routerLink='/mcc/mymcc/updatevip'>升级会员</span>
+  </p>
+  <p>用户ID:
+    <span>{{this.userNumber}}</span>
+  </p>
+  <p>认证key：
+    <span>{{this.apiKey}}</span>
+  </p>
+</nz-card>
+<nz-card nzTitle="已申请数据(3)" style="margin-top: 10px">
+  <ul fxLayout="row" fxLayoutGap="1%" class="service-box" style="" fxLayoutAlign="start center">
+    <li *ngFor="let list of userServices" fxFlex="32%" fxLayout="row" class="itembox">
+      <img src="../../../../assets/images/tq1.png" style="height:60px;" alt="">
+      <div>
+        <h4> {{list.servic.name}}</h4>
+        <span> 申请时间</span>
+        <span> {{list.userservice.starttime}}</span>
+        <span>剩余 {{list.userservice.visit- list.userservice.used}}次</span>
+      </div>
+      <p>
+        <span style="color:#1890ff;cursor: pointer;" routerLink='/mcc/purchase'>立即续费</span>
+      </p>
+    </li>
+    <li class="itembox item-add" fxFlex="32%" style="" routerLink='/mcc/purchase'>
+      <i class="anticon anticon-plus-circle"></i>
+    </li>
+  </ul>
+</nz-card>

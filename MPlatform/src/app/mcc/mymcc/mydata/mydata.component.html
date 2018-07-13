@@ -1,0 +1,51 @@
+<div>
+  <div>
+    <button nz-button nzType="primary" nzGhost nzValue="large" routerLink='/mcc/purchase'>
+      <i class="anticon anticon-plus"></i>申请新数据</button>
+    <p style="width: 30%;margin-left:20px;display: inline-block">
+      <nz-input-group nzSearch [nzSuffix]="suffixButton">
+        <input type="text" nz-input placeholder="已申请项目检索" [(ngModel)]="searchValue">
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button nz-button nzType="primary" nzSearch (click)="search()">Search</button>
+      </ng-template>
+    </p>
+  </div>
+
+  <nz-table #basicTable1 [nzData]="displayData">
+    <thead>
+      <tr>
+        <th>数据</th>
+        <th>申请时间</th>
+        <th>剩余会员次数</th>
+        <th>剩余付费次数</th>
+        <th>购买</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of displayData">
+        <td>
+          <img src="../../../../assets/images/tq1.png" alt="" style="height: 50px;">{{data.name}}</td>
+        <td>{{data.time}}</td>
+        <td>{{data.freenumber}}</td>
+        <td>{{data.paynumber}}</td>
+        <td style="color:rgb(12, 202, 11);">再次购买</td>
+        <td style="color:rgb(12, 202, 11);">
+          <span *ngIf="data.disabled">已停用</span>
+          <span *ngIf="!data.disabled">已启用</span>
+        </td>
+        <td>
+          <button nz-button nzType="dashed" (click)="changeservice(data)" *ngIf="!data.disabled">停用</button>
+          <button nz-button nzType="primary" (click)="changeservice(data)" *ngIf="data.disabled">启用</button>
+          <a href={{data.connector}}>
+            <i class="anticon anticon-api" style="font-weight: 800"></i>接口</a>
+          &nbsp; &nbsp; &nbsp;
+          <a (click)="delet(data.id)">
+            <i class="anticon anticon-area-chart" style="font-weight: 800"></i>统计</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

@@ -1,0 +1,79 @@
+<div>
+  <h2 class="header">账号信息</h2>
+  <!-- <form #updateForm="ngForm"> -->
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3">实名认证</nz-form-label>
+    <button nz-button nzType="default" disabled>未认证</button>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3">用户类型</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <nz-form-text>个人用户</nz-form-text>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row>
+    <nz-form-label [nzSpan]="3" style="height: 32px;line-height: 32px;">用户名</nz-form-label>
+    <nz-form-control nzValidateStatus="validating">
+      <nz-input-group  [nzSuffix]="suffixButton" nzSearch style="width: 30%">
+        <input nz-input id="name" [(ngModel)]="userName" placeholder={{userName}} (keyup)="validName()">
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button nz-button nzType="primary" (click)="ChangeUserName()" nzSearch style="width: 100px" nzGhost [disabled]="isNameValid">更换用户名</button>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" style="height: 32px;line-height: 32px;">邮箱</nz-form-label>
+    <nz-input-group  [nzSuffix]="suffixButton1" nzSearch style="width: 30%">
+      <input nz-input id="email" [(ngModel)]="email" placeholder={{curEmail}} (keyup)="validEmail()">
+    </nz-input-group>
+    <ng-template #suffixButton1 style="position: relative">
+      <button nz-button nzType="primary" (click)="ChangeEmail()" nzSearch style="width: 100px" nzGhost [disabled]="isEmailValid">绑定邮箱</button>
+      <p class="mark"> <span *ngIf="sendEmailErr" class="failure"><i class="anticon anticon-close-circle"></i>发送失败</span> <span *ngIf="sendEmailOk" class="success"><i class="anticon anticon-check-circle"></i>发送成功,请前往绑定邮箱激活链接</span></p>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" style="height: 32px;line-height: 32px;">手机号码</nz-form-label>
+    <nz-form-control >
+      <nz-input-group [nzSuffix]="suffixButton4" nzSearch style="width: 30%">
+        <input nz-input [(ngModel)]="telephone" (keyup)="validPhone()">
+      </nz-input-group>
+      <ng-template #suffixButton4 style="position: relative">
+        <button nz-button nzType="primary" (click)="sendPhone()" nzSearch style="width: 100px" nzGhost [disabled]="isPhoneValid">发送验证码</button>
+        <p class="mark"> <span *ngIf="sendPhoneErr" class="failure"><i class="anticon anticon-close-circle"></i>发送失败</span> <span *ngIf="sendPhoneOk" class="success"><i class="anticon anticon-check-circle"></i>发送成功</span></p>
+      </ng-template>
+      
+    </nz-form-control>
+    <nz-input-group [nzSuffix]="suffixButton2" nzSearch style="width: 30%;margin:10px 0 0 12.5%">
+      <input nz-input [(ngModel)]="verification" placeholder="输入手机验证码">
+    </nz-input-group>
+    <ng-template #suffixButton2>
+      <button nz-button nzType="primary" (click)="boundPhone()" nzSearch style="width: 100px" nzGhost [disabled]="isPhoneValid">绑定手机</button>
+    </ng-template>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="3" style="height: 32px;line-height: 32px;">密码</nz-form-label>
+    <nz-form-control style="position: relative;">
+      <nz-input-group style="width: 30%;">
+        <input type="password" nz-input placeholder="输入原密码" [(ngModel)]="oldPassword" >
+        <!-- <p class="mark mark1"> <span *ngIf="oldPassErr" class="failure"><i class="anticon anticon-close-circle"></i>密码错误</span> <span *ngIf="oldPassOk" class="success"><i class="anticon anticon-check-circle"></i></span></p> -->
+      </nz-input-group>
+    </nz-form-control>
+    <nz-form-control>
+      <nz-input-group style="width: 30%;margin:10px 0 0 12.5%">
+        <input type="password" nz-input placeholder="输入新密码" [(ngModel)]="newPassword1" (keyup)="validPass()">
+        
+      </nz-input-group>
+    </nz-form-control>
+    <nz-form-control>
+      <nz-input-group [nzSuffix]="suffixButton3" nzSearch style="width: 30%;margin:10px 0 0 12.5%">
+        <input nz-input type="password" [(ngModel)]="newPassword2"  placeholder="确认新密码" (keyup)="validPass()">
+      </nz-input-group>
+      <ng-template #suffixButton3>
+        <button nz-button nzType="primary" (click)="ChangePass()" nzSearch style="width: 100px" nzGhost [disabled]="isPassValid">修改密码</button>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <!-- </form> -->
+
+</div>

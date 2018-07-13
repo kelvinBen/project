@@ -1,0 +1,40 @@
+:host{
+    width: calc(100% - 245px);
+}
+.header{
+    height: 50px;
+    line-height: 50px;
+    background: rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+.form-item{
+    padding:10px 0;
+    
+}
+.form-item input{
+    font-size: 14px;
+}
+.form-item button{
+    width: 8em;
+    text-align: center;
+    font-size: 14px;
+}
+ .input{
+    padding-bottom: 20px;
+    /* height:  */
+}
+.mark{
+    position: absolute;
+    width: 300px;
+    left: 110px;
+    top: 4px;
+}
+.mark1{
+    left: 316px;
+}
+.mark .success{
+    color: #008e00;
+}
+.mark .failure{
+    color:#f5222d;
+}

@@ -1,0 +1,24 @@
+<!-- <div>
+  <h2 class="header">账号信息</h2>
+</div> -->
+<nz-card style="margin-top: 10px" nzTitle="开通云美会员服务" >
+  <p>
+    开通服务：<span *ngFor="let list of data" (click)="itemchange($event)"  [ngClass]="{'active':list.isactive === true}">{{list.title}}</span>
+  </p>
+  <p>
+    付费方式：<span *ngFor="let item of itemData" (click)= "timechange($event)"  [ngClass]="{'active':item.isactive === true}">{{item.detail}}</span>
+  </p>
+  <p>
+    开通时长：<strong>{{duration}}</strong>
+  </p>
+  <p>
+    支付方式：<span class="active">支付宝</span><span>余额</span>
+  </p>
+  <p>
+    应付金额：<strong>{{money}}元</strong>
+  </p>
+  <p class="submit">
+    <button nz-button nzType="primary" (click)="submit()">立即开通</button>
+  </p>
+  <p class="sign"><label nz-checkbox [(ngModel)]="checked"></label>同意<a href="http://www.extraweather.com/help/#i-12">《云美会员服务协议》</a><a href="">《云美VIP会员服务协议》</a></p>
+</nz-card>
