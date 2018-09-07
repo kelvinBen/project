@@ -1,8 +1,0 @@
-/* @import url('https://js.arcgis.com/3.21/esri/css/esri.css'); */
-@import url('http://120.26.44.171:5558/esri/css/esri.css');
-#viewDiv{
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-}
