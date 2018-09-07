@@ -1,0 +1,84 @@
+<ul class="breadcrumb">
+  <li>应急物资</li>
+  <li class="active">应急装备类</li>
+</ul>
+<div style="padding:20px;" fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-raised-button color='primary' routerLink="/home/addequipment">增加</button>
+      <button mat-raised-button color='primary' (click)="downloadFile('../../../assets/TempFiles/plan.xlsx')">导入</button>
+      <button mat-raised-button color='primary'>导出</button>
+      <button mat-raised-button color='primary' (click)="downloadFile('../../../assets/TempFiles/plan.xlsx')">模版</button>
+    </div>
+    <mat-form-field style="width:300px">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="查询">
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> 设备名称 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="feature">
+        <mat-header-cell *matHeaderCellDef> 功能 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.feature}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="size">
+        <mat-header-cell *matHeaderCellDef> 外形尺寸</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.size}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="parameter">
+        <mat-header-cell *matHeaderCellDef> 技术参数</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.parameter}} </mat-cell>
+      </ng-container>
+      <!-- <ng-container matColumnDef="num">
+          <mat-header-cell *matHeaderCellDef> 数量</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.num}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="producer">
+          <mat-header-cell *matHeaderCellDef> 生产厂家</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.producer}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef> 存放地点</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="phone">
+          <mat-header-cell *matHeaderCellDef> 联络方式</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+        </ng-container> -->
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="desc">
+        <mat-header-cell *matHeaderCellDef> 备注 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.desc}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="symbol">
+        <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div style="width:130px;">
+            <a mat-mini-fab color="primary" mdTooltip="查看详情" routerLink="/admin/1/user/{{row.id}}">
+              <mat-icon>search</mat-icon>
+            </a>
+            <a mat-mini-fab color="primary" mdTooltip="编辑" routerLink="/admin/user/edit/{{row.id}}">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a mat-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+              <mat-icon>delete</mat-icon>
+            </a>
+            <!-- <button mat-raised-button color='primary' routerLink="/plan/add">增加</button> -->
+          </div>
+        </mat-cell>
+
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div [style.display]="dataSource.data.length == 0 ? '' : 'none'" style="text-align: center">
+      <h3>无数据显示.</h3>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<ul class="breadcrumb">
+  <li>系统管理</li>
+  <li>
+    <a routerLink="/resource/professor">用户管理</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<mat-divider></mat-divider>
+<div style="padding:20px">
+  <mat-card>
+    <mat-card-title>{{type?'查看':(pId?"编辑":"新增")}}用户</mat-card-title>
+    <form #proForm="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <input matInput placeholder="姓名" required name="name" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="密码" required name="password" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="职位" required name="position" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <input matInput placeholder="邮箱" required name="email" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="手机" required name="phone" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="座机" required name="telphone" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+      </div>
+
+      <mat-card-actions>
+        <div style="text-align:center">
+          <button mat-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+          <a routerLink="/home/user" mat-raised-button color="warn">取消</a>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!proForm.valid" *ngIf="!type">提交</button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

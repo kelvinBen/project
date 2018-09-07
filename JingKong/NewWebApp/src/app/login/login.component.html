@@ -1,0 +1,18 @@
+<div class="login">
+  <div class="title"><span>海洋油气开采实时在线高效应急救援平台</span></div>
+  <div class="login_boder">
+      <form action="" (ngSubmit)="submit()">
+          <div class="login_padding" id="login_model" fxLayout="column">
+              <mat-form-field>
+                  <input matInput placeholder="用户名" required name="username" [(ngModel)]="vm.name" [readonly]="type" >
+                  <mat-icon matSuffix>person</mat-icon>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="密码" required name="password" [(ngModel)]="vm.password" [readonly]="type" >
+                  <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">登陆</button>
+          </div>
+      </form>
+  </div>
+</div>

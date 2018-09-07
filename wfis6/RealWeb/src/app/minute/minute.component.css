@@ -1,0 +1,11 @@
+#layerDiv {
+  position: absolute;
+  right: 10px;
+  top: 59px;
+  z-Index: 2;
+}
+
+:host ::ng-deep .mat-tab-body-wrapper {
+  height: calc(100% - 49px);
+  width: 100%;
+}

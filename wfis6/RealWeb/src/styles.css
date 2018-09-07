@@ -1,0 +1,22 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('http://120.26.44.171:5558/esri/css/esri.css');
+@import "~ag-grid/dist/styles/ag-grid.css";
+@import "~ag-grid/dist/styles/ag-theme-balham.css";
+html,
+body,
+.mapView {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.ag-theme-balham .ag-header-cell,
+.ag-theme-balham .ag-header-group-cell {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.ag-theme-balham .ag-header-cell-label {
+  justify-content: center;
+}

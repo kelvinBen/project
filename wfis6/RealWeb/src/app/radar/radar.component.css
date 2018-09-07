@@ -1,0 +1,12 @@
+#layerDiv {
+    position: absolute;
+    right: 10px;
+    top: 59px;
+    z-Index: 2;
+}
+
+#queryDiv {
+    position: absolute;
+    left: 0px;
+    z-index: 2;
+}

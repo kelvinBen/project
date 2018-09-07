@@ -1,0 +1,73 @@
+<div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;height: 100%;">
+  <div style="width: 500px;height: 100%;">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding: 0 10px">
+      <label>查询时间</label>
+      <mat-form-field style="width:140px;">
+        <input matInput [(ngModel)]="selDate" [disabled]="autoCheck" mode="daytime" [dpDayPicker]="minuteConfig" theme="dp-material"
+          attachTo=".mat-input-wrapper">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" [disabled]="autoCheck" (click)="loadData()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <mat-checkbox [(ngModel)]="autoCheck" (change)="autoCheck=!autoCheck">实时更新(逐5分钟)</mat-checkbox>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding: 0 10px">
+      <label>区县</label>
+      <mat-form-field>
+        <mat-select [(ngModel)]="selCity" (change)="filter()">
+          <mat-option *ngFor="let city of cityList" [value]="city">
+            {{ city }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <label>城区</label>
+      <mat-form-field>
+        <mat-select [(ngModel)]="selCounty" [disabled]="selCity!=='城区'" (change)="filter()">
+          <mat-option *ngFor="let county of countyList" [value]="county">
+            {{ county }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-tab-group style="height:calc(100% - 131px);">
+      <mat-tab label="十分钟雨量">
+        <ag-grid-angular #rGrid enableSorting (rowDoubleClicked)='rGridDbClicked($event)' (gridReady)="initRGrid()" style="width: 100%; height: 100%;"
+          class="ag-theme-balham">
+        </ag-grid-angular>
+      </mat-tab>
+      <mat-tab label="压温湿风">
+        <ag-grid-angular #mainGrid enableSorting (rowDoubleClicked)='mainGridDbClicked($event)' (gridReady)="initMainGrid()" style="width: 100%; height: 100%;"
+          class="ag-theme-balham">
+        </ag-grid-angular>
+      </mat-tab>
+      <mat-tab label="其他要素">
+        <ag-grid-angular #otherGrid enableSorting (rowDoubleClicked)='otherGridDbClicked($event)' (gridReady)="initOtherGrid()" style="width: 100%; height: 100%;" class="ag-theme-balham">
+        </ag-grid-angular>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div fxFlex="1 1 auto" style="height: 100%;">
+    <div class="mapView" #map  id="esriMap"></div>
+    <div id="layerDiv">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              图层管理
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-radio-group [(ngModel)]="mapType" (change)="_esriLoad.ChangeMapType(mapType)">
+              <mat-radio-button [value]="1">地图</mat-radio-button>
+              <mat-radio-button [value]="2">影像</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox [(ngModel)]="boundaryLy" (change)="_esriLoad.ShowOrHideLayer('boundary', boundaryLy)"> 界限</mat-checkbox>
+              <mat-checkbox [(ngModel)]="stationLy" (change)="_esriLoad.ShowOrHideLayer('station', stationLy)">站点</mat-checkbox>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

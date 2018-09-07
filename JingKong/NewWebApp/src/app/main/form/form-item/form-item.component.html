@@ -1,0 +1,31 @@
+<div [formGroup]="form">
+    <div [ngSwitch]="question.dataType">
+      <mat-form-field class="example-full-width" *ngSwitchCase="'varchar'" style="width: 280px;margin-right: 20px;">
+        <input matInput placeholder={{question.attributeName}} [formControlName]="question.attributeCode" >
+      </mat-form-field>
+      <mat-form-field *ngSwitchCase="'select'" style="width: 280px;margin-right: 20px;">
+        <mat-select placeholder={{question.attributeName}} [formControlName]="question.attributeCode">
+          <mat-option *ngFor="let opt of question.options" [value]="opt.key">
+            {{opt.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngSwitchCase="'bool'" style="width: 280px;margin-right: 20px;">
+        <mat-select placeholder={{question.attributeName}} [formControlName]="question.attributeCode">
+          <mat-option value="true">是</mat-option>
+          <mat-option value="false">否</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngSwitchCase="'datetime'" style="width: 280px;margin-right: 20px;">
+        <input matInput mode="day" placeholder={{question.attributeName}}  [dpDayPicker]="{ format:question.format }"
+          theme="dp-material" [formControlName]="question.attributeCode">
+      </mat-form-field>
+      <!-- <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+          <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+        </select> -->
+
+    </div>
+  <!-- </div> -->
+
+</div>

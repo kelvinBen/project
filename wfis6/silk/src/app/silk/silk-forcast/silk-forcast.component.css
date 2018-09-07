@@ -1,0 +1,4 @@
+.myapp-no-padding-dialog .mat-dialog-container {
+    padding: 0;
+    top: 0;
+  }

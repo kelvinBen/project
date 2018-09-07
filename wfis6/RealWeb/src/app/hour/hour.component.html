@@ -1,0 +1,84 @@
+<div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;height: 100%;">
+  <div style="width: 500px;height: 100%;">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="padding: 0 10px">
+      <label>要素</label>
+      <mat-form-field style="width:110px;">
+        <mat-select [(ngModel)]="selType" (change)="initGrid()">
+          <mat-option *ngFor="let type of typeList" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <label>区县</label>
+      <mat-form-field style="width:110px;">
+        <mat-select [(ngModel)]="selCity" (change)="filter()">
+          <mat-option *ngFor="let city of cityList" [value]="city">
+            {{ city }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <label>城区</label>
+      <mat-form-field style="width:110px;">
+        <mat-select [(ngModel)]="selCounty" [disabled]="selCity!=='城区'" (change)="filter()">
+          <mat-option *ngFor="let county of countyList" [value]="county">
+            {{ county }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-card style="height:calc(100% - 66px);width:100%;">
+      <mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-toolbar class="card-toolbar">
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+            <span *ngIf="selType !== '变压'">起始</span>
+            <mat-form-field style="width:100px;" *ngIf="selType !== '变压'">
+              <input matInput [(ngModel)]="sDate" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+            </mat-form-field>
+            <span>{{(selType === '变压') ? '时间':'截至'}}</span>
+            <mat-form-field style="width:100px;">
+              <input matInput [(ngModel)]="eDate" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+            </mat-form-field>
+          </div>
+          <span fxFlex="1 1 auto"></span>
+          <button mat-icon-button color="primary" (click)="initGrid()">
+            <mat-icon>search</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="rainFileDown()" *ngIf="selType==='降水'">
+            <mat-icon>assignment</mat-icon>
+          </button>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <div class="card-content">
+        <ag-grid-angular #hourGrid id="hGrid" enableSorting [allowContextMenuWithControlKey]="true" 
+          (rowDoubleClicked)='gridDbClicked($event)' (gridReady)="initGrid()" style="width: 100%; height: 100%;" class="ag-theme-balham">
+        </ag-grid-angular>
+      </div>
+    </mat-card>
+  </div>
+  <div fxFlex="1 1 auto" style="height: 100%;">
+    <div class="mapView" #map id="esriMap"></div>
+    <div id="layerDiv">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              图层管理
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <mat-radio-group [(ngModel)]="mapType" (change)="_esriLoad.ChangeMapType(mapType)">
+              <mat-radio-button [value]="1">地图</mat-radio-button>
+              <mat-radio-button [value]="2">影像</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox [(ngModel)]="boundaryLy" (change)="_esriLoad.ShowOrHideLayer('boundary', boundaryLy)"> 界限</mat-checkbox>
+              <mat-checkbox [(ngModel)]="stationLy" (change)="_esriLoad.ShowOrHideLayer('station', stationLy)">站点</mat-checkbox>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

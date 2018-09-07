@@ -1,0 +1,79 @@
+<ul class="breadcrumb">
+  <li>
+    <a routerLink="/home/plan">应急预案</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<mat-card>
+  <mat-card-title>{{type?'查看':(pId?"编辑":"新增")}}应急预案</mat-card-title>
+  <!-- <form #proForm="ngForm" (ngSubmit)="onSubmit()"> -->
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field>
+      <mat-select placeholder="预案层级" [(ngModel)]="selLevel">
+        <mat-option [value]="0">全部</mat-option>
+        <mat-option [value]="1">总公司级</mat-option>
+        <mat-option [value]="2">分公司级</mat-option>
+        <mat-option [value]="3">现场级</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="预案类型" [(ngModel)]="selType">
+        <mat-option [value]="0">全部</mat-option>
+        <mat-option [value]="1">综合预案</mat-option>
+        <mat-option [value]="2">专项预案</mat-option>
+        <mat-option [value]="3">现场处置方案</mat-option>
+        <mat-option [value]="4">综合+专项</mat-option>
+        <mat-option [value]="5">综合+现场处置</mat-option>
+        <mat-option [value]="6">专项+现场处置</mat-option>
+        <mat-option [value]="7">综合+专项+现场处置</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select class="row-margin" placeholder="是否向上级单位上报" required>
+        <mat-option value="1">是</mat-option>
+        <mat-option value="0">否</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field>
+      <input matInput placeholder="预案名称" required name="name" [(ngModel)]="vm.platname" [readonly]="type" [readonly]="type">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="所属单位" required name="name" [(ngModel)]="vm.plattype" [readonly]="type" [readonly]="type">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="签发人" required name="name" [(ngModel)]="vm.contractor" [readonly]="type" [readonly]="type">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field>
+      <input matInput placeholder="联系人" required name="name" [(ngModel)]="vm.operator" [readonly]="type" [readonly]="type">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="联系电话" required name="name" [(ngModel)]="vm.participation" [readonly]="type" [readonly]="type">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="发布时间" required name="name" [(ngModel)]="vm.technology" [readonly]="type" [readonly]="type">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="更新时间" required name="name" [(ngModel)]="vm.resource" [readonly]="type" [readonly]="type">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field style="width:1260px;">
+      <textarea matInput placeholder="备注" rows="3" [(ngModel)]="vm.desc" required name="desc" [readonly]="type"></textarea>
+    </mat-form-field>
+  </div>
+  <mat-card-actions>
+    <div style="text-align:center">
+      <button mat-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+      <a routerLink="/home/plan" mat-raised-button color="warn">取消</a>
+      <button mat-raised-button color="primary" type="submit">提交</button>
+    </div>
+  </mat-card-actions>
+  <!-- </form> -->
+</mat-card>

@@ -1,0 +1,60 @@
+<ul class="breadcrumb">
+  <li>应急物资</li>
+  <li>
+    <a routerLink="/resource/professor">船舶</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<mat-card>
+  <mat-card-title>{{type?'查看':(pId?"编辑":"新增")}}船舶</mat-card-title>
+  <form #proForm="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row"  fxLayoutGap="20px">
+        <mat-form-field >
+          <input matInput placeholder="船名" required name="name" [(ngModel)]="vm.name" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="船舶类型" required name="name" [(ngModel)]="vm.classification" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="所属单位" required name="name" [(ngModel)]="vm.depart" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="技术参数" required name="name" [(ngModel)]="vm.parameter" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <input matInput placeholder="船长(米)" required name="name" [(ngModel)]="vm.length" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="型宽(米)" required name="name" [(ngModel)]="vm.width" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="型深(米)" required name="name" [(ngModel)]="vm.height" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="吃水(米)" required name="name" [(ngModel)]="vm.loaddraught" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+      </div>
+
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field>
+        <input matInput placeholder="联络方式" required type="tel" [(ngModel)]="vm.phone" name="phone" [readonly]="type">
+      </mat-form-field>
+    </div> 
+     <div>
+      <mat-form-field style="width:1260px;">
+        <textarea matInput placeholder="备注" rows="3" [(ngModel)]="vm.desc" required name="desc" [readonly]="type"></textarea>
+      </mat-form-field>
+    </div>
+    <mat-card-actions>
+      <div style="text-align:center">
+        <button mat-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/home/ship" mat-raised-button color="warn">取消</a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!proForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -1,0 +1,18 @@
+#queryDiv {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    z-index: 9999;
+}
+
+.mapView {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .myapp-no-padding-dialog .mat-dialog-container {
+    padding: 0;
+    top: 0;
+  }

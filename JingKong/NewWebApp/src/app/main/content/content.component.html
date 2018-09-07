@@ -1,0 +1,55 @@
+<ul class="breadcrumb">
+  <ng-container *ngFor="let menu of menuList">
+      <li class="active" *ngIf="menu.entityTypeId==vmId">{{menu.title}} <span *ngIf="menu.stitle">/ {{menu.stitle}}</span></li>
+  </ng-container>
+</ul>
+<div style="padding:20px;" fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space center" *ngIf="searchList.length">
+    <app-form [questions]="searchList"></app-form>
+    <button mat-raised-button color='primary' style="height:35px;" (click)="queryPlan()">查询</button>
+    <button mat-raised-button color='primary' style="height:35px;" (click)="resetQuery()">重置</button>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-raised-button color='primary' routerLink="/main/detail/{{vmId}}">增加</button>
+      <button mat-raised-button color='primary' (click)="downloadFile('../../../assets/TempFiles/plan.xlsx')">导入</button>
+      <button mat-raised-button color='primary'>导出</button>
+      <button mat-raised-button color='primary' (click)="downloadFile('../../../assets/TempFiles/plan.xlsx')">模版</button>
+    </div>
+
+    <mat-form-field style="width:300px">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="查询">
+    </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef={{item.attributeCode}} *ngFor="let item of headData">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{item.attributeName}} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element[item.attributeCode]}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="symbol" [style.display]="data.length == 0 ? 'none' : ''">
+        <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div style="width:130px;">
+            <a mat-mini-fab color="primary" mdTooltip="查看详情" routerLink="/main/detail/{{vmId}}/0/{{row.id}}">
+              <mat-icon>search</mat-icon>
+            </a>
+            <a mat-mini-fab color="primary" mdTooltip="编辑" routerLink="/main/detail/{{vmId}}/1/{{row.id}}">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a mat-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+              <mat-icon>delete</mat-icon>
+            </a>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div [style.display]="dataSource.data.length == 0 ? '' : 'none'" style="text-align: center">
+      <h3>无数据显示.</h3>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

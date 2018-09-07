@@ -1,0 +1,104 @@
+<ul class="breadcrumb">
+  <li>系统管理</li>
+  <li>
+    <a routerLink="/resource/professor">属性配置</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<mat-divider></mat-divider>
+<div style="padding:20px">
+  <mat-card>
+    <mat-card-title>{{type?'查看':(pId?"编辑":"新增")}}属性配置</mat-card-title>
+    <form #proForm="ngForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <input matInput placeholder="属性名称" required name="name" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="属性关键字" required name="password" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="是否必填" name="required" required>
+            <mat-option [value]="1">必填</mat-option>
+            <mat-option [value]="2">选填</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width: 200px;">
+          <input matInput placeholder="备注" name="note" [readonly]="type" [readonly]="type">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <mat-select placeholder="属性类型" [(ngModel)]="selType" name="type" required>
+            <mat-option [value]="1">字符串</mat-option>
+            <mat-option [value]="2">整数</mat-option>
+            <mat-option [value]="3">浮点数</mat-option>
+            <mat-option [value]="4">布尔类型</mat-option>
+            <mat-option [value]="5">日期</mat-option>
+            <mat-option [value]="6">选择项</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="selType === 1 || selType === 2">
+          <input matInput placeholder="默认值" required name="default">
+        </mat-form-field>
+        <mat-form-field *ngIf="selType === 3">
+          <input matInput type="number" min="1" value="3" placeholder="小数点后保留位数" required name="number11">
+        </mat-form-field>
+        <mat-form-field *ngIf="selType === 4">
+          <mat-select placeholder="布尔默认值" name="bool" required>
+            <mat-option [value]="1">是</mat-option>
+            <mat-option [value]="2">否</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="selType === 5">
+          <mat-select placeholder="日期格式" name="dataformatt" required>
+            <mat-option [value]="1">yyyy-MM-DD</mat-option>
+            <mat-option [value]="2">yyyy年MM月DD日</mat-option>
+            <mat-option [value]="3">yyyy-MM-DD HH:mm:ss</mat-option>
+            <mat-option [value]="4">yyyy年MM月DD日 HH时mm分ss秒</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button *ngIf="selType === 6" mat-mini-fab color="primary" mdTooltip="查看详情" (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <table *ngIf="selType === 6" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width:700px;margin-bottom: 20px;">
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 序号 </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 选择项名称 </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef style="width: 100px;"> 操作 </th>
+          <td mat-cell *matCellDef="let row">
+            <div style="width:130px;">
+              <a mat-mini-fab color="primary" mdTooltip="查看详情" routerLink="/home/addconfig">
+                <mat-icon>search</mat-icon>
+              </a>
+              <a mat-mini-fab color="primary" mdTooltip="编辑" routerLink="/home/addconfig">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a mat-mini-fab color="warn" mdTooltip="删除">
+                <mat-icon>delete</mat-icon>
+              </a>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-card-actions>
+        <div style="text-align:center">
+          <button mat-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+          <a routerLink="/home/user" mat-raised-button color="warn">取消</a>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!proForm.valid" *ngIf="!type">提交</button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

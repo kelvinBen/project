@@ -1,0 +1,79 @@
+<ul class="breadcrumb">
+  <li>应急物资</li>
+  <li>
+    <a routerLink="/resource/professor">应急装备类</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<mat-card>
+  <mat-card-title>{{type?'查看':(pId?"编辑":"新增")}}应急装备</mat-card-title>
+  <form #proForm="ngForm" (ngSubmit)="onSubmit()">
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field style="width:240px;">
+        <input matInput placeholder="设备名称" required name="name" [(ngModel)]="vm.name" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <button type="button" (click)="searchMType()" mat-mini-fab class="row-margin" color="primary"><mat-icon>search</mat-icon></button>
+      <mat-form-field>
+        <mat-select placeholder="应急保障类别(大类)" style="width:300px;" class="row-margin" name="bigtype" [(ngModel)]="vm.bigtype" (change)="cate1Change(false)">
+          <mat-option *ngFor="let c of cates" [value]="c.id">
+            {{c.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="现场任务类型(中类)" style="width:300px;" class="row-margin" name="middletype" [(ngModel)]="vm.middletype"
+          (change)="cate2Change(false)">
+          <mat-option *ngFor="let c of cates1" [value]="c.id">
+            {{c.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="主要作业方式或物资功能(小类)" style="width:300px;" name="smalltype" class="row-margin" [(ngModel)]="vm.smalltype">
+          <mat-option *ngFor="let c of cates2" [value]="c.id">
+            {{c.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field>
+        <input matInput placeholder="功能" required name="name" [(ngModel)]="vm.feature" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="外形尺寸" required name="name" [(ngModel)]="vm.size" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="技术参数" required name="name" [(ngModel)]="vm.parameter" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field>
+        <input matInput placeholder="数量" required name="name" [(ngModel)]="vm.num" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="生产厂家" required name="name" [(ngModel)]="vm.producer" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="存放地点" required name="name" [(ngModel)]="vm.position" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="联络方式" required name="name" [(ngModel)]="vm.phone" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field style="width:1260px;">
+        <textarea matInput placeholder="备注" rows="3" [(ngModel)]="vm.desc" required name="desc" [readonly]="type"></textarea>
+      </mat-form-field>
+    </div>
+    <mat-card-actions>
+      <div style="text-align:center">
+        <button mat-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/home/equipment" mat-raised-button color="warn">取消</a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!proForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>

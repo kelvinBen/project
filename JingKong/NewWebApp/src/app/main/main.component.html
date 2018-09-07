@@ -1,0 +1,52 @@
+<mat-toolbar color='primary'>
+  <a [routerLink]="" style="width:500px;font-size:24px;">
+    <img src="../../assets/images/logo.jpg" width="50px;" height="50px" style="vertical-align: middle;">
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;海洋油气开采实时在线高效应急救援平台</span>
+  </a>
+  <span fxFlex="1 1 auto"></span>
+  <!-- <div fxLayout='row' fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-button routerLink="/home/gis">电子地图</button>
+    <button mat-button [matMenuTriggerFor]="menu">应急物资管理</button>
+    <mat-menu #menu [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/home/ship">船舶类</button>
+      <button mat-menu-item routerLink="/home/equipment">应急装备类</button>
+    </mat-menu>
+    <button mat-button routerLink="/home/plan">应急预案管理</button>
+    <button mat-button routerLink="/home/case">应急案例管理</button>
+    <button mat-button routerLink="/home/professor">应急专家管理</button>
+    <button mat-button [matMenuTriggerFor]="menu_mgr">系统管理</button>
+    <mat-menu #menu_mgr [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/home/user">用户管理</button>
+      <button mat-menu-item routerLink="/home/config">属性配置</button>
+    </mat-menu>
+    <button mat-mini-fab [matMenuTriggerFor]="userMenu" color="primary">
+      <mat-icon>face</mat-icon>
+    </button>
+    <mat-menu #userMenu [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/login">
+        <span>登出</span>
+      </button>
+    </mat-menu>
+  </div> -->
+  <div *ngFor="let item of data">
+    <ng-container *ngIf="item.childrenList.length==0">
+      <button mat-button routerLink="/main/con/{{item.entityTypeId}}">{{item.title}}</button>
+    </ng-container>
+    <ng-container *ngIf="item.childrenList.length>0">
+      <button mat-button [matMenuTriggerFor]="menu">{{item.title}}</button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item routerLink="/main/con/{{subitem.entityTypeId}}" *ngFor="let subitem of item.childrenList">{{subitem.title}}</button>
+      </mat-menu>
+    </ng-container>
+   
+  </div>
+  <button mat-mini-fab [matMenuTriggerFor]="userMenu" color="primary">
+      <mat-icon>face</mat-icon>
+    </button>
+    <mat-menu #userMenu [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/login">
+        <span>登出</span>
+      </button>
+    </mat-menu>
+</mat-toolbar>
+<router-outlet></router-outlet>

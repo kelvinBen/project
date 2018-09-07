@@ -1,0 +1,30 @@
+<div style="width:100%;height:100%">
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" style="padding:10px;height:56px;">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selCity" (selectionChange)=onChangeCity() >
+        <mat-option *ngFor="let city of cityList" [value]="city">
+          {{ city }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selStation">
+        <mat-option *ngFor="let station of stations" [value]="station.stationnum">
+          {{ station.stationname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label>起始</label>
+    <mat-form-field style="width:120px;">
+      <input matInput [(ngModel)]="sDate" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <label>终止</label>
+    <mat-form-field style="width:120px;">
+      <input matInput [(ngModel)]="eDate" mode="daytime" [dpDayPicker]="hourConfig" theme="dp-material" attachTo=".mat-input-wrapper">
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="queryFactor()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div echarts [options]="option" theme="macarons" style="height:calc(100% - 56px);" (chartInit)="onChartInit($event)"></div>
+</div>

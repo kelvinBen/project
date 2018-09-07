@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>选择应急物资类型</h2>
+<mat-dialog-content>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width:100%;">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? rowClick(row) : null" [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="big">
+      <th mat-header-cell *matHeaderCellDef> 应急保障类别(大类) </th>
+      <td mat-cell *matCellDef="let element"> {{element.big}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mid">
+      <th mat-header-cell *matHeaderCellDef> 现场任务类型(中类) </th>
+      <td mat-cell *matCellDef="let element"> {{element.mid}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="small">
+      <th mat-header-cell *matHeaderCellDef> 主要作业方式或物资功能(小类) </th>
+      <td mat-cell *matCellDef="let element"> {{element.small}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row);">
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close color="warn">取消</button>
+  <button mat-button (click)="submit()" color="primary" >确定</button>
+</mat-dialog-actions>

@@ -1,0 +1,23 @@
+<h2 mat-dialog-title style="padding-left: 10px; padding-top: 10px;">{{dt.name}}</h2>
+<mat-dialog-content style="padding:0px;margin: 0px;">
+  <table *ngIf="vm && vm.returnCode === 0">
+    <thead>
+      <th style="width: 120px;" align="center">时间</th>
+      <th style="width: 90px;">天气现象</th>
+      <th style="width: 80px;">最高温</th>
+      <th style="width: 80px;">最低温</th>
+      <th style="width: 80px;">风速</th>
+      <th style="width: 80px;">风向</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of vm.DS">
+        <td align="center">{{d.time}}</td>
+        <td align="center">{{d.weather}}</td>
+        <td align="center">{{d.maxtemp}}</td>
+        <td align="center">{{d.mintemp}}</td>
+        <td align="center">{{d.windV}}</td>
+        <td align="center">{{d.windD}}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>

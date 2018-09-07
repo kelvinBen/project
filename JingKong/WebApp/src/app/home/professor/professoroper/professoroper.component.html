@@ -1,0 +1,58 @@
+<ul class="breadcrumb">
+  <li>
+    <a routerLink="/resource/professor">应急专家</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<mat-card>
+  <mat-card-title>{{type?'查看':(pId?"编辑":"新增")}}应急专家</mat-card-title>
+  <form #proForm="ngForm" (ngSubmit)="onSubmit()">
+    <div fxLayout="row" fxLayoutGap="20px">
+
+      <mat-form-field>
+        <input matInput placeholder="专家姓名" required name="name" [(ngModel)]="vm.name" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="专家类别" [(ngModel)]="vm.professionType" name="type">
+          <mat-option *ngFor="let t of types" [value]="t.id">
+            {{ t.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="所属公司" [(ngModel)]="vm.depart" name="depart">
+          <mat-option *ngFor="let t of planLevels" [value]="t.id">
+            {{ t.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field>
+        <input matInput placeholder="办公地点" required [(ngModel)]="vm.position" name="position" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="固定电话" required type="tel" [(ngModel)]="vm.phone" name="phone" [readonly]="type">
+      </mat-form-field>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" required type="email" [(ngModel)]="vm.email" name="email" [readonly]="type">
+        </mat-form-field>
+      </form>
+    </div>
+    <div>
+      <mat-form-field style="width:940px;">
+        <textarea matInput placeholder="备注" rows="3" [(ngModel)]="vm.desc" required name="desc" [readonly]="type"></textarea>
+      </mat-form-field>
+    </div>
+    <mat-card-actions>
+      <div style="text-align:center">
+        <button mat-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/home/professor" mat-raised-button color="warn">取消</a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!proForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>

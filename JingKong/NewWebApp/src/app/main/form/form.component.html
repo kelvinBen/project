@@ -1,0 +1,21 @@
+<div style="padding: 0 auto;">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form"  style="margin:0 auto;">
+
+    <div *ngFor="let question of questions"  style="display:inline-block;">
+      <ng-container>
+        <app-form-item [question]="question" [form]="form" *ngIf="!question.relation"></app-form-item>
+      </ng-container>
+      <ng-container>
+          <app-form-item [question]="question" [form]="form" *ngIf="question.attributeCode==this.sign"></app-form-item>
+      </ng-container>
+    </div>
+
+    <!-- <div class="form-row">
+      <button type="submit" [disabled]="!form.valid">Save</button>
+    </div> -->
+  </form>
+  <!-- <div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong>
+    <br>{{payLoad}}
+  </div> -->
+</div>

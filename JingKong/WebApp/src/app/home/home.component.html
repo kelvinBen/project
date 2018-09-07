@@ -1,0 +1,39 @@
+<mat-toolbar color='primary'>
+  <a [routerLink]="" style="width:500px;font-size:24px;">
+    <img src="../../assets/images/logo.jpg" width="50px;" height="50px" style="vertical-align: middle;">
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;海洋油气开采实时在线高效应急救援平台</span>
+  </a>
+  <span fxFlex="1 1 auto"></span>
+  <div fxLayout='row' fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-button routerLink="/home/gis">电子地图</button>
+    <button mat-button [matMenuTriggerFor]="menu">应急物资管理</button>
+    <mat-menu #menu [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/home/ship">船舶类</button>
+      <button mat-menu-item routerLink="/home/equipment">应急装备类</button>
+    </mat-menu>
+    <button mat-button routerLink="/home/plan">应急预案管理</button>
+    <button mat-button routerLink="/home/case">应急案例管理</button>
+    <button mat-button routerLink="/home/professor">应急专家管理</button>
+    <!-- <ng-container *ngFor="let navMenu of navMenus">
+      <button mat-button *ngIf="navMenu.child.length === 0">{{navMenu.menu_name}}</button>
+      <button mat-button *ngIf="navMenu.child.length !== 0" [matMenuTriggerFor]="menu1">{{navMenu.menu_name}}</button>
+      <mat-menu [overlapTrigger]="false" #menu1>
+        <button mat-menu-item *ngFor="let m of navMenu.child">{{m.menu_name}}</button>
+      </mat-menu>
+    </ng-container> -->
+    <button mat-button [matMenuTriggerFor]="menu_mgr">系统管理</button>
+    <mat-menu #menu_mgr [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/home/user">用户管理</button>
+      <button mat-menu-item routerLink="/home/config">属性配置</button>
+    </mat-menu>
+    <button mat-mini-fab [matMenuTriggerFor]="userMenu" color="primary">
+      <mat-icon>face</mat-icon>
+    </button>
+    <mat-menu #userMenu [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/login">
+        <span>登出</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>

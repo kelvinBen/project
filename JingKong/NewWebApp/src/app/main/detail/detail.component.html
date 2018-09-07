@@ -1,0 +1,21 @@
+<ul class="breadcrumb">
+  <!-- <ng-container *ngFor="let title of titleList"> -->
+  <li class="active">{{head.title}}
+    <span *ngIf="head.stitle">/ {{head.stitle}}</span>
+  </li>
+  <!-- </ng-container> -->
+  <li class="active">
+    {{entity_id?(type?"编辑":"查看"):'新增'}}
+  </li>
+</ul>
+<mat-card>
+  <mat-card-title style="width: 1200px;"> {{entity_id?(type?"编辑":"查看"):'新增'}}<span *ngIf="!head.stitle">{{head.title}}</span><span *ngIf="head.stitle">{{head.stitle}}</span></mat-card-title>
+  <app-form [questions]="questions"></app-form>
+  <mat-card-actions style="margin-top:60px;">
+    <div style="text-align:center">
+      <button mat-raised-button color="accent" (click)="reset()" *ngIf="!type">重置</button>
+      <button mat-raised-button color="accent" color="primary" (click)="submit()" [disabled]="!this.child.form.valid">提交</button>
+      <a routerLink="/home/ship" mat-raised-button color="warn">取消</a>
+    </div>
+  </mat-card-actions>
+</mat-card>

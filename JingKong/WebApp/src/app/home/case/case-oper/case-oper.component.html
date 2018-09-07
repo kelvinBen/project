@@ -1,0 +1,70 @@
+<ul class="breadcrumb">
+  <li>
+    <a routerLink="/resource/professor">应急案例</a>
+  </li>
+  <li class="active">
+    {{type?'查看':(pId?"编辑":"新增")}}
+  </li>
+</ul>
+<mat-card>
+  <mat-card-title>{{type?'查看':(pId?"编辑":"新增")}}应急案例</mat-card-title>
+  <form #proForm="ngForm" (ngSubmit)="onSubmit()">
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field>
+        <mat-select placeholder="工况" [(ngModel)]="vm.Plantype" name="type">
+          <mat-option *ngFor="let t of types" [value]="t.id">
+            {{ t.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="时间" required name="name" [(ngModel)]="vm.date" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="地点" required name="name" [(ngModel)]="vm.position" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="井名" required name="name" [(ngModel)]="vm.wellname" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field>
+        <input matInput placeholder="平台名称" required name="name" [(ngModel)]="vm.platname" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="平台类型" required name="name" [(ngModel)]="vm.plattype" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="承包商" required name="name" [(ngModel)]="vm.contractor" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="作业者" required name="name" [(ngModel)]="vm.operator" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <mat-form-field>
+        <input matInput placeholder="参与单位" required name="name" [(ngModel)]="vm.participation" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="应急技术" required name="name" [(ngModel)]="vm.technology" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="动用资源" required name="name" [(ngModel)]="vm.resource" [readonly]="type" [readonly]="type">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field style="width:1260px;">
+        <textarea matInput placeholder="备注" rows="3" [(ngModel)]="vm.desc" required name="desc" [readonly]="type"></textarea>
+      </mat-form-field>
+    </div>
+    <mat-card-actions>
+      <div style="text-align:center">
+        <button mat-raised-button color="accent" type="reset" *ngIf="!type">重置</button>
+        <a routerLink="/professor" mat-raised-button color="warn">取消</a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!proForm.valid" *ngIf="!type">提交</button>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>

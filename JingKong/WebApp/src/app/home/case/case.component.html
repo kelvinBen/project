@@ -1,0 +1,126 @@
+<ul class="breadcrumb">
+  <li class="active">应急案例</li>
+</ul>
+<div style="padding:20px;" fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space center">
+    <mat-form-field>
+      <input matInput placeholder="平台名称" [(ngModel)]="selOrg">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="工况" [(ngModel)]="selLevel">
+        <mat-option [value]="0">全部</mat-option>
+        <mat-option [value]="1">油井着火</mat-option>
+        <mat-option [value]="2">气井着火</mat-option>
+        <mat-option [value]="3">油井未着火</mat-option>
+        <mat-option [value]="4">气井未着火</mat-option>
+        <mat-option [value]="5">浅层气井喷</mat-option>
+        <mat-option [value]="6">起下钻井喷</mat-option>
+        <mat-option [value]="7">钻遇异常高压</mat-option>
+        <mat-option [value]="8">地下井喷</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color='primary' style="height:35px;" (click)="queryPlan()">查询</button>
+    <button mat-raised-button color='primary' style="height:35px;" (click)="resetQuery()">重置</button>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-raised-button color='primary' routerLink="/home/addcase">增加</button>
+      <button mat-raised-button color='primary' (click)="downloadFile('../../../assets/TempFiles/plan.xlsx')">导入</button>
+      <button mat-raised-button color='primary'>导出</button>
+      <button mat-raised-button color='primary' (click)="downloadFile('../../../assets/TempFiles/plan.xlsx')">模版</button>
+    </div>
+
+    <mat-form-field style="width:300px">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="查询">
+    </mat-form-field>
+  </div>
+
+
+  <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>序号 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="platname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 平台名称 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.platname}} </mat-cell>
+      </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="condition">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 工况 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.condition}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 时间</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 地点</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="wellname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 井名 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.wellname}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="plattype">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 平台类型 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.plattype}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="contractor">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 承包商 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.contractor}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="operator">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> 作业者 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.operator}} </mat-cell>
+      </ng-container>
+      <!-- <ng-container matColumnDef="participation">
+          <mat-header-cell *matHeaderCellDef> 参与单位 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.participation}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="technology">
+          <mat-header-cell *matHeaderCellDef> 应急技术 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.technology}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="resource">
+          <mat-header-cell *matHeaderCellDef> 动用资源 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.resource}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="desc">
+          <mat-header-cell *matHeaderCellDef> 备注 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.desc}} </mat-cell>
+        </ng-container> -->
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <mat-header-cell *matHeaderCellDef> 操作 </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div style="width:130px;">
+            <a mat-mini-fab color="primary" mdTooltip="查看详情" routerLink="/admin/1/user/{{row.id}}">
+              <mat-icon>search</mat-icon>
+            </a>
+            <a mat-mini-fab color="primary" mdTooltip="编辑" routerLink="/admin/user/edit/{{row.id}}">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a mat-mini-fab color="warn" mdTooltip="删除" (click)="delete(row.id)">
+              <mat-icon>delete</mat-icon>
+            </a>
+            <!-- <button mat-raised-button color='primary' routerLink="/plan/add">增加</button> -->
+          </div>
+        </mat-cell>
+
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div [style.display]="dataSource.data.length == 0 ? '' : 'none'" style="text-align: center">
+      <h3>无数据显示.</h3>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>
